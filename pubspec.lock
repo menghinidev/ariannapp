@@ -373,14 +373,6 @@ packages:
       url: "https://artifactory.gbm.lan/artifactory/api/pub/pub_virtual/"
     source: hosted
     version: "0.7.1"
-  json:
-    dependency: "direct main"
-    description:
-      name: json
-      sha256: "40a98ec3715f40f3723c20ee68dce3640f32d24d278262de4eddae885c060180"
-      url: "https://artifactory.gbm.lan/artifactory/api/pub/pub_virtual/"
-    source: hosted
-    version: "0.20.2"
   json_annotation:
     dependency: transitive
     description:
