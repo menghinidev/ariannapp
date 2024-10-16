@@ -1,0 +1,165 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'score.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
+/// @nodoc
+mixin _$Score {
+  String get teamId => throw _privateConstructorUsedError;
+  List<int> get points => throw _privateConstructorUsedError;
+
+  /// Create a copy of Score
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ScoreCopyWith<Score> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ScoreCopyWith<$Res> {
+  factory $ScoreCopyWith(Score value, $Res Function(Score) then) =
+      _$ScoreCopyWithImpl<$Res, Score>;
+  @useResult
+  $Res call({String teamId, List<int> points});
+}
+
+/// @nodoc
+class _$ScoreCopyWithImpl<$Res, $Val extends Score>
+    implements $ScoreCopyWith<$Res> {
+  _$ScoreCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of Score
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? teamId = null,
+    Object? points = null,
+  }) {
+    return _then(_value.copyWith(
+      teamId: null == teamId
+          ? _value.teamId
+          : teamId // ignore: cast_nullable_to_non_nullable
+              as String,
+      points: null == points
+          ? _value.points
+          : points // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ScoreImplCopyWith<$Res> implements $ScoreCopyWith<$Res> {
+  factory _$$ScoreImplCopyWith(
+          _$ScoreImpl value, $Res Function(_$ScoreImpl) then) =
+      __$$ScoreImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String teamId, List<int> points});
+}
+
+/// @nodoc
+class __$$ScoreImplCopyWithImpl<$Res>
+    extends _$ScoreCopyWithImpl<$Res, _$ScoreImpl>
+    implements _$$ScoreImplCopyWith<$Res> {
+  __$$ScoreImplCopyWithImpl(
+      _$ScoreImpl _value, $Res Function(_$ScoreImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Score
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? teamId = null,
+    Object? points = null,
+  }) {
+    return _then(_$ScoreImpl(
+      teamId: null == teamId
+          ? _value.teamId
+          : teamId // ignore: cast_nullable_to_non_nullable
+              as String,
+      points: null == points
+          ? _value._points
+          : points // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ScoreImpl implements _Score {
+  _$ScoreImpl({required this.teamId, required final List<int> points})
+      : _points = points;
+
+  @override
+  final String teamId;
+  final List<int> _points;
+  @override
+  List<int> get points {
+    if (_points is EqualUnmodifiableListView) return _points;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_points);
+  }
+
+  @override
+  String toString() {
+    return 'Score(teamId: $teamId, points: $points)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ScoreImpl &&
+            (identical(other.teamId, teamId) || other.teamId == teamId) &&
+            const DeepCollectionEquality().equals(other._points, _points));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, teamId, const DeepCollectionEquality().hash(_points));
+
+  /// Create a copy of Score
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ScoreImplCopyWith<_$ScoreImpl> get copyWith =>
+      __$$ScoreImplCopyWithImpl<_$ScoreImpl>(this, _$identity);
+}
+
+abstract class _Score implements Score {
+  factory _Score(
+      {required final String teamId,
+      required final List<int> points}) = _$ScoreImpl;
+
+  @override
+  String get teamId;
+  @override
+  List<int> get points;
+
+  /// Create a copy of Score
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ScoreImplCopyWith<_$ScoreImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}

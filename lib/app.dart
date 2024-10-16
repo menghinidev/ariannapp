@@ -1,5 +1,5 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/core/entrypoint.dart';
+import 'package:ariannapp/navigation/entrypoint.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
