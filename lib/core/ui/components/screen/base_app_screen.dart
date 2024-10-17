@@ -37,7 +37,7 @@ class SimpleAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottomAppBarWidget;
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight * 2);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight * (bottomAppBarWidget == null ? 1 : 2));
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

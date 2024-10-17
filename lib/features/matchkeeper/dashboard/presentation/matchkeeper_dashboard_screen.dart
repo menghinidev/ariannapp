@@ -1,7 +1,7 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/matchkeeper/dashboard/presentation/sections/completed/completed_matches_section.dart';
 import 'package:ariannapp/features/matchkeeper/dashboard/presentation/sections/ongoing/ongoing_matches_section.dart';
-import 'package:ariannapp/features/matchkeeper/routes/matchkeeper_routes.dart';
+import 'package:ariannapp/features/matchkeeper/shared/routes/matchkeeper_routes.dart';
 import 'package:ariannapp/navigation/entrypoint.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,13 +41,33 @@ class _MatchkeeperDashboardScreenState extends ConsumerState<MatchkeeperDashboar
         onPressed: () => context.goRelative(MatchkeeperRoutes.newMatch),
         label: const Text('Nuova partita'),
       ),
-      child: TabBarView(
-        controller: _tabController,
-        children: const [
-          OngoingMatchesSection(),
-          CompletedMatchesSection(),
-        ],
+      child: IhneritedDashboard(
+        tabController: _tabController,
+        child: TabBarView(
+          controller: _tabController,
+          children: const [
+            OngoingMatchesSection(),
+            CompletedMatchesSection(),
+          ],
+        ),
       ),
     );
   }
+}
+
+class IhneritedDashboard extends InheritedWidget {
+  const IhneritedDashboard({
+    required super.child,
+    required this.tabController,
+    super.key,
+  });
+
+  final TabController tabController;
+
+  static IhneritedDashboard? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<IhneritedDashboard>();
+  }
+
+  @override
+  bool updateShouldNotify(covariant InheritedWidget oldWidget) => false;
 }

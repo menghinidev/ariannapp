@@ -164,6 +164,7 @@ class __ScoreActionsBarState extends ConsumerState<_ScoreActionsBar> {
       child: ListWheelScrollView.useDelegate(
         itemExtent: itemHeight,
         controller: _scrollController,
+        key: ValueKey(widget.score),
         onSelectedItemChanged: (value) => ref.read(scoreModificationProvider(widget.score).notifier).points = value,
         physics: const PageScrollPhysics(),
         childDelegate: ListWheelChildListDelegate(

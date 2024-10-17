@@ -4,6 +4,8 @@ import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/edi
 import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/edit_score/edit_score_use_case.dart';
 import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/get_matches/get_matches_use_case.dart';
 import 'package:ariannapp/features/matchkeeper/dashboard/presentation/components/score_card/score_card.dart';
+import 'package:ariannapp/features/matchkeeper/dashboard/presentation/matchkeeper_dashboard_screen.dart';
+import 'package:ariannapp/features/matchkeeper/new_match/features/restart_match/presentation/restart_match_button.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/game/game.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/match/match.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/score/score.dart';
@@ -67,9 +69,12 @@ class _MatchCardHeader extends StatelessWidget {
         ),
         if (match.status == MatchStatus.completed) ...[
           DistanceProvider.smallDistance.spacer(axis: Axis.horizontal),
-          IconButton.filledTonal(
-            onPressed: () {},
-            icon: const Icon(Icons.refresh_outlined),
+          RestartMatchIconButton(
+            match: match,
+            onCompleted: () {
+              final dashboardController = IhneritedDashboard.of(context)?.tabController;
+              if (dashboardController != null) dashboardController.animateTo(0);
+            },
           ),
         ],
       ],

@@ -6,6 +6,7 @@ import 'package:ariannapp/features/matchkeeper/shared/domain/model/score/score.d
 
 abstract class IMatchRepository {
   Future<ApplicationResponse<ApplicationMatch>> addMatch({required MatchBuilder builder});
+  Future<ApplicationResponse<ApplicationMatch>> restartMatch({required ApplicationMatch match});
   Future<EmptyResponse> updateScore({
     required String matchId,
     required List<Score> scores,

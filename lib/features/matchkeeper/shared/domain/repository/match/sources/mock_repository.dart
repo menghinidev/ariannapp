@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/core/infrastructure/utils/response/empty_response.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/application/state/new_match_builder.dart';
@@ -64,8 +66,9 @@ class MockMatchRepository extends IMatchRepository {
     required List<Score> scores,
   }) async {
     final match = _matches.firstWhere((match) => match.id == matchId);
+    final newScores = [...scores]..sort((a, b) => b.totalPoints.compareTo(a.totalPoints));
     var newMatch = match.copyWith(
-      scores: scores,
+      scores: newScores,
       lastUpdate: DateTime.now(),
     );
     if (newMatch.isOver) newMatch = newMatch.copyWith(status: MatchStatus.completed);
@@ -74,5 +77,29 @@ class MockMatchRepository extends IMatchRepository {
       ..add(newMatch)
       ..sort((a, b) => b.lastUpdate.compareTo(a.lastUpdate));
     return Responses.success<void, ApplicationError>(null);
+  }
+
+  @override
+  Future<ApplicationResponse<ApplicationMatch>> restartMatch({
+    required ApplicationMatch match,
+  }) async {
+    final teams = match.scores.map((e) => e.team).toList();
+    final newScores = teams
+        .map(
+          (e) => Score(
+            team: e,
+            points: [0],
+          ),
+        )
+        .toList();
+    _matches.add(
+      match.copyWith(
+        scores: newScores,
+        status: MatchStatus.ongoing,
+        lastUpdate: DateTime.now(),
+        id: Random().nextInt(200).toString(),
+      ),
+    );
+    return Responses.success<ApplicationMatch, ApplicationError>(match);
   }
 }

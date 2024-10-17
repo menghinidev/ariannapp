@@ -1,16 +1,14 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
-import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/get_matches/get_matches_use_case.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/application/new_match_state_provider.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/application/state/new_match_builder.dart';
-import 'package:ariannapp/features/matchkeeper/new_match/features/add_match/add_match_use_case.dart';
+import 'package:ariannapp/features/matchkeeper/new_match/features/add_match/presentation/add_match_button.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/presentation/sections/double_life_step.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/presentation/sections/game_step.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/presentation/sections/teams_step.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/presentation/sections/winning_points_step.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class NewMatchScreen extends ConsumerWidget {
   const NewMatchScreen({super.key});
@@ -22,7 +20,7 @@ class NewMatchScreen extends ConsumerWidget {
     final canBuild = ref.watch(newMatchControllerProvider.select((e) => e.canBuild));
     return BaseAppScreen(
       title: 'Nuova partita',
-      fab: !canBuild ? null : const _ConfirmNewMatchFAB(),
+      fab: !canBuild ? null : const CreateNewMatchFAB(),
       child: SizedBox.expand(
         child: Stepper(
           currentStep: stepper,
@@ -95,25 +93,5 @@ class NewMatchScreen extends ConsumerWidget {
       return const Icon(Icons.check);
     }
     return const Icon(Icons.next_plan_outlined);
-  }
-}
-
-class _ConfirmNewMatchFAB extends ConsumerWidget {
-  const _ConfirmNewMatchFAB();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final builder = ref.watch(newMatchControllerProvider);
-    return FloatingActionButton(
-      onPressed: () => ref.read(addMatchUseCaseProvider).call(builder).ifSuccess(
-        (value) {
-          if (context.mounted) {
-            ref.invalidate(matchesProvider);
-            context.pop();
-          }
-        },
-      ),
-      child: const Icon(Icons.check),
-    );
   }
 }
