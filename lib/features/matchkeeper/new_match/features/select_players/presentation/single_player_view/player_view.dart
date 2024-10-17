@@ -14,10 +14,12 @@ class AddSinglePlayerView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AddPlayerTextField(
-      onSelected: (value) => onSelected(Team(
-        players: [value],
-        id: '1',
-      )),
+      onSelected: (value) => onSelected(
+        Team(
+          players: [value],
+          id: '1',
+        ),
+      ),
     );
   }
 }

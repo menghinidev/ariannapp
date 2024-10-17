@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MatchListTile extends ConsumerWidget {
-  const MatchListTile({super.key, required this.match});
+  const MatchListTile({required this.match, super.key});
 
   final ApplicationMatch match;
 

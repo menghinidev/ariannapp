@@ -46,10 +46,12 @@ class AddTeamView extends ConsumerWidget {
         Align(
           alignment: Alignment.centerRight,
           child: ElevatedButton(
-            onPressed: () => onSelected(Team(
-              players: selectedPlayers,
-              id: '1',
-            )),
+            onPressed: () => onSelected(
+              Team(
+                players: selectedPlayers,
+                id: '1',
+              ),
+            ),
             child: const Text('Aggiungi squadra'),
           ),
         ),
