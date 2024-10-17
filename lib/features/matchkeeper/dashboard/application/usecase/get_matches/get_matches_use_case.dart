@@ -3,7 +3,8 @@ import 'package:ariannapp/core/infrastructure/usecase/use_case.dart';
 import 'package:ariannapp/core/infrastructure/utils/response/response.dart';
 import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/get_matches/command/get_matches_command.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/match/match.dart';
-import 'package:ariannapp/features/matchkeeper/shared/domain/repository/match_repository.dart';
+import 'package:ariannapp/features/matchkeeper/shared/domain/repository/match/provider.dart';
+import 'package:ariannapp/features/matchkeeper/shared/domain/repository/match/sources/i_match_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'get_matches_use_case.g.dart';

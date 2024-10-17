@@ -1,8 +1,9 @@
 import 'package:ariannapp/core/infrastructure/error/application_error/applicationerror.dart';
 import 'package:ariannapp/core/infrastructure/usecase/use_case.dart';
 import 'package:ariannapp/core/infrastructure/utils/response/response.dart';
-import 'package:ariannapp/features/matchkeeper/new_match/features/select_game/application/repository/games_repository.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/game/game.dart';
+import 'package:ariannapp/features/matchkeeper/shared/domain/repository/games/provider.dart';
+import 'package:ariannapp/features/matchkeeper/shared/domain/repository/games/sources/i_games_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'get_games_use_case.g.dart';

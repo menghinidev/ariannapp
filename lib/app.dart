@@ -15,25 +15,25 @@ class AriannApp extends ConsumerWidget {
     final themeBuilder = ref.watch(themeBuilderProvider);
     final themeMode = ref.watch(applicationThemeModeProvider);
     return MaterialApp.router(
+      title: 'AriannApp',
       routerConfig: router,
       darkTheme: themeBuilder.darkTheme,
       theme: themeBuilder.lightTheme,
       themeMode: themeMode,
+      supportedLocales: const [Locale('it')],
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [Locale('it')],
       scrollBehavior: const MaterialScrollBehavior().copyWith(
         dragDevices: {
           PointerDeviceKind.mouse,
           PointerDeviceKind.touch,
           PointerDeviceKind.stylus,
-          PointerDeviceKind.unknown
+          PointerDeviceKind.unknown,
         },
       ),
-      title: 'AriannApp',
     );
   }
 }

@@ -2,7 +2,9 @@ import 'package:ariannapp/core/infrastructure/error/application_error/applicatio
 import 'package:ariannapp/core/infrastructure/usecase/use_case.dart';
 import 'package:ariannapp/core/infrastructure/utils/response/response.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/application/state/new_match_builder.dart';
-import 'package:ariannapp/features/matchkeeper/shared/domain/repository/match_repository.dart';
+import 'package:ariannapp/features/matchkeeper/shared/domain/repository/match/provider.dart';
+import 'package:ariannapp/features/matchkeeper/shared/domain/repository/match/sources/i_match_repository.dart';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'add_match_use_case.g.dart';
