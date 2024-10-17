@@ -19,6 +19,7 @@ mixin _$MatchBuilder {
   Game? get game => throw _privateConstructorUsedError;
   int? get winningPoints => throw _privateConstructorUsedError;
   bool? get doubleLife => throw _privateConstructorUsedError;
+  List<Team> get teams => throw _privateConstructorUsedError;
 
   /// Create a copy of MatchBuilder
   /// with the given fields replaced by the non-null parameter values.
@@ -33,7 +34,8 @@ abstract class $MatchBuilderCopyWith<$Res> {
           MatchBuilder value, $Res Function(MatchBuilder) then) =
       _$MatchBuilderCopyWithImpl<$Res, MatchBuilder>;
   @useResult
-  $Res call({Game? game, int? winningPoints, bool? doubleLife});
+  $Res call(
+      {Game? game, int? winningPoints, bool? doubleLife, List<Team> teams});
 
   $GameCopyWith<$Res>? get game;
 }
@@ -56,6 +58,7 @@ class _$MatchBuilderCopyWithImpl<$Res, $Val extends MatchBuilder>
     Object? game = freezed,
     Object? winningPoints = freezed,
     Object? doubleLife = freezed,
+    Object? teams = null,
   }) {
     return _then(_value.copyWith(
       game: freezed == game
@@ -70,6 +73,10 @@ class _$MatchBuilderCopyWithImpl<$Res, $Val extends MatchBuilder>
           ? _value.doubleLife
           : doubleLife // ignore: cast_nullable_to_non_nullable
               as bool?,
+      teams: null == teams
+          ? _value.teams
+          : teams // ignore: cast_nullable_to_non_nullable
+              as List<Team>,
     ) as $Val);
   }
 
@@ -96,7 +103,8 @@ abstract class _$$MatchBuilderImplCopyWith<$Res>
       __$$MatchBuilderImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Game? game, int? winningPoints, bool? doubleLife});
+  $Res call(
+      {Game? game, int? winningPoints, bool? doubleLife, List<Team> teams});
 
   @override
   $GameCopyWith<$Res>? get game;
@@ -118,6 +126,7 @@ class __$$MatchBuilderImplCopyWithImpl<$Res>
     Object? game = freezed,
     Object? winningPoints = freezed,
     Object? doubleLife = freezed,
+    Object? teams = null,
   }) {
     return _then(_$MatchBuilderImpl(
       game: freezed == game
@@ -132,6 +141,10 @@ class __$$MatchBuilderImplCopyWithImpl<$Res>
           ? _value.doubleLife
           : doubleLife // ignore: cast_nullable_to_non_nullable
               as bool?,
+      teams: null == teams
+          ? _value._teams
+          : teams // ignore: cast_nullable_to_non_nullable
+              as List<Team>,
     ));
   }
 }
@@ -139,7 +152,12 @@ class __$$MatchBuilderImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MatchBuilderImpl implements _MatchBuilder {
-  _$MatchBuilderImpl({this.game, this.winningPoints, this.doubleLife});
+  _$MatchBuilderImpl(
+      {this.game,
+      this.winningPoints,
+      this.doubleLife,
+      final List<Team> teams = const <Team>[]})
+      : _teams = teams;
 
   @override
   final Game? game;
@@ -147,10 +165,18 @@ class _$MatchBuilderImpl implements _MatchBuilder {
   final int? winningPoints;
   @override
   final bool? doubleLife;
+  final List<Team> _teams;
+  @override
+  @JsonKey()
+  List<Team> get teams {
+    if (_teams is EqualUnmodifiableListView) return _teams;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_teams);
+  }
 
   @override
   String toString() {
-    return 'MatchBuilder(game: $game, winningPoints: $winningPoints, doubleLife: $doubleLife)';
+    return 'MatchBuilder(game: $game, winningPoints: $winningPoints, doubleLife: $doubleLife, teams: $teams)';
   }
 
   @override
@@ -162,11 +188,13 @@ class _$MatchBuilderImpl implements _MatchBuilder {
             (identical(other.winningPoints, winningPoints) ||
                 other.winningPoints == winningPoints) &&
             (identical(other.doubleLife, doubleLife) ||
-                other.doubleLife == doubleLife));
+                other.doubleLife == doubleLife) &&
+            const DeepCollectionEquality().equals(other._teams, _teams));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, game, winningPoints, doubleLife);
+  int get hashCode => Object.hash(runtimeType, game, winningPoints, doubleLife,
+      const DeepCollectionEquality().hash(_teams));
 
   /// Create a copy of MatchBuilder
   /// with the given fields replaced by the non-null parameter values.
@@ -181,7 +209,8 @@ abstract class _MatchBuilder implements MatchBuilder {
   factory _MatchBuilder(
       {final Game? game,
       final int? winningPoints,
-      final bool? doubleLife}) = _$MatchBuilderImpl;
+      final bool? doubleLife,
+      final List<Team> teams}) = _$MatchBuilderImpl;
 
   @override
   Game? get game;
@@ -189,6 +218,8 @@ abstract class _MatchBuilder implements MatchBuilder {
   int? get winningPoints;
   @override
   bool? get doubleLife;
+  @override
+  List<Team> get teams;
 
   /// Create a copy of MatchBuilder
   /// with the given fields replaced by the non-null parameter values.

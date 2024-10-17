@@ -10,10 +10,12 @@ class AriannApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRouterProvider);
     final themeBuilder = ref.watch(themeBuilderProvider);
+    final themeMode = ref.watch(applicationThemeModeProvider);
     return MaterialApp.router(
       routerConfig: router,
       darkTheme: themeBuilder.darkTheme,
       theme: themeBuilder.lightTheme,
+      themeMode: themeMode,
       title: 'AriannApp',
     );
   }

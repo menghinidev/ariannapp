@@ -1,4 +1,5 @@
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/game/game.dart';
+import 'package:ariannapp/features/matchkeeper/shared/domain/model/team/team.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'new_match_builder.freezed.dart';
@@ -9,14 +10,10 @@ class MatchBuilder with _$MatchBuilder {
     Game? game,
     int? winningPoints,
     bool? doubleLife,
+    @Default(<Team>[]) List<Team> teams,
   }) = _MatchBuilder;
 }
 
 extension MatchBuilderFeatures on MatchBuilder {
-  bool get canBuild {
-    if (game == null) return false;
-    if (winningPoints == null) return false;
-    if (doubleLife == null) return false;
-    return true;
-  }
+  bool get canBuild => teams.length >= 2 && game != null && winningPoints != null;
 }

@@ -3,9 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shimmer/shimmer.dart';
 
 extension AsyncDataBuilder<X> on AsyncValue<X> {
-  Widget loadUntil({
-    required Widget Function(X data) onLoaded,
-  }) {
+  Widget loadUntil({required Widget Function(X data) onLoaded}) {
     return maybeWhen(orElse: _LoadingComponent.new, data: onLoaded);
   }
 }

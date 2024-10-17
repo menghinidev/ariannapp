@@ -8,3 +8,15 @@ class Game with _$Game {
   factory Game.scopa() = Scopa;
   factory Game.piccimbrigo() = Piccimbrigo;
 }
+
+extension GameFeatures on Game {
+  bool get supportsDoubleLife => true;
+
+  String get name {
+    return map(
+      briscola: (_) => 'Briscola',
+      scopa: (_) => 'Scopa',
+      piccimbrigo: (_) => 'Piccimbrigo',
+    );
+  }
+}

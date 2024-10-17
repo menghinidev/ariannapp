@@ -1,7 +1,10 @@
+import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
-import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/presentation/player_text_field.dart';
+import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/presentation/single_player_view/player_view.dart';
+import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/presentation/team_view/team_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'select_player_bottom_sheet.g.dart';
@@ -10,7 +13,7 @@ part 'select_player_bottom_sheet.g.dart';
 
 @riverpod
 List<String> _availablePlayerModes(_AvailablePlayerModesRef ref) {
-  return ['Team', 'Player'];
+  return ['Squadra', 'Giocatore singolo'];
 }
 
 @riverpod
@@ -41,8 +44,13 @@ class AddPlayerBottomSheet extends ConsumerWidget {
       builder: (context) => SingleChildScrollView(
         padding: DistanceProvider.screenInsets.padding,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              'Aggiungi squadra o giocatore',
+              style: context.textTheme.headlineSmall,
+            ),
+            DistanceProvider.mediumDistance.spacer(),
             SegmentedButton<String>(
               selected: {selectedMode},
               onSelectionChanged: ref.read(selectedPlayerModeProvider.notifier).update,
@@ -50,14 +58,12 @@ class AddPlayerBottomSheet extends ConsumerWidget {
                 for (final i in available) ButtonSegment(value: i, label: Text(i)),
               ],
             ),
-            DistanceProvider.smallDistance.spacer(),
-            const NewPlayerTextField(),
-            Align(
-              alignment: Alignment.centerRight,
-              child: FilledButton(
-                onPressed: () {},
-                child: const Text('Aggiungi giocatore'),
-              ),
+            DistanceProvider.mediumDistance.spacer(),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              child: selectedMode == 'Squadra'
+                  ? AddTeamView(onSelected: (team) => context.pop(team))
+                  : AddSinglePlayerView(onSelected: (team) => context.pop(team)),
             ),
           ],
         ),
