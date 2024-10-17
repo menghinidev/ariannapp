@@ -3,7 +3,8 @@ import 'package:ariannapp/features/matchkeeper/shared/domain/model/player/player
 import 'package:ariannapp/features/matchkeeper/shared/domain/repository/players/sources/i_players_repository.dart';
 
 class MockPlayersRepository extends IPlayersRepository {
-  late final players = List.generate(
+  final players = <Player>[];
+/*   late final players = List.generate(
     10,
     (index) => Player(
       id: index.toString(),
@@ -21,7 +22,7 @@ class MockPlayersRepository extends IPlayersRepository {
     'Giovanna',
     'Giovannino',
     'Giovannina',
-  ];
+  ]; */
 
   @override
   Future<ApplicationResponse<Player>> addPlayer(String name) async {

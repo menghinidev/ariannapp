@@ -48,6 +48,7 @@ class _AddPlayerTextFieldState extends ConsumerState<AddPlayerTextField> {
               enableFilter: true,
               expandedInsets: EdgeInsets.zero,
               controller: _controller,
+              requestFocusOnTap: true,
               initialSelection: widget.selectedPlayer,
               onSelected: (value) => value == null ? null : widget.onSelected(value),
               filterCallback: _filterCallback,

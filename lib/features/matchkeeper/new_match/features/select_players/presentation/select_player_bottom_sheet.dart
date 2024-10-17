@@ -13,7 +13,7 @@ part 'select_player_bottom_sheet.g.dart';
 
 @riverpod
 List<String> _availablePlayerModes(_AvailablePlayerModesRef ref) {
-  return ['Squadra', 'Giocatore singolo'];
+  return ['Giocatore singolo', 'Squadra'];
 }
 
 @riverpod
@@ -40,11 +40,12 @@ class AddPlayerBottomSheet extends ConsumerWidget {
     final available = ref.watch(_availablePlayerModesProvider);
     final selectedMode = ref.watch(selectedPlayerModeProvider);
     return BottomSheet(
+      showDragHandle: true,
       onClosing: () {},
       builder: (context) => SingleChildScrollView(
         padding: DistanceProvider.screenInsets.padding,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               'Aggiungi squadra o giocatore',
@@ -59,11 +60,14 @@ class AddPlayerBottomSheet extends ConsumerWidget {
               ],
             ),
             DistanceProvider.mediumDistance.spacer(),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
-              child: selectedMode == 'Squadra'
-                  ? AddTeamView(onSelected: (team) => context.pop(team))
-                  : AddSinglePlayerView(onSelected: (team) => context.pop(team)),
+            Padding(
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                child: selectedMode == 'Squadra'
+                    ? AddTeamView(onSelected: (team) => context.pop(team))
+                    : AddSinglePlayerView(onSelected: (team) => context.pop(team)),
+              ),
             ),
           ],
         ),
