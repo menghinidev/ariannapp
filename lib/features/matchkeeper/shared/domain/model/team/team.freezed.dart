@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Team {
+  String get id => throw _privateConstructorUsedError;
   List<Player> get players => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
 
@@ -30,7 +31,7 @@ abstract class $TeamCopyWith<$Res> {
   factory $TeamCopyWith(Team value, $Res Function(Team) then) =
       _$TeamCopyWithImpl<$Res, Team>;
   @useResult
-  $Res call({List<Player> players, String? name});
+  $Res call({String id, List<Player> players, String? name});
 }
 
 /// @nodoc
@@ -48,10 +49,15 @@ class _$TeamCopyWithImpl<$Res, $Val extends Team>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? players = null,
     Object? name = freezed,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       players: null == players
           ? _value.players
           : players // ignore: cast_nullable_to_non_nullable
@@ -71,7 +77,7 @@ abstract class _$$TeamImplCopyWith<$Res> implements $TeamCopyWith<$Res> {
       __$$TeamImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Player> players, String? name});
+  $Res call({String id, List<Player> players, String? name});
 }
 
 /// @nodoc
@@ -86,10 +92,15 @@ class __$$TeamImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? players = null,
     Object? name = freezed,
   }) {
     return _then(_$TeamImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       players: null == players
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
@@ -105,9 +116,11 @@ class __$$TeamImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TeamImpl implements _Team {
-  _$TeamImpl({required final List<Player> players, this.name})
+  _$TeamImpl({required this.id, required final List<Player> players, this.name})
       : _players = players;
 
+  @override
+  final String id;
   final List<Player> _players;
   @override
   List<Player> get players {
@@ -121,7 +134,7 @@ class _$TeamImpl implements _Team {
 
   @override
   String toString() {
-    return 'Team(players: $players, name: $name)';
+    return 'Team(id: $id, players: $players, name: $name)';
   }
 
   @override
@@ -129,13 +142,14 @@ class _$TeamImpl implements _Team {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TeamImpl &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._players, _players) &&
             (identical(other.name, name) || other.name == name));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_players), name);
+      runtimeType, id, const DeepCollectionEquality().hash(_players), name);
 
   /// Create a copy of Team
   /// with the given fields replaced by the non-null parameter values.
@@ -147,9 +161,13 @@ class _$TeamImpl implements _Team {
 }
 
 abstract class _Team implements Team {
-  factory _Team({required final List<Player> players, final String? name}) =
-      _$TeamImpl;
+  factory _Team(
+      {required final String id,
+      required final List<Player> players,
+      final String? name}) = _$TeamImpl;
 
+  @override
+  String get id;
   @override
   List<Player> get players;
   @override

@@ -1,0 +1,13 @@
+import 'package:ariannapp/features/matchkeeper/dashboard/presentation/components/match_list_view.dart';
+import 'package:ariannapp/features/matchkeeper/shared/domain/model/match/match.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class OngoingMatchesSection extends ConsumerWidget {
+  const OngoingMatchesSection({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return const MatchListView(status: MatchStatus.ongoing);
+  }
+}

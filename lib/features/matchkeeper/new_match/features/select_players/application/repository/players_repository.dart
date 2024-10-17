@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'players_repository.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 IPlayersRepository playersRepository(PlayersRepositoryRef ref) {
   return MockPlayersRepository();
 }
@@ -16,11 +16,31 @@ abstract class IPlayersRepository {
 }
 
 class MockPlayersRepository extends IPlayersRepository {
-  late final players = List.generate(10, (index) => Player(id: index.toString(), name: 'Pippo'));
+  late final players = List.generate(
+    10,
+    (index) => Player(
+      id: index.toString(),
+      name: playerNames[index],
+    ),
+  );
+  late final playerNames = [
+    'Pippo',
+    'Pluto',
+    'Paolo',
+    'Ciccio',
+    'Gino',
+    'Gina',
+    'Giovanni',
+    'Giovanna',
+    'Giovannino',
+    'Giovannina',
+  ];
 
   @override
   Future<ApplicationResponse<Player>> addPlayer(String name) async {
-    return Responses.success(Player(id: 'id', name: name));
+    final newValue = Player(id: 'id', name: name);
+    players.add(newValue);
+    return Responses.success(newValue);
   }
 
   @override

@@ -1,25 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'players_repository.dart';
+part of 'add_match_use_case.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$playersRepositoryHash() => r'6dcd34649dd56df6fc06bf03acc1616a47eea69a';
+String _$addMatchUseCaseHash() => r'e921bbf95e27658adcd5b6f0e897d6d361971df1';
 
-/// See also [playersRepository].
-@ProviderFor(playersRepository)
-final playersRepositoryProvider = Provider<IPlayersRepository>.internal(
-  playersRepository,
-  name: r'playersRepositoryProvider',
+/// See also [addMatchUseCase].
+@ProviderFor(addMatchUseCase)
+final addMatchUseCaseProvider = AutoDisposeProvider<AddMatchUseCase>.internal(
+  addMatchUseCase,
+  name: r'addMatchUseCaseProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$playersRepositoryHash,
+      : _$addMatchUseCaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef PlayersRepositoryRef = ProviderRef<IPlayersRepository>;
+typedef AddMatchUseCaseRef = AutoDisposeProviderRef<AddMatchUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

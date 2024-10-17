@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/navigation/entrypoint.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,14 @@ class AriannApp extends ConsumerWidget {
       darkTheme: themeBuilder.darkTheme,
       theme: themeBuilder.lightTheme,
       themeMode: themeMode,
+      scrollBehavior: const MaterialScrollBehavior().copyWith(
+        dragDevices: {
+          PointerDeviceKind.mouse,
+          PointerDeviceKind.touch,
+          PointerDeviceKind.stylus,
+          PointerDeviceKind.unknown
+        },
+      ),
       title: 'AriannApp',
     );
   }

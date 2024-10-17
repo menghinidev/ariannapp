@@ -5,15 +5,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'match.freezed.dart';
 
 @freezed
-class Match with _$Match {
-  factory Match({
+class ApplicationMatch with _$ApplicationMatch {
+  factory ApplicationMatch({
     required Game game,
     required List<Score> scores,
     required MatchStatus status,
     required DateTime lastUpdate,
     required int winningPoints,
     required bool doubleLife,
-  }) = _Match;
+  }) = _ApplicationMatch;
 }
 
 enum MatchStatus { completed, ongoing }

@@ -6,7 +6,7 @@ part of 'add_player_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$addPlayerUseCaseHash() => r'a0b0c3f6c1e7fb7fdfca8b4bddbd9c16bb2dd17a';
+String _$addPlayerUseCaseHash() => r'2ed9d2d57943bbe575a1f776fa5302e42232c5e3';
 
 /// See also [addPlayerUseCase].
 @ProviderFor(addPlayerUseCase)

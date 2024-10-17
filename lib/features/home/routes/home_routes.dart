@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:ariannapp/features/home/presentation/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeScreenRoute extends GoRoute {
@@ -6,7 +6,7 @@ class HomeScreenRoute extends GoRoute {
       : super(
           path: pagePath,
           routes: addictionalRoutes,
-          builder: (context, state) => const SizedBox.shrink(),
+          builder: (context, state) => const HomeScreen(),
         );
 
   static const pagePath = '/home';

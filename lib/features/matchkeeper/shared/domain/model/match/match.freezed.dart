@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$Match {
+mixin _$ApplicationMatch {
   Game get game => throw _privateConstructorUsedError;
   List<Score> get scores => throw _privateConstructorUsedError;
   MatchStatus get status => throw _privateConstructorUsedError;
@@ -23,16 +23,18 @@ mixin _$Match {
   int get winningPoints => throw _privateConstructorUsedError;
   bool get doubleLife => throw _privateConstructorUsedError;
 
-  /// Create a copy of Match
+  /// Create a copy of ApplicationMatch
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $MatchCopyWith<Match> get copyWith => throw _privateConstructorUsedError;
+  $ApplicationMatchCopyWith<ApplicationMatch> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MatchCopyWith<$Res> {
-  factory $MatchCopyWith(Match value, $Res Function(Match) then) =
-      _$MatchCopyWithImpl<$Res, Match>;
+abstract class $ApplicationMatchCopyWith<$Res> {
+  factory $ApplicationMatchCopyWith(
+          ApplicationMatch value, $Res Function(ApplicationMatch) then) =
+      _$ApplicationMatchCopyWithImpl<$Res, ApplicationMatch>;
   @useResult
   $Res call(
       {Game game,
@@ -46,16 +48,16 @@ abstract class $MatchCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MatchCopyWithImpl<$Res, $Val extends Match>
-    implements $MatchCopyWith<$Res> {
-  _$MatchCopyWithImpl(this._value, this._then);
+class _$ApplicationMatchCopyWithImpl<$Res, $Val extends ApplicationMatch>
+    implements $ApplicationMatchCopyWith<$Res> {
+  _$ApplicationMatchCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Match
+  /// Create a copy of ApplicationMatch
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -95,7 +97,7 @@ class _$MatchCopyWithImpl<$Res, $Val extends Match>
     ) as $Val);
   }
 
-  /// Create a copy of Match
+  /// Create a copy of ApplicationMatch
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -107,10 +109,11 @@ class _$MatchCopyWithImpl<$Res, $Val extends Match>
 }
 
 /// @nodoc
-abstract class _$$MatchImplCopyWith<$Res> implements $MatchCopyWith<$Res> {
-  factory _$$MatchImplCopyWith(
-          _$MatchImpl value, $Res Function(_$MatchImpl) then) =
-      __$$MatchImplCopyWithImpl<$Res>;
+abstract class _$$ApplicationMatchImplCopyWith<$Res>
+    implements $ApplicationMatchCopyWith<$Res> {
+  factory _$$ApplicationMatchImplCopyWith(_$ApplicationMatchImpl value,
+          $Res Function(_$ApplicationMatchImpl) then) =
+      __$$ApplicationMatchImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -126,14 +129,14 @@ abstract class _$$MatchImplCopyWith<$Res> implements $MatchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$MatchImplCopyWithImpl<$Res>
-    extends _$MatchCopyWithImpl<$Res, _$MatchImpl>
-    implements _$$MatchImplCopyWith<$Res> {
-  __$$MatchImplCopyWithImpl(
-      _$MatchImpl _value, $Res Function(_$MatchImpl) _then)
+class __$$ApplicationMatchImplCopyWithImpl<$Res>
+    extends _$ApplicationMatchCopyWithImpl<$Res, _$ApplicationMatchImpl>
+    implements _$$ApplicationMatchImplCopyWith<$Res> {
+  __$$ApplicationMatchImplCopyWithImpl(_$ApplicationMatchImpl _value,
+      $Res Function(_$ApplicationMatchImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Match
+  /// Create a copy of ApplicationMatch
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -145,7 +148,7 @@ class __$$MatchImplCopyWithImpl<$Res>
     Object? winningPoints = null,
     Object? doubleLife = null,
   }) {
-    return _then(_$MatchImpl(
+    return _then(_$ApplicationMatchImpl(
       game: null == game
           ? _value.game
           : game // ignore: cast_nullable_to_non_nullable
@@ -176,8 +179,8 @@ class __$$MatchImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$MatchImpl implements _Match {
-  _$MatchImpl(
+class _$ApplicationMatchImpl implements _ApplicationMatch {
+  _$ApplicationMatchImpl(
       {required this.game,
       required final List<Score> scores,
       required this.status,
@@ -207,14 +210,14 @@ class _$MatchImpl implements _Match {
 
   @override
   String toString() {
-    return 'Match(game: $game, scores: $scores, status: $status, lastUpdate: $lastUpdate, winningPoints: $winningPoints, doubleLife: $doubleLife)';
+    return 'ApplicationMatch(game: $game, scores: $scores, status: $status, lastUpdate: $lastUpdate, winningPoints: $winningPoints, doubleLife: $doubleLife)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MatchImpl &&
+            other is _$ApplicationMatchImpl &&
             (identical(other.game, game) || other.game == game) &&
             const DeepCollectionEquality().equals(other._scores, _scores) &&
             (identical(other.status, status) || other.status == status) &&
@@ -236,23 +239,24 @@ class _$MatchImpl implements _Match {
       winningPoints,
       doubleLife);
 
-  /// Create a copy of Match
+  /// Create a copy of ApplicationMatch
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$MatchImplCopyWith<_$MatchImpl> get copyWith =>
-      __$$MatchImplCopyWithImpl<_$MatchImpl>(this, _$identity);
+  _$$ApplicationMatchImplCopyWith<_$ApplicationMatchImpl> get copyWith =>
+      __$$ApplicationMatchImplCopyWithImpl<_$ApplicationMatchImpl>(
+          this, _$identity);
 }
 
-abstract class _Match implements Match {
-  factory _Match(
+abstract class _ApplicationMatch implements ApplicationMatch {
+  factory _ApplicationMatch(
       {required final Game game,
       required final List<Score> scores,
       required final MatchStatus status,
       required final DateTime lastUpdate,
       required final int winningPoints,
-      required final bool doubleLife}) = _$MatchImpl;
+      required final bool doubleLife}) = _$ApplicationMatchImpl;
 
   @override
   Game get game;
@@ -267,10 +271,10 @@ abstract class _Match implements Match {
   @override
   bool get doubleLife;
 
-  /// Create a copy of Match
+  /// Create a copy of ApplicationMatch
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MatchImplCopyWith<_$MatchImpl> get copyWith =>
+  _$$ApplicationMatchImplCopyWith<_$ApplicationMatchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

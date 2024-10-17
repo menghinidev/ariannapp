@@ -21,7 +21,7 @@ final canProceedStepperProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef CanProceedStepperRef = AutoDisposeProviderRef<bool>;
-String _$stepperStateHash() => r'bafd914fe9c8c80e67aa79ba3d41a5560de5700a';
+String _$stepperStateHash() => r'71b33be4efc8b72e9e7470b7526cfc414bd88589';
 
 /// See also [StepperState].
 @ProviderFor(StepperState)
@@ -37,7 +37,7 @@ final stepperStateProvider =
 
 typedef _$StepperState = AutoDisposeNotifier<int>;
 String _$newMatchControllerHash() =>
-    r'7b12d283fa1d5b8cffcf0bb8796fe4bb641b8435';
+    r'ab9d11be2a78f3d5b697e66ec3933f446ff8d690';
 
 /// See also [NewMatchController].
 @ProviderFor(NewMatchController)

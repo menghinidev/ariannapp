@@ -1,6 +1,6 @@
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
-import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/presentation/player_list_tile.dart';
-import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/presentation/player_text_field.dart';
+import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/presentation/components/player_list_tile.dart';
+import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/presentation/components/player_text_field.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/player/player.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/team/team.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,7 @@ class AddTeamView extends ConsumerWidget {
           PlayerListTile(player: player, index: index),
           DistanceProvider.smallDistance.spacer(),
         ],
-        NewPlayerTextField(
+        AddPlayerTextField(
           key: ValueKey(selectedPlayers),
           onSelected: (value) => ref.read(teamSelectedPlayersProvider.notifier).add(value),
         ),
@@ -46,7 +46,10 @@ class AddTeamView extends ConsumerWidget {
         Align(
           alignment: Alignment.centerRight,
           child: ElevatedButton(
-            onPressed: () => onSelected(Team(players: selectedPlayers)),
+            onPressed: () => onSelected(Team(
+              players: selectedPlayers,
+              id: '1',
+            )),
             child: const Text('Aggiungi squadra'),
           ),
         ),

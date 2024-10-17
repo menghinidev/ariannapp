@@ -8,9 +8,7 @@ part 'new_match_state_provider.g.dart';
 @riverpod
 class StepperState extends _$StepperState {
   @override
-  int build() {
-    return 0;
-  }
+  int build() => 0;
 
   void nextStep() {
     final newStep = state + 1;
@@ -22,9 +20,7 @@ class StepperState extends _$StepperState {
     step = newStep;
   }
 
-  set step(int value) {
-    state = value;
-  }
+  set step(int value) => state = value;
 
   int get step => state;
 }
@@ -42,9 +38,7 @@ bool canProceedStepper(CanProceedStepperRef ref) {
 @riverpod
 class NewMatchController extends _$NewMatchController {
   @override
-  MatchBuilder build() {
-    return MatchBuilder();
-  }
+  MatchBuilder build() => MatchBuilder();
 
   void addTeam(Team team) {
     final teams = state.teams;
@@ -56,13 +50,8 @@ class NewMatchController extends _$NewMatchController {
     state = state.copyWith(teams: teams.where((t) => t != team).toList());
   }
 
-  void updateTeam(Team team) {
-    final teams = state.teams;
-    state = state.copyWith(teams: teams.map((t) => t == team ? team : t).toList());
-  }
-
   void updateGame(Game? game) {
-    state = state.copyWith(game: game);
+    state = state.copyWith(game: game, winningPoints: game?.standardWinningPonts);
   }
 
   void updateWinningPoints(int winningPoints) {
@@ -73,5 +62,3 @@ class NewMatchController extends _$NewMatchController {
     state = state.copyWith(doubleLife: doubleLife);
   }
 }
-
-extension NewMatchControllerFeature on NewMatchController {}

@@ -12,6 +12,14 @@ class Game with _$Game {
 extension GameFeatures on Game {
   bool get supportsDoubleLife => true;
 
+  int get standardWinningPonts {
+    return map(
+      briscola: (_) => 11,
+      scopa: (_) => 31,
+      piccimbrigo: (_) => 101,
+    );
+  }
+
   String get name {
     return map(
       briscola: (_) => 'Briscola',

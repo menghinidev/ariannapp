@@ -6,6 +6,7 @@ class BaseAppScreen extends StatelessWidget {
   const BaseAppScreen({
     required this.child,
     required this.title,
+    this.bottomAppBarWidget,
     this.fab,
     super.key,
   });
@@ -13,11 +14,12 @@ class BaseAppScreen extends StatelessWidget {
   final Widget child;
   final String title;
   final Widget? fab;
+  final PreferredSizeWidget? bottomAppBarWidget;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(title: title),
+      appBar: SimpleAppBar(title: title, bottomAppBarWidget: bottomAppBarWidget),
       body: child,
       floatingActionButton: fab,
     );
@@ -27,19 +29,22 @@ class BaseAppScreen extends StatelessWidget {
 class SimpleAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const SimpleAppBar({
     required this.title,
+    this.bottomAppBarWidget,
     super.key,
   });
 
   final String title;
+  final PreferredSizeWidget? bottomAppBarWidget;
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight * 2);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(applicationThemeModeProvider);
     return AppBar(
       title: Text(title),
+      bottom: bottomAppBarWidget,
       actions: [
         Switch.adaptive(
           value: theme == ThemeMode.light,
