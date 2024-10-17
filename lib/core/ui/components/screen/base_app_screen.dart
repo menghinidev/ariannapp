@@ -1,4 +1,3 @@
-import 'package:ariannapp/core/ui/theme/theme_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,6 +6,7 @@ class BaseAppScreen extends StatelessWidget {
     required this.child,
     required this.title,
     this.bottomAppBarWidget,
+    this.actions,
     this.fab,
     super.key,
   });
@@ -14,12 +14,17 @@ class BaseAppScreen extends StatelessWidget {
   final Widget child;
   final String title;
   final Widget? fab;
+  final List<Widget>? actions;
   final PreferredSizeWidget? bottomAppBarWidget;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(title: title, bottomAppBarWidget: bottomAppBarWidget),
+      appBar: SimpleAppBar(
+        title: title,
+        bottomAppBarWidget: bottomAppBarWidget,
+        actions: actions,
+      ),
       body: child,
       floatingActionButton: fab,
     );
@@ -30,10 +35,12 @@ class SimpleAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const SimpleAppBar({
     required this.title,
     this.bottomAppBarWidget,
+    this.actions,
     super.key,
   });
 
   final String title;
+  final List<Widget>? actions;
   final PreferredSizeWidget? bottomAppBarWidget;
 
   @override
@@ -41,19 +48,10 @@ class SimpleAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(applicationThemeModeProvider);
     return AppBar(
       title: Text(title),
       bottom: bottomAppBarWidget,
-      actions: [
-        Switch.adaptive(
-          value: theme == ThemeMode.light,
-          onChanged: (_) => ref.read(applicationThemeModeProvider.notifier).toggle(),
-          thumbIcon: WidgetStatePropertyAll(
-            theme == ThemeMode.light ? const Icon(Icons.dark_mode) : const Icon(Icons.light_mode),
-          ),
-        ),
-      ],
+      actions: actions,
     );
   }
 }

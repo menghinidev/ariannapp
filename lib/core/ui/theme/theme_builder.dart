@@ -7,14 +7,24 @@ part 'theme_builder.g.dart';
 @riverpod
 class ApplicationThemeMode extends _$ApplicationThemeMode {
   @override
-  ThemeMode build() => ThemeMode.light;
+  ThemeMode build() => ThemeMode.system;
 
-  void toggle() => state = state == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+  set themeMode(ThemeMode value) => state = value;
+
+  ThemeMode get themeMode => state;
 }
 
 @riverpod
-ThemeBuilder themeBuilder(ThemeBuilderRef ref) {
-  return ThemeBuilder(scheme: FlexScheme.purpleM3);
+class ApplicationTheme extends _$ApplicationTheme {
+  @override
+  ThemeBuilder build() {
+    return ThemeBuilder(scheme: FlexScheme.pinkM3);
+  }
+
+  void changeTheme(FlexScheme scheme) {
+    final newBuilder = ThemeBuilder(scheme: scheme);
+    state = newBuilder;
+  }
 }
 
 class ThemeBuilder {
