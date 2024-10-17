@@ -19,9 +19,10 @@ class MatchListView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final matches = ref.watch(matchesProvider(GetMatchesCommand(status: status)));
     return matches.loadUntil(
-      onLoaded: (data) => ListView.builder(
+      onLoaded: (data) => ListView.separated(
         itemCount: data.length,
         padding: DistanceProvider.screenInsets.padding,
+        separatorBuilder: (context, index) => const Divider(height: DistanceProvider.hugeDistance),
         itemBuilder: (context, index) => MatchCard(match: data[index]),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:ariannapp/core/core.dart';
+import 'package:ariannapp/core/infrastructure/utils/response/empty_response.dart';
 import 'package:ariannapp/core/infrastructure/utils/utils.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/application/state/new_match_builder.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/game/game.dart';
@@ -16,15 +17,16 @@ IMatchRepository matchRepository(MatchRepositoryRef ref) {
 }
 
 abstract class IMatchRepository {
-  Future<ApplicationResponse<ApplicationMatch>> addMatch({
-    required MatchBuilder builder,
-  });
-  Future<ApplicationResponse<List<ApplicationMatch>>> getMatches();
+  Future<ApplicationResponse<ApplicationMatch>> addMatch({required MatchBuilder builder});
+  Future<EmptyResponse> updateScore();
+  Future<ApplicationResponse<List<ApplicationMatch>>> getMatches({MatchStatus? status});
 }
 
 class MatchRepository extends IMatchRepository {
-  final List<ApplicationMatch> _matches = [
-    ApplicationMatch(
+  final List<ApplicationMatch> _matches = List.generate(
+    3,
+    (id) => ApplicationMatch(
+      id: id.toString(),
       game: Game.briscola(),
       scores: List.generate(
         2,
@@ -36,18 +38,19 @@ class MatchRepository extends IMatchRepository {
           points: <int>[2, 15],
         ),
       ),
-      status: MatchStatus.ongoing,
+      status: id == 2 ? MatchStatus.completed : MatchStatus.ongoing,
       lastUpdate: DateTime.now(),
       winningPoints: Game.briscola().standardWinningPonts,
       doubleLife: false,
-    )
-  ];
+    ),
+  );
 
   @override
   Future<ApplicationResponse<ApplicationMatch>> addMatch({
     required MatchBuilder builder,
   }) async {
     final match = ApplicationMatch(
+      id: _matches.length.toString(),
       game: builder.game!,
       winningPoints: builder.winningPoints!,
       doubleLife: builder.doubleLife ?? false,
@@ -60,7 +63,18 @@ class MatchRepository extends IMatchRepository {
   }
 
   @override
-  Future<ApplicationResponse<List<ApplicationMatch>>> getMatches() async {
-    return Responses.success<List<ApplicationMatch>, ApplicationError>(_matches);
+  Future<ApplicationResponse<List<ApplicationMatch>>> getMatches({MatchStatus? status}) async {
+    late final List<ApplicationMatch> values;
+    if (status != null) {
+      values = _matches.where((match) => match.status == status).toList();
+    } else {
+      values = _matches;
+    }
+    return Responses.success<List<ApplicationMatch>, ApplicationError>(values);
+  }
+
+  @override
+  Future<EmptyResponse> updateScore() async {
+    return Responses.success<void, ApplicationError>(null);
   }
 }

@@ -1,11 +1,25 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
+import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/edit_score/command/edit_score_command.dart';
+import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/edit_score/edit_score_use_case.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/match/match.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/score/score.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/team/team.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'score_card.g.dart';
+
+@riverpod
+class ScoreModification extends _$ScoreModification {
+  @override
+  int build() => 0;
+
+  set points(int points) => state = points;
+
+  int get points => state;
+}
 
 class ScoreCard extends ConsumerWidget {
   const ScoreCard({
@@ -27,19 +41,23 @@ class ScoreCard extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _ScoreCardHeader(match: match, score: score),
-            const Divider(),
-            Row(
-              children: [
-                Expanded(child: _ScorePointsSummary(score: score)),
-                const _ScoreActionsBar(),
-              ],
-            ),
+            if (match.status == MatchStatus.ongoing) ...[
+              const Divider(),
+              Row(
+                children: [
+                  Expanded(child: _ScorePointsSummary(score: score)),
+                  _ScoreActionsBar(score: score),
+                ],
+              ),
+            ],
           ],
         ),
       ),
     );
   }
 }
+
+/* Components */
 
 class _ScoreCardHeader extends StatelessWidget {
   const _ScoreCardHeader({
@@ -74,7 +92,7 @@ class _ScoreCardHeader extends StatelessWidget {
         ),
         Text(
           '${score.points.reduce((a, b) => a + b)}',
-          style: context.textTheme.titleLarge,
+          style: context.textTheme.headlineSmall,
         ),
       ],
     );
@@ -98,6 +116,7 @@ class _ScorePointsSummary extends StatelessWidget {
             '$point',
             style: context.textTheme.bodyLarge?.copyWith(
               decoration: score.points.last == point ? null : TextDecoration.lineThrough,
+              fontWeight: score.points.last == point ? FontWeight.bold : null,
             ),
           ),
       ],
@@ -106,72 +125,87 @@ class _ScorePointsSummary extends StatelessWidget {
 }
 
 class _ScoreActionsBar extends ConsumerStatefulWidget {
-  const _ScoreActionsBar({super.key});
+  const _ScoreActionsBar({
+    required this.score,
+  });
+
+  final Score score;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => __ScoreActionsBarState();
 }
 
 class __ScoreActionsBarState extends ConsumerState<_ScoreActionsBar> {
-  late final ItemScrollController itemScrollController;
-  late final ItemPositionsListener itemPositionsListener;
+  late final FixedExtentScrollController _scrollController;
+
+  static const itemHeight = 48.0;
+  static const quickNumbers = 100;
 
   @override
   void initState() {
     super.initState();
-    itemScrollController = ItemScrollController();
-    itemPositionsListener = ItemPositionsListener.create();
-    itemPositionsListener.itemPositions.addListener(() {
-      final positions = itemPositionsListener.itemPositions.value;
-      if (positions.isNotEmpty) {
-        final firstIndex = positions.first.index;
-        final lastIndex = positions.last.index;
-        print('First index: $firstIndex, Last index: $lastIndex');
-      }
-    });
+    _scrollController = FixedExtentScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final _ = ref.watch(scoreModificationProvider);
     return Row(
       children: [
         IconButton.filled(
-          onPressed: () {},
+          onPressed: _onPressed,
           icon: const Icon(Icons.add),
         ),
         DistanceProvider.smallDistance.spacer(axis: Axis.horizontal),
         IconButton.filled(
-          onPressed: () {},
+          onPressed: _onPressed,
           icon: const Icon(Icons.remove),
         ),
         DistanceProvider.smallDistance.spacer(axis: Axis.horizontal),
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxHeight: 48, maxWidth: 36),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondaryContainer,
-              borderRadius: BorderRadius.circular(12),
-              border: const Border.fromBorderSide(BorderSide.none),
-            ),
-            child: ScrollablePositionedList.builder(
-              itemCount: 100,
-              initialScrollIndex: 0,
-              physics: const PageScrollPhysics(),
-              itemBuilder: (context, index) => Container(
-                height: 48,
-                alignment: Alignment.center,
-                child: Text(
-                  '${index + 1}',
-                  textAlign: TextAlign.center,
-                  style: context.textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.secondary),
-                ),
-              ),
-              itemScrollController: itemScrollController,
-              itemPositionsListener: itemPositionsListener,
+        Container(
+          constraints: const BoxConstraints(maxHeight: itemHeight, maxWidth: 36),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondaryContainer,
+            borderRadius: BorderRadius.circular(12),
+            border: const Border.fromBorderSide(BorderSide.none),
+          ),
+          child: ListWheelScrollView.useDelegate(
+            itemExtent: itemHeight,
+            controller: _scrollController,
+            onSelectedItemChanged: (value) => ref.read(scoreModificationProvider.notifier).points = value + 1,
+            physics: const PageScrollPhysics(),
+            childDelegate: ListWheelChildListDelegate(
+              children: [
+                for (var index = 0; index < quickNumbers; index++)
+                  Container(
+                    height: itemHeight,
+                    alignment: Alignment.center,
+                    child: Text(
+                      '${index + 1}',
+                      textAlign: TextAlign.center,
+                      style: context.textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.secondary),
+                    ),
+                  ),
+              ],
             ),
           ),
         ),
       ],
+    );
+  }
+
+  Future<void> _onPressed() async {
+    await ref.read(editScoreUseCaseProvider).call(EditScoreCommand());
+    await _scrollController.animateToItem(
+      0,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
     );
   }
 }

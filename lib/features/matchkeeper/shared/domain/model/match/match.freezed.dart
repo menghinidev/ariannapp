@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ApplicationMatch {
+  String get id => throw _privateConstructorUsedError;
   Game get game => throw _privateConstructorUsedError;
   List<Score> get scores => throw _privateConstructorUsedError;
   MatchStatus get status => throw _privateConstructorUsedError;
@@ -37,7 +38,8 @@ abstract class $ApplicationMatchCopyWith<$Res> {
       _$ApplicationMatchCopyWithImpl<$Res, ApplicationMatch>;
   @useResult
   $Res call(
-      {Game game,
+      {String id,
+      Game game,
       List<Score> scores,
       MatchStatus status,
       DateTime lastUpdate,
@@ -62,6 +64,7 @@ class _$ApplicationMatchCopyWithImpl<$Res, $Val extends ApplicationMatch>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? game = null,
     Object? scores = null,
     Object? status = null,
@@ -70,6 +73,10 @@ class _$ApplicationMatchCopyWithImpl<$Res, $Val extends ApplicationMatch>
     Object? doubleLife = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       game: null == game
           ? _value.game
           : game // ignore: cast_nullable_to_non_nullable
@@ -117,7 +124,8 @@ abstract class _$$ApplicationMatchImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Game game,
+      {String id,
+      Game game,
       List<Score> scores,
       MatchStatus status,
       DateTime lastUpdate,
@@ -141,6 +149,7 @@ class __$$ApplicationMatchImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? game = null,
     Object? scores = null,
     Object? status = null,
@@ -149,6 +158,10 @@ class __$$ApplicationMatchImplCopyWithImpl<$Res>
     Object? doubleLife = null,
   }) {
     return _then(_$ApplicationMatchImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       game: null == game
           ? _value.game
           : game // ignore: cast_nullable_to_non_nullable
@@ -181,7 +194,8 @@ class __$$ApplicationMatchImplCopyWithImpl<$Res>
 
 class _$ApplicationMatchImpl implements _ApplicationMatch {
   _$ApplicationMatchImpl(
-      {required this.game,
+      {required this.id,
+      required this.game,
       required final List<Score> scores,
       required this.status,
       required this.lastUpdate,
@@ -189,6 +203,8 @@ class _$ApplicationMatchImpl implements _ApplicationMatch {
       required this.doubleLife})
       : _scores = scores;
 
+  @override
+  final String id;
   @override
   final Game game;
   final List<Score> _scores;
@@ -210,7 +226,7 @@ class _$ApplicationMatchImpl implements _ApplicationMatch {
 
   @override
   String toString() {
-    return 'ApplicationMatch(game: $game, scores: $scores, status: $status, lastUpdate: $lastUpdate, winningPoints: $winningPoints, doubleLife: $doubleLife)';
+    return 'ApplicationMatch(id: $id, game: $game, scores: $scores, status: $status, lastUpdate: $lastUpdate, winningPoints: $winningPoints, doubleLife: $doubleLife)';
   }
 
   @override
@@ -218,6 +234,7 @@ class _$ApplicationMatchImpl implements _ApplicationMatch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ApplicationMatchImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.game, game) || other.game == game) &&
             const DeepCollectionEquality().equals(other._scores, _scores) &&
             (identical(other.status, status) || other.status == status) &&
@@ -232,6 +249,7 @@ class _$ApplicationMatchImpl implements _ApplicationMatch {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       game,
       const DeepCollectionEquality().hash(_scores),
       status,
@@ -251,13 +269,16 @@ class _$ApplicationMatchImpl implements _ApplicationMatch {
 
 abstract class _ApplicationMatch implements ApplicationMatch {
   factory _ApplicationMatch(
-      {required final Game game,
+      {required final String id,
+      required final Game game,
       required final List<Score> scores,
       required final MatchStatus status,
       required final DateTime lastUpdate,
       required final int winningPoints,
       required final bool doubleLife}) = _$ApplicationMatchImpl;
 
+  @override
+  String get id;
   @override
   Game get game;
   @override

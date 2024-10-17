@@ -7,6 +7,7 @@ part 'match.freezed.dart';
 @freezed
 class ApplicationMatch with _$ApplicationMatch {
   factory ApplicationMatch({
+    required String id,
     required Game game,
     required List<Score> scores,
     required MatchStatus status,
