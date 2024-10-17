@@ -18,3 +18,14 @@ class ApplicationMatch with _$ApplicationMatch {
 }
 
 enum MatchStatus { completed, ongoing }
+
+extension MatchStatusFeature on ApplicationMatch {
+  bool get isOver {
+    if (status == MatchStatus.completed) return true;
+    final mappedReduced = scores.map((e) => e.points.reduce((value, element) => value + element)).toList()
+      ..sort((a, b) => b.compareTo(a))
+      ..toList();
+    if (mappedReduced[0] >= winningPoints) return true;
+    return false;
+  }
+}

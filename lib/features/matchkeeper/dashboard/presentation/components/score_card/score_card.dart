@@ -1,20 +1,17 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
-import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/edit_score/command/edit_score_command.dart';
-import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/edit_score/edit_score_use_case.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/match/match.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/score/score.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/team/team.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'score_card.g.dart';
+final scoreModificationProvider = StateNotifierProvider.family<ScoreModificationNotifier, int, Score>((ref, score) {
+  return ScoreModificationNotifier();
+});
 
-@riverpod
-class ScoreModification extends _$ScoreModification {
-  @override
-  int build() => 0;
+class ScoreModificationNotifier extends StateNotifier<int> {
+  ScoreModificationNotifier() : super(0);
 
   set points(int points) => state = points;
 
@@ -111,14 +108,15 @@ class _ScorePointsSummary extends StatelessWidget {
     return Wrap(
       spacing: DistanceProvider.smallDistance,
       children: [
-        for (final point in score.points)
+        for (final point in score.points.sublist(0, score.points.length - 1))
           Text(
             '$point',
-            style: context.textTheme.bodyLarge?.copyWith(
-              decoration: score.points.last == point ? null : TextDecoration.lineThrough,
-              fontWeight: score.points.last == point ? FontWeight.bold : null,
-            ),
+            style: context.textTheme.bodyLarge?.copyWith(decoration: TextDecoration.lineThrough),
           ),
+        Text(
+          '${score.points.last}',
+          style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+        ),
       ],
     );
   }
@@ -155,57 +153,34 @@ class __ScoreActionsBarState extends ConsumerState<_ScoreActionsBar> {
 
   @override
   Widget build(BuildContext context) {
-    final _ = ref.watch(scoreModificationProvider);
-    return Row(
-      children: [
-        IconButton.filled(
-          onPressed: _onPressed,
-          icon: const Icon(Icons.add),
+    final _ = ref.watch(scoreModificationProvider(widget.score));
+    return Container(
+      constraints: const BoxConstraints(maxHeight: itemHeight, maxWidth: 36),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.secondaryContainer,
+        borderRadius: BorderRadius.circular(12),
+        border: const Border.fromBorderSide(BorderSide.none),
+      ),
+      child: ListWheelScrollView.useDelegate(
+        itemExtent: itemHeight,
+        controller: _scrollController,
+        onSelectedItemChanged: (value) => ref.read(scoreModificationProvider(widget.score).notifier).points = value,
+        physics: const PageScrollPhysics(),
+        childDelegate: ListWheelChildListDelegate(
+          children: [
+            for (var index = 0; index < quickNumbers; index++)
+              Container(
+                height: itemHeight,
+                alignment: Alignment.center,
+                child: Text(
+                  '$index',
+                  textAlign: TextAlign.center,
+                  style: context.textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.secondary),
+                ),
+              ),
+          ],
         ),
-        DistanceProvider.smallDistance.spacer(axis: Axis.horizontal),
-        IconButton.filled(
-          onPressed: _onPressed,
-          icon: const Icon(Icons.remove),
-        ),
-        DistanceProvider.smallDistance.spacer(axis: Axis.horizontal),
-        Container(
-          constraints: const BoxConstraints(maxHeight: itemHeight, maxWidth: 36),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondaryContainer,
-            borderRadius: BorderRadius.circular(12),
-            border: const Border.fromBorderSide(BorderSide.none),
-          ),
-          child: ListWheelScrollView.useDelegate(
-            itemExtent: itemHeight,
-            controller: _scrollController,
-            onSelectedItemChanged: (value) => ref.read(scoreModificationProvider.notifier).points = value + 1,
-            physics: const PageScrollPhysics(),
-            childDelegate: ListWheelChildListDelegate(
-              children: [
-                for (var index = 0; index < quickNumbers; index++)
-                  Container(
-                    height: itemHeight,
-                    alignment: Alignment.center,
-                    child: Text(
-                      '${index + 1}',
-                      textAlign: TextAlign.center,
-                      style: context.textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.secondary),
-                    ),
-                  ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Future<void> _onPressed() async {
-    await ref.read(editScoreUseCaseProvider).call(EditScoreCommand());
-    await _scrollController.animateToItem(
-      0,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
+      ),
     );
   }
 }

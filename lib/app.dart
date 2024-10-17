@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/navigation/entrypoint.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AriannApp extends ConsumerWidget {
@@ -18,6 +19,12 @@ class AriannApp extends ConsumerWidget {
       darkTheme: themeBuilder.darkTheme,
       theme: themeBuilder.lightTheme,
       themeMode: themeMode,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('it')],
       scrollBehavior: const MaterialScrollBehavior().copyWith(
         dragDevices: {
           PointerDeviceKind.mouse,

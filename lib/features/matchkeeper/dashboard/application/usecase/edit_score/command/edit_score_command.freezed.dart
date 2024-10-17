@@ -15,13 +15,26 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$EditScoreCommand {}
+mixin _$EditScoreCommand {
+  ApplicationMatch get match => throw _privateConstructorUsedError;
+  List<Score> get newScores => throw _privateConstructorUsedError;
+
+  /// Create a copy of EditScoreCommand
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $EditScoreCommandCopyWith<EditScoreCommand> get copyWith =>
+      throw _privateConstructorUsedError;
+}
 
 /// @nodoc
 abstract class $EditScoreCommandCopyWith<$Res> {
   factory $EditScoreCommandCopyWith(
           EditScoreCommand value, $Res Function(EditScoreCommand) then) =
       _$EditScoreCommandCopyWithImpl<$Res, EditScoreCommand>;
+  @useResult
+  $Res call({ApplicationMatch match, List<Score> newScores});
+
+  $ApplicationMatchCopyWith<$Res> get match;
 }
 
 /// @nodoc
@@ -36,13 +49,47 @@ class _$EditScoreCommandCopyWithImpl<$Res, $Val extends EditScoreCommand>
 
   /// Create a copy of EditScoreCommand
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? match = null,
+    Object? newScores = null,
+  }) {
+    return _then(_value.copyWith(
+      match: null == match
+          ? _value.match
+          : match // ignore: cast_nullable_to_non_nullable
+              as ApplicationMatch,
+      newScores: null == newScores
+          ? _value.newScores
+          : newScores // ignore: cast_nullable_to_non_nullable
+              as List<Score>,
+    ) as $Val);
+  }
+
+  /// Create a copy of EditScoreCommand
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ApplicationMatchCopyWith<$Res> get match {
+    return $ApplicationMatchCopyWith<$Res>(_value.match, (value) {
+      return _then(_value.copyWith(match: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$EditScoreCommandImplCopyWith<$Res> {
+abstract class _$$EditScoreCommandImplCopyWith<$Res>
+    implements $EditScoreCommandCopyWith<$Res> {
   factory _$$EditScoreCommandImplCopyWith(_$EditScoreCommandImpl value,
           $Res Function(_$EditScoreCommandImpl) then) =
       __$$EditScoreCommandImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ApplicationMatch match, List<Score> newScores});
+
+  @override
+  $ApplicationMatchCopyWith<$Res> get match;
 }
 
 /// @nodoc
@@ -55,28 +102,85 @@ class __$$EditScoreCommandImplCopyWithImpl<$Res>
 
   /// Create a copy of EditScoreCommand
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? match = null,
+    Object? newScores = null,
+  }) {
+    return _then(_$EditScoreCommandImpl(
+      match: null == match
+          ? _value.match
+          : match // ignore: cast_nullable_to_non_nullable
+              as ApplicationMatch,
+      newScores: null == newScores
+          ? _value._newScores
+          : newScores // ignore: cast_nullable_to_non_nullable
+              as List<Score>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$EditScoreCommandImpl implements _EditScoreCommand {
-  _$EditScoreCommandImpl();
+  _$EditScoreCommandImpl(
+      {required this.match, required final List<Score> newScores})
+      : _newScores = newScores;
+
+  @override
+  final ApplicationMatch match;
+  final List<Score> _newScores;
+  @override
+  List<Score> get newScores {
+    if (_newScores is EqualUnmodifiableListView) return _newScores;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_newScores);
+  }
 
   @override
   String toString() {
-    return 'EditScoreCommand()';
+    return 'EditScoreCommand(match: $match, newScores: $newScores)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$EditScoreCommandImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$EditScoreCommandImpl &&
+            (identical(other.match, match) || other.match == match) &&
+            const DeepCollectionEquality()
+                .equals(other._newScores, _newScores));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, match, const DeepCollectionEquality().hash(_newScores));
+
+  /// Create a copy of EditScoreCommand
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EditScoreCommandImplCopyWith<_$EditScoreCommandImpl> get copyWith =>
+      __$$EditScoreCommandImplCopyWithImpl<_$EditScoreCommandImpl>(
+          this, _$identity);
 }
 
 abstract class _EditScoreCommand implements EditScoreCommand {
-  factory _EditScoreCommand() = _$EditScoreCommandImpl;
+  factory _EditScoreCommand(
+      {required final ApplicationMatch match,
+      required final List<Score> newScores}) = _$EditScoreCommandImpl;
+
+  @override
+  ApplicationMatch get match;
+  @override
+  List<Score> get newScores;
+
+  /// Create a copy of EditScoreCommand
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$EditScoreCommandImplCopyWith<_$EditScoreCommandImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

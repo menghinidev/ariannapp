@@ -2,11 +2,8 @@ import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/core/infrastructure/utils/response/empty_response.dart';
 import 'package:ariannapp/core/infrastructure/utils/utils.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/application/state/new_match_builder.dart';
-import 'package:ariannapp/features/matchkeeper/shared/domain/model/game/game.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/match/match.dart';
-import 'package:ariannapp/features/matchkeeper/shared/domain/model/player/player.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/score/score.dart';
-import 'package:ariannapp/features/matchkeeper/shared/domain/model/team/team.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'match_repository.g.dart';
@@ -18,12 +15,15 @@ IMatchRepository matchRepository(MatchRepositoryRef ref) {
 
 abstract class IMatchRepository {
   Future<ApplicationResponse<ApplicationMatch>> addMatch({required MatchBuilder builder});
-  Future<EmptyResponse> updateScore();
+  Future<EmptyResponse> updateScore({
+    required String matchId,
+    required List<Score> scores,
+  });
   Future<ApplicationResponse<List<ApplicationMatch>>> getMatches({MatchStatus? status});
 }
 
 class MatchRepository extends IMatchRepository {
-  final List<ApplicationMatch> _matches = List.generate(
+  /* final List<ApplicationMatch> _matches = List.generate(
     3,
     (id) => ApplicationMatch(
       id: id.toString(),
@@ -35,7 +35,7 @@ class MatchRepository extends IMatchRepository {
             id: index.toString(),
             players: [Player(id: 'player', name: 'Giocatore $index')],
           ),
-          points: <int>[2, 15],
+          points: <int>[2, 2],
         ),
       ),
       status: id == 2 ? MatchStatus.completed : MatchStatus.ongoing,
@@ -43,7 +43,9 @@ class MatchRepository extends IMatchRepository {
       winningPoints: Game.briscola().standardWinningPonts,
       doubleLife: false,
     ),
-  );
+  ); */
+
+  final List<ApplicationMatch> _matches = <ApplicationMatch>[];
 
   @override
   Future<ApplicationResponse<ApplicationMatch>> addMatch({
@@ -74,7 +76,20 @@ class MatchRepository extends IMatchRepository {
   }
 
   @override
-  Future<EmptyResponse> updateScore() async {
+  Future<EmptyResponse> updateScore({
+    required String matchId,
+    required List<Score> scores,
+  }) async {
+    final match = _matches.firstWhere((match) => match.id == matchId);
+    var newMatch = match.copyWith(
+      scores: scores,
+      lastUpdate: DateTime.now(),
+    );
+    if (newMatch.isOver) newMatch = newMatch.copyWith(status: MatchStatus.completed);
+    _matches
+      ..remove(match)
+      ..add(newMatch)
+      ..sort((a, b) => b.lastUpdate.compareTo(a.lastUpdate));
     return Responses.success<void, ApplicationError>(null);
   }
 }

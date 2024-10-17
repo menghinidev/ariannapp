@@ -20,7 +20,10 @@ class EditScoreUseCase extends UseCase<void, EditScoreCommand> {
   @override
   Future<Response<void, ApplicationError>> call(EditScoreCommand input) async {
     final check = await checkRequirements();
-    final response = await check.flatMapAsync((_) => repo.updateScore());
+    final response = await check.flatMapAsync((_) => repo.updateScore(
+          matchId: input.match.id,
+          scores: input.newScores,
+        ));
     return response;
   }
 }

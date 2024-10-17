@@ -1,8 +1,13 @@
 import 'package:ariannapp/core/core.dart';
+import 'package:ariannapp/core/infrastructure/utils/utils.dart';
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
+import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/edit_score/command/edit_score_command.dart';
+import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/edit_score/edit_score_use_case.dart';
+import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/get_matches/get_matches_use_case.dart';
 import 'package:ariannapp/features/matchkeeper/dashboard/presentation/components/score_card/score_card.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/game/game.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/match/match.dart';
+import 'package:ariannapp/features/matchkeeper/shared/domain/model/score/score.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,6 +28,13 @@ class MatchCard extends ConsumerWidget {
         _MatchCardHeader(match: match),
         DistanceProvider.smallDistance.spacer(),
         _MatchCardScores(match: match),
+        if (match.status == MatchStatus.ongoing) ...[
+          DistanceProvider.smallDistance.spacer(),
+          Align(
+            alignment: Alignment.centerRight,
+            child: _MatchCardActions(match: match),
+          ),
+        ],
       ],
     );
   }
@@ -48,17 +60,19 @@ class _MatchCardHeader extends StatelessWidget {
                 style: context.textTheme.headlineSmall,
               ),
               Text(
-                'Iniziata il ${match.lastUpdate}',
+                'Iniziata il ${match.lastUpdate.toExtendedDate}',
                 style: context.textTheme.bodySmall,
               ),
             ],
           ),
         ),
-        DistanceProvider.smallDistance.spacer(axis: Axis.horizontal),
-        IconButton.filledTonal(
-          onPressed: () {},
-          icon: const Icon(Icons.add),
-        ),
+        if (match.status == MatchStatus.completed) ...[
+          DistanceProvider.smallDistance.spacer(axis: Axis.horizontal),
+          IconButton.filledTonal(
+            onPressed: () {},
+            icon: const Icon(Icons.refresh_outlined),
+          ),
+        ],
       ],
     );
   }
@@ -82,6 +96,33 @@ class _MatchCardScores extends ConsumerWidget {
         score: match.scores[index],
         match: match,
       ),
+    );
+  }
+}
+
+class _MatchCardActions extends ConsumerWidget {
+  const _MatchCardActions({
+    required this.match,
+  });
+
+  final ApplicationMatch match;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return FilledButton.icon(
+      label: const Text('Registra turno'),
+      onPressed: () async {
+        final scores = <Score>[];
+        for (final score in match.scores) {
+          final points = score.points;
+          final newPoint = ref.read(scoreModificationProvider(score));
+          final newValue = score.copyWith(points: [...points, newPoint]);
+          scores.add(newValue);
+        }
+        final command = EditScoreCommand(match: match, newScores: scores);
+        await ref.read(editScoreUseCaseProvider).call(command);
+        ref.invalidate(matchesProvider);
+      },
     );
   }
 }
