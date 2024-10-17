@@ -9,7 +9,7 @@ part 'app_router.g.dart';
 @riverpod
 GoRouter appRouter(AppRouterRef ref) {
   return GoRouter(
-    initialLocation: '/home/${MatchkeeperRoutes.dashboard}',
+    initialLocation: '/home',
     routes: [
       HomeScreenRoute([
         MatchkeeperDashboardRoute(),

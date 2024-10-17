@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:shimmer/shimmer.dart';
 
 extension AsyncDataBuilder<X> on AsyncValue<X> {
   Widget loadUntil({required Widget Function(X data) onLoaded}) {
@@ -13,7 +12,8 @@ class _LoadingComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return const SizedBox.shrink();
+    /* return SizedBox(
       width: 200,
       height: 100,
       child: Shimmer.fromColors(
@@ -28,6 +28,6 @@ class _LoadingComponent extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ); */
   }
 }
