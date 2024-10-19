@@ -37,7 +37,7 @@ final stepperStateProvider =
 
 typedef _$StepperState = AutoDisposeNotifier<int>;
 String _$newMatchControllerHash() =>
-    r'ab9d11be2a78f3d5b697e66ec3933f446ff8d690';
+    r'59fee2fec5f11aa88e205eeca95ee811f6de6de2';
 
 /// See also [NewMatchController].
 @ProviderFor(NewMatchController)

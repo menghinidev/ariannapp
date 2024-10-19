@@ -36,11 +36,14 @@ class MockMatchRepository extends IMatchRepository {
   Future<ApplicationResponse<ApplicationMatch>> addMatch({
     required MatchBuilder builder,
   }) async {
+    final game = builder.game!;
+    final gameStrategy = game.strategy;
     final match = ApplicationMatch(
       id: _matches.length.toString(),
-      game: builder.game!,
-      winningPoints: builder.winningPoints!,
-      doubleLife: builder.doubleLife ?? false,
+      game: game.copyWith.strategy(
+        doubleLife: builder.doubleLife ?? gameStrategy.doubleLife,
+        threshold: builder.winningPoints ?? gameStrategy.threshold,
+      ),
       lastUpdate: DateTime.now(),
       status: MatchStatus.ongoing,
       scores: builder.teams.map((team) => Score(points: <int>[0], team: team)).toList(),
@@ -66,11 +69,12 @@ class MockMatchRepository extends IMatchRepository {
     required List<Score> scores,
   }) async {
     final match = _matches.firstWhere((match) => match.id == matchId);
-    final newScores = [...scores]..sort((a, b) => b.totalPoints.compareTo(a.totalPoints));
-    var newMatch = match.copyWith(
-      scores: newScores,
-      lastUpdate: DateTime.now(),
-    );
+    var newMatch = match
+        .copyWith(
+          scores: scores,
+          lastUpdate: DateTime.now(),
+        )
+        .sortedScores;
     if (newMatch.isOver) newMatch = newMatch.copyWith(status: MatchStatus.completed);
     _matches
       ..remove(match)

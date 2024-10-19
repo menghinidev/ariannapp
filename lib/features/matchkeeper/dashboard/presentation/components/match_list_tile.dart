@@ -1,4 +1,3 @@
-import 'package:ariannapp/features/matchkeeper/shared/domain/model/game/game.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/match/match.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

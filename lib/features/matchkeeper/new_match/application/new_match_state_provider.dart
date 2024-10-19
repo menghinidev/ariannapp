@@ -51,7 +51,7 @@ class NewMatchController extends _$NewMatchController {
   }
 
   void updateGame(Game? game) {
-    state = state.copyWith(game: game, winningPoints: game?.standardWinningPonts);
+    state = state.copyWith(game: game, winningPoints: game?.strategy.threshold);
   }
 
   void updateWinningPoints(int winningPoints) {

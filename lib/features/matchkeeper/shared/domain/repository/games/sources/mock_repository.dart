@@ -2,11 +2,11 @@ import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/game/game.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/repository/games/sources/i_games_repository.dart';
 
-class MockGamesRepository extends IGamesRepository {
+class MockGamesRepository extends IGamesRepository with GameFactory {
   late final games = [
-    Game.briscola(),
-    Game.scopa(),
-    Game.piccimbrigo(),
+    briscola,
+    scopa,
+    picci,
   ];
 
   @override

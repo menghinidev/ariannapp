@@ -21,8 +21,6 @@ mixin _$ApplicationMatch {
   List<Score> get scores => throw _privateConstructorUsedError;
   MatchStatus get status => throw _privateConstructorUsedError;
   DateTime get lastUpdate => throw _privateConstructorUsedError;
-  int get winningPoints => throw _privateConstructorUsedError;
-  bool get doubleLife => throw _privateConstructorUsedError;
 
   /// Create a copy of ApplicationMatch
   /// with the given fields replaced by the non-null parameter values.
@@ -42,9 +40,7 @@ abstract class $ApplicationMatchCopyWith<$Res> {
       Game game,
       List<Score> scores,
       MatchStatus status,
-      DateTime lastUpdate,
-      int winningPoints,
-      bool doubleLife});
+      DateTime lastUpdate});
 
   $GameCopyWith<$Res> get game;
 }
@@ -69,8 +65,6 @@ class _$ApplicationMatchCopyWithImpl<$Res, $Val extends ApplicationMatch>
     Object? scores = null,
     Object? status = null,
     Object? lastUpdate = null,
-    Object? winningPoints = null,
-    Object? doubleLife = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -93,14 +87,6 @@ class _$ApplicationMatchCopyWithImpl<$Res, $Val extends ApplicationMatch>
           ? _value.lastUpdate
           : lastUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      winningPoints: null == winningPoints
-          ? _value.winningPoints
-          : winningPoints // ignore: cast_nullable_to_non_nullable
-              as int,
-      doubleLife: null == doubleLife
-          ? _value.doubleLife
-          : doubleLife // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 
@@ -128,9 +114,7 @@ abstract class _$$ApplicationMatchImplCopyWith<$Res>
       Game game,
       List<Score> scores,
       MatchStatus status,
-      DateTime lastUpdate,
-      int winningPoints,
-      bool doubleLife});
+      DateTime lastUpdate});
 
   @override
   $GameCopyWith<$Res> get game;
@@ -154,8 +138,6 @@ class __$$ApplicationMatchImplCopyWithImpl<$Res>
     Object? scores = null,
     Object? status = null,
     Object? lastUpdate = null,
-    Object? winningPoints = null,
-    Object? doubleLife = null,
   }) {
     return _then(_$ApplicationMatchImpl(
       id: null == id
@@ -178,14 +160,6 @@ class __$$ApplicationMatchImplCopyWithImpl<$Res>
           ? _value.lastUpdate
           : lastUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      winningPoints: null == winningPoints
-          ? _value.winningPoints
-          : winningPoints // ignore: cast_nullable_to_non_nullable
-              as int,
-      doubleLife: null == doubleLife
-          ? _value.doubleLife
-          : doubleLife // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -198,9 +172,7 @@ class _$ApplicationMatchImpl implements _ApplicationMatch {
       required this.game,
       required final List<Score> scores,
       required this.status,
-      required this.lastUpdate,
-      required this.winningPoints,
-      required this.doubleLife})
+      required this.lastUpdate})
       : _scores = scores;
 
   @override
@@ -219,14 +191,10 @@ class _$ApplicationMatchImpl implements _ApplicationMatch {
   final MatchStatus status;
   @override
   final DateTime lastUpdate;
-  @override
-  final int winningPoints;
-  @override
-  final bool doubleLife;
 
   @override
   String toString() {
-    return 'ApplicationMatch(id: $id, game: $game, scores: $scores, status: $status, lastUpdate: $lastUpdate, winningPoints: $winningPoints, doubleLife: $doubleLife)';
+    return 'ApplicationMatch(id: $id, game: $game, scores: $scores, status: $status, lastUpdate: $lastUpdate)';
   }
 
   @override
@@ -239,23 +207,12 @@ class _$ApplicationMatchImpl implements _ApplicationMatch {
             const DeepCollectionEquality().equals(other._scores, _scores) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.lastUpdate, lastUpdate) ||
-                other.lastUpdate == lastUpdate) &&
-            (identical(other.winningPoints, winningPoints) ||
-                other.winningPoints == winningPoints) &&
-            (identical(other.doubleLife, doubleLife) ||
-                other.doubleLife == doubleLife));
+                other.lastUpdate == lastUpdate));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      game,
-      const DeepCollectionEquality().hash(_scores),
-      status,
-      lastUpdate,
-      winningPoints,
-      doubleLife);
+  int get hashCode => Object.hash(runtimeType, id, game,
+      const DeepCollectionEquality().hash(_scores), status, lastUpdate);
 
   /// Create a copy of ApplicationMatch
   /// with the given fields replaced by the non-null parameter values.
@@ -273,9 +230,7 @@ abstract class _ApplicationMatch implements ApplicationMatch {
       required final Game game,
       required final List<Score> scores,
       required final MatchStatus status,
-      required final DateTime lastUpdate,
-      required final int winningPoints,
-      required final bool doubleLife}) = _$ApplicationMatchImpl;
+      required final DateTime lastUpdate}) = _$ApplicationMatchImpl;
 
   @override
   String get id;
@@ -287,10 +242,6 @@ abstract class _ApplicationMatch implements ApplicationMatch {
   MatchStatus get status;
   @override
   DateTime get lastUpdate;
-  @override
-  int get winningPoints;
-  @override
-  bool get doubleLife;
 
   /// Create a copy of ApplicationMatch
   /// with the given fields replaced by the non-null parameter values.

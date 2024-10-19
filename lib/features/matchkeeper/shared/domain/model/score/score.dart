@@ -10,7 +10,3 @@ class Score with _$Score {
     required List<int> points,
   }) = _Score;
 }
-
-extension ScoreFeatures on Score {
-  int get totalPoints => points.reduce((a, b) => a + b);
-}

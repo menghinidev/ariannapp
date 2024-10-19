@@ -16,56 +16,23 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Game {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() briscola,
-    required TResult Function() scopa,
-    required TResult Function() piccimbrigo,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? briscola,
-    TResult? Function()? scopa,
-    TResult? Function()? piccimbrigo,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? briscola,
-    TResult Function()? scopa,
-    TResult Function()? piccimbrigo,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Briscola value) briscola,
-    required TResult Function(Scopa value) scopa,
-    required TResult Function(Piccimbrigo value) piccimbrigo,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Briscola value)? briscola,
-    TResult? Function(Scopa value)? scopa,
-    TResult? Function(Piccimbrigo value)? piccimbrigo,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Briscola value)? briscola,
-    TResult Function(Scopa value)? scopa,
-    TResult Function(Piccimbrigo value)? piccimbrigo,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  WinningStrategy get strategy => throw _privateConstructorUsedError;
+
+  /// Create a copy of Game
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $GameCopyWith<Game> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $GameCopyWith<$Res> {
   factory $GameCopyWith(Game value, $Res Function(Game) then) =
       _$GameCopyWithImpl<$Res, Game>;
+  @useResult
+  $Res call({String name, WinningStrategy strategy});
+
+  $WinningStrategyCopyWith<$Res> get strategy;
 }
 
 /// @nodoc
@@ -80,337 +47,367 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
 
   /// Create a copy of Game
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? strategy = null,
+  }) {
+    return _then(_value.copyWith(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      strategy: null == strategy
+          ? _value.strategy
+          : strategy // ignore: cast_nullable_to_non_nullable
+              as WinningStrategy,
+    ) as $Val);
+  }
+
+  /// Create a copy of Game
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $WinningStrategyCopyWith<$Res> get strategy {
+    return $WinningStrategyCopyWith<$Res>(_value.strategy, (value) {
+      return _then(_value.copyWith(strategy: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$BriscolaImplCopyWith<$Res> {
-  factory _$$BriscolaImplCopyWith(
-          _$BriscolaImpl value, $Res Function(_$BriscolaImpl) then) =
-      __$$BriscolaImplCopyWithImpl<$Res>;
+abstract class _$$GameImplCopyWith<$Res> implements $GameCopyWith<$Res> {
+  factory _$$GameImplCopyWith(
+          _$GameImpl value, $Res Function(_$GameImpl) then) =
+      __$$GameImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String name, WinningStrategy strategy});
+
+  @override
+  $WinningStrategyCopyWith<$Res> get strategy;
 }
 
 /// @nodoc
-class __$$BriscolaImplCopyWithImpl<$Res>
-    extends _$GameCopyWithImpl<$Res, _$BriscolaImpl>
-    implements _$$BriscolaImplCopyWith<$Res> {
-  __$$BriscolaImplCopyWithImpl(
-      _$BriscolaImpl _value, $Res Function(_$BriscolaImpl) _then)
+class __$$GameImplCopyWithImpl<$Res>
+    extends _$GameCopyWithImpl<$Res, _$GameImpl>
+    implements _$$GameImplCopyWith<$Res> {
+  __$$GameImplCopyWithImpl(_$GameImpl _value, $Res Function(_$GameImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of Game
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? strategy = null,
+  }) {
+    return _then(_$GameImpl(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      strategy: null == strategy
+          ? _value.strategy
+          : strategy // ignore: cast_nullable_to_non_nullable
+              as WinningStrategy,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$BriscolaImpl implements Briscola {
-  _$BriscolaImpl();
+class _$GameImpl implements _Game {
+  const _$GameImpl({required this.name, required this.strategy});
+
+  @override
+  final String name;
+  @override
+  final WinningStrategy strategy;
 
   @override
   String toString() {
-    return 'Game.briscola()';
+    return 'Game(name: $name, strategy: $strategy)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$BriscolaImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$GameImpl &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.strategy, strategy) ||
+                other.strategy == strategy));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() briscola,
-    required TResult Function() scopa,
-    required TResult Function() piccimbrigo,
-  }) {
-    return briscola();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? briscola,
-    TResult? Function()? scopa,
-    TResult? Function()? piccimbrigo,
-  }) {
-    return briscola?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? briscola,
-    TResult Function()? scopa,
-    TResult Function()? piccimbrigo,
-    required TResult orElse(),
-  }) {
-    if (briscola != null) {
-      return briscola();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Briscola value) briscola,
-    required TResult Function(Scopa value) scopa,
-    required TResult Function(Piccimbrigo value) piccimbrigo,
-  }) {
-    return briscola(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Briscola value)? briscola,
-    TResult? Function(Scopa value)? scopa,
-    TResult? Function(Piccimbrigo value)? piccimbrigo,
-  }) {
-    return briscola?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Briscola value)? briscola,
-    TResult Function(Scopa value)? scopa,
-    TResult Function(Piccimbrigo value)? piccimbrigo,
-    required TResult orElse(),
-  }) {
-    if (briscola != null) {
-      return briscola(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Briscola implements Game {
-  factory Briscola() = _$BriscolaImpl;
-}
-
-/// @nodoc
-abstract class _$$ScopaImplCopyWith<$Res> {
-  factory _$$ScopaImplCopyWith(
-          _$ScopaImpl value, $Res Function(_$ScopaImpl) then) =
-      __$$ScopaImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ScopaImplCopyWithImpl<$Res>
-    extends _$GameCopyWithImpl<$Res, _$ScopaImpl>
-    implements _$$ScopaImplCopyWith<$Res> {
-  __$$ScopaImplCopyWithImpl(
-      _$ScopaImpl _value, $Res Function(_$ScopaImpl) _then)
-      : super(_value, _then);
+  int get hashCode => Object.hash(runtimeType, name, strategy);
 
   /// Create a copy of Game
   /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GameImplCopyWith<_$GameImpl> get copyWith =>
+      __$$GameImplCopyWithImpl<_$GameImpl>(this, _$identity);
+}
+
+abstract class _Game implements Game {
+  const factory _Game(
+      {required final String name,
+      required final WinningStrategy strategy}) = _$GameImpl;
+
+  @override
+  String get name;
+  @override
+  WinningStrategy get strategy;
+
+  /// Create a copy of Game
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GameImplCopyWith<_$GameImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$WinningStrategy {
+  int get startingFrom => throw _privateConstructorUsedError;
+  bool get goingUpTo => throw _privateConstructorUsedError;
+  bool get goingDownTo => throw _privateConstructorUsedError;
+  int get threshold => throw _privateConstructorUsedError;
+  bool get winAtThreshold => throw _privateConstructorUsedError;
+  bool get doubleLife => throw _privateConstructorUsedError;
+
+  /// Create a copy of WinningStrategy
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $WinningStrategyCopyWith<WinningStrategy> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WinningStrategyCopyWith<$Res> {
+  factory $WinningStrategyCopyWith(
+          WinningStrategy value, $Res Function(WinningStrategy) then) =
+      _$WinningStrategyCopyWithImpl<$Res, WinningStrategy>;
+  @useResult
+  $Res call(
+      {int startingFrom,
+      bool goingUpTo,
+      bool goingDownTo,
+      int threshold,
+      bool winAtThreshold,
+      bool doubleLife});
+}
+
+/// @nodoc
+class _$WinningStrategyCopyWithImpl<$Res, $Val extends WinningStrategy>
+    implements $WinningStrategyCopyWith<$Res> {
+  _$WinningStrategyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of WinningStrategy
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? startingFrom = null,
+    Object? goingUpTo = null,
+    Object? goingDownTo = null,
+    Object? threshold = null,
+    Object? winAtThreshold = null,
+    Object? doubleLife = null,
+  }) {
+    return _then(_value.copyWith(
+      startingFrom: null == startingFrom
+          ? _value.startingFrom
+          : startingFrom // ignore: cast_nullable_to_non_nullable
+              as int,
+      goingUpTo: null == goingUpTo
+          ? _value.goingUpTo
+          : goingUpTo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      goingDownTo: null == goingDownTo
+          ? _value.goingDownTo
+          : goingDownTo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      threshold: null == threshold
+          ? _value.threshold
+          : threshold // ignore: cast_nullable_to_non_nullable
+              as int,
+      winAtThreshold: null == winAtThreshold
+          ? _value.winAtThreshold
+          : winAtThreshold // ignore: cast_nullable_to_non_nullable
+              as bool,
+      doubleLife: null == doubleLife
+          ? _value.doubleLife
+          : doubleLife // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$WinningStrategyImplCopyWith<$Res>
+    implements $WinningStrategyCopyWith<$Res> {
+  factory _$$WinningStrategyImplCopyWith(_$WinningStrategyImpl value,
+          $Res Function(_$WinningStrategyImpl) then) =
+      __$$WinningStrategyImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int startingFrom,
+      bool goingUpTo,
+      bool goingDownTo,
+      int threshold,
+      bool winAtThreshold,
+      bool doubleLife});
+}
+
+/// @nodoc
+class __$$WinningStrategyImplCopyWithImpl<$Res>
+    extends _$WinningStrategyCopyWithImpl<$Res, _$WinningStrategyImpl>
+    implements _$$WinningStrategyImplCopyWith<$Res> {
+  __$$WinningStrategyImplCopyWithImpl(
+      _$WinningStrategyImpl _value, $Res Function(_$WinningStrategyImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of WinningStrategy
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? startingFrom = null,
+    Object? goingUpTo = null,
+    Object? goingDownTo = null,
+    Object? threshold = null,
+    Object? winAtThreshold = null,
+    Object? doubleLife = null,
+  }) {
+    return _then(_$WinningStrategyImpl(
+      startingFrom: null == startingFrom
+          ? _value.startingFrom
+          : startingFrom // ignore: cast_nullable_to_non_nullable
+              as int,
+      goingUpTo: null == goingUpTo
+          ? _value.goingUpTo
+          : goingUpTo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      goingDownTo: null == goingDownTo
+          ? _value.goingDownTo
+          : goingDownTo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      threshold: null == threshold
+          ? _value.threshold
+          : threshold // ignore: cast_nullable_to_non_nullable
+              as int,
+      winAtThreshold: null == winAtThreshold
+          ? _value.winAtThreshold
+          : winAtThreshold // ignore: cast_nullable_to_non_nullable
+              as bool,
+      doubleLife: null == doubleLife
+          ? _value.doubleLife
+          : doubleLife // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$ScopaImpl implements Scopa {
-  _$ScopaImpl();
+class _$WinningStrategyImpl implements _WinningStrategy {
+  const _$WinningStrategyImpl(
+      {required this.startingFrom,
+      required this.goingUpTo,
+      required this.goingDownTo,
+      required this.threshold,
+      required this.winAtThreshold,
+      required this.doubleLife});
+
+  @override
+  final int startingFrom;
+  @override
+  final bool goingUpTo;
+  @override
+  final bool goingDownTo;
+  @override
+  final int threshold;
+  @override
+  final bool winAtThreshold;
+  @override
+  final bool doubleLife;
 
   @override
   String toString() {
-    return 'Game.scopa()';
+    return 'WinningStrategy(startingFrom: $startingFrom, goingUpTo: $goingUpTo, goingDownTo: $goingDownTo, threshold: $threshold, winAtThreshold: $winAtThreshold, doubleLife: $doubleLife)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ScopaImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$WinningStrategyImpl &&
+            (identical(other.startingFrom, startingFrom) ||
+                other.startingFrom == startingFrom) &&
+            (identical(other.goingUpTo, goingUpTo) ||
+                other.goingUpTo == goingUpTo) &&
+            (identical(other.goingDownTo, goingDownTo) ||
+                other.goingDownTo == goingDownTo) &&
+            (identical(other.threshold, threshold) ||
+                other.threshold == threshold) &&
+            (identical(other.winAtThreshold, winAtThreshold) ||
+                other.winAtThreshold == winAtThreshold) &&
+            (identical(other.doubleLife, doubleLife) ||
+                other.doubleLife == doubleLife));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, startingFrom, goingUpTo,
+      goingDownTo, threshold, winAtThreshold, doubleLife);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() briscola,
-    required TResult Function() scopa,
-    required TResult Function() piccimbrigo,
-  }) {
-    return scopa();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? briscola,
-    TResult? Function()? scopa,
-    TResult? Function()? piccimbrigo,
-  }) {
-    return scopa?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? briscola,
-    TResult Function()? scopa,
-    TResult Function()? piccimbrigo,
-    required TResult orElse(),
-  }) {
-    if (scopa != null) {
-      return scopa();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Briscola value) briscola,
-    required TResult Function(Scopa value) scopa,
-    required TResult Function(Piccimbrigo value) piccimbrigo,
-  }) {
-    return scopa(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Briscola value)? briscola,
-    TResult? Function(Scopa value)? scopa,
-    TResult? Function(Piccimbrigo value)? piccimbrigo,
-  }) {
-    return scopa?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Briscola value)? briscola,
-    TResult Function(Scopa value)? scopa,
-    TResult Function(Piccimbrigo value)? piccimbrigo,
-    required TResult orElse(),
-  }) {
-    if (scopa != null) {
-      return scopa(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Scopa implements Game {
-  factory Scopa() = _$ScopaImpl;
-}
-
-/// @nodoc
-abstract class _$$PiccimbrigoImplCopyWith<$Res> {
-  factory _$$PiccimbrigoImplCopyWith(
-          _$PiccimbrigoImpl value, $Res Function(_$PiccimbrigoImpl) then) =
-      __$$PiccimbrigoImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$PiccimbrigoImplCopyWithImpl<$Res>
-    extends _$GameCopyWithImpl<$Res, _$PiccimbrigoImpl>
-    implements _$$PiccimbrigoImplCopyWith<$Res> {
-  __$$PiccimbrigoImplCopyWithImpl(
-      _$PiccimbrigoImpl _value, $Res Function(_$PiccimbrigoImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Game
+  /// Create a copy of WinningStrategy
   /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WinningStrategyImplCopyWith<_$WinningStrategyImpl> get copyWith =>
+      __$$WinningStrategyImplCopyWithImpl<_$WinningStrategyImpl>(
+          this, _$identity);
 }
 
-/// @nodoc
-
-class _$PiccimbrigoImpl implements Piccimbrigo {
-  _$PiccimbrigoImpl();
-
-  @override
-  String toString() {
-    return 'Game.piccimbrigo()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$PiccimbrigoImpl);
-  }
+abstract class _WinningStrategy implements WinningStrategy {
+  const factory _WinningStrategy(
+      {required final int startingFrom,
+      required final bool goingUpTo,
+      required final bool goingDownTo,
+      required final int threshold,
+      required final bool winAtThreshold,
+      required final bool doubleLife}) = _$WinningStrategyImpl;
 
   @override
-  int get hashCode => runtimeType.hashCode;
-
+  int get startingFrom;
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() briscola,
-    required TResult Function() scopa,
-    required TResult Function() piccimbrigo,
-  }) {
-    return piccimbrigo();
-  }
-
+  bool get goingUpTo;
   @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? briscola,
-    TResult? Function()? scopa,
-    TResult? Function()? piccimbrigo,
-  }) {
-    return piccimbrigo?.call();
-  }
-
+  bool get goingDownTo;
   @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? briscola,
-    TResult Function()? scopa,
-    TResult Function()? piccimbrigo,
-    required TResult orElse(),
-  }) {
-    if (piccimbrigo != null) {
-      return piccimbrigo();
-    }
-    return orElse();
-  }
-
+  int get threshold;
   @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Briscola value) briscola,
-    required TResult Function(Scopa value) scopa,
-    required TResult Function(Piccimbrigo value) piccimbrigo,
-  }) {
-    return piccimbrigo(this);
-  }
-
+  bool get winAtThreshold;
   @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Briscola value)? briscola,
-    TResult? Function(Scopa value)? scopa,
-    TResult? Function(Piccimbrigo value)? piccimbrigo,
-  }) {
-    return piccimbrigo?.call(this);
-  }
+  bool get doubleLife;
 
+  /// Create a copy of WinningStrategy
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Briscola value)? briscola,
-    TResult Function(Scopa value)? scopa,
-    TResult Function(Piccimbrigo value)? piccimbrigo,
-    required TResult orElse(),
-  }) {
-    if (piccimbrigo != null) {
-      return piccimbrigo(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Piccimbrigo implements Game {
-  factory Piccimbrigo() = _$PiccimbrigoImpl;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$WinningStrategyImplCopyWith<_$WinningStrategyImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

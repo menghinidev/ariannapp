@@ -6,7 +6,6 @@ import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/get
 import 'package:ariannapp/features/matchkeeper/dashboard/presentation/components/score_card/score_card.dart';
 import 'package:ariannapp/features/matchkeeper/dashboard/presentation/matchkeeper_dashboard_screen.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/features/restart_match/presentation/restart_match_button.dart';
-import 'package:ariannapp/features/matchkeeper/shared/domain/model/game/game.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/match/match.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/score/score.dart';
 import 'package:flutter/material.dart';
