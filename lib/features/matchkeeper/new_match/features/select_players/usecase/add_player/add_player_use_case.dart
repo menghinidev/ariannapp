@@ -1,7 +1,7 @@
 import 'package:ariannapp/core/infrastructure/error/application_error/applicationerror.dart';
 import 'package:ariannapp/core/infrastructure/usecase/use_case.dart';
 import 'package:ariannapp/core/infrastructure/utils/response/response.dart';
-import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/application/usecase/add_player/command/addplayercommand.dart';
+import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/usecase/add_player/command/addplayercommand.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/player/player.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/repository/players/provider.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/repository/players/sources/i_players_repository.dart';

@@ -1,6 +1,6 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/get_matches/get_matches_use_case.dart';
-import 'package:ariannapp/features/matchkeeper/new_match/features/restart_match/restart_match_use_case.dart';
+import 'package:ariannapp/features/matchkeeper/dashboard/usecase/get_matches/get_matches_use_case.dart';
+import 'package:ariannapp/features/matchkeeper/new_match/features/restart_match/usecase/restart_match_use_case.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/match/match.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

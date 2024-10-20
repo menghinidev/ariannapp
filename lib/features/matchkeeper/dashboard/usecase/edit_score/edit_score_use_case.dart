@@ -1,7 +1,7 @@
 import 'package:ariannapp/core/infrastructure/error/application_error/applicationerror.dart';
 import 'package:ariannapp/core/infrastructure/usecase/use_case.dart';
 import 'package:ariannapp/core/infrastructure/utils/response/response.dart';
-import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/edit_score/command/edit_score_command.dart';
+import 'package:ariannapp/features/matchkeeper/dashboard/usecase/edit_score/command/edit_score_command.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/repository/match/provider.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/repository/match/sources/i_match_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

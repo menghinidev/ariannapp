@@ -1,8 +1,8 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
-import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/edit_score/command/edit_score_command.dart';
-import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/edit_score/edit_score_use_case.dart';
-import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/get_matches/get_matches_use_case.dart';
+import 'package:ariannapp/features/matchkeeper/dashboard/usecase/edit_score/command/edit_score_command.dart';
+import 'package:ariannapp/features/matchkeeper/dashboard/usecase/edit_score/edit_score_use_case.dart';
+import 'package:ariannapp/features/matchkeeper/dashboard/usecase/get_matches/get_matches_use_case.dart';
 import 'package:ariannapp/features/matchkeeper/dashboard/presentation/components/score_card/score_card.dart';
 import 'package:ariannapp/features/matchkeeper/dashboard/presentation/matchkeeper_dashboard_screen.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/features/restart_match/presentation/restart_match_button.dart';

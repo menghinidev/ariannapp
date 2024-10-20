@@ -1,5 +1,5 @@
 import 'package:ariannapp/core/infrastructure/utils/extensions/riverpod_extensions.dart';
-import 'package:ariannapp/features/matchkeeper/new_match/features/select_game/application/usecase/get_games_use_case.dart';
+import 'package:ariannapp/features/matchkeeper/new_match/features/select_game/usecase/get_games_use_case.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/game/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
