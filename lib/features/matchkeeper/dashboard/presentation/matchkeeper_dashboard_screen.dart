@@ -33,13 +33,15 @@ class _MatchkeeperDashboardScreenState extends ConsumerState<MatchkeeperDashboar
   Widget build(BuildContext context) {
     return BaseAppScreen(
       title: 'Matchkeeper',
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: () => context.goRelative(MatchkeeperRoutes.newMatch),
+        ),
+      ],
       bottomAppBarWidget: TabBar(
         controller: _tabController,
         tabs: const [Tab(text: 'In corso'), Tab(text: 'Conclusi')],
-      ),
-      fab: FloatingActionButton.extended(
-        onPressed: () => context.goRelative(MatchkeeperRoutes.newMatch),
-        label: const Text('Nuova partita'),
       ),
       child: IhneritedDashboard(
         tabController: _tabController,

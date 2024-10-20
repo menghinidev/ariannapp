@@ -92,10 +92,3 @@ extension on DropdownMenuEntry<Player> {
     return label.contains(filter);
   }
 }
-
-extension on List<Player> {
-  Player? findByName(String name) {
-    final value = where((e) => e.name == name);
-    return value.firstOrNull;
-  }
-}

@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Game {
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   WinningStrategy get strategy => throw _privateConstructorUsedError;
 
@@ -30,7 +31,7 @@ abstract class $GameCopyWith<$Res> {
   factory $GameCopyWith(Game value, $Res Function(Game) then) =
       _$GameCopyWithImpl<$Res, Game>;
   @useResult
-  $Res call({String name, WinningStrategy strategy});
+  $Res call({String id, String name, WinningStrategy strategy});
 
   $WinningStrategyCopyWith<$Res> get strategy;
 }
@@ -50,10 +51,15 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? strategy = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -83,7 +89,7 @@ abstract class _$$GameImplCopyWith<$Res> implements $GameCopyWith<$Res> {
       __$$GameImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, WinningStrategy strategy});
+  $Res call({String id, String name, WinningStrategy strategy});
 
   @override
   $WinningStrategyCopyWith<$Res> get strategy;
@@ -101,10 +107,15 @@ class __$$GameImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? strategy = null,
   }) {
     return _then(_$GameImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -120,8 +131,11 @@ class __$$GameImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$GameImpl implements _Game {
-  const _$GameImpl({required this.name, required this.strategy});
+  const _$GameImpl(
+      {required this.id, required this.name, required this.strategy});
 
+  @override
+  final String id;
   @override
   final String name;
   @override
@@ -129,7 +143,7 @@ class _$GameImpl implements _Game {
 
   @override
   String toString() {
-    return 'Game(name: $name, strategy: $strategy)';
+    return 'Game(id: $id, name: $name, strategy: $strategy)';
   }
 
   @override
@@ -137,13 +151,14 @@ class _$GameImpl implements _Game {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GameImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.strategy, strategy) ||
                 other.strategy == strategy));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, strategy);
+  int get hashCode => Object.hash(runtimeType, id, name, strategy);
 
   /// Create a copy of Game
   /// with the given fields replaced by the non-null parameter values.
@@ -156,9 +171,12 @@ class _$GameImpl implements _Game {
 
 abstract class _Game implements Game {
   const factory _Game(
-      {required final String name,
+      {required final String id,
+      required final String name,
       required final WinningStrategy strategy}) = _$GameImpl;
 
+  @override
+  String get id;
   @override
   String get name;
   @override

@@ -5,6 +5,7 @@ part 'game.freezed.dart';
 @freezed
 class Game with _$Game {
   const factory Game({
+    required String id,
     required String name,
     required WinningStrategy strategy,
   }) = _Game;
@@ -34,6 +35,7 @@ extension GameFeatures on Game {
 
 mixin GameFactory {
   Game get briscola => const Game(
+        id: '0',
         name: 'Briscola',
         strategy: WinningStrategy(
           goingDownTo: false,
@@ -46,6 +48,7 @@ mixin GameFactory {
       );
 
   Game get scopa => const Game(
+        id: '1',
         name: 'Scopa',
         strategy: WinningStrategy(
           goingDownTo: false,
@@ -58,6 +61,7 @@ mixin GameFactory {
       );
 
   Game get picci => const Game(
+        id: '2',
         name: 'Piccimbrigo',
         strategy: WinningStrategy(
           goingDownTo: false,

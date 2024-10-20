@@ -2,7 +2,7 @@ import 'package:ariannapp/core/ui/layout/layout_provider.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/application/new_match_state_provider.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/presentation/components/team_list_tile.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/presentation/select_player_bottom_sheet.dart';
-import 'package:ariannapp/features/matchkeeper/shared/domain/model/team/team.dart';
+import 'package:ariannapp/features/matchkeeper/shared/domain/model/player/player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,12 +36,12 @@ class TeamsStep extends ConsumerWidget {
   }
 
   void _onAddTeam(BuildContext context, WidgetRef ref) {
-    showModalBottomSheet<Team>(
+    showModalBottomSheet<List<Player>>(
       context: context,
       builder: (context) => const AddPlayerBottomSheet(),
-    ).then((value) {
-      if (value != null) {
-        ref.read(newMatchControllerProvider.notifier).addTeam(value);
+    ).then((players) {
+      if (players != null) {
+        ref.read(newMatchControllerProvider.notifier).addTeam(players);
       }
     });
   }

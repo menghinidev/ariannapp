@@ -1,5 +1,7 @@
+import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/application/state/new_match_builder.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/game/game.dart';
+import 'package:ariannapp/features/matchkeeper/shared/domain/model/player/player.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/team/team.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -40,8 +42,9 @@ class NewMatchController extends _$NewMatchController {
   @override
   MatchBuilder build() => MatchBuilder();
 
-  void addTeam(Team team) {
+  void addTeam(List<Player> players) {
     final teams = state.teams;
+    final team = Team(id: IDGenerator.generateId, players: players);
     state = state.copyWith(teams: [...teams, team]);
   }
 

@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Score {
+  String get id => throw _privateConstructorUsedError;
   Team get team => throw _privateConstructorUsedError;
   List<int> get points => throw _privateConstructorUsedError;
 
@@ -30,7 +31,7 @@ abstract class $ScoreCopyWith<$Res> {
   factory $ScoreCopyWith(Score value, $Res Function(Score) then) =
       _$ScoreCopyWithImpl<$Res, Score>;
   @useResult
-  $Res call({Team team, List<int> points});
+  $Res call({String id, Team team, List<int> points});
 
   $TeamCopyWith<$Res> get team;
 }
@@ -50,10 +51,15 @@ class _$ScoreCopyWithImpl<$Res, $Val extends Score>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? team = null,
     Object? points = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       team: null == team
           ? _value.team
           : team // ignore: cast_nullable_to_non_nullable
@@ -83,7 +89,7 @@ abstract class _$$ScoreImplCopyWith<$Res> implements $ScoreCopyWith<$Res> {
       __$$ScoreImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Team team, List<int> points});
+  $Res call({String id, Team team, List<int> points});
 
   @override
   $TeamCopyWith<$Res> get team;
@@ -102,10 +108,15 @@ class __$$ScoreImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? team = null,
     Object? points = null,
   }) {
     return _then(_$ScoreImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       team: null == team
           ? _value.team
           : team // ignore: cast_nullable_to_non_nullable
@@ -121,9 +132,12 @@ class __$$ScoreImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ScoreImpl implements _Score {
-  _$ScoreImpl({required this.team, required final List<int> points})
+  _$ScoreImpl(
+      {required this.id, required this.team, required final List<int> points})
       : _points = points;
 
+  @override
+  final String id;
   @override
   final Team team;
   final List<int> _points;
@@ -136,7 +150,7 @@ class _$ScoreImpl implements _Score {
 
   @override
   String toString() {
-    return 'Score(team: $team, points: $points)';
+    return 'Score(id: $id, team: $team, points: $points)';
   }
 
   @override
@@ -144,13 +158,14 @@ class _$ScoreImpl implements _Score {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ScoreImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.team, team) || other.team == team) &&
             const DeepCollectionEquality().equals(other._points, _points));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, team, const DeepCollectionEquality().hash(_points));
+      runtimeType, id, team, const DeepCollectionEquality().hash(_points));
 
   /// Create a copy of Score
   /// with the given fields replaced by the non-null parameter values.
@@ -162,9 +177,13 @@ class _$ScoreImpl implements _Score {
 }
 
 abstract class _Score implements Score {
-  factory _Score({required final Team team, required final List<int> points}) =
-      _$ScoreImpl;
+  factory _Score(
+      {required final String id,
+      required final Team team,
+      required final List<int> points}) = _$ScoreImpl;
 
+  @override
+  String get id;
   @override
   Team get team;
   @override

@@ -1,3 +1,4 @@
+import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/core/infrastructure/utils/extensions/riverpod_extensions.dart';
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
 import 'package:ariannapp/features/matchkeeper/dashboard/application/usecase/get_matches/command/get_matches_command.dart';
@@ -19,11 +20,16 @@ class MatchListView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final matches = ref.watch(matchesProvider(GetMatchesCommand(status: status)));
     return matches.loadUntil(
-      onLoaded: (data) => ListView.separated(
-        itemCount: data.length,
-        padding: DistanceProvider.screenInsets.padding,
-        separatorBuilder: (context, index) => const Divider(height: DistanceProvider.hugeDistance),
-        itemBuilder: (context, index) => MatchCard(match: data[index]),
+      onLoaded: (data) => EmptyCaseBuilder(
+        isEmpty: data.isEmpty,
+        title: 'Non sono presenti partite',
+        subtitle: 'Clicca sul bottone in alto a destra per aggiungere una nuova partita',
+        builder: (context) => ListView.separated(
+          itemCount: data.length,
+          padding: DistanceProvider.screenInsets.padding,
+          separatorBuilder: (context, index) => const Divider(height: DistanceProvider.hugeDistance),
+          itemBuilder: (context, index) => MatchCard(match: data[index]),
+        ),
       ),
     );
   }

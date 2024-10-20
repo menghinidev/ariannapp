@@ -3,10 +3,9 @@ import 'package:ariannapp/core/ui/layout/layout_provider.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/application/new_match_state_provider.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/application/state/new_match_builder.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/features/add_match/presentation/add_match_button.dart';
-import 'package:ariannapp/features/matchkeeper/new_match/presentation/sections/double_life_step.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/presentation/sections/game_step.dart';
+import 'package:ariannapp/features/matchkeeper/new_match/presentation/sections/game_strategy_step.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/presentation/sections/teams_step.dart';
-import 'package:ariannapp/features/matchkeeper/new_match/presentation/sections/winning_points_step.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -41,25 +40,18 @@ class NewMatchScreen extends ConsumerWidget {
               state: stepper > 0 ? StepState.complete : StepState.indexed,
             ),
             Step(
-              title: const Text('Punti vittoria'),
-              subtitle: const Text('Scegli quanti punti servono per vincere'),
-              content: const WinningPointsStep(),
+              title: const Text('Impostazioni di gioco'),
+              subtitle: const Text('Scegli quanti punti servono per vincere e altri dettagli'),
+              content: const GameStrategyStep(),
               isActive: stepper == 1,
               state: stepper > 1 ? StepState.complete : StepState.indexed,
-            ),
-            Step(
-              title: const Text('Doppia vita'),
-              subtitle: const Text('Dopo che avrai superato il punteggio massimo potrai continuare a giocare'),
-              content: const DoubleLifeStep(),
-              isActive: stepper == 2,
-              state: stepper > 2 ? StepState.complete : StepState.indexed,
             ),
             Step(
               title: const Text('Squadre'),
               subtitle: const Text('Scegli le squadre che parteciperanno al match'),
               content: const TeamsStep(),
-              isActive: stepper == 3,
-              state: stepper == 3 && canBuild ? StepState.complete : StepState.indexed,
+              isActive: stepper == 2,
+              state: stepper == 2 && canBuild ? StepState.complete : StepState.indexed,
             ),
           ],
         ),
@@ -67,7 +59,7 @@ class NewMatchScreen extends ConsumerWidget {
     );
   }
 
-  bool hasControlsBar(int stepper) => stepper < 3;
+  bool hasControlsBar(int stepper) => stepper < 2;
 
   Widget _controlsBuilder(BuildContext context, ControlsDetails details) {
     if (!hasControlsBar(details.currentStep)) return const SizedBox.shrink();

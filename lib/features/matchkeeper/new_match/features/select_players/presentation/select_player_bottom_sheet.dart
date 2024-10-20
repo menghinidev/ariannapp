@@ -65,8 +65,8 @@ class AddPlayerBottomSheet extends ConsumerWidget {
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 500),
                 child: selectedMode == 'Squadra'
-                    ? AddTeamView(onSelected: (team) => context.pop(team))
-                    : AddSinglePlayerView(onSelected: (team) => context.pop(team)),
+                    ? AddTeamView(onSelected: (players) => context.pop(players))
+                    : AddSinglePlayerView(onSelected: (player) => context.pop([player])),
               ),
             ),
           ],
