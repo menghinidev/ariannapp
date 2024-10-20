@@ -5,23 +5,27 @@ import 'package:dio/dio.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 abstract class IHoroscopeRepository {
-  Future<ApplicationResponse<DailyHoroscopeDTO>> dailyHoroscope({required HoroscopeSign sign});
+  Future<ApplicationResponse<DailyHoroscopeDTO>> dailyHoroscope({
+    required HoroscopeSign sign,
+    required DateTime date,
+  });
   Future<ApplicationResponse<MontlyHoroscopeDTO>> monthlyHoroscope({required HoroscopeSign sign});
 }
 
 class HoroscopeRepository extends IHoroscopeRepository {
-  final basePath = 'https://horoscope-app-api.vercel.app/api/v1/get-horoscope/';
+  final basePath = 'https://horoscope-app-api.vercel.app/api/v1/get-horoscope';
 
   final httpClient = Dio();
 
   @override
   Future<ApplicationResponse<DailyHoroscopeDTO>> dailyHoroscope({
     required HoroscopeSign sign,
+    required DateTime date,
   }) async {
     try {
       final queryParameters = {
         'sign': sign.name.capitalize,
-        'day': 'TODAY',
+        'day': date.customFormat('yyyy-MM-dd'),
       };
       final response = await httpClient.get<Map<String, dynamic>>(
         '$basePath/daily',

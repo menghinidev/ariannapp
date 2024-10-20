@@ -1,5 +1,5 @@
 import 'package:ariannapp/features/horoscope/application/domain/model/horoscope/horoscope.dart';
-import 'package:ariannapp/features/horoscope/application/domain/repository/horoscope_repository.dart';
+import 'package:ariannapp/features/horoscope/application/domain/repository/sources/horoscope_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -10,7 +10,10 @@ void main() {
         'Daily API',
         () async {
           final repositoy = HoroscopeRepository();
-          final response = await repositoy.dailyHoroscope(sign: HoroscopeSign.aries);
+          final response = await repositoy.dailyHoroscope(
+            sign: HoroscopeSign.aries,
+            date: DateTime.now(),
+          );
           expect(response.payload, isNotNull);
         },
       );

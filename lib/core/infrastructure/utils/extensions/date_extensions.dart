@@ -16,6 +16,8 @@ extension DateFormatter on DateTime {
 
   String get toExtendedDate => DateFormat('dd MMMM yyyy - kk:mm', 'it-IT').format(this);
 
+  String customFormat(String pattern) => DateFormat(pattern).format(this);
+
   DateTime copyWith({int? year, int? month, int? day}) {
     return DateTime(
       year ?? this.year,

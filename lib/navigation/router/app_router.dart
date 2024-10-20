@@ -1,4 +1,5 @@
 import 'package:ariannapp/features/home/routes/home_routes.dart';
+import 'package:ariannapp/features/horoscope/routes/my_astrology_routes.dart';
 import 'package:ariannapp/features/matchkeeper/shared/routes/matchkeeper_routes.dart';
 import 'package:ariannapp/features/settings/routes/settings_route.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +15,7 @@ GoRouter appRouter(AppRouterRef ref) {
       HomeScreenRoute([
         MatchkeeperDashboardRoute(),
         SettingsScreenRoute(),
+        MyAstrologyScreenRoute(),
       ]),
     ],
   );

@@ -1,4 +1,5 @@
 import 'package:ariannapp/core/core.dart';
+import 'package:ariannapp/features/horoscope/routes/my_astrology_routes.dart';
 import 'package:ariannapp/features/matchkeeper/shared/routes/matchkeeper_routes.dart';
 import 'package:ariannapp/features/settings/routes/settings_route.dart';
 import 'package:ariannapp/navigation/entrypoint.dart';
@@ -13,6 +14,10 @@ class HomeScreen extends ConsumerWidget {
     return BaseAppScreen(
       title: 'AriannApp',
       actions: [
+        IconButton.filled(
+          onPressed: () => context.goRelative(MyAstrologyScreenRoute.pagePath),
+          icon: const Icon(Icons.public),
+        ),
         IconButton.filled(
           onPressed: () => context.goRelative(SettingsScreenRoute.pagePath),
           icon: const Icon(Icons.settings_outlined),
