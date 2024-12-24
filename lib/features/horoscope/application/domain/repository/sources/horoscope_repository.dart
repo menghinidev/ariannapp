@@ -7,7 +7,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 abstract class IHoroscopeRepository {
   Future<ApplicationResponse<DailyHoroscopeDTO>> dailyHoroscope({
     required HoroscopeSign sign,
-    required DateTime date,
   });
   Future<ApplicationResponse<MontlyHoroscopeDTO>> monthlyHoroscope({required HoroscopeSign sign});
 }
@@ -20,12 +19,11 @@ class HoroscopeRepository extends IHoroscopeRepository {
   @override
   Future<ApplicationResponse<DailyHoroscopeDTO>> dailyHoroscope({
     required HoroscopeSign sign,
-    required DateTime date,
   }) async {
     try {
       final queryParameters = {
         'sign': sign.name.capitalize,
-        'day': date.customFormat('yyyy-MM-dd'),
+        'day': 'TODAY',
       };
       final response = await httpClient.get<Map<String, dynamic>>(
         '$basePath/daily',

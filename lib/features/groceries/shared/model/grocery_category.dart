@@ -1,0 +1,1 @@
+enum GroceryCategory { edible, animal }

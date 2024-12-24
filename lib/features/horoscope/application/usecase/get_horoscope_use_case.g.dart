@@ -6,7 +6,7 @@ part of 'get_horoscope_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$horoscopeHash() => r'01470eae20b845b100a019ba56be299b021c811b';
+String _$horoscopeHash() => r'5924afc774e95811b16fcf062b28d257b57bf247';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -40,11 +40,9 @@ class HoroscopeFamily extends Family<AsyncValue<DailyHoroscope>> {
 
   /// See also [horoscope].
   HoroscopeProvider call(
-    DateTime date,
     HoroscopeSign sign,
   ) {
     return HoroscopeProvider(
-      date,
       sign,
     );
   }
@@ -54,7 +52,6 @@ class HoroscopeFamily extends Family<AsyncValue<DailyHoroscope>> {
     covariant HoroscopeProvider provider,
   ) {
     return call(
-      provider.date,
       provider.sign,
     );
   }
@@ -78,12 +75,10 @@ class HoroscopeFamily extends Family<AsyncValue<DailyHoroscope>> {
 class HoroscopeProvider extends AutoDisposeFutureProvider<DailyHoroscope> {
   /// See also [horoscope].
   HoroscopeProvider(
-    DateTime date,
     HoroscopeSign sign,
   ) : this._internal(
           (ref) => horoscope(
             ref as HoroscopeRef,
-            date,
             sign,
           ),
           from: horoscopeProvider,
@@ -94,7 +89,6 @@ class HoroscopeProvider extends AutoDisposeFutureProvider<DailyHoroscope> {
                   : _$horoscopeHash,
           dependencies: HoroscopeFamily._dependencies,
           allTransitiveDependencies: HoroscopeFamily._allTransitiveDependencies,
-          date: date,
           sign: sign,
         );
 
@@ -105,11 +99,9 @@ class HoroscopeProvider extends AutoDisposeFutureProvider<DailyHoroscope> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.date,
     required this.sign,
   }) : super.internal();
 
-  final DateTime date;
   final HoroscopeSign sign;
 
   @override
@@ -125,7 +117,6 @@ class HoroscopeProvider extends AutoDisposeFutureProvider<DailyHoroscope> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        date: date,
         sign: sign,
       ),
     );
@@ -138,15 +129,12 @@ class HoroscopeProvider extends AutoDisposeFutureProvider<DailyHoroscope> {
 
   @override
   bool operator ==(Object other) {
-    return other is HoroscopeProvider &&
-        other.date == date &&
-        other.sign == sign;
+    return other is HoroscopeProvider && other.sign == sign;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, date.hashCode);
     hash = _SystemHash.combine(hash, sign.hashCode);
 
     return _SystemHash.finish(hash);
@@ -154,9 +142,6 @@ class HoroscopeProvider extends AutoDisposeFutureProvider<DailyHoroscope> {
 }
 
 mixin HoroscopeRef on AutoDisposeFutureProviderRef<DailyHoroscope> {
-  /// The parameter `date` of this provider.
-  DateTime get date;
-
   /// The parameter `sign` of this provider.
   HoroscopeSign get sign;
 }
@@ -165,8 +150,6 @@ class _HoroscopeProviderElement
     extends AutoDisposeFutureProviderElement<DailyHoroscope> with HoroscopeRef {
   _HoroscopeProviderElement(super.provider);
 
-  @override
-  DateTime get date => (origin as HoroscopeProvider).date;
   @override
   HoroscopeSign get sign => (origin as HoroscopeProvider).sign;
 }

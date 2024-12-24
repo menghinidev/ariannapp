@@ -11,10 +11,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'get_horoscope_use_case.g.dart';
 
 @riverpod
-FutureOr<DailyHoroscope> horoscope(HoroscopeRef ref, DateTime date, HoroscopeSign sign) async {
+FutureOr<DailyHoroscope> horoscope(HoroscopeRef ref, HoroscopeSign sign) async {
   final repo = ref.watch(horoscopeRepositoryProvider);
   final usecase = _GetHoroscopeUseCase(repo: repo);
-  final command = GetHoroscopeCommand(sign: sign, date: date);
+  final command = GetHoroscopeCommand(sign: sign);
   final response = await usecase.call(command);
   return response.toFuture();
 }
@@ -32,7 +32,6 @@ class _GetHoroscopeUseCase extends UseCase<DailyHoroscope, GetHoroscopeCommand> 
     final response = await check.flatMapAsync(
       (_) => repo.dailyHoroscope(
         sign: input.sign,
-        date: input.date,
       ),
     );
     return response.map((e) => mapDailyHoroscope(e!));

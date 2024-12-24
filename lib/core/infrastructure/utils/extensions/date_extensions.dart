@@ -2,6 +2,8 @@ import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 extension DateFormatter on DateTime {
+  String get toNiceDate => DateFormat('dd MMMM yyyy').format(this);
+
   String get toShortDate => DateFormat('dd/MM/yyyy').format(this);
 
   String get toUtcDate => DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(this);

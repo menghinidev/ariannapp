@@ -10,10 +10,7 @@ void main() {
         'Daily API',
         () async {
           final repositoy = HoroscopeRepository();
-          final response = await repositoy.dailyHoroscope(
-            sign: HoroscopeSign.aries,
-            date: DateTime.now(),
-          );
+          final response = await repositoy.dailyHoroscope(sign: HoroscopeSign.aries);
           expect(response.payload, isNotNull);
         },
       );

@@ -12,9 +12,8 @@ class MyAstrologyScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final date = ref.watch(horoscopeDateSelectorProvider);
     final sign = ref.watch(horoscopeSignSelectorProvider);
-    final horoscope = ref.watch(horoscopeProvider(date, sign));
+    final horoscope = ref.watch(horoscopeProvider(sign));
     return BaseAppScreen(
       title: 'My astro',
       child: horoscope.loadUntil(
@@ -28,7 +27,6 @@ class MyAstrologyScreen extends ConsumerWidget {
                     child: DailyHoroscopeSection(
                       sign: sign,
                       horoscope: data,
-                      onDateSelected: (value) => ref.read(horoscopeDateSelectorProvider.notifier).date = value,
                     ),
                   ),
                 ],

@@ -14,6 +14,14 @@ class HoroscopeSignIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       'assets/images/horoscope/${sign.name}_sign.svg',
+      width: size,
+      height: size,
+      colorFilter: ColorFilter.mode(
+        Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white,
+        BlendMode.srcIn,
+      ),
     );
   }
+
+  double get size => 64;
 }

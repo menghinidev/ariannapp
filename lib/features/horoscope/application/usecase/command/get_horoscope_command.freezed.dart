@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$GetHoroscopeCommand {
   HoroscopeSign get sign => throw _privateConstructorUsedError;
-  DateTime get date => throw _privateConstructorUsedError;
 
   /// Create a copy of GetHoroscopeCommand
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +31,7 @@ abstract class $GetHoroscopeCommandCopyWith<$Res> {
           GetHoroscopeCommand value, $Res Function(GetHoroscopeCommand) then) =
       _$GetHoroscopeCommandCopyWithImpl<$Res, GetHoroscopeCommand>;
   @useResult
-  $Res call({HoroscopeSign sign, DateTime date});
+  $Res call({HoroscopeSign sign});
 }
 
 /// @nodoc
@@ -51,17 +50,12 @@ class _$GetHoroscopeCommandCopyWithImpl<$Res, $Val extends GetHoroscopeCommand>
   @override
   $Res call({
     Object? sign = null,
-    Object? date = null,
   }) {
     return _then(_value.copyWith(
       sign: null == sign
           ? _value.sign
           : sign // ignore: cast_nullable_to_non_nullable
               as HoroscopeSign,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ) as $Val);
   }
 }
@@ -74,7 +68,7 @@ abstract class _$$GetHoroscopeCommandImplCopyWith<$Res>
       __$$GetHoroscopeCommandImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({HoroscopeSign sign, DateTime date});
+  $Res call({HoroscopeSign sign});
 }
 
 /// @nodoc
@@ -91,17 +85,12 @@ class __$$GetHoroscopeCommandImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? sign = null,
-    Object? date = null,
   }) {
     return _then(_$GetHoroscopeCommandImpl(
       sign: null == sign
           ? _value.sign
           : sign // ignore: cast_nullable_to_non_nullable
               as HoroscopeSign,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ));
   }
 }
@@ -109,16 +98,14 @@ class __$$GetHoroscopeCommandImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$GetHoroscopeCommandImpl implements _GetHoroscopeCommand {
-  _$GetHoroscopeCommandImpl({required this.sign, required this.date});
+  _$GetHoroscopeCommandImpl({required this.sign});
 
   @override
   final HoroscopeSign sign;
-  @override
-  final DateTime date;
 
   @override
   String toString() {
-    return 'GetHoroscopeCommand(sign: $sign, date: $date)';
+    return 'GetHoroscopeCommand(sign: $sign)';
   }
 
   @override
@@ -126,12 +113,11 @@ class _$GetHoroscopeCommandImpl implements _GetHoroscopeCommand {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetHoroscopeCommandImpl &&
-            (identical(other.sign, sign) || other.sign == sign) &&
-            (identical(other.date, date) || other.date == date));
+            (identical(other.sign, sign) || other.sign == sign));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, sign, date);
+  int get hashCode => Object.hash(runtimeType, sign);
 
   /// Create a copy of GetHoroscopeCommand
   /// with the given fields replaced by the non-null parameter values.
@@ -144,14 +130,11 @@ class _$GetHoroscopeCommandImpl implements _GetHoroscopeCommand {
 }
 
 abstract class _GetHoroscopeCommand implements GetHoroscopeCommand {
-  factory _GetHoroscopeCommand(
-      {required final HoroscopeSign sign,
-      required final DateTime date}) = _$GetHoroscopeCommandImpl;
+  factory _GetHoroscopeCommand({required final HoroscopeSign sign}) =
+      _$GetHoroscopeCommandImpl;
 
   @override
   HoroscopeSign get sign;
-  @override
-  DateTime get date;
 
   /// Create a copy of GetHoroscopeCommand
   /// with the given fields replaced by the non-null parameter values.

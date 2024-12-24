@@ -7,6 +7,5 @@ part 'get_horoscope_command.freezed.dart';
 class GetHoroscopeCommand with _$GetHoroscopeCommand {
   factory GetHoroscopeCommand({
     required HoroscopeSign sign,
-    required DateTime date,
   }) = _GetHoroscopeCommand;
 }

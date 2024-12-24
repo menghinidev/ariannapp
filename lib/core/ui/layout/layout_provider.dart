@@ -11,6 +11,11 @@ extension LayoutProvider on double {
   EdgeInsets get padding => EdgeInsets.all(this);
 }
 
+extension EdgeInsetsModifier on EdgeInsets {
+  EdgeInsets get removeBottom => copyWith(bottom: 0);
+  EdgeInsets get removeTop => copyWith(top: 0);
+}
+
 class DistanceProvider {
   static const double smallDistance = 6;
   static const double mediumDistance = 16;

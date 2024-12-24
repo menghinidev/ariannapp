@@ -14,15 +14,3 @@ class HoroscopeSignSelector extends _$HoroscopeSignSelector {
 
   set sign(HoroscopeSign sign) => state = sign;
 }
-
-@riverpod
-class HoroscopeDateSelector extends _$HoroscopeDateSelector {
-  @override
-  DateTime build() {
-    return DateTime.now();
-  }
-
-  DateTime get date => state;
-
-  set date(DateTime date) => state = date;
-}
