@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/core/infrastructure/utils/extensions/riverpod_extensions.dart';
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
@@ -28,6 +30,15 @@ class GroceriesCheckListView extends ConsumerWidget {
               child: ReorderableListView.builder(
                 padding: DistanceProvider.screenInsets.padding.removeBottom,
                 itemCount: data.length,
+                proxyDecorator: (child, index, animation) => AnimatedBuilder(
+                  animation: animation,
+                  builder: (context, child) => _builder(
+                    context,
+                    child,
+                    animation: animation,
+                  ),
+                  child: child,
+                ),
                 onReorder: ref.read(groceriesCheckListOrderManagerProvider.notifier).reorder,
                 itemBuilder: (context, index) => GroceriesCheckListItem(
                   item: data[index],
@@ -38,6 +49,15 @@ class GroceriesCheckListView extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _builder(BuildContext context, Widget? child, {required Animation<double> animation}) {
+    final animValue = Curves.easeInOut.transform(animation.value);
+    final elevation = lerpDouble(0, 6, animValue)!;
+    return Material(
+      elevation: elevation,
+      child: child,
     );
   }
 }

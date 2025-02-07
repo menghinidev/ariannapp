@@ -48,21 +48,27 @@ class EmptyContentPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          title,
-          style: context.textTheme.titleMedium,
-        ),
-        if (subtitle != null) ...[
-          DistanceProvider.smallDistance.spacer(),
+    return Padding(
+      padding: DistanceProvider.screenInsets.padding,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
           Text(
-            subtitle!,
-            style: context.textTheme.bodyMedium,
+            title,
+            style: context.textTheme.titleMedium,
           ),
+          if (subtitle != null) ...[
+            DistanceProvider.smallDistance.spacer(),
+            Text(
+              subtitle!,
+              textAlign: TextAlign.center,
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.outline,
+              ),
+            ),
+          ],
         ],
-      ],
+      ),
     );
   }
 }

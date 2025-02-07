@@ -40,10 +40,9 @@ class AddPlayerBottomSheet extends ConsumerWidget {
     final available = ref.watch(_availablePlayerModesProvider);
     final selectedMode = ref.watch(selectedPlayerModeProvider);
     return BottomSheet(
-      showDragHandle: true,
       onClosing: () {},
       builder: (context) => SingleChildScrollView(
-        padding: DistanceProvider.screenInsets.padding,
+        padding: DistanceProvider.screenInsets.padding.add(MediaQuery.of(context).viewInsets),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
