@@ -1,10 +1,10 @@
 flutter_launcher_icons:
   android: true
-  image_path_android: "assets/launcher/ariannaap_transparent.png"
+  image_path_android: "assets/ariannaap_transparent.png"
   min_sdk_android: 21
   ios: true
-  image_path_ios: "assets/launcher/ariannaap_transparent.png"
+  image_path_ios: "assets/ariannaap_transparent.png"
   remove_alpha_ios: true
   web:
     generate: true
-    image_path: "assets/launcher/ariannaap_transparent.png"
+    image_path: "assets/ariannaap_transparent.png"
