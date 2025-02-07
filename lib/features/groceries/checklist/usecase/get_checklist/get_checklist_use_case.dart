@@ -31,3 +31,11 @@ class GetGroceriesChecklistUseCase extends UseCase<List<GroceriesCheckListItem>,
     return response;
   }
 }
+
+@riverpod
+class GroceriesCheckList extends _$GroceriesCheckList {
+  @override
+  FutureOr<List<GroceriesCheckListItem>> build() async {
+    return ref.watch(getGroceriesChecklistProvider.future);
+  }
+}

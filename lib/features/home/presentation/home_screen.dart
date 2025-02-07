@@ -1,5 +1,8 @@
 import 'package:ariannapp/core/core.dart';
+import 'package:ariannapp/core/ui/layout/layout_provider.dart';
 import 'package:ariannapp/features/groceries/shared/routes/shelf_routes.dart';
+import 'package:ariannapp/features/home/presentation/sections/groceries_dashboard_section.dart';
+import 'package:ariannapp/features/home/presentation/sections/matchkeeper_dashboard_section.dart';
 import 'package:ariannapp/features/horoscope/routes/my_astrology_routes.dart';
 import 'package:ariannapp/features/matchkeeper/shared/routes/matchkeeper_routes.dart';
 import 'package:ariannapp/features/settings/routes/settings_route.dart';
@@ -32,7 +35,17 @@ class HomeScreen extends ConsumerWidget {
         onPressed: () => context.goRelative(MatchkeeperRoutes.dashboard),
         label: const Text('Matchkeeper'),
       ),
-      child: const SizedBox.expand(),
+      child: SingleChildScrollView(
+        physics: const ScrollPhysics(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const MatchkeeperDashboardSection(),
+            DistanceProvider.mediumDistance.spacer(),
+            const GroceriesDashboardSection(),
+          ],
+        ),
+      ),
     );
   }
 }

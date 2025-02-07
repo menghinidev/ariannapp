@@ -6,7 +6,7 @@ part of 'get_matches_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$matchesHash() => r'9b2df973a0fb2aa6e99bf22f14a415963c2a911e';
+String _$matchesHash() => r'a17a494be597731b06d0ce8f65d6716473e0879b';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -158,7 +158,7 @@ class _MatchesProviderElement
   GetMatchesCommand get command => (origin as MatchesProvider).command;
 }
 
-String _$getMatchesUseCaseHash() => r'5d0ddcf0480b1d981a86a1111ee0f436e432596e';
+String _$getMatchesUseCaseHash() => r'05a28f79d7ac4f1ffc3385f5ccb6d299e4ac8231';
 
 /// See also [getMatchesUseCase].
 @ProviderFor(getMatchesUseCase)

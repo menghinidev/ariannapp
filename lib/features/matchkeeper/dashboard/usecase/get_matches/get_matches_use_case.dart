@@ -5,19 +5,20 @@ import 'package:ariannapp/features/matchkeeper/dashboard/usecase/get_matches/com
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/match/match.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/repository/match/provider.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/repository/match/sources/i_match_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'get_matches_use_case.g.dart';
 
 @riverpod
-FutureOr<List<ApplicationMatch>> matches(MatchesRef ref, GetMatchesCommand command) async {
+FutureOr<List<ApplicationMatch>> matches(Ref ref, GetMatchesCommand command) async {
   final useCase = ref.watch(getMatchesUseCaseProvider);
   final response = await useCase.call(command);
   return response.toFuture();
 }
 
 @riverpod
-GetMatchesUseCase getMatchesUseCase(GetMatchesUseCaseRef ref) {
+GetMatchesUseCase getMatchesUseCase(Ref ref) {
   return GetMatchesUseCase(repo: ref.watch(matchRepositoryProvider));
 }
 

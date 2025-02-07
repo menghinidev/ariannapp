@@ -46,5 +46,23 @@ final getGroceriesChecklistUseCaseProvider =
 // ignore: unused_element
 typedef GetGroceriesChecklistUseCaseRef
     = AutoDisposeProviderRef<GetGroceriesChecklistUseCase>;
+String _$groceriesCheckListHash() =>
+    r'3872bd1b753f43b0b5a93a426564a92a635f5d8f';
+
+/// See also [GroceriesCheckList].
+@ProviderFor(GroceriesCheckList)
+final groceriesCheckListProvider = AutoDisposeAsyncNotifierProvider<
+    GroceriesCheckList, List<GroceriesCheckListItem>>.internal(
+  GroceriesCheckList.new,
+  name: r'groceriesCheckListProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$groceriesCheckListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$GroceriesCheckList
+    = AutoDisposeAsyncNotifier<List<GroceriesCheckListItem>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

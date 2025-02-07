@@ -7,7 +7,7 @@ part of 'groceries_checklist_bloc.dart';
 // **************************************************************************
 
 String _$groceriesCheckListFiltersHash() =>
-    r'96bcce3371a4d2e90767b97fa8bfe62492ce65b3';
+    r'8e7a885e76d7a29200ed181ae45fc8026f45ec67';
 
 /// See also [GroceriesCheckListFilters].
 @ProviderFor(GroceriesCheckListFilters)
@@ -25,7 +25,7 @@ final groceriesCheckListFiltersProvider = AutoDisposeNotifierProvider<
 typedef _$GroceriesCheckListFilters
     = AutoDisposeNotifier<GroceriesCheckListState>;
 String _$groceriesCheckListOrderManagerHash() =>
-    r'63cfff2a7ad4a89b622af67134d2afc848b7b522';
+    r'25731c3efbe550939e3fe35a9a1402d67e7b6ba5';
 
 /// See also [GroceriesCheckListOrderManager].
 @ProviderFor(GroceriesCheckListOrderManager)

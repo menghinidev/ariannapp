@@ -7,7 +7,7 @@ part of 'remove_grocery_item_use_case.dart';
 // **************************************************************************
 
 String _$removeGroceryItemUseCaseHash() =>
-    r'8da70fba6947ff1bf57284d5e65511e00944cfdf';
+    r'7f29c2a891e3dae059a64380d4cc2ff04283c019';
 
 /// See also [removeGroceryItemUseCase].
 @ProviderFor(removeGroceryItemUseCase)

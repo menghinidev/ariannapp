@@ -59,14 +59,11 @@ class AddPlayerBottomSheet extends ConsumerWidget {
               ],
             ),
             DistanceProvider.mediumDistance.spacer(),
-            Padding(
-              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 500),
-                child: selectedMode == 'Squadra'
-                    ? AddTeamView(onSelected: (players) => context.pop(players))
-                    : AddSinglePlayerView(onSelected: (player) => context.pop([player])),
-              ),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              child: selectedMode == 'Squadra'
+                  ? AddTeamView(onSelected: (players) => context.pop(players))
+                  : AddSinglePlayerView(onSelected: (player) => context.pop([player])),
             ),
           ],
         ),

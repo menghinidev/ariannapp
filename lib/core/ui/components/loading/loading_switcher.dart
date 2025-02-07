@@ -7,10 +7,12 @@ class LoadingSwitcher<T> extends StatelessWidget {
   const LoadingSwitcher({
     required this.value,
     required this.builder,
+    this.margin,
     super.key,
   });
 
   final T? value;
+  final EdgeInsets? margin;
   final Widget Function(BuildContext context, T value) builder;
 
   @override
@@ -30,13 +32,15 @@ class LoadingSwitcher<T> extends StatelessWidget {
         opacity: animation,
         child: child,
       ),
-      child: value == null ? const _BaseShimmer() : builder(context, value as T),
+      child: value == null ? _BaseShimmer(margin: margin) : builder(context, value as T),
     );
   }
 }
 
 class _BaseShimmer extends StatelessWidget {
-  const _BaseShimmer();
+  const _BaseShimmer({this.margin});
+
+  final EdgeInsets? margin;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +49,7 @@ class _BaseShimmer extends StatelessWidget {
       highlightColor: Colors.grey.shade100,
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
+        padding: margin,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

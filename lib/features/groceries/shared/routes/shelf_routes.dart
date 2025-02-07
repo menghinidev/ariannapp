@@ -3,7 +3,7 @@ import 'package:ariannapp/features/groceries/shelf/presentation/shelf_screen.dar
 import 'package:go_router/go_router.dart';
 
 class GroceriesRoutes {
-  static const shelf = 'matchkeeper-dashboard';
+  static const shelf = 'shelf';
   static const checklist = 'checklist';
 }
 
