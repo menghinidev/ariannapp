@@ -22,6 +22,8 @@ final _availablePlayerModesProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef _AvailablePlayerModesRef = AutoDisposeProviderRef<List<String>>;
 String _$selectedPlayerModeHash() =>
     r'f55b3ab998702c1d93025ef712d165207c60298d';
@@ -41,4 +43,4 @@ final selectedPlayerModeProvider =
 
 typedef _$SelectedPlayerMode = AutoDisposeNotifier<String>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -16,7 +16,7 @@ class ShelfListView extends ConsumerWidget {
     return shelf.loadUntil(
       onLoaded: (data) => EmptyCaseBuilder(
         isEmpty: data.isEmpty,
-        title: 'Nessuna elemento',
+        title: 'Nessun elemento',
         builder: (context) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -27,6 +27,7 @@ class ShelfListView extends ConsumerWidget {
             Expanded(
               child: ListView.builder(
                 itemCount: data.length,
+                physics: const ScrollPhysics(),
                 padding: DistanceProvider.screenInsets.padding.removeBottom,
                 itemBuilder: (context, index) => ShelfListItem(item: data[index]),
               ),

@@ -8,6 +8,7 @@ class GroceriesCheckListItem with _$GroceriesCheckListItem {
   factory GroceriesCheckListItem({
     required String id,
     required String name,
+    required DateTime createdAt,
     required GroceryCategory category,
   }) = _GroceriesCheckListItem;
 }

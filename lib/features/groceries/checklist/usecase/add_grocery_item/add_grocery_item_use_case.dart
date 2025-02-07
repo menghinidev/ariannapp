@@ -3,12 +3,13 @@ import 'package:ariannapp/core/infrastructure/usecase/use_case.dart';
 import 'package:ariannapp/features/groceries/checklist/usecase/add_grocery_item/command/add_grocery_item_command.dart';
 import 'package:ariannapp/features/groceries/shared/repositories/provider.dart';
 import 'package:ariannapp/features/groceries/shared/repositories/sources/i_groceries_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'add_grocery_item_use_case.g.dart';
 
 @riverpod
-AddGroceryItemUseCase addGroceryItemUseCase(AddGroceryItemUseCaseRef ref) {
+AddGroceryItemUseCase addGroceryItemUseCase(Ref ref) {
   return AddGroceryItemUseCase(repo: ref.watch(groceriesRepositoryProvider));
 }
 

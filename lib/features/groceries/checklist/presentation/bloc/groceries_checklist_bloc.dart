@@ -30,8 +30,12 @@ class GroceriesCheckListFilters extends _$GroceriesCheckListFilters {
 @riverpod
 class GroceriesCheckListOrderManager extends _$GroceriesCheckListOrderManager {
   @override
-  FutureOr<List<GroceriesCheckListItem>> build() {
-    return ref.watch(getGroceriesChecklistProvider.future);
+  FutureOr<List<GroceriesCheckListItem>> build() async {
+    final filters = ref.watch(groceriesCheckListFiltersProvider);
+    final categories = filters.categories;
+    final groceries = await ref.watch(getGroceriesChecklistProvider.future);
+    if (categories.isEmpty) return groceries;
+    return groceries.where((e) => categories.contains(e.category)).toList();
   }
 
   void reorder(int oldIndex, int newIndex) {

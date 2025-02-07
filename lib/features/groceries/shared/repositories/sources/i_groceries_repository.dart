@@ -7,8 +7,15 @@ import 'package:ariannapp/features/groceries/shared/model/shelf_item/shelf_item.
 abstract class IGroceriesRepository {
   Future<ApplicationResponse<List<ShelfItem>>> getShelf();
   Future<ApplicationResponse<List<GroceriesCheckListItem>>> getGroceriesList();
+  Future<EmptyResponse> addShelfItem({
+    required String name,
+    required GroceryCategory category,
+  });
   Future<EmptyResponse> addGroceryItem({
     required String name,
     required GroceryCategory category,
+  });
+  Future<EmptyResponse> removeGroceryItem({
+    required String name,
   });
 }

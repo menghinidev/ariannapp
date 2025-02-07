@@ -52,9 +52,11 @@ class EmptyContentPlaceholder extends StatelessWidget {
       padding: DistanceProvider.screenInsets.padding,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
             title,
+            textAlign: TextAlign.center,
             style: context.textTheme.titleMedium,
           ),
           if (subtitle != null) ...[

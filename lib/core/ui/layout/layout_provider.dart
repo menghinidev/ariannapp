@@ -18,10 +18,10 @@ extension EdgeInsetsModifier on EdgeInsets {
 
 class DistanceProvider {
   static const double smallDistance = 6;
-  static const double mediumDistance = 16;
+  static const double mediumDistance = 14;
   static const double largeDistance = 24;
   static const double hugeDistance = 56;
 
-  static const double screenInsets = 20;
+  static const double screenInsets = 16;
   static const double cardInsets = 16;
 }

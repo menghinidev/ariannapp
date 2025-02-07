@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$GroceriesCheckListItem {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
   GroceryCategory get category => throw _privateConstructorUsedError;
 
   /// Create a copy of GroceriesCheckListItem
@@ -33,7 +34,8 @@ abstract class $GroceriesCheckListItemCopyWith<$Res> {
           $Res Function(GroceriesCheckListItem) then) =
       _$GroceriesCheckListItemCopyWithImpl<$Res, GroceriesCheckListItem>;
   @useResult
-  $Res call({String id, String name, GroceryCategory category});
+  $Res call(
+      {String id, String name, DateTime createdAt, GroceryCategory category});
 }
 
 /// @nodoc
@@ -54,6 +56,7 @@ class _$GroceriesCheckListItemCopyWithImpl<$Res,
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? createdAt = null,
     Object? category = null,
   }) {
     return _then(_value.copyWith(
@@ -65,6 +68,10 @@ class _$GroceriesCheckListItemCopyWithImpl<$Res,
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -82,7 +89,8 @@ abstract class _$$GroceriesCheckListItemImplCopyWith<$Res>
       __$$GroceriesCheckListItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, GroceryCategory category});
+  $Res call(
+      {String id, String name, DateTime createdAt, GroceryCategory category});
 }
 
 /// @nodoc
@@ -102,6 +110,7 @@ class __$$GroceriesCheckListItemImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? createdAt = null,
     Object? category = null,
   }) {
     return _then(_$GroceriesCheckListItemImpl(
@@ -113,6 +122,10 @@ class __$$GroceriesCheckListItemImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -125,18 +138,23 @@ class __$$GroceriesCheckListItemImplCopyWithImpl<$Res>
 
 class _$GroceriesCheckListItemImpl implements _GroceriesCheckListItem {
   _$GroceriesCheckListItemImpl(
-      {required this.id, required this.name, required this.category});
+      {required this.id,
+      required this.name,
+      required this.createdAt,
+      required this.category});
 
   @override
   final String id;
   @override
   final String name;
   @override
+  final DateTime createdAt;
+  @override
   final GroceryCategory category;
 
   @override
   String toString() {
-    return 'GroceriesCheckListItem(id: $id, name: $name, category: $category)';
+    return 'GroceriesCheckListItem(id: $id, name: $name, createdAt: $createdAt, category: $category)';
   }
 
   @override
@@ -146,12 +164,14 @@ class _$GroceriesCheckListItemImpl implements _GroceriesCheckListItem {
             other is _$GroceriesCheckListItemImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
             (identical(other.category, category) ||
                 other.category == category));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, category);
+  int get hashCode => Object.hash(runtimeType, id, name, createdAt, category);
 
   /// Create a copy of GroceriesCheckListItem
   /// with the given fields replaced by the non-null parameter values.
@@ -167,12 +187,15 @@ abstract class _GroceriesCheckListItem implements GroceriesCheckListItem {
   factory _GroceriesCheckListItem(
       {required final String id,
       required final String name,
+      required final DateTime createdAt,
       required final GroceryCategory category}) = _$GroceriesCheckListItemImpl;
 
   @override
   String get id;
   @override
   String get name;
+  @override
+  DateTime get createdAt;
   @override
   GroceryCategory get category;
 

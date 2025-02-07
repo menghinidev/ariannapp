@@ -5,8 +5,8 @@ import 'package:ariannapp/features/groceries/shared/model/grocery_category.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CategoriesFilter extends ConsumerWidget {
-  const CategoriesFilter({super.key});
+class CategoriesFilterSection extends ConsumerWidget {
+  const CategoriesFilterSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -15,10 +15,10 @@ class CategoriesFilter extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Categorie',
+          'Filtra per categoria',
           style: context.textTheme.titleMedium,
         ),
-        DistanceProvider.mediumDistance.spacer(),
+        DistanceProvider.smallDistance.spacer(),
         Wrap(
           spacing: DistanceProvider.mediumDistance,
           children: [

@@ -20,6 +20,8 @@ final canProceedStepperProvider = AutoDisposeProvider<bool>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef CanProceedStepperRef = AutoDisposeProviderRef<bool>;
 String _$stepperStateHash() => r'71b33be4efc8b72e9e7470b7526cfc414bd88589';
 
@@ -54,4 +56,4 @@ final newMatchControllerProvider =
 
 typedef _$NewMatchController = AutoDisposeNotifier<MatchBuilder>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

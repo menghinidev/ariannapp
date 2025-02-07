@@ -7,7 +7,7 @@ part of 'add_grocery_item_use_case.dart';
 // **************************************************************************
 
 String _$addGroceryItemUseCaseHash() =>
-    r'a168cf09bc09f44a1e5d1882fa75b4850ad99ce8';
+    r'3c22bce846936b75a2d2157786b207149e3b0243';
 
 /// See also [addGroceryItemUseCase].
 @ProviderFor(addGroceryItemUseCase)
@@ -22,7 +22,9 @@ final addGroceryItemUseCaseProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AddGroceryItemUseCaseRef
     = AutoDisposeProviderRef<AddGroceryItemUseCase>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

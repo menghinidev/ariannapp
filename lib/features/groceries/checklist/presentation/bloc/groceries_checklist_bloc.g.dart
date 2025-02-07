@@ -7,7 +7,7 @@ part of 'groceries_checklist_bloc.dart';
 // **************************************************************************
 
 String _$groceriesCheckListFiltersHash() =>
-    r'8e7a885e76d7a29200ed181ae45fc8026f45ec67';
+    r'96bcce3371a4d2e90767b97fa8bfe62492ce65b3';
 
 /// See also [GroceriesCheckListFilters].
 @ProviderFor(GroceriesCheckListFilters)
@@ -25,7 +25,7 @@ final groceriesCheckListFiltersProvider = AutoDisposeNotifierProvider<
 typedef _$GroceriesCheckListFilters
     = AutoDisposeNotifier<GroceriesCheckListState>;
 String _$groceriesCheckListOrderManagerHash() =>
-    r'412d52413954675d00085a839ae07fae014cc52b';
+    r'63cfff2a7ad4a89b622af67134d2afc848b7b522';
 
 /// See also [GroceriesCheckListOrderManager].
 @ProviderFor(GroceriesCheckListOrderManager)
@@ -43,4 +43,4 @@ final groceriesCheckListOrderManagerProvider = AutoDisposeAsyncNotifierProvider<
 typedef _$GroceriesCheckListOrderManager
     = AutoDisposeAsyncNotifier<List<GroceriesCheckListItem>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

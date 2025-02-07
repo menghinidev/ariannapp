@@ -6,24 +6,58 @@ import 'package:ariannapp/features/groceries/shared/model/shelf_item/shelf_item.
 import 'package:ariannapp/features/groceries/shared/repositories/sources/i_groceries_repository.dart';
 
 class MockGroceriesRepository extends IGroceriesRepository {
-  late final shelf = List.generate(
-    10,
-    (index) => ShelfItem(
+  late final shelf = [
+    ShelfItem(
       id: IDGenerator.generateId,
-      name: 'name $index',
+      name: 'Latte',
+      category: GroceryCategory.edible,
       lastUpdate: DateTime.now(),
-      category: GroceryCategory.edible,
     ),
-  );
-
-  late final groceries = List.generate(
-    10,
-    (index) => GroceriesCheckListItem(
+    ShelfItem(
       id: IDGenerator.generateId,
-      name: 'name $index',
+      name: 'Pane',
       category: GroceryCategory.edible,
+      lastUpdate: DateTime.now(),
     ),
-  );
+    ShelfItem(
+      id: IDGenerator.generateId,
+      name: 'Pasta',
+      category: GroceryCategory.edible,
+      lastUpdate: DateTime.now(),
+    ),
+    ShelfItem(
+      id: IDGenerator.generateId,
+      name: 'Croccantini',
+      category: GroceryCategory.animal,
+      lastUpdate: DateTime.now(),
+    ),
+    ShelfItem(
+      id: IDGenerator.generateId,
+      name: 'Acqua',
+      category: GroceryCategory.edible,
+      lastUpdate: DateTime.now(),
+    ),
+    ShelfItem(
+      id: IDGenerator.generateId,
+      name: 'Fermenti lattici',
+      category: GroceryCategory.house,
+      lastUpdate: DateTime.now(),
+    ),
+    ShelfItem(
+      id: IDGenerator.generateId,
+      name: 'Sapone',
+      category: GroceryCategory.bathroom,
+      lastUpdate: DateTime.now(),
+    ),
+    ShelfItem(
+      id: IDGenerator.generateId,
+      name: 'Shampoo',
+      category: GroceryCategory.bathroom,
+      lastUpdate: DateTime.now(),
+    ),
+  ];
+
+  late final groceries = <GroceriesCheckListItem>[];
 
   @override
   Future<ApplicationResponse<List<ShelfItem>>> getShelf() async {
@@ -44,8 +78,27 @@ class MockGroceriesRepository extends IGroceriesRepository {
       id: IDGenerator.generateId,
       name: name,
       category: category,
+      createdAt: DateTime.now(),
     );
     groceries.add(newItem);
+    return Responses.success<void, ApplicationError>(null);
+  }
+
+  @override
+  Future<EmptyResponse> removeGroceryItem({required String name}) async {
+    groceries.removeWhere((element) => element.name == name);
+    return Responses.success<void, ApplicationError>(null);
+  }
+
+  @override
+  Future<EmptyResponse> addShelfItem({required String name, required GroceryCategory category}) async {
+    final newItem = ShelfItem(
+      id: IDGenerator.generateId,
+      name: name,
+      category: category,
+      lastUpdate: DateTime.now(),
+    );
+    shelf.add(newItem);
     return Responses.success<void, ApplicationError>(null);
   }
 }
