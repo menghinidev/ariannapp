@@ -16,6 +16,6 @@ abstract class IGroceriesRepository {
     required GroceryCategory category,
   });
   Future<EmptyResponse> removeGroceryItem({
-    required String name,
+    required GroceriesCheckListItem item,
   });
 }

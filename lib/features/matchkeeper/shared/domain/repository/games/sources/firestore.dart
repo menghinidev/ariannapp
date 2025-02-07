@@ -9,7 +9,8 @@ class FirestoreGamesRepository extends IGamesRepository {
 
   @override
   Future<ApplicationResponse<List<Game>>> getGames() async {
-    final _ = await instance.collection('game').get();
-    return Responses.success<List<Game>, ApplicationError>(<Game>[]);
+    final games = await instance.collection('game').get();
+    final mappedResults = games.docs.map(Game.fromFirestore).toList();
+    return Responses.success(mappedResults);
   }
 }

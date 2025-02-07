@@ -85,8 +85,8 @@ class MockGroceriesRepository extends IGroceriesRepository {
   }
 
   @override
-  Future<EmptyResponse> removeGroceryItem({required String name}) async {
-    groceries.removeWhere((element) => element.name == name);
+  Future<EmptyResponse> removeGroceryItem({required GroceriesCheckListItem item}) async {
+    groceries.removeWhere((element) => element.id == item.id);
     return Responses.success<void, ApplicationError>(null);
   }
 

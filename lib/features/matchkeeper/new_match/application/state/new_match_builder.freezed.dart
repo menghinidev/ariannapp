@@ -14,12 +14,19 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+MatchBuilder _$MatchBuilderFromJson(Map<String, dynamic> json) {
+  return _MatchBuilder.fromJson(json);
+}
+
 /// @nodoc
 mixin _$MatchBuilder {
   Game? get game => throw _privateConstructorUsedError;
   int? get winningPoints => throw _privateConstructorUsedError;
   bool? get doubleLife => throw _privateConstructorUsedError;
   List<Team> get teams => throw _privateConstructorUsedError;
+
+  /// Serializes this MatchBuilder to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of MatchBuilder
   /// with the given fields replaced by the non-null parameter values.
@@ -150,7 +157,7 @@ class __$$MatchBuilderImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$MatchBuilderImpl implements _MatchBuilder {
   _$MatchBuilderImpl(
       {this.game,
@@ -158,6 +165,9 @@ class _$MatchBuilderImpl implements _MatchBuilder {
       this.doubleLife,
       final List<Team> teams = const <Team>[]})
       : _teams = teams;
+
+  factory _$MatchBuilderImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MatchBuilderImplFromJson(json);
 
   @override
   final Game? game;
@@ -192,6 +202,7 @@ class _$MatchBuilderImpl implements _MatchBuilder {
             const DeepCollectionEquality().equals(other._teams, _teams));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, game, winningPoints, doubleLife,
       const DeepCollectionEquality().hash(_teams));
@@ -203,6 +214,13 @@ class _$MatchBuilderImpl implements _MatchBuilder {
   @pragma('vm:prefer-inline')
   _$$MatchBuilderImplCopyWith<_$MatchBuilderImpl> get copyWith =>
       __$$MatchBuilderImplCopyWithImpl<_$MatchBuilderImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MatchBuilderImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _MatchBuilder implements MatchBuilder {
@@ -211,6 +229,9 @@ abstract class _MatchBuilder implements MatchBuilder {
       final int? winningPoints,
       final bool? doubleLife,
       final List<Team> teams}) = _$MatchBuilderImpl;
+
+  factory _MatchBuilder.fromJson(Map<String, dynamic> json) =
+      _$MatchBuilderImpl.fromJson;
 
   @override
   Game? get game;

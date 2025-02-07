@@ -43,9 +43,8 @@ class _GroceriesListTile extends ConsumerWidget {
         subtitle: Text(item.category.label),
         trailing: IconButton(
           icon: const Icon(Icons.check_circle_outline_outlined),
-          onPressed: () => ref
-              .read(removeGroceryItemUseCaseProvider)
-              .call(RemoveGroceryItemCommand(name: item.name, context: context)),
+          onPressed: () =>
+              ref.read(removeGroceryItemUseCaseProvider).call(RemoveGroceryItemCommand(item: item, context: context)),
         ),
       ),
     );

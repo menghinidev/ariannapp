@@ -14,12 +14,19 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+ShelfItem _$ShelfItemFromJson(Map<String, dynamic> json) {
+  return _ShelfItem.fromJson(json);
+}
+
 /// @nodoc
 mixin _$ShelfItem {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   DateTime get lastUpdate => throw _privateConstructorUsedError;
   GroceryCategory get category => throw _privateConstructorUsedError;
+
+  /// Serializes this ShelfItem to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of ShelfItem
   /// with the given fields replaced by the non-null parameter values.
@@ -130,13 +137,16 @@ class __$$ShelfItemImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$ShelfItemImpl implements _ShelfItem {
   _$ShelfItemImpl(
       {required this.id,
       required this.name,
       required this.lastUpdate,
       required this.category});
+
+  factory _$ShelfItemImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ShelfItemImplFromJson(json);
 
   @override
   final String id;
@@ -165,6 +175,7 @@ class _$ShelfItemImpl implements _ShelfItem {
                 other.category == category));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, lastUpdate, category);
 
@@ -175,6 +186,13 @@ class _$ShelfItemImpl implements _ShelfItem {
   @pragma('vm:prefer-inline')
   _$$ShelfItemImplCopyWith<_$ShelfItemImpl> get copyWith =>
       __$$ShelfItemImplCopyWithImpl<_$ShelfItemImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ShelfItemImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _ShelfItem implements ShelfItem {
@@ -183,6 +201,9 @@ abstract class _ShelfItem implements ShelfItem {
       required final String name,
       required final DateTime lastUpdate,
       required final GroceryCategory category}) = _$ShelfItemImpl;
+
+  factory _ShelfItem.fromJson(Map<String, dynamic> json) =
+      _$ShelfItemImpl.fromJson;
 
   @override
   String get id;

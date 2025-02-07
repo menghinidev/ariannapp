@@ -14,12 +14,20 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+GroceriesCheckListItem _$GroceriesCheckListItemFromJson(
+    Map<String, dynamic> json) {
+  return _GroceriesCheckListItem.fromJson(json);
+}
+
 /// @nodoc
 mixin _$GroceriesCheckListItem {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   GroceryCategory get category => throw _privateConstructorUsedError;
+
+  /// Serializes this GroceriesCheckListItem to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of GroceriesCheckListItem
   /// with the given fields replaced by the non-null parameter values.
@@ -135,13 +143,16 @@ class __$$GroceriesCheckListItemImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$GroceriesCheckListItemImpl implements _GroceriesCheckListItem {
   _$GroceriesCheckListItemImpl(
       {required this.id,
       required this.name,
       required this.createdAt,
       required this.category});
+
+  factory _$GroceriesCheckListItemImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GroceriesCheckListItemImplFromJson(json);
 
   @override
   final String id;
@@ -170,6 +181,7 @@ class _$GroceriesCheckListItemImpl implements _GroceriesCheckListItem {
                 other.category == category));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, createdAt, category);
 
@@ -181,6 +193,13 @@ class _$GroceriesCheckListItemImpl implements _GroceriesCheckListItem {
   _$$GroceriesCheckListItemImplCopyWith<_$GroceriesCheckListItemImpl>
       get copyWith => __$$GroceriesCheckListItemImplCopyWithImpl<
           _$GroceriesCheckListItemImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$GroceriesCheckListItemImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _GroceriesCheckListItem implements GroceriesCheckListItem {
@@ -189,6 +208,9 @@ abstract class _GroceriesCheckListItem implements GroceriesCheckListItem {
       required final String name,
       required final DateTime createdAt,
       required final GroceryCategory category}) = _$GroceriesCheckListItemImpl;
+
+  factory _GroceriesCheckListItem.fromJson(Map<String, dynamic> json) =
+      _$GroceriesCheckListItemImpl.fromJson;
 
   @override
   String get id;

@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RemoveGroceryItemCommand {
-  String get name => throw _privateConstructorUsedError;
+  GroceriesCheckListItem get item => throw _privateConstructorUsedError;
   BuildContext get context => throw _privateConstructorUsedError;
 
   /// Create a copy of RemoveGroceryItemCommand
@@ -32,7 +32,9 @@ abstract class $RemoveGroceryItemCommandCopyWith<$Res> {
           $Res Function(RemoveGroceryItemCommand) then) =
       _$RemoveGroceryItemCommandCopyWithImpl<$Res, RemoveGroceryItemCommand>;
   @useResult
-  $Res call({String name, BuildContext context});
+  $Res call({GroceriesCheckListItem item, BuildContext context});
+
+  $GroceriesCheckListItemCopyWith<$Res> get item;
 }
 
 /// @nodoc
@@ -51,19 +53,29 @@ class _$RemoveGroceryItemCommandCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
+    Object? item = null,
     Object? context = null,
   }) {
     return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
+      item: null == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as GroceriesCheckListItem,
       context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
               as BuildContext,
     ) as $Val);
+  }
+
+  /// Create a copy of RemoveGroceryItemCommand
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $GroceriesCheckListItemCopyWith<$Res> get item {
+    return $GroceriesCheckListItemCopyWith<$Res>(_value.item, (value) {
+      return _then(_value.copyWith(item: value) as $Val);
+    });
   }
 }
 
@@ -76,7 +88,10 @@ abstract class _$$RemoveGroceryItemCommandImplCopyWith<$Res>
       __$$RemoveGroceryItemCommandImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, BuildContext context});
+  $Res call({GroceriesCheckListItem item, BuildContext context});
+
+  @override
+  $GroceriesCheckListItemCopyWith<$Res> get item;
 }
 
 /// @nodoc
@@ -94,14 +109,14 @@ class __$$RemoveGroceryItemCommandImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
+    Object? item = null,
     Object? context = null,
   }) {
     return _then(_$RemoveGroceryItemCommandImpl(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
+      item: null == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as GroceriesCheckListItem,
       context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
@@ -113,16 +128,16 @@ class __$$RemoveGroceryItemCommandImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RemoveGroceryItemCommandImpl implements _RemoveGroceryItemCommand {
-  _$RemoveGroceryItemCommandImpl({required this.name, required this.context});
+  _$RemoveGroceryItemCommandImpl({required this.item, required this.context});
 
   @override
-  final String name;
+  final GroceriesCheckListItem item;
   @override
   final BuildContext context;
 
   @override
   String toString() {
-    return 'RemoveGroceryItemCommand(name: $name, context: $context)';
+    return 'RemoveGroceryItemCommand(item: $item, context: $context)';
   }
 
   @override
@@ -130,12 +145,12 @@ class _$RemoveGroceryItemCommandImpl implements _RemoveGroceryItemCommand {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RemoveGroceryItemCommandImpl &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.item, item) || other.item == item) &&
             (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, context);
+  int get hashCode => Object.hash(runtimeType, item, context);
 
   /// Create a copy of RemoveGroceryItemCommand
   /// with the given fields replaced by the non-null parameter values.
@@ -149,11 +164,11 @@ class _$RemoveGroceryItemCommandImpl implements _RemoveGroceryItemCommand {
 
 abstract class _RemoveGroceryItemCommand implements RemoveGroceryItemCommand {
   factory _RemoveGroceryItemCommand(
-      {required final String name,
+      {required final GroceriesCheckListItem item,
       required final BuildContext context}) = _$RemoveGroceryItemCommandImpl;
 
   @override
-  String get name;
+  GroceriesCheckListItem get item;
   @override
   BuildContext get context;
 

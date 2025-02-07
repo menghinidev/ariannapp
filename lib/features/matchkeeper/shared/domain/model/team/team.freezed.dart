@@ -14,11 +14,18 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+Team _$TeamFromJson(Map<String, dynamic> json) {
+  return _Team.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Team {
   String get id => throw _privateConstructorUsedError;
   List<Player> get players => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
+
+  /// Serializes this Team to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Team
   /// with the given fields replaced by the non-null parameter values.
@@ -114,10 +121,13 @@ class __$$TeamImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$TeamImpl implements _Team {
   _$TeamImpl({required this.id, required final List<Player> players, this.name})
       : _players = players;
+
+  factory _$TeamImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TeamImplFromJson(json);
 
   @override
   final String id;
@@ -147,6 +157,7 @@ class _$TeamImpl implements _Team {
             (identical(other.name, name) || other.name == name));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, const DeepCollectionEquality().hash(_players), name);
@@ -158,6 +169,13 @@ class _$TeamImpl implements _Team {
   @pragma('vm:prefer-inline')
   _$$TeamImplCopyWith<_$TeamImpl> get copyWith =>
       __$$TeamImplCopyWithImpl<_$TeamImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TeamImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Team implements Team {
@@ -165,6 +183,8 @@ abstract class _Team implements Team {
       {required final String id,
       required final List<Player> players,
       final String? name}) = _$TeamImpl;
+
+  factory _Team.fromJson(Map<String, dynamic> json) = _$TeamImpl.fromJson;
 
   @override
   String get id;

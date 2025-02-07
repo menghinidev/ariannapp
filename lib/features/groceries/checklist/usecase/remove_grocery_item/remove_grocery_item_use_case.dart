@@ -41,7 +41,7 @@ class RemoveGroceryItemUseCase extends UseCase<void, RemoveGroceryItemCommand> {
   @override
   Future<Response<void, ApplicationError>> call(RemoveGroceryItemCommand input) async {
     final check = await checkRequirements();
-    final response = await check.flatMapAsync((_) => repo.removeGroceryItem(name: input.name));
+    final response = await check.flatMapAsync((_) => repo.removeGroceryItem(item: input.item));
     await response.ifSuccessAsync((_) => applySuccessHandlers(response, input));
     return response;
   }

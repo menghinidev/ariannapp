@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'game.freezed.dart';
@@ -12,6 +13,13 @@ class Game with _$Game {
   }) = _Game;
 
   factory Game.fromJson(Map<String, dynamic> json) => _$GameFromJson(json);
+
+  factory Game.fromFirestore(QueryDocumentSnapshot snapshot) {
+    final id = snapshot.id;
+    final json = snapshot.data()! as Map<String, dynamic>;
+    json['id'] = id;
+    return Game.fromJson(json);
+  }
 }
 
 @freezed
@@ -29,6 +37,15 @@ class WinningStrategy with _$WinningStrategy {
 }
 
 extension GameFeatures on Game {
+  Map<String, dynamic> toFirestore() {
+    final json = toJson()
+      ..remove('id')
+      ..remove('strategy');
+    final jsonStrategy = strategy.toJson();
+    json['strategy'] = jsonStrategy;
+    return json;
+  }
+
   Game changeStandardPoints(int points) {
     return copyWith.strategy(threshold: points);
   }

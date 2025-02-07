@@ -20,9 +20,9 @@ class GroceriesCheckListItem extends ConsumerWidget {
       subtitle: Text(item.createdAt.toNiceDate),
       trailing: IconButton(
         icon: const Icon(Icons.check_circle_outline_outlined),
-        onPressed: () => ref
-            .read(removeGroceryItemUseCaseProvider)
-            .call(RemoveGroceryItemCommand(name: item.name, context: context)),
+        onPressed: () => ref.read(removeGroceryItemUseCaseProvider).call(
+              RemoveGroceryItemCommand(item: item, context: context),
+            ),
       ),
     );
   }
