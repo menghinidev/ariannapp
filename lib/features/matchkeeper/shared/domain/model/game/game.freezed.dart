@@ -14,11 +14,18 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+Game _$GameFromJson(Map<String, dynamic> json) {
+  return _Game.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Game {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   WinningStrategy get strategy => throw _privateConstructorUsedError;
+
+  /// Serializes this Game to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Game
   /// with the given fields replaced by the non-null parameter values.
@@ -129,10 +136,13 @@ class __$$GameImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$GameImpl implements _Game {
   const _$GameImpl(
       {required this.id, required this.name, required this.strategy});
+
+  factory _$GameImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GameImplFromJson(json);
 
   @override
   final String id;
@@ -157,6 +167,7 @@ class _$GameImpl implements _Game {
                 other.strategy == strategy));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, strategy);
 
@@ -167,6 +178,13 @@ class _$GameImpl implements _Game {
   @pragma('vm:prefer-inline')
   _$$GameImplCopyWith<_$GameImpl> get copyWith =>
       __$$GameImplCopyWithImpl<_$GameImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$GameImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Game implements Game {
@@ -174,6 +192,8 @@ abstract class _Game implements Game {
       {required final String id,
       required final String name,
       required final WinningStrategy strategy}) = _$GameImpl;
+
+  factory _Game.fromJson(Map<String, dynamic> json) = _$GameImpl.fromJson;
 
   @override
   String get id;
@@ -190,6 +210,10 @@ abstract class _Game implements Game {
       throw _privateConstructorUsedError;
 }
 
+WinningStrategy _$WinningStrategyFromJson(Map<String, dynamic> json) {
+  return _WinningStrategy.fromJson(json);
+}
+
 /// @nodoc
 mixin _$WinningStrategy {
   int get startingFrom => throw _privateConstructorUsedError;
@@ -198,6 +222,9 @@ mixin _$WinningStrategy {
   int get threshold => throw _privateConstructorUsedError;
   bool get winAtThreshold => throw _privateConstructorUsedError;
   bool get doubleLife => throw _privateConstructorUsedError;
+
+  /// Serializes this WinningStrategy to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of WinningStrategy
   /// with the given fields replaced by the non-null parameter values.
@@ -339,7 +366,7 @@ class __$$WinningStrategyImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$WinningStrategyImpl implements _WinningStrategy {
   const _$WinningStrategyImpl(
       {required this.startingFrom,
@@ -348,6 +375,9 @@ class _$WinningStrategyImpl implements _WinningStrategy {
       required this.threshold,
       required this.winAtThreshold,
       required this.doubleLife});
+
+  factory _$WinningStrategyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WinningStrategyImplFromJson(json);
 
   @override
   final int startingFrom;
@@ -386,6 +416,7 @@ class _$WinningStrategyImpl implements _WinningStrategy {
                 other.doubleLife == doubleLife));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, startingFrom, goingUpTo,
       goingDownTo, threshold, winAtThreshold, doubleLife);
@@ -398,6 +429,13 @@ class _$WinningStrategyImpl implements _WinningStrategy {
   _$$WinningStrategyImplCopyWith<_$WinningStrategyImpl> get copyWith =>
       __$$WinningStrategyImplCopyWithImpl<_$WinningStrategyImpl>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$WinningStrategyImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _WinningStrategy implements WinningStrategy {
@@ -408,6 +446,9 @@ abstract class _WinningStrategy implements WinningStrategy {
       required final int threshold,
       required final bool winAtThreshold,
       required final bool doubleLife}) = _$WinningStrategyImpl;
+
+  factory _WinningStrategy.fromJson(Map<String, dynamic> json) =
+      _$WinningStrategyImpl.fromJson;
 
   @override
   int get startingFrom;

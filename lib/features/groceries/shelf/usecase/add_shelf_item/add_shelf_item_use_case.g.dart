@@ -7,7 +7,7 @@ part of 'add_shelf_item_use_case.dart';
 // **************************************************************************
 
 String _$addShelfItemUseCaseHash() =>
-    r'bd309dd9719ec30e4f3f26188e09ff2186a9fd5b';
+    r'ea23b541cd06b08307ec41497535709945afe338';
 
 /// See also [addShelfItemUseCase].
 @ProviderFor(addShelfItemUseCase)

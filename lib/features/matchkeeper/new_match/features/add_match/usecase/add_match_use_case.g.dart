@@ -6,7 +6,7 @@ part of 'add_match_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$addMatchUseCaseHash() => r'e921bbf95e27658adcd5b6f0e897d6d361971df1';
+String _$addMatchUseCaseHash() => r'2eed8121d88464ae785c1f31c789527d26e3729c';
 
 /// See also [addMatchUseCase].
 @ProviderFor(addMatchUseCase)

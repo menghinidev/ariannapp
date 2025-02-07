@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'game.freezed.dart';
+part 'game.g.dart';
 
 @freezed
 class Game with _$Game {
@@ -9,6 +10,8 @@ class Game with _$Game {
     required String name,
     required WinningStrategy strategy,
   }) = _Game;
+
+  factory Game.fromJson(Map<String, dynamic> json) => _$GameFromJson(json);
 }
 
 @freezed
@@ -21,6 +24,8 @@ class WinningStrategy with _$WinningStrategy {
     required bool winAtThreshold,
     required bool doubleLife,
   }) = _WinningStrategy;
+
+  factory WinningStrategy.fromJson(Map<String, dynamic> json) => _$WinningStrategyFromJson(json);
 }
 
 extension GameFeatures on Game {

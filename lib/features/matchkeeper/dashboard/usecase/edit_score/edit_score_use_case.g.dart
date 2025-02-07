@@ -6,7 +6,7 @@ part of 'edit_score_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$editScoreUseCaseHash() => r'31e1dde5e0deb1902cce7d7a3b80ac8f2c58e3e2';
+String _$editScoreUseCaseHash() => r'a003f478b6c2647392f337485f9548868a45ce87';
 
 /// See also [editScoreUseCase].
 @ProviderFor(editScoreUseCase)

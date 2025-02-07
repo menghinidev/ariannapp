@@ -7,7 +7,7 @@ part of 'restart_match_use_case.dart';
 // **************************************************************************
 
 String _$restartMatchUseCaseHash() =>
-    r'328c06f0a9e08967566605b883a3b47111583f24';
+    r'7d26f1e71189670da86b35bde5040bfefbf009f3';
 
 /// See also [restartMatchUseCase].
 @ProviderFor(restartMatchUseCase)
