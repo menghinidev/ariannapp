@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAwVyPcXZRD71-OLQg-wl6DeHMWDlTOOeg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>826811037308</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>it.menghinidev.ariannapp</string>
+	<key>PROJECT_ID</key>
+	<string>ariannapp-sbubu</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ariannapp-sbubu.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:826811037308:ios:2c6feaa8c3e102c040fbf9</string>
+</dict>
+</plist>

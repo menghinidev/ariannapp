@@ -1,5 +1,4 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/features/groceries/checklist/presentation/bloc/groceries_checklist_bloc.dart';
 import 'package:ariannapp/features/groceries/checklist/usecase/remove_grocery_item/command/removegroceryitemcommand.dart';
 import 'package:ariannapp/features/groceries/checklist/usecase/remove_grocery_item/remove_grocery_item_use_case.dart';
 import 'package:ariannapp/features/groceries/shared/model/check_item/checklist_item.dart' as model;
@@ -23,8 +22,7 @@ class GroceriesCheckListItem extends ConsumerWidget {
         icon: const Icon(Icons.check_circle_outline_outlined),
         onPressed: () => ref
             .read(removeGroceryItemUseCaseProvider)
-            .call(RemoveGroceryItemCommand(name: item.name, context: context))
-            .then((_) => ref.invalidate(groceriesCheckListOrderManagerProvider)),
+            .call(RemoveGroceryItemCommand(name: item.name, context: context)),
       ),
     );
   }

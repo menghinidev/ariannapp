@@ -1,4 +1,6 @@
 import 'package:ariannapp/core/core.dart';
+import 'package:ariannapp/features/groceries/checklist/presentation/bloc/groceries_checklist_bloc.dart';
+import 'package:ariannapp/features/groceries/checklist/usecase/get_checklist/get_checklist_use_case.dart';
 import 'package:ariannapp/features/groceries/shared/repositories/provider.dart';
 import 'package:ariannapp/features/groceries/shared/repositories/sources/i_groceries_repository.dart';
 import 'package:ariannapp/features/groceries/shelf/usecase/move_to_grocery_list/command/movetogrocerylistcommand.dart';
@@ -15,6 +17,14 @@ MoveGroceryItemUseCase moveGroceryItemUseCase(Ref ref) {
       ShowSnackbarSuccessHandler<void, MoveToGroceryListCommand>(
         message: 'Aggiunto alla lista della spesa',
         contextProvider: (input) => input.context,
+      ),
+      InvalidateProviderOnSuccessHandler<void, MoveToGroceryListCommand>(
+        ref: ref,
+        provider: groceriesCheckListOrderManagerProvider,
+      ),
+      InvalidateProviderOnSuccessHandler<void, MoveToGroceryListCommand>(
+        ref: ref,
+        provider: groceriesCheckListProvider,
       ),
     ],
   );

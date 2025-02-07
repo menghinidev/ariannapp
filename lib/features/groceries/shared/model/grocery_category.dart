@@ -1,7 +1,7 @@
 enum GroceryCategory { edible, animal, house, bathroom, other }
 
 extension GroceryCategoryExtension on GroceryCategory {
-  String get name {
+  String get label {
     switch (this) {
       case GroceryCategory.edible:
         return 'Cibarie';

@@ -74,7 +74,6 @@ class _AddPlayerTextFieldState extends ConsumerState<AddPlayerTextField> {
   Future<void> _addNewPlayer(WidgetRef ref) async {
     final command = AddPlayerCommand(name: _controller.text);
     final player = await ref.read(addPlayerUseCaseProvider).call(command);
-    ref.invalidate(applicationPlayersProvider);
     player.ifSuccess((value) => widget.onSelected(value!));
   }
 

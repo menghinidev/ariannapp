@@ -55,7 +55,7 @@ class BaseDashboardSection<T> extends ConsumerWidget {
               physics: const ScrollPhysics(),
               shrinkWrap: true,
               padding: DistanceProvider.screenInsets.padding.removeTop,
-              separatorBuilder: (context, index) => const Divider(height: DistanceProvider.smallDistance),
+              separatorBuilder: (context, index) => DistanceProvider.smallDistance.spacer(),
               itemBuilder: (context, index) => itemBuilder(context, data[index]),
             ),
           ),

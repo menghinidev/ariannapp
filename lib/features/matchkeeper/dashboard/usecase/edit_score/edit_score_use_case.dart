@@ -1,20 +1,28 @@
-import 'package:ariannapp/core/infrastructure/error/application_error/applicationerror.dart';
-import 'package:ariannapp/core/infrastructure/usecase/use_case.dart';
-import 'package:ariannapp/core/infrastructure/utils/response/response.dart';
+import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/matchkeeper/dashboard/usecase/edit_score/command/edit_score_command.dart';
+import 'package:ariannapp/features/matchkeeper/dashboard/usecase/get_matches/get_matches_use_case.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/repository/match/provider.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/repository/match/sources/i_match_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'edit_score_use_case.g.dart';
 
 @riverpod
-EditScoreUseCase editScoreUseCase(EditScoreUseCaseRef ref) {
-  return EditScoreUseCase(repo: ref.watch(matchRepositoryProvider));
+EditScoreUseCase editScoreUseCase(Ref ref) {
+  return EditScoreUseCase(
+    repo: ref.watch(matchRepositoryProvider),
+    successHandlers: [
+      InvalidateProviderOnSuccessHandler(ref: ref, provider: matchesProvider),
+    ],
+  );
 }
 
 class EditScoreUseCase extends UseCase<void, EditScoreCommand> {
-  EditScoreUseCase({required this.repo});
+  EditScoreUseCase({
+    required this.repo,
+    super.successHandlers,
+  });
 
   final IMatchRepository repo;
 
@@ -27,6 +35,7 @@ class EditScoreUseCase extends UseCase<void, EditScoreCommand> {
         scores: input.newScores,
       ),
     );
+    await response.ifSuccessAsync((_) => applySuccessHandlers(response, input));
     return response;
   }
 }

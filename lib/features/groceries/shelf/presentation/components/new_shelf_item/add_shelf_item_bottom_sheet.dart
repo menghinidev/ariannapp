@@ -4,7 +4,6 @@ import 'package:ariannapp/features/groceries/shared/model/grocery_category.dart'
 import 'package:ariannapp/features/groceries/shelf/presentation/components/new_shelf_item/bloc.dart';
 import 'package:ariannapp/features/groceries/shelf/usecase/add_shelf_item/add_shelf_item_use_case.dart';
 import 'package:ariannapp/features/groceries/shelf/usecase/add_shelf_item/command/add_shelf_item_command.dart';
-import 'package:ariannapp/features/groceries/shelf/usecase/get_shelf/get_shelf_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -52,7 +51,6 @@ class NewShelfItemBottomSheet extends ConsumerWidget {
   Future<void> _add(BuildContext context, WidgetRef ref, NewShelfItemState state) async {
     final command = AddShelfItemCommand(name: state.name!, category: state.category!);
     await ref.read(addShelfItemUseCaseProvider).call(command);
-    ref.invalidate(getShelfProvider);
     if (context.mounted) context.pop();
   }
 }
@@ -77,7 +75,7 @@ class _CategorySelector extends ConsumerWidget {
           children: [
             for (final category in GroceryCategory.values)
               ChoiceChip(
-                label: Text(category.name),
+                label: Text(category.label),
                 selected: category == selected,
                 onSelected: (value) => ref.read(newShelfItemBuilderProvider.notifier).changeCategory(category),
               ),

@@ -24,7 +24,7 @@ class CategoriesFilterSection extends ConsumerWidget {
           children: [
             for (final category in GroceryCategory.values)
               ChoiceChip(
-                label: Text(category.name),
+                label: Text(category.label),
                 selected: selected.contains(category),
                 onSelected: (value) => ref.read(groceriesCheckListFiltersProvider.notifier).toggleCategory(category),
               ),

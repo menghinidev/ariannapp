@@ -20,43 +20,43 @@ enum MatchStatus { completed, ongoing }
 extension MatchStatusFeature on ApplicationMatch {
   bool get isOver {
     if (status == MatchStatus.completed) return true;
-    final mappedReduced = scores.map(totalPoints).toList()
+    final points = scores.map(game.strategy.totalPoints).toList()
       ..sort((a, b) => b.compareTo(a))
       ..toList();
-    return _isOver(mappedReduced[0]);
-  }
-
-  int totalPoints(Score score) {
-    final total = score.points.reduce((a, b) => a + b);
     final strategy = game.strategy;
     if (strategy.goingDownTo) {
-      return strategy.threshold - total;
+      return points[0] <= strategy.threshold;
     } else {
-      return strategy.startingFrom + total;
-    }
-  }
-
-  bool _isOver(int points) {
-    final strategy = game.strategy;
-    if (strategy.goingDownTo) {
-      return points <= strategy.threshold;
-    } else {
-      return points >= strategy.threshold;
+      return points[0] >= strategy.threshold;
     }
   }
 
   ApplicationMatch get sortedScores {
     final strategy = game.strategy;
+    return copyWith(scores: strategy.sortedScores(scores));
+  }
+}
 
-    final winGoingUp = strategy.goingUpTo && strategy.winAtThreshold;
-    final loseGoingDown = strategy.goingDownTo && !strategy.winAtThreshold;
+extension on WinningStrategy {
+  List<Score> sortedScores(List<Score> scores) {
+    final winGoingUp = goingUpTo && winAtThreshold;
+    final loseGoingDown = goingDownTo && !winAtThreshold;
 
     if (loseGoingDown || winGoingUp) {
       final sorted = [...scores]..sort((a, b) => totalPoints(b).compareTo(totalPoints(a)));
-      return copyWith(scores: sorted);
+      return sorted;
     } else {
       final sorted = [...scores]..sort((a, b) => totalPoints(a).compareTo(totalPoints(b)));
-      return copyWith(scores: sorted);
+      return sorted;
+    }
+  }
+
+  int totalPoints(Score score) {
+    final total = score.points.reduce((a, b) => a + b);
+    if (goingDownTo) {
+      return threshold - total;
+    } else {
+      return startingFrom + total;
     }
   }
 }

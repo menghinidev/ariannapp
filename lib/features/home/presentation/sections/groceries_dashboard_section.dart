@@ -1,6 +1,9 @@
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
 import 'package:ariannapp/features/groceries/checklist/usecase/get_checklist/get_checklist_use_case.dart';
+import 'package:ariannapp/features/groceries/checklist/usecase/remove_grocery_item/command/removegroceryitemcommand.dart';
+import 'package:ariannapp/features/groceries/checklist/usecase/remove_grocery_item/remove_grocery_item_use_case.dart';
 import 'package:ariannapp/features/groceries/shared/model/check_item/checklist_item.dart';
+import 'package:ariannapp/features/groceries/shared/model/grocery_category.dart';
 import 'package:ariannapp/features/groceries/shared/routes/shelf_routes.dart';
 import 'package:ariannapp/features/home/presentation/sections/base_home_section.dart';
 import 'package:ariannapp/navigation/utils.dart';
@@ -37,7 +40,13 @@ class _GroceriesListTile extends ConsumerWidget {
       child: ListTile(
         contentPadding: DistanceProvider.cardInsets.padding.removeTop.removeBottom,
         title: Text(item.name),
-        subtitle: Text(item.category.name),
+        subtitle: Text(item.category.label),
+        trailing: IconButton(
+          icon: const Icon(Icons.check_circle_outline_outlined),
+          onPressed: () => ref
+              .read(removeGroceryItemUseCaseProvider)
+              .call(RemoveGroceryItemCommand(name: item.name, context: context)),
+        ),
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:ariannapp/core/core.dart';
+import 'package:ariannapp/features/groceries/checklist/presentation/bloc/groceries_checklist_bloc.dart';
+import 'package:ariannapp/features/groceries/checklist/usecase/get_checklist/get_checklist_use_case.dart';
 import 'package:ariannapp/features/groceries/checklist/usecase/remove_grocery_item/command/removegroceryitemcommand.dart';
 import 'package:ariannapp/features/groceries/shared/repositories/provider.dart';
 import 'package:ariannapp/features/groceries/shared/repositories/sources/i_groceries_repository.dart';
@@ -15,6 +17,14 @@ RemoveGroceryItemUseCase removeGroceryItemUseCase(Ref ref) {
       ShowSnackbarSuccessHandler<void, RemoveGroceryItemCommand>(
         message: 'Rimosso dalla lista della spesa',
         contextProvider: (input) => input.context,
+      ),
+      InvalidateProviderOnSuccessHandler(
+        ref: ref,
+        provider: groceriesCheckListOrderManagerProvider,
+      ),
+      InvalidateProviderOnSuccessHandler(
+        ref: ref,
+        provider: groceriesCheckListProvider,
       ),
     ],
   );

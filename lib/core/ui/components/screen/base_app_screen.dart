@@ -9,22 +9,34 @@ class BaseAppScreen extends StatelessWidget {
     this.actions,
     this.fab,
     super.key,
-  });
+  }) : isSliver = false;
+
+  const BaseAppScreen.sliver({
+    required this.child,
+    required this.title,
+    this.fab,
+    super.key,
+  })  : isSliver = true,
+        actions = null,
+        bottomAppBarWidget = null;
 
   final Widget child;
   final String title;
   final Widget? fab;
   final List<Widget>? actions;
   final PreferredSizeWidget? bottomAppBarWidget;
+  final bool isSliver;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(
-        title: title,
-        bottomAppBarWidget: bottomAppBarWidget,
-        actions: actions,
-      ),
+      appBar: isSliver
+          ? null
+          : SimpleAppBar(
+              title: title,
+              bottomAppBarWidget: bottomAppBarWidget,
+              actions: actions,
+            ),
       body: child,
       floatingActionButton: fab,
     );

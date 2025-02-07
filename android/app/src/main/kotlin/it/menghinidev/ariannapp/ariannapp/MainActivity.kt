@@ -1,4 +1,4 @@
-package it.menghinidev.ariannapp.ariannapp
+package it.menghinidev.ariannapp
 
 import io.flutter.embedding.android.FlutterActivity
 

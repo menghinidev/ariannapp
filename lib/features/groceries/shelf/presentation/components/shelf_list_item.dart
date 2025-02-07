@@ -1,5 +1,4 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/features/groceries/checklist/presentation/bloc/groceries_checklist_bloc.dart';
 import 'package:ariannapp/features/groceries/shared/model/shelf_item/shelf_item.dart';
 import 'package:ariannapp/features/groceries/shelf/usecase/move_to_grocery_list/command/movetogrocerylistcommand.dart';
 import 'package:ariannapp/features/groceries/shelf/usecase/move_to_grocery_list/move_grocery_item_use_case.dart';
@@ -21,10 +20,8 @@ class ShelfListItem extends ConsumerWidget {
       subtitle: Text(item.lastUpdate.toDayMonthDate),
       trailing: IconButton(
         icon: const Icon(Icons.add_circle_outline),
-        onPressed: () => ref
-            .read(moveGroceryItemUseCaseProvider)
-            .call(MoveToGroceryListCommand(item: item, context: context))
-            .then((_) => ref.invalidate(groceriesCheckListOrderManagerProvider)),
+        onPressed: () =>
+            ref.read(moveGroceryItemUseCaseProvider).call(MoveToGroceryListCommand(item: item, context: context)),
       ),
     );
   }

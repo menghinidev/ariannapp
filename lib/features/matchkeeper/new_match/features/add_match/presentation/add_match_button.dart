@@ -1,5 +1,4 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/features/matchkeeper/dashboard/usecase/get_matches/get_matches_use_case.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/application/new_match_state_provider.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/features/add_match/usecase/add_match_use_case.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ class CreateNewMatchFAB extends ConsumerWidget {
       onPressed: () => ref.read(addMatchUseCaseProvider).call(builder).ifSuccess(
         (value) {
           if (context.mounted) {
-            ref.invalidate(matchesProvider);
             context.pop();
           }
         },
