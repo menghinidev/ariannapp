@@ -27,3 +27,9 @@ extension PlayerFeatures on Player {
     return json;
   }
 }
+
+extension PlayersFeatures on List<Player> {
+  String get playersFormatter {
+    return map((e) => e.name).join(', ');
+  }
+}

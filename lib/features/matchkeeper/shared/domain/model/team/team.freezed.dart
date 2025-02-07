@@ -21,7 +21,7 @@ Team _$TeamFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Team {
   String get id => throw _privateConstructorUsedError;
-  List<Player> get players => throw _privateConstructorUsedError;
+  List<String> get players => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
 
   /// Serializes this Team to a JSON map.
@@ -38,7 +38,7 @@ abstract class $TeamCopyWith<$Res> {
   factory $TeamCopyWith(Team value, $Res Function(Team) then) =
       _$TeamCopyWithImpl<$Res, Team>;
   @useResult
-  $Res call({String id, List<Player> players, String? name});
+  $Res call({String id, List<String> players, String? name});
 }
 
 /// @nodoc
@@ -68,7 +68,7 @@ class _$TeamCopyWithImpl<$Res, $Val extends Team>
       players: null == players
           ? _value.players
           : players // ignore: cast_nullable_to_non_nullable
-              as List<Player>,
+              as List<String>,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -84,7 +84,7 @@ abstract class _$$TeamImplCopyWith<$Res> implements $TeamCopyWith<$Res> {
       __$$TeamImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, List<Player> players, String? name});
+  $Res call({String id, List<String> players, String? name});
 }
 
 /// @nodoc
@@ -111,7 +111,7 @@ class __$$TeamImplCopyWithImpl<$Res>
       players: null == players
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
-              as List<Player>,
+              as List<String>,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -121,9 +121,10 @@ class __$$TeamImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$TeamImpl implements _Team {
-  _$TeamImpl({required this.id, required final List<Player> players, this.name})
+  _$TeamImpl({required this.id, required final List<String> players, this.name})
       : _players = players;
 
   factory _$TeamImpl.fromJson(Map<String, dynamic> json) =>
@@ -131,9 +132,9 @@ class _$TeamImpl implements _Team {
 
   @override
   final String id;
-  final List<Player> _players;
+  final List<String> _players;
   @override
-  List<Player> get players {
+  List<String> get players {
     if (_players is EqualUnmodifiableListView) return _players;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_players);
@@ -181,7 +182,7 @@ class _$TeamImpl implements _Team {
 abstract class _Team implements Team {
   factory _Team(
       {required final String id,
-      required final List<Player> players,
+      required final List<String> players,
       final String? name}) = _$TeamImpl;
 
   factory _Team.fromJson(Map<String, dynamic> json) = _$TeamImpl.fromJson;
@@ -189,7 +190,7 @@ abstract class _Team implements Team {
   @override
   String get id;
   @override
-  List<Player> get players;
+  List<String> get players;
   @override
   String? get name;
 

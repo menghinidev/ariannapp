@@ -35,4 +35,10 @@ class MockPlayersRepository extends IPlayersRepository {
   Future<ApplicationResponse<List<Player>>> getPlayers() async {
     return Responses.success(players);
   }
+
+  @override
+  Future<ApplicationResponse<Player>> getPlayer(String id) {
+    // TODO: implement getPlayer
+    throw UnimplementedError();
+  }
 }

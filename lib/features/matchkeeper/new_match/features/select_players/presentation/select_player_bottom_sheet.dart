@@ -12,7 +12,7 @@ part 'select_player_bottom_sheet.g.dart';
 /* State management */
 
 @riverpod
-List<String> _availablePlayerModes(_AvailablePlayerModesRef ref) {
+List<String> _availablePlayerModes(Ref ref) {
   return ['Giocatore singolo', 'Squadra'];
 }
 

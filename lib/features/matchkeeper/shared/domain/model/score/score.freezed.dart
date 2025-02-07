@@ -14,11 +14,18 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+Score _$ScoreFromJson(Map<String, dynamic> json) {
+  return _Score.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Score {
   String get id => throw _privateConstructorUsedError;
   Team get team => throw _privateConstructorUsedError;
   List<int> get points => throw _privateConstructorUsedError;
+
+  /// Serializes this Score to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Score
   /// with the given fields replaced by the non-null parameter values.
@@ -130,11 +137,14 @@ class __$$ScoreImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$ScoreImpl implements _Score {
   _$ScoreImpl(
       {required this.id, required this.team, required final List<int> points})
       : _points = points;
+
+  factory _$ScoreImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ScoreImplFromJson(json);
 
   @override
   final String id;
@@ -163,6 +173,7 @@ class _$ScoreImpl implements _Score {
             const DeepCollectionEquality().equals(other._points, _points));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, team, const DeepCollectionEquality().hash(_points));
@@ -174,6 +185,13 @@ class _$ScoreImpl implements _Score {
   @pragma('vm:prefer-inline')
   _$$ScoreImplCopyWith<_$ScoreImpl> get copyWith =>
       __$$ScoreImplCopyWithImpl<_$ScoreImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ScoreImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Score implements Score {
@@ -181,6 +199,8 @@ abstract class _Score implements Score {
       {required final String id,
       required final Team team,
       required final List<int> points}) = _$ScoreImpl;
+
+  factory _Score.fromJson(Map<String, dynamic> json) = _$ScoreImpl.fromJson;
 
   @override
   String get id;

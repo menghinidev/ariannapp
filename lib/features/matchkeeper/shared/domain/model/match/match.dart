@@ -1,8 +1,10 @@
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/game/game.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/score/score.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'match.freezed.dart';
+part 'match.g.dart';
 
 @freezed
 class ApplicationMatch with _$ApplicationMatch {
@@ -13,6 +15,15 @@ class ApplicationMatch with _$ApplicationMatch {
     required MatchStatus status,
     required DateTime lastUpdate,
   }) = _ApplicationMatch;
+
+  factory ApplicationMatch.fromJson(Map<String, dynamic> json) => _$ApplicationMatchFromJson(json);
+
+  factory ApplicationMatch.fromFirestore(QueryDocumentSnapshot snapshot) {
+    final id = snapshot.id;
+    final json = snapshot.data()! as Map<String, dynamic>;
+    json['id'] = id;
+    return ApplicationMatch.fromJson(json);
+  }
 }
 
 enum MatchStatus { completed, ongoing }
@@ -34,6 +45,18 @@ extension MatchStatusFeature on ApplicationMatch {
   ApplicationMatch get sortedScores {
     final strategy = game.strategy;
     return copyWith(scores: strategy.sortedScores(scores));
+  }
+
+  Map<String, dynamic> toFirestore() {
+    final json = toJson()
+      ..remove('id')
+      ..remove('game')
+      ..remove('scores');
+    final formattedGame = game.toFirestore();
+    final formattedScores = scores.map((e) => e.toFirestore()).toList();
+    json['game'] = formattedGame;
+    json['scores'] = formattedScores;
+    return json;
   }
 }
 

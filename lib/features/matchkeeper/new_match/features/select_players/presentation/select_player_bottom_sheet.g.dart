@@ -7,7 +7,7 @@ part of 'select_player_bottom_sheet.dart';
 // **************************************************************************
 
 String _$availablePlayerModesHash() =>
-    r'2f2c9f9394a77733e51a2746f70a3b7dd9667c9d';
+    r'5d0f1d07e9fda62e0bd4f4f9da926dc0cb1489d2';
 
 /// See also [_availablePlayerModes].
 @ProviderFor(_availablePlayerModes)

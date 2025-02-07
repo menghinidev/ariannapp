@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+ApplicationMatch _$ApplicationMatchFromJson(Map<String, dynamic> json) {
+  return _ApplicationMatch.fromJson(json);
+}
+
 /// @nodoc
 mixin _$ApplicationMatch {
   String get id => throw _privateConstructorUsedError;
@@ -21,6 +25,9 @@ mixin _$ApplicationMatch {
   List<Score> get scores => throw _privateConstructorUsedError;
   MatchStatus get status => throw _privateConstructorUsedError;
   DateTime get lastUpdate => throw _privateConstructorUsedError;
+
+  /// Serializes this ApplicationMatch to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of ApplicationMatch
   /// with the given fields replaced by the non-null parameter values.
@@ -165,7 +172,7 @@ class __$$ApplicationMatchImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$ApplicationMatchImpl implements _ApplicationMatch {
   _$ApplicationMatchImpl(
       {required this.id,
@@ -174,6 +181,9 @@ class _$ApplicationMatchImpl implements _ApplicationMatch {
       required this.status,
       required this.lastUpdate})
       : _scores = scores;
+
+  factory _$ApplicationMatchImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ApplicationMatchImplFromJson(json);
 
   @override
   final String id;
@@ -210,6 +220,7 @@ class _$ApplicationMatchImpl implements _ApplicationMatch {
                 other.lastUpdate == lastUpdate));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, game,
       const DeepCollectionEquality().hash(_scores), status, lastUpdate);
@@ -222,6 +233,13 @@ class _$ApplicationMatchImpl implements _ApplicationMatch {
   _$$ApplicationMatchImplCopyWith<_$ApplicationMatchImpl> get copyWith =>
       __$$ApplicationMatchImplCopyWithImpl<_$ApplicationMatchImpl>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ApplicationMatchImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _ApplicationMatch implements ApplicationMatch {
@@ -231,6 +249,9 @@ abstract class _ApplicationMatch implements ApplicationMatch {
       required final List<Score> scores,
       required final MatchStatus status,
       required final DateTime lastUpdate}) = _$ApplicationMatchImpl;
+
+  factory _ApplicationMatch.fromJson(Map<String, dynamic> json) =
+      _$ApplicationMatchImpl.fromJson;
 
   @override
   String get id;

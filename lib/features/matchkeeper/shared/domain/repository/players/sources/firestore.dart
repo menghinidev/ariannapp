@@ -32,4 +32,17 @@ class FirestorePlayerRepository extends IPlayersRepository {
       return Responses.failure([ApplicationError.generic()]);
     }
   }
+
+  @override
+  Future<ApplicationResponse<Player>> getPlayer(String id) async {
+    try {
+      final snapshot = await instance.collection(playersCollection).doc(id).get();
+      final json = snapshot.data()!;
+      json['id'] = snapshot.id;
+      final player = Player.fromJson(json);
+      return Responses.success(player);
+    } catch (e) {
+      return Responses.failure([ApplicationError.generic()]);
+    }
+  }
 }

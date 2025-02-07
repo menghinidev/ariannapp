@@ -6,7 +6,7 @@ part of 'new_match_state_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$canProceedStepperHash() => r'de966a206c349f09796ff6583c1c7ee8bfacf553';
+String _$canProceedStepperHash() => r'896cc54314cd5f596f0195def22c7d6f446351eb';
 
 /// See also [canProceedStepper].
 @ProviderFor(canProceedStepper)
@@ -39,7 +39,7 @@ final stepperStateProvider =
 
 typedef _$StepperState = AutoDisposeNotifier<int>;
 String _$newMatchControllerHash() =>
-    r'147f859101221762b481b1a593d29d2235899fb5';
+    r'4061c89afe1484cd41b2780bd34af38bc58677c6';
 
 /// See also [NewMatchController].
 @ProviderFor(NewMatchController)

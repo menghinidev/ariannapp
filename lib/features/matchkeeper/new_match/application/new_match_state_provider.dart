@@ -3,6 +3,7 @@ import 'package:ariannapp/features/matchkeeper/new_match/application/state/new_m
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/game/game.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/player/player.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/team/team.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'new_match_state_provider.g.dart';
@@ -28,7 +29,7 @@ class StepperState extends _$StepperState {
 }
 
 @riverpod
-bool canProceedStepper(CanProceedStepperRef ref) {
+bool canProceedStepper(Ref ref) {
   final match = ref.watch(newMatchControllerProvider);
   final step = ref.watch(stepperStateProvider);
   if (step == 0 && match.game != null) return true;
@@ -44,7 +45,7 @@ class NewMatchController extends _$NewMatchController {
 
   void addTeam(List<Player> players) {
     final teams = state.teams;
-    final team = Team(id: IDGenerator.generateId, players: players);
+    final team = Team(id: IDGenerator.generateId, players: players.map((e) => e.id).toList());
     state = state.copyWith(teams: [...teams, team]);
   }
 

@@ -8,9 +8,8 @@ part of 'team.dart';
 
 _$TeamImpl _$$TeamImplFromJson(Map<String, dynamic> json) => _$TeamImpl(
       id: json['id'] as String,
-      players: (json['players'] as List<dynamic>)
-          .map((e) => Player.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      players:
+          (json['players'] as List<dynamic>).map((e) => e as String).toList(),
       name: json['name'] as String?,
     );
 
@@ -18,5 +17,5 @@ Map<String, dynamic> _$$TeamImplToJson(_$TeamImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'players': instance.players,
-      'name': instance.name,
+      if (instance.name case final value?) 'name': value,
     };
