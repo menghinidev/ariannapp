@@ -10,53 +10,61 @@ class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(applicationThemeModeProvider);
-    final applicationTheme = ref.watch(applicationThemeProvider);
+    final scheme = ref.watch(applicationThemeProvider);
     return BaseAppScreen(
       title: 'Impostazioni',
-      child: SingleChildScrollView(
-        padding: DistanceProvider.screenInsets.padding,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            DropdownMenu<ThemeMode>(
-              label: const Text('Tema'),
-              initialSelection: theme,
-              onSelected: (value) =>
-                  value == null ? null : ref.read(applicationThemeModeProvider.notifier).themeMode = value,
-              dropdownMenuEntries: [
-                for (final mode in ThemeMode.values) DropdownMenuEntry(value: mode, label: mode.label),
-              ],
-            ),
-            DistanceProvider.mediumDistance.spacer(),
-            DropdownMenu<FlexScheme>(
-              label: const Text('Colori'),
-              initialSelection: applicationTheme.scheme,
-              onSelected: (value) =>
-                  value == null ? null : ref.read(applicationThemeProvider.notifier).changeTheme(value),
-              dropdownMenuEntries: [
-                for (final mode in FlexScheme.values)
-                  DropdownMenuEntry(
-                    value: mode,
-                    label: mode.name,
-                    labelWidget: Row(
-                      children: [
-                        SizedBox.square(
-                          dimension: 24,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: FlexThemeData.light(scheme: mode).primaryColor,
-                              shape: BoxShape.circle,
+      child: LoadingSwitcher(
+        value: theme.valueOrNull,
+        builder: (context, themeMode) => LoadingSwitcher(
+          value: scheme.valueOrNull,
+          builder: (context, themeBuilder) => SingleChildScrollView(
+            padding: DistanceProvider.screenInsets.padding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                DropdownMenu<ThemeMode>(
+                  label: const Text('Tema'),
+                  initialSelection: themeMode,
+                  onSelected: (value) {
+                    if (value == null) return;
+                    ref.read(applicationThemeModeProvider.notifier).changeTheme(value);
+                  },
+                  dropdownMenuEntries: [
+                    for (final mode in ThemeMode.values) DropdownMenuEntry(value: mode, label: mode.label),
+                  ],
+                ),
+                DistanceProvider.mediumDistance.spacer(),
+                DropdownMenu<FlexScheme>(
+                  label: const Text('Colori'),
+                  initialSelection: themeBuilder.scheme,
+                  onSelected: (value) =>
+                      value == null ? null : ref.read(applicationThemeProvider.notifier).changeTheme(value),
+                  dropdownMenuEntries: [
+                    for (final mode in FlexScheme.values)
+                      DropdownMenuEntry(
+                        value: mode,
+                        label: mode.name,
+                        labelWidget: Row(
+                          children: [
+                            SizedBox.square(
+                              dimension: 24,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  color: FlexThemeData.light(scheme: mode).primaryColor,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
                             ),
-                          ),
+                            DistanceProvider.mediumDistance.spacer(axis: Axis.horizontal),
+                            Text(mode.name),
+                          ],
                         ),
-                        DistanceProvider.mediumDistance.spacer(axis: Axis.horizontal),
-                        Text(mode.name),
-                      ],
-                    ),
-                  ),
+                      ),
+                  ],
+                ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

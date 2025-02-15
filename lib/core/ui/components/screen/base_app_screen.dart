@@ -13,10 +13,10 @@ class BaseAppScreen extends StatelessWidget {
 
   const BaseAppScreen.sliver({
     required this.child,
-    required this.title,
     this.fab,
     super.key,
-  })  : isSliver = true,
+  })  : title = '',
+        isSliver = true,
         actions = null,
         bottomAppBarWidget = null;
 

@@ -1,3 +1,4 @@
+import 'package:ariannapp/core/infrastructure/utils/local_storage/local_storage_service.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -7,23 +8,33 @@ part 'theme_builder.g.dart';
 @riverpod
 class ApplicationThemeMode extends _$ApplicationThemeMode {
   @override
-  ThemeMode build() => ThemeMode.system;
+  FutureOr<ThemeMode> build() async {
+    final localStorage = await ref.read(localStorageServiceProvider.future);
+    final themeMode = await localStorage.themeMode;
+    return themeMode ?? ThemeMode.system;
+  }
 
-  set themeMode(ThemeMode value) => state = value;
-
-  ThemeMode get themeMode => state;
+  Future<void> changeTheme(ThemeMode value) async {
+    state = AsyncData(value);
+    final localStorage = await ref.read(localStorageServiceProvider.future);
+    await localStorage.saveThemeMode(value);
+  }
 }
 
 @riverpod
 class ApplicationTheme extends _$ApplicationTheme {
   @override
-  ThemeBuilder build() {
-    return ThemeBuilder(scheme: FlexScheme.pinkM3);
+  FutureOr<ThemeBuilder> build() async {
+    final localStorage = await ref.read(localStorageServiceProvider.future);
+    final scheme = await localStorage.flexScheme;
+    return ThemeBuilder(scheme: scheme ?? FlexScheme.pinkM3);
   }
 
-  void changeTheme(FlexScheme scheme) {
+  Future<void> changeTheme(FlexScheme scheme) async {
     final newBuilder = ThemeBuilder(scheme: scheme);
-    state = newBuilder;
+    state = AsyncData(newBuilder);
+    final localStorage = await ref.read(localStorageServiceProvider.future);
+    await localStorage.saveFlexScheme(scheme);
   }
 }
 

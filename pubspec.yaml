@@ -28,6 +28,7 @@ dependencies:
   firebase_app_check: ^0.3.2+2
   firebase_auth: ^5.4.2
   logger: ^2.5.0
+  shared_preferences: ^2.5.2
   
 
 dev_dependencies:

@@ -12,14 +12,14 @@ class AriannApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRouterProvider);
-    final themeBuilder = ref.watch(applicationThemeProvider);
-    final themeMode = ref.watch(applicationThemeModeProvider);
+    final themeBuilder = ref.watch(applicationThemeProvider.select((e) => e.valueOrNull));
+    final themeMode = ref.watch(applicationThemeModeProvider.select((e) => e.valueOrNull));
     return MaterialApp.router(
       title: 'AriannApp',
       routerConfig: router,
-      darkTheme: themeBuilder.darkTheme,
+      darkTheme: themeBuilder?.darkTheme,
       debugShowCheckedModeBanner: false,
-      theme: themeBuilder.lightTheme,
+      theme: themeBuilder?.lightTheme,
       themeMode: themeMode,
       supportedLocales: const [Locale('it')],
       localizationsDelegates: const [
