@@ -11,6 +11,7 @@ class GroceriesCheckListItem with _$GroceriesCheckListItem {
     required String id,
     required String name,
     required DateTime createdAt,
+    required int index,
     required GroceryCategory category,
   }) = _GroceriesCheckListItem;
 

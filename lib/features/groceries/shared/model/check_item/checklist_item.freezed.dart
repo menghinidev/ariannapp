@@ -24,6 +24,7 @@ mixin _$GroceriesCheckListItem {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
+  int get index => throw _privateConstructorUsedError;
   GroceryCategory get category => throw _privateConstructorUsedError;
 
   /// Serializes this GroceriesCheckListItem to a JSON map.
@@ -43,7 +44,11 @@ abstract class $GroceriesCheckListItemCopyWith<$Res> {
       _$GroceriesCheckListItemCopyWithImpl<$Res, GroceriesCheckListItem>;
   @useResult
   $Res call(
-      {String id, String name, DateTime createdAt, GroceryCategory category});
+      {String id,
+      String name,
+      DateTime createdAt,
+      int index,
+      GroceryCategory category});
 }
 
 /// @nodoc
@@ -65,6 +70,7 @@ class _$GroceriesCheckListItemCopyWithImpl<$Res,
     Object? id = null,
     Object? name = null,
     Object? createdAt = null,
+    Object? index = null,
     Object? category = null,
   }) {
     return _then(_value.copyWith(
@@ -80,6 +86,10 @@ class _$GroceriesCheckListItemCopyWithImpl<$Res,
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -98,7 +108,11 @@ abstract class _$$GroceriesCheckListItemImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id, String name, DateTime createdAt, GroceryCategory category});
+      {String id,
+      String name,
+      DateTime createdAt,
+      int index,
+      GroceryCategory category});
 }
 
 /// @nodoc
@@ -119,6 +133,7 @@ class __$$GroceriesCheckListItemImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? createdAt = null,
+    Object? index = null,
     Object? category = null,
   }) {
     return _then(_$GroceriesCheckListItemImpl(
@@ -134,6 +149,10 @@ class __$$GroceriesCheckListItemImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -149,6 +168,7 @@ class _$GroceriesCheckListItemImpl implements _GroceriesCheckListItem {
       {required this.id,
       required this.name,
       required this.createdAt,
+      required this.index,
       required this.category});
 
   factory _$GroceriesCheckListItemImpl.fromJson(Map<String, dynamic> json) =>
@@ -161,11 +181,13 @@ class _$GroceriesCheckListItemImpl implements _GroceriesCheckListItem {
   @override
   final DateTime createdAt;
   @override
+  final int index;
+  @override
   final GroceryCategory category;
 
   @override
   String toString() {
-    return 'GroceriesCheckListItem(id: $id, name: $name, createdAt: $createdAt, category: $category)';
+    return 'GroceriesCheckListItem(id: $id, name: $name, createdAt: $createdAt, index: $index, category: $category)';
   }
 
   @override
@@ -177,13 +199,15 @@ class _$GroceriesCheckListItemImpl implements _GroceriesCheckListItem {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
+            (identical(other.index, index) || other.index == index) &&
             (identical(other.category, category) ||
                 other.category == category));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, createdAt, category);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, createdAt, index, category);
 
   /// Create a copy of GroceriesCheckListItem
   /// with the given fields replaced by the non-null parameter values.
@@ -207,6 +231,7 @@ abstract class _GroceriesCheckListItem implements GroceriesCheckListItem {
       {required final String id,
       required final String name,
       required final DateTime createdAt,
+      required final int index,
       required final GroceryCategory category}) = _$GroceriesCheckListItemImpl;
 
   factory _GroceriesCheckListItem.fromJson(Map<String, dynamic> json) =
@@ -218,6 +243,8 @@ abstract class _GroceriesCheckListItem implements GroceriesCheckListItem {
   String get name;
   @override
   DateTime get createdAt;
+  @override
+  int get index;
   @override
   GroceryCategory get category;
 

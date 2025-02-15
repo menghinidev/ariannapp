@@ -17,15 +17,17 @@ class FirestoreGroceriesRepository extends IGroceriesRepository with RepositoryS
   Future<EmptyResponse> addGroceryItem({
     required String name,
     required GroceryCategory category,
+    required int index,
   }) {
     final item = GroceriesCheckListItem(
       id: IDGenerator.generateId,
       name: name,
       category: category,
+      index: index,
       createdAt: DateTime.now(),
     );
     return safeInvoke(
-      request: () => instance.collection(groceriesCollection).doc(item.id).set(item.toFirestore()),
+      request: () => instance.collection(groceriesCollection).add(item.toFirestore()),
       payloadMapper: (_) {},
     );
   }
@@ -42,7 +44,7 @@ class FirestoreGroceriesRepository extends IGroceriesRepository with RepositoryS
       lastUpdate: DateTime.now(),
     );
     return safeInvoke(
-      request: () => instance.collection(shelfCollection).doc(item.id).set(item.toFirestore()),
+      request: () => instance.collection(shelfCollection).add(item.toFirestore()),
       payloadMapper: (_) {},
     );
   }
@@ -50,7 +52,7 @@ class FirestoreGroceriesRepository extends IGroceriesRepository with RepositoryS
   @override
   Future<ApplicationResponse<List<GroceriesCheckListItem>>> getGroceriesList() {
     return safeInvoke<List<GroceriesCheckListItem>, QuerySnapshot<Map<String, dynamic>>>(
-      request: () => instance.collection(groceriesCollection).get(),
+      request: () => instance.collection(groceriesCollection).orderBy('index').get(),
       payloadMapper: (response) => response.docs.map(GroceriesCheckListItem.fromFirestore).toList(),
     );
   }
@@ -67,6 +69,22 @@ class FirestoreGroceriesRepository extends IGroceriesRepository with RepositoryS
   Future<EmptyResponse> removeGroceryItem({required GroceriesCheckListItem item}) {
     return safeInvoke(
       request: () => instance.collection(groceriesCollection).doc(item.id).delete(),
+      payloadMapper: (_) {},
+    );
+  }
+
+  @override
+  Future<EmptyResponse> reorder({
+    required List<GroceriesCheckListItem> items,
+  }) {
+    final batch = instance.batch();
+    for (var i = 0; i < items.length; i++) {
+      final item = items[i];
+      final ref = instance.collection(groceriesCollection).doc(item.id);
+      batch.update(ref, {'index': i});
+    }
+    return safeInvoke(
+      request: batch.commit,
       payloadMapper: (_) {},
     );
   }

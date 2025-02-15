@@ -1,5 +1,6 @@
 import 'package:ariannapp/features/groceries/checklist/presentation/bloc/state/groceries_checklist_state.dart';
 import 'package:ariannapp/features/groceries/checklist/usecase/get_checklist/get_checklist_use_case.dart';
+import 'package:ariannapp/features/groceries/checklist/usecase/update_order/update_checklist_order_use_case.dart';
 import 'package:ariannapp/features/groceries/shared/model/check_item/checklist_item.dart';
 import 'package:ariannapp/features/groceries/shared/model/grocery_category.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -33,12 +34,12 @@ class GroceriesCheckListOrderManager extends _$GroceriesCheckListOrderManager {
   FutureOr<List<GroceriesCheckListItem>> build() async {
     final filters = ref.watch(groceriesCheckListFiltersProvider);
     final categories = filters.categories;
-    final groceries = await ref.watch(getGroceriesChecklistProvider.future);
+    final groceries = await ref.watch(groceriesChecklistProvider.future);
     if (categories.isEmpty) return groceries;
     return groceries.where((e) => categories.contains(e.category)).toList();
   }
 
-  void reorder(int oldIndex, int newIndex) {
+  Future<void> reorder(int oldIndex, int newIndex) async {
     final loadedState = state.valueOrNull;
     if (loadedState == null) return;
     final target = loadedState[oldIndex];
@@ -46,5 +47,6 @@ class GroceriesCheckListOrderManager extends _$GroceriesCheckListOrderManager {
       ..removeAt(oldIndex)
       ..insert(newIndex, target);
     state = AsyncData(newValues);
+    await ref.read(updateCheckListOrderUseCaseProvider).call(newValues);
   }
 }

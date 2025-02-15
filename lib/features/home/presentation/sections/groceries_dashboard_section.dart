@@ -15,7 +15,7 @@ class GroceriesDashboardSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final groceries = ref.watch(groceriesCheckListProvider.select((data) => data.valueOrNull?.take(3).toList()));
+    final groceries = ref.watch(groceriesChecklistProvider.select((data) => data.valueOrNull?.take(3).toList()));
     return BaseDashboardSection(
       values: groceries,
       itemBuilder: (context, data) => _GroceriesListTile(item: data),

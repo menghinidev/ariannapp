@@ -7,12 +7,12 @@ part of 'move_grocery_item_use_case.dart';
 // **************************************************************************
 
 String _$moveGroceryItemUseCaseHash() =>
-    r'434444209a088dbb7bd8a503093d8df22e0509c1';
+    r'b25ae8eff40d2ee80d7811a15c8e80cd1a167368';
 
 /// See also [moveGroceryItemUseCase].
 @ProviderFor(moveGroceryItemUseCase)
 final moveGroceryItemUseCaseProvider =
-    AutoDisposeProvider<MoveGroceryItemUseCase>.internal(
+    AutoDisposeFutureProvider<MoveGroceryItemUseCase>.internal(
   moveGroceryItemUseCase,
   name: r'moveGroceryItemUseCaseProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -25,6 +25,6 @@ final moveGroceryItemUseCaseProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef MoveGroceryItemUseCaseRef
-    = AutoDisposeProviderRef<MoveGroceryItemUseCase>;
+    = AutoDisposeFutureProviderRef<MoveGroceryItemUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

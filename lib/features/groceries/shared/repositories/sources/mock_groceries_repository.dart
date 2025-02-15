@@ -73,11 +73,13 @@ class MockGroceriesRepository extends IGroceriesRepository {
   Future<EmptyResponse> addGroceryItem({
     required String name,
     required GroceryCategory category,
+    required int index,
   }) async {
     final newItem = GroceriesCheckListItem(
       id: IDGenerator.generateId,
       name: name,
       category: category,
+      index: index,
       createdAt: DateTime.now(),
     );
     groceries.add(newItem);
@@ -100,5 +102,11 @@ class MockGroceriesRepository extends IGroceriesRepository {
     );
     shelf.add(newItem);
     return Responses.success<void, ApplicationError>(null);
+  }
+
+  @override
+  Future<EmptyResponse> reorder({required List<GroceriesCheckListItem> items}) {
+    // TODO: implement reorder
+    throw UnimplementedError();
   }
 }

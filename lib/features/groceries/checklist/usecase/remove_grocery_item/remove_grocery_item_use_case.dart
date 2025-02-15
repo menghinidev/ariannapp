@@ -24,7 +24,7 @@ RemoveGroceryItemUseCase removeGroceryItemUseCase(Ref ref) {
       ),
       InvalidateProviderOnSuccessHandler(
         ref: ref,
-        provider: groceriesCheckListProvider,
+        provider: groceriesChecklistProvider,
       ),
     ],
   );

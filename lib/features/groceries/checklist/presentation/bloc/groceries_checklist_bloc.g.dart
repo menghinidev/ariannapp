@@ -25,7 +25,7 @@ final groceriesCheckListFiltersProvider = AutoDisposeNotifierProvider<
 typedef _$GroceriesCheckListFilters
     = AutoDisposeNotifier<GroceriesCheckListState>;
 String _$groceriesCheckListOrderManagerHash() =>
-    r'25731c3efbe550939e3fe35a9a1402d67e7b6ba5';
+    r'e8066413df84f9588b48450417c8717e14902ab6';
 
 /// See also [GroceriesCheckListOrderManager].
 @ProviderFor(GroceriesCheckListOrderManager)

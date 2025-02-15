@@ -20,8 +20,11 @@ class ShelfListItem extends ConsumerWidget {
       subtitle: Text(item.lastUpdate.toDayMonthDate),
       trailing: IconButton(
         icon: const Icon(Icons.add_circle_outline),
-        onPressed: () =>
-            ref.read(moveGroceryItemUseCaseProvider).call(MoveToGroceryListCommand(item: item, context: context)),
+        onPressed: () async {
+          final command = MoveToGroceryListCommand(item: item, context: context);
+          final useCase = await ref.read(moveGroceryItemUseCaseProvider.future);
+          await useCase.call(command);
+        },
       ),
     );
   }

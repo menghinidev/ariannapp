@@ -12,6 +12,7 @@ _$GroceriesCheckListItemImpl _$$GroceriesCheckListItemImplFromJson(
       id: json['id'] as String,
       name: json['name'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
+      index: (json['index'] as num).toInt(),
       category: $enumDecode(_$GroceryCategoryEnumMap, json['category']),
     );
 
@@ -21,6 +22,7 @@ Map<String, dynamic> _$$GroceriesCheckListItemImplToJson(
       'id': instance.id,
       'name': instance.name,
       'createdAt': instance.createdAt.toIso8601String(),
+      'index': instance.index,
       'category': _$GroceryCategoryEnumMap[instance.category]!,
     };
 

@@ -14,8 +14,12 @@ abstract class IGroceriesRepository {
   Future<EmptyResponse> addGroceryItem({
     required String name,
     required GroceryCategory category,
+    required int index,
   });
   Future<EmptyResponse> removeGroceryItem({
     required GroceriesCheckListItem item,
+  });
+  Future<EmptyResponse> reorder({
+    required List<GroceriesCheckListItem> items,
   });
 }

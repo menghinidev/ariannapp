@@ -14,12 +14,12 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return BaseAppScreen.sliver(
-      title: 'AriannApp',
+      title: 'ALARA',
       child: CustomScrollView(
         physics: const ScrollPhysics(),
         slivers: [
           SliverAppBar.large(
-            title: const Text('AriannApp'),
+            title: const Text('ALARA'),
             shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
             actions: [
               IconButton.filled(
