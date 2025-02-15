@@ -45,5 +45,5 @@ void main() async {
     appleProvider: kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
   );
   await login();
-  runApp(const ProviderScope(child: ALARA()));
+  runApp(const ProviderScope(child: AriannApp()));
 }
