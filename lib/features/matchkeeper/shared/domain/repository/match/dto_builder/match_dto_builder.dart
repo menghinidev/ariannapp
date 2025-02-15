@@ -9,13 +9,14 @@ mixin MatchDtoBuilder {
   ApplicationMatch buildNewMatch(MatchBuilder matchBuilder) {
     final game = matchBuilder.game!;
     final gameStrategy = game.strategy;
+    final doubleLife = matchBuilder.doubleLife ?? gameStrategy.doubleLife;
     return _buildMatch(
       game: game,
       strategy: gameStrategy.copyWith(
-        doubleLife: matchBuilder.doubleLife ?? gameStrategy.doubleLife,
+        doubleLife: doubleLife,
         threshold: matchBuilder.winningPoints ?? gameStrategy.threshold,
       ),
-      scores: matchBuilder.teams.newScores,
+      scores: matchBuilder.teams.newScores(hasDoubleLife: doubleLife),
     );
   }
 
@@ -46,10 +47,11 @@ mixin MatchDtoBuilder {
 }
 
 extension on List<Team> {
-  List<Score> get newScores {
+  List<Score> newScores({required bool hasDoubleLife}) {
     return map(
       (e) => Score(
         id: IDGenerator.generateId,
+        lifeRemaining: hasDoubleLife ? 2 : 1,
         team: e,
         points: [],
       ),

@@ -47,13 +47,12 @@ class MockMatchRepository extends IMatchRepository {
   }) async {
     final match = _matches.firstWhere((match) => match.id == matchId);
     final matchIndex = _matches.indexOf(match);
-    var newMatch = match
+    final newMatch = match
         .copyWith(
           scores: scores,
           lastUpdate: DateTime.now(),
         )
-        .sortedScores;
-    if (newMatch.isOver) newMatch = newMatch.copyWith(status: MatchStatus.completed);
+        .computeNewScore();
     _matches
       ..remove(match)
       ..insert(matchIndex, newMatch);
@@ -88,6 +87,7 @@ extension on Team {
   Score get newScore {
     return Score(
       id: IDGenerator.generateId,
+      lifeRemaining: 1,
       team: this,
       points: <int>[0],
     );

@@ -38,17 +38,40 @@ class ApplicationMatch with _$ApplicationMatch {
 enum MatchStatus { completed, ongoing }
 
 extension MatchStatusFeature on ApplicationMatch {
-  bool get isOver {
+  bool get _isOver {
     if (status == MatchStatus.completed) return true;
-    final points = scores.map(game.strategy.totalPoints).toList()
+    final standings = scores.map(game.strategy.totalPoints).toList()
       ..sort((a, b) => b.compareTo(a))
       ..toList();
+    final firstPlacePoints = standings.first;
     final strategy = game.strategy;
     if (strategy.goingDownTo) {
-      return points[0] <= strategy.threshold;
+      return firstPlacePoints <= strategy.threshold;
     } else {
-      return points[0] >= strategy.threshold;
+      return firstPlacePoints >= strategy.threshold;
     }
+  }
+
+  ApplicationMatch computeNewScore() {
+    if (_isOver) {
+      final standings = game.strategy.sortedScores(scores);
+      final exceedingScore = standings.last;
+      final lowestScore = standings.first;
+      var newExceedingScore = exceedingScore.copyWith(lifeRemaining: exceedingScore.lifeRemaining - 1);
+      if (newExceedingScore.lifeRemaining == 0) {
+        return copyWith(status: MatchStatus.completed);
+      }
+      newExceedingScore = newExceedingScore.copyWith(
+        points: [...lowestScore.points]
+          ..removeLast()
+          ..add(lowestScore.points.last + 1),
+      );
+      final newScores = [...scores]
+        ..remove(exceedingScore)
+        ..add(newExceedingScore);
+      return copyWith(scores: newScores).sortedScores;
+    }
+    return sortedScores;
   }
 
   ApplicationMatch get sortedScores {

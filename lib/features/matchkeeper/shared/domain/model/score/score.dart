@@ -10,6 +10,7 @@ class Score with _$Score {
   factory Score({
     required String id,
     required Team team,
+    required int lifeRemaining,
     required List<int> points,
   }) = _Score;
 

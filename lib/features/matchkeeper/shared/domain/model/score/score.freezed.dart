@@ -22,6 +22,7 @@ Score _$ScoreFromJson(Map<String, dynamic> json) {
 mixin _$Score {
   String get id => throw _privateConstructorUsedError;
   Team get team => throw _privateConstructorUsedError;
+  int get lifeRemaining => throw _privateConstructorUsedError;
   List<int> get points => throw _privateConstructorUsedError;
 
   /// Serializes this Score to a JSON map.
@@ -38,7 +39,7 @@ abstract class $ScoreCopyWith<$Res> {
   factory $ScoreCopyWith(Score value, $Res Function(Score) then) =
       _$ScoreCopyWithImpl<$Res, Score>;
   @useResult
-  $Res call({String id, Team team, List<int> points});
+  $Res call({String id, Team team, int lifeRemaining, List<int> points});
 
   $TeamCopyWith<$Res> get team;
 }
@@ -60,6 +61,7 @@ class _$ScoreCopyWithImpl<$Res, $Val extends Score>
   $Res call({
     Object? id = null,
     Object? team = null,
+    Object? lifeRemaining = null,
     Object? points = null,
   }) {
     return _then(_value.copyWith(
@@ -71,6 +73,10 @@ class _$ScoreCopyWithImpl<$Res, $Val extends Score>
           ? _value.team
           : team // ignore: cast_nullable_to_non_nullable
               as Team,
+      lifeRemaining: null == lifeRemaining
+          ? _value.lifeRemaining
+          : lifeRemaining // ignore: cast_nullable_to_non_nullable
+              as int,
       points: null == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
@@ -96,7 +102,7 @@ abstract class _$$ScoreImplCopyWith<$Res> implements $ScoreCopyWith<$Res> {
       __$$ScoreImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, Team team, List<int> points});
+  $Res call({String id, Team team, int lifeRemaining, List<int> points});
 
   @override
   $TeamCopyWith<$Res> get team;
@@ -117,6 +123,7 @@ class __$$ScoreImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? team = null,
+    Object? lifeRemaining = null,
     Object? points = null,
   }) {
     return _then(_$ScoreImpl(
@@ -128,6 +135,10 @@ class __$$ScoreImplCopyWithImpl<$Res>
           ? _value.team
           : team // ignore: cast_nullable_to_non_nullable
               as Team,
+      lifeRemaining: null == lifeRemaining
+          ? _value.lifeRemaining
+          : lifeRemaining // ignore: cast_nullable_to_non_nullable
+              as int,
       points: null == points
           ? _value._points
           : points // ignore: cast_nullable_to_non_nullable
@@ -141,7 +152,10 @@ class __$$ScoreImplCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$ScoreImpl implements _Score {
   _$ScoreImpl(
-      {required this.id, required this.team, required final List<int> points})
+      {required this.id,
+      required this.team,
+      required this.lifeRemaining,
+      required final List<int> points})
       : _points = points;
 
   factory _$ScoreImpl.fromJson(Map<String, dynamic> json) =>
@@ -151,6 +165,8 @@ class _$ScoreImpl implements _Score {
   final String id;
   @override
   final Team team;
+  @override
+  final int lifeRemaining;
   final List<int> _points;
   @override
   List<int> get points {
@@ -161,7 +177,7 @@ class _$ScoreImpl implements _Score {
 
   @override
   String toString() {
-    return 'Score(id: $id, team: $team, points: $points)';
+    return 'Score(id: $id, team: $team, lifeRemaining: $lifeRemaining, points: $points)';
   }
 
   @override
@@ -171,13 +187,15 @@ class _$ScoreImpl implements _Score {
             other is _$ScoreImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.team, team) || other.team == team) &&
+            (identical(other.lifeRemaining, lifeRemaining) ||
+                other.lifeRemaining == lifeRemaining) &&
             const DeepCollectionEquality().equals(other._points, _points));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, team, const DeepCollectionEquality().hash(_points));
+  int get hashCode => Object.hash(runtimeType, id, team, lifeRemaining,
+      const DeepCollectionEquality().hash(_points));
 
   /// Create a copy of Score
   /// with the given fields replaced by the non-null parameter values.
@@ -199,6 +217,7 @@ abstract class _Score implements Score {
   factory _Score(
       {required final String id,
       required final Team team,
+      required final int lifeRemaining,
       required final List<int> points}) = _$ScoreImpl;
 
   factory _Score.fromJson(Map<String, dynamic> json) = _$ScoreImpl.fromJson;
@@ -207,6 +226,8 @@ abstract class _Score implements Score {
   String get id;
   @override
   Team get team;
+  @override
+  int get lifeRemaining;
   @override
   List<int> get points;
 

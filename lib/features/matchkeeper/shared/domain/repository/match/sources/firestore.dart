@@ -57,8 +57,7 @@ class FirestoreMatchRepository extends IMatchRepository with RepositorySafeInvok
     );
     final match = matchResponse.payload;
     if (matchResponse.isError || match == null) return Responses.failure([ApplicationError.generic()]);
-    var newMatch = match.copyWith(scores: scores);
-    if (newMatch.isOver) newMatch = newMatch.copyWith(status: MatchStatus.completed);
+    final newMatch = match.copyWith(scores: scores).computeNewScore();
     return safeInvoke(
       request: () => document.update(newMatch.toFirestore()),
       payloadMapper: (_) {},
