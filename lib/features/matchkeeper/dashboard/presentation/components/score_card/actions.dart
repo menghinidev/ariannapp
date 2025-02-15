@@ -9,18 +9,21 @@ class _ScorePointsSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lastScore = score.points.lastOrNull;
+    final scores = [...score.points]..remove(lastScore);
     return Wrap(
       spacing: DistanceProvider.smallDistance,
       children: [
-        for (final point in score.points.sublist(0, score.points.length - 1))
+        for (final point in scores)
           Text(
             '$point',
             style: context.textTheme.bodyLarge?.copyWith(decoration: TextDecoration.lineThrough),
           ),
-        Text(
-          '${score.points.last}',
-          style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
-        ),
+        if (lastScore != null)
+          Text(
+            lastScore.toString(),
+            style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+          ),
       ],
     );
   }

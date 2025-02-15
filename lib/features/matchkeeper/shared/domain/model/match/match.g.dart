@@ -22,8 +22,8 @@ Map<String, dynamic> _$$ApplicationMatchImplToJson(
         _$ApplicationMatchImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'game': instance.game,
-      'scores': instance.scores,
+      'game': instance.game.toJson(),
+      'scores': instance.scores.map((e) => e.toJson()).toList(),
       'status': _$MatchStatusEnumMap[instance.status]!,
       'lastUpdate': instance.lastUpdate.toIso8601String(),
     };

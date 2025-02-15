@@ -17,7 +17,7 @@ Map<String, dynamic> _$$GameImplToJson(_$GameImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'strategy': instance.strategy,
+      'strategy': instance.strategy.toJson(),
     };
 
 _$WinningStrategyImpl _$$WinningStrategyImplFromJson(

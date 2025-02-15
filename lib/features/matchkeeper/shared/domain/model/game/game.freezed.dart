@@ -136,7 +136,8 @@ class __$$GameImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$GameImpl implements _Game {
   const _$GameImpl(
       {required this.id, required this.name, required this.strategy});

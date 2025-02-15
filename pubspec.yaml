@@ -27,6 +27,7 @@ dependencies:
   cloud_firestore: ^5.6.3
   firebase_app_check: ^0.3.2+2
   firebase_auth: ^5.4.2
+  logger: ^2.5.0
   
 
 dev_dependencies:

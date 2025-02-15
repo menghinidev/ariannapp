@@ -19,6 +19,13 @@ class Player with _$Player {
     json['id'] = id;
     return Player.fromJson(json);
   }
+
+  factory Player.fromFirestoreDoc(DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    final json = snapshot.data()!;
+    json['id'] = snapshot.id;
+    final player = Player.fromJson(json);
+    return player;
+  }
 }
 
 extension PlayerFeatures on Player {

@@ -137,7 +137,8 @@ class __$$ScoreImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$ScoreImpl implements _Score {
   _$ScoreImpl(
       {required this.id, required this.team, required final List<int> points})

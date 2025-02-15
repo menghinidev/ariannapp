@@ -6,6 +6,7 @@ part 'game.g.dart';
 
 @freezed
 class Game with _$Game {
+  @JsonSerializable(explicitToJson: true)
   const factory Game({
     required String id,
     required String name,

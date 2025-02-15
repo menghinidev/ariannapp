@@ -172,7 +172,8 @@ class __$$ApplicationMatchImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$ApplicationMatchImpl implements _ApplicationMatch {
   _$ApplicationMatchImpl(
       {required this.id,

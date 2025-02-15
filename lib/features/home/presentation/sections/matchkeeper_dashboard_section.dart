@@ -43,7 +43,7 @@ class _MatchListTile extends ConsumerWidget {
         title: Text(match.game.name),
         subtitle: Text(match.lastUpdate.toNiceDate),
         trailing: Text(
-          match.sortedScores.scores.map((e) => e.points.reduce((a, b) => a + b)).join(' - '),
+          match.sortedScores.formattedScore,
           style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
       ),

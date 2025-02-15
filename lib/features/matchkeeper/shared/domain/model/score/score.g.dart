@@ -17,6 +17,6 @@ _$ScoreImpl _$$ScoreImplFromJson(Map<String, dynamic> json) => _$ScoreImpl(
 Map<String, dynamic> _$$ScoreImplToJson(_$ScoreImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'team': instance.team,
+      'team': instance.team.toJson(),
       'points': instance.points,
     };

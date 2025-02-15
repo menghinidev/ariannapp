@@ -8,6 +8,7 @@ part 'match.g.dart';
 
 @freezed
 class ApplicationMatch with _$ApplicationMatch {
+  @JsonSerializable(explicitToJson: true)
   factory ApplicationMatch({
     required String id,
     required Game game,
@@ -21,6 +22,14 @@ class ApplicationMatch with _$ApplicationMatch {
   factory ApplicationMatch.fromFirestore(QueryDocumentSnapshot snapshot) {
     final id = snapshot.id;
     final json = snapshot.data()! as Map<String, dynamic>;
+    json['id'] = id;
+
+    return ApplicationMatch.fromJson(json);
+  }
+
+  factory ApplicationMatch.fromFirestoreDoc(DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    final id = snapshot.id;
+    final json = snapshot.data()!;
     json['id'] = id;
     return ApplicationMatch.fromJson(json);
   }
@@ -48,15 +57,21 @@ extension MatchStatusFeature on ApplicationMatch {
   }
 
   Map<String, dynamic> toFirestore() {
-    final json = toJson()
-      ..remove('id')
-      ..remove('game')
-      ..remove('scores');
-    final formattedGame = game.toFirestore();
-    final formattedScores = scores.map((e) => e.toFirestore()).toList();
-    json['game'] = formattedGame;
-    json['scores'] = formattedScores;
+    final json = toJson()..remove('id');
     return json;
+  }
+
+  String get formattedScore {
+    return scores.map((e) {
+      if (e.points.isEmpty) return '0';
+      return e.points.reduce((a, b) => a + b).toString();
+    }).join(' - ');
+  }
+
+  int totalPoints(Score score) {
+    final strategy = game.strategy;
+    if (score.points.isEmpty) return 0;
+    return strategy.totalPoints(score);
   }
 }
 
@@ -75,6 +90,7 @@ extension on WinningStrategy {
   }
 
   int totalPoints(Score score) {
+    if (score.points.isEmpty) return 0;
     final total = score.points.reduce((a, b) => a + b);
     if (goingDownTo) {
       return threshold - total;

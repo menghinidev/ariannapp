@@ -35,7 +35,7 @@ class _ScoreCardHeader extends ConsumerWidget {
             ),
           ),
           Text(
-            '${score.points.reduce((a, b) => a + b)}',
+            match.totalPoints(score).toString(),
             style: context.textTheme.headlineSmall,
           ),
         ],
