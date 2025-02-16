@@ -16,6 +16,7 @@ class HoroscopeSignIcon extends StatelessWidget {
       'assets/images/horoscope/${sign.name}_sign.svg',
       width: size,
       height: size,
+      placeholderBuilder: (context) => Center(child: Text(sign.name.substring(0, 2).toUpperCase())),
       colorFilter: ColorFilter.mode(
         Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white,
         BlendMode.srcIn,
