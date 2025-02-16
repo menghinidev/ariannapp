@@ -1,8 +1,8 @@
 import 'package:ariannapp/core/ui/components/components.dart';
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
-import 'package:ariannapp/features/horoscope/application/usecase/get_horoscope_use_case.dart';
-import 'package:ariannapp/features/horoscope/presentation/bloc/my_astrology_state.dart';
-import 'package:ariannapp/features/horoscope/presentation/sections/daily_horoscope_section.dart';
+import 'package:ariannapp/features/horoscope/daily_horoscope/presentation/bloc/my_astrology_state.dart';
+import 'package:ariannapp/features/horoscope/daily_horoscope/presentation/sections/daily_horoscope_section.dart';
+import 'package:ariannapp/features/horoscope/daily_horoscope/usecase/get_horoscope_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

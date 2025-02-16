@@ -1,4 +1,4 @@
-import 'package:ariannapp/features/horoscope/application/domain/model/horoscope/horoscope.dart';
+import 'package:ariannapp/features/horoscope/shared/horoscope/horoscope.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'my_astrology_state.g.dart';

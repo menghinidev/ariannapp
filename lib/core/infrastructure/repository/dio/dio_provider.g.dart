@@ -1,29 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'provider.dart';
+part of 'dio_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$horoscopeRepositoryHash() =>
-    r'572e00c4070d73308309214a1a09003eafa47c90';
+String _$networkServiceHash() => r'5cd851b61f6e3df84797cd4a806af2aa93019796';
 
-/// See also [horoscopeRepository].
-@ProviderFor(horoscopeRepository)
-final horoscopeRepositoryProvider =
-    AutoDisposeProvider<IHoroscopeRepository>.internal(
-  horoscopeRepository,
-  name: r'horoscopeRepositoryProvider',
+/// See also [networkService].
+@ProviderFor(networkService)
+final networkServiceProvider = AutoDisposeProvider<Dio>.internal(
+  networkService,
+  name: r'networkServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$horoscopeRepositoryHash,
+      : _$networkServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef HoroscopeRepositoryRef = AutoDisposeProviderRef<IHoroscopeRepository>;
+typedef NetworkServiceRef = AutoDisposeProviderRef<Dio>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

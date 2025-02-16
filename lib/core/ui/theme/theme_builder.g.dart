@@ -23,7 +23,7 @@ final applicationThemeModeProvider =
 );
 
 typedef _$ApplicationThemeMode = AutoDisposeAsyncNotifier<ThemeMode>;
-String _$applicationThemeHash() => r'f74d691671a82b10358d29af859b369042aa4cae';
+String _$applicationThemeHash() => r'8d0797f4995a80af32f7a6060a6d6b7cd40b8be1';
 
 /// See also [ApplicationTheme].
 @ProviderFor(ApplicationTheme)

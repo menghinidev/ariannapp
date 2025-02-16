@@ -6,7 +6,7 @@ part of 'get_horoscope_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$horoscopeHash() => r'5924afc774e95811b16fcf062b28d257b57bf247';
+String _$horoscopeHash() => r'a729e7a723956f0fbab75de34f8cb63677875301';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -34,7 +34,7 @@ class _SystemHash {
 const horoscopeProvider = HoroscopeFamily();
 
 /// See also [horoscope].
-class HoroscopeFamily extends Family<AsyncValue<DailyHoroscope>> {
+class HoroscopeFamily extends Family<AsyncValue<SimpleDailyHoroscope>> {
   /// See also [horoscope].
   const HoroscopeFamily();
 
@@ -72,7 +72,8 @@ class HoroscopeFamily extends Family<AsyncValue<DailyHoroscope>> {
 }
 
 /// See also [horoscope].
-class HoroscopeProvider extends AutoDisposeFutureProvider<DailyHoroscope> {
+class HoroscopeProvider
+    extends AutoDisposeFutureProvider<SimpleDailyHoroscope> {
   /// See also [horoscope].
   HoroscopeProvider(
     HoroscopeSign sign,
@@ -106,7 +107,7 @@ class HoroscopeProvider extends AutoDisposeFutureProvider<DailyHoroscope> {
 
   @override
   Override overrideWith(
-    FutureOr<DailyHoroscope> Function(HoroscopeRef provider) create,
+    FutureOr<SimpleDailyHoroscope> Function(HoroscopeRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -123,7 +124,7 @@ class HoroscopeProvider extends AutoDisposeFutureProvider<DailyHoroscope> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<DailyHoroscope> createElement() {
+  AutoDisposeFutureProviderElement<SimpleDailyHoroscope> createElement() {
     return _HoroscopeProviderElement(this);
   }
 
@@ -143,13 +144,14 @@ class HoroscopeProvider extends AutoDisposeFutureProvider<DailyHoroscope> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin HoroscopeRef on AutoDisposeFutureProviderRef<DailyHoroscope> {
+mixin HoroscopeRef on AutoDisposeFutureProviderRef<SimpleDailyHoroscope> {
   /// The parameter `sign` of this provider.
   HoroscopeSign get sign;
 }
 
 class _HoroscopeProviderElement
-    extends AutoDisposeFutureProviderElement<DailyHoroscope> with HoroscopeRef {
+    extends AutoDisposeFutureProviderElement<SimpleDailyHoroscope>
+    with HoroscopeRef {
   _HoroscopeProviderElement(super.provider);
 
   @override

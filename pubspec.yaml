@@ -29,6 +29,7 @@ dependencies:
   firebase_auth: ^5.4.2
   logger: ^2.5.0
   shared_preferences: ^2.5.2
+  pretty_dio_logger: ^1.4.0
   
 
 dev_dependencies:

@@ -1,7 +1,7 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
-import 'package:ariannapp/features/horoscope/application/domain/model/horoscope/horoscope.dart';
-import 'package:ariannapp/features/horoscope/presentation/components/horoscope_sign.dart';
+import 'package:ariannapp/features/horoscope/daily_horoscope/presentation/components/horoscope_sign.dart';
+import 'package:ariannapp/features/horoscope/shared/horoscope/horoscope.dart';
 import 'package:flutter/material.dart';
 
 class DailyHoroscopeSection extends StatelessWidget {
@@ -12,7 +12,7 @@ class DailyHoroscopeSection extends StatelessWidget {
   });
 
   final HoroscopeSign sign;
-  final DailyHoroscope horoscope;
+  final SimpleDailyHoroscope horoscope;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class DailyHoroscopeSection extends StatelessWidget {
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1200),
           child: Text(
-            horoscope.data,
+            horoscope.prediction,
             style: context.textTheme.bodyLarge,
           ),
         ),

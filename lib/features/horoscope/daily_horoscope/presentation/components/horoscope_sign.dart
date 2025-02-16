@@ -1,4 +1,4 @@
-import 'package:ariannapp/features/horoscope/application/domain/model/horoscope/horoscope.dart';
+import 'package:ariannapp/features/horoscope/shared/horoscope/horoscope.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

@@ -12,6 +12,7 @@
 .buildlog/
 .history
 .svn/
+*.env
 
 # IntelliJ related
 *.iml
@@ -23,7 +24,6 @@
 .classpath
 .project
 .settings/
-.vscode/*
 
 # Flutter repo-specific
 /bin/cache/

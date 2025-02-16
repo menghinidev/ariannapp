@@ -1,4 +1,6 @@
+export 'infrastructure/env.dart';
 export 'infrastructure/error/application_error/applicationerror.dart';
+export 'infrastructure/repository/dio/dio_provider.dart';
 export 'infrastructure/usecase/handlers/success.dart';
 export 'infrastructure/usecase/use_case.dart';
 export 'infrastructure/utils/generator/id_generator.dart';
