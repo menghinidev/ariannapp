@@ -11,6 +11,10 @@
             "flutterMode": "debug",
             "console": "debugConsole",
             "deviceId": "chrome",
+            "toolArgs": [
+                "--dart-define-from-file",
+                "${workspaceFolder}/.env",
+            ],
         },
         {
             "name": "Android (debug)",

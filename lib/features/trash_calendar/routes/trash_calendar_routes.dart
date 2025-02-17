@@ -8,5 +8,5 @@ class TrashCalendarScreenRoute extends GoRoute {
           builder: (context, state) => const TrashCalendarScreen(),
         );
 
-  static const pagePath = 'calendar';
+  static const pagePath = 'trash-calendar';
 }
