@@ -1,5 +1,6 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
+import 'package:ariannapp/features/home/presentation/sections/calendar_dashboard_section.dart';
 import 'package:ariannapp/features/home/presentation/sections/groceries_dashboard_section.dart';
 import 'package:ariannapp/features/home/presentation/sections/matchkeeper_dashboard_section.dart';
 import 'package:ariannapp/features/horoscope/routes/my_astrology_routes.dart';
@@ -19,13 +20,8 @@ class HomeScreen extends ConsumerWidget {
         physics: const ScrollPhysics(),
         slivers: [
           SliverAppBar.large(
-            title: Text(
-              'Casina',
-              style: context.textTheme.displaySmall?.copyWith(
-                fontStyle: FontStyle.italic,
-                letterSpacing: 1.5,
-                color: Theme.of(context).colorScheme.brightness == Brightness.light ? Colors.black : Colors.white,
-              ),
+            title: const Text(
+              'AriannApp',
             ),
             shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
             actions: [
@@ -43,6 +39,8 @@ class HomeScreen extends ConsumerWidget {
               ),
             ],
           ),
+          const SliverToBoxAdapter(child: CalendarDashboardSection()),
+          SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
           const SliverToBoxAdapter(child: MatchkeeperDashboardSection()),
           SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
           const SliverToBoxAdapter(child: GroceriesDashboardSection()),
