@@ -1,7 +1,7 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
-import 'package:ariannapp/features/horoscope/daily_horoscope/presentation/bloc/my_astrology_state.dart';
-import 'package:ariannapp/features/horoscope/daily_horoscope/presentation/components/horoscope_sign.dart';
+import 'package:ariannapp/features/horoscope/horoscope/presentation/bloc/my_astrology_state.dart';
+import 'package:ariannapp/features/horoscope/horoscope/presentation/components/horoscope_sign.dart';
 import 'package:ariannapp/features/horoscope/shared/model/horoscope.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

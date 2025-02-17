@@ -1,6 +1,6 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/features/horoscope/daily_horoscope/presentation/bloc/my_astrology_state.dart';
-import 'package:ariannapp/features/horoscope/daily_horoscope/usecase/command/get_horoscope_command.dart';
+import 'package:ariannapp/features/horoscope/horoscope/presentation/bloc/my_astrology_state.dart';
+import 'package:ariannapp/features/horoscope/horoscope/usecase/command/get_horoscope_command.dart';
 import 'package:ariannapp/features/horoscope/shared/model/horoscope.dart';
 import 'package:ariannapp/features/horoscope/shared/repository/provider.dart';
 import 'package:ariannapp/features/horoscope/shared/repository/sources/horoscope_repository.dart';

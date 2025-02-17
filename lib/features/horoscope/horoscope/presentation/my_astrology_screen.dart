@@ -1,9 +1,9 @@
-import 'package:ariannapp/core/ui/components/components.dart';
+import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
-import 'package:ariannapp/features/horoscope/daily_horoscope/presentation/bloc/my_astrology_state.dart';
-import 'package:ariannapp/features/horoscope/daily_horoscope/presentation/components/horoscope_sign.dart';
-import 'package:ariannapp/features/horoscope/daily_horoscope/presentation/sections/daily_horoscope_section.dart';
-import 'package:ariannapp/features/horoscope/daily_horoscope/usecase/get_horoscope_use_case.dart';
+import 'package:ariannapp/features/horoscope/horoscope/presentation/bloc/my_astrology_state.dart';
+import 'package:ariannapp/features/horoscope/horoscope/presentation/components/horoscope_sign.dart';
+import 'package:ariannapp/features/horoscope/horoscope/presentation/sections/daily_horoscope_section.dart';
+import 'package:ariannapp/features/horoscope/horoscope/usecase/get_horoscope_use_case.dart';
 import 'package:ariannapp/features/horoscope/shared/model/horoscope.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
@@ -15,22 +15,28 @@ class MyAstrologyScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final horoscope = ref.watch(horoscopeProvider.select((e) => e.valueOrNull));
-    return BaseAppScreen(
-      title: horoscope?.sign.name.capitalize ?? 'My Astrology',
+    return BaseAppScreen.sliver(
       fab: horoscope == null ? null : _WheelHoroscopeSelector(initialSign: horoscope.sign),
-      child: Padding(
-        padding: DistanceProvider.screenInsets.padding,
-        child: LoadingSwitcher(
-          value: horoscope,
-          builder: (context, data) => CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
+      child: LoadingSwitcher(
+        margin: DistanceProvider.screenInsets.padding,
+        value: horoscope,
+        builder: (context, data) => CustomScrollView(
+          slivers: [
+            SliverAppBar.large(
+              title: Text(
+                data.sign.name.capitalize,
+              ),
+              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: DistanceProvider.screenInsets.padding,
                 child: DailyHoroscopeSection(
                   horoscope: data,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
