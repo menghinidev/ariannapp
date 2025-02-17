@@ -10,4 +10,8 @@ abstract class IHoroscopeRepository {
   Future<ApplicationResponse<MonthlyHoroscope>> monthlyHoroscope({
     required HoroscopeSign sign,
   });
+
+  Future<ApplicationResponse<SimpleHoroscope>> weeklyHoroscope({
+    required HoroscopeSign sign,
+  });
 }

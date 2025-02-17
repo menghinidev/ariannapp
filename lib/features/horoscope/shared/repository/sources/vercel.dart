@@ -73,4 +73,27 @@ class VercelHoroscopeRepository with RepositorySafeInvoker implements IHoroscope
 
     return Responses.success(mapped);
   }
+
+  @override
+  Future<ApplicationResponse<SimpleHoroscope>> weeklyHoroscope({required HoroscopeSign sign}) async {
+    final parameters = {'sign': sign.name};
+    final response = await safeInvoke(
+      request: () => httpClient.get<Map<String, dynamic>>(
+        '$host/get-horoscope/weekly',
+        queryParameters: parameters,
+      ),
+      payloadMapper: (value) => VercelWeeklyHoroscopeDto.fromJson(value.data!['data'] as Map<String, dynamic>),
+      errorMapper: (exception) {
+        final payload = exception.response?.data as Map<String, dynamic>?;
+        return ApplicationError.generic(message: payload?['message'] as String?);
+      },
+    );
+    if (response.isError) return Responses.failure(response.errors);
+    final mapped = SimpleHoroscope(
+      sign: sign,
+      date: DateTime.now().toUtc(),
+      prediction: response.payload!.prediction,
+    );
+    return Responses.success(mapped);
+  }
 }

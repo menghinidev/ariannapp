@@ -64,6 +64,12 @@ class ProkeralaHoroscopeRepository extends IHoroscopeRepository with RepositoryS
     // TODO: implement monthlyHoroscope
     throw UnimplementedError();
   }
+
+  @override
+  Future<ApplicationResponse<SimpleHoroscope>> weeklyHoroscope({required HoroscopeSign sign}) {
+    // TODO: implement weeklyHoroscope
+    throw UnimplementedError();
+  }
 }
 
 class HoroscopeRequestWrapper with RepositorySafeInvoker {

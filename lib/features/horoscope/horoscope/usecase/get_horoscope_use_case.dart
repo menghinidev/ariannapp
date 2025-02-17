@@ -31,6 +31,17 @@ FutureOr<MonthlyHoroscope> monthlyHoroscope(Ref ref) async {
   return response.toFuture();
 }
 
+@riverpod
+FutureOr<SimpleHoroscope> weeklyHoroscope(Ref ref) async {
+  final sign = ref.watch(horoscopeSignSelectorProvider);
+  final date = ref.watch(horoscopeDateSelectorProvider);
+  final repo = await ref.watch(horoscopeRepositoryProvider.future);
+  final usecase = _GetWeeklyHoroscopeUseCase(repo: repo);
+  final command = GetHoroscopeCommand(sign: sign, date: date);
+  final response = await usecase.call(command);
+  return response.toFuture();
+}
+
 class _GetDailyHoroscopeUseCase extends UseCase<SimpleHoroscope, GetHoroscopeCommand> {
   _GetDailyHoroscopeUseCase({
     required this.repo,
@@ -64,6 +75,26 @@ class _GetMonthlyHoroscopeUseCase extends UseCase<MonthlyHoroscope, GetHoroscope
     final check = await checkRequirements();
     final response = await check.flatMapAsync(
       (_) => repo.monthlyHoroscope(
+        sign: input.sign,
+      ),
+    );
+    await response.ifErrorAsync((payload) => applyErrorHandlers(response));
+    return response;
+  }
+}
+
+class _GetWeeklyHoroscopeUseCase extends UseCase<SimpleHoroscope, GetHoroscopeCommand> {
+  _GetWeeklyHoroscopeUseCase({
+    required this.repo,
+  });
+
+  final IHoroscopeRepository repo;
+
+  @override
+  Future<Response<SimpleHoroscope, ApplicationError>> call(GetHoroscopeCommand input) async {
+    final check = await checkRequirements();
+    final response = await check.flatMapAsync(
+      (_) => repo.weeklyHoroscope(
         sign: input.sign,
       ),
     );

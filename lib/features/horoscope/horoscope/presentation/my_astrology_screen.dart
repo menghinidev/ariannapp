@@ -4,6 +4,7 @@ import 'package:ariannapp/features/horoscope/horoscope/presentation/bloc/my_astr
 import 'package:ariannapp/features/horoscope/horoscope/presentation/components/horoscope_sign.dart';
 import 'package:ariannapp/features/horoscope/horoscope/presentation/sections/daily_horoscope_section.dart';
 import 'package:ariannapp/features/horoscope/horoscope/presentation/sections/montly_horoscope_section.dart';
+import 'package:ariannapp/features/horoscope/horoscope/presentation/sections/weekly_horoscope_section.dart';
 import 'package:ariannapp/features/horoscope/shared/model/horoscope.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +20,12 @@ class MyAstrologyScreen extends ConsumerStatefulWidget {
 class _MyAstrologyScreenState extends ConsumerState<MyAstrologyScreen> with TickerProviderStateMixin {
   late final TabController _tabController;
 
-  static const tabs = ['Giorno', 'Mese'];
+  static const tabs = ['Giornaliera', 'Settimanale', 'Mensile'];
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -53,6 +54,7 @@ class _MyAstrologyScreenState extends ConsumerState<MyAstrologyScreen> with Tick
               controller: _tabController,
               children: const [
                 DailyHoroscopeSection(),
+                WeeklyHoroscopeSection(),
                 MonthlyHoroscopeSection(),
               ],
             ),
