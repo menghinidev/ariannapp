@@ -123,7 +123,10 @@ class _HoroscopeSignSelector extends StatelessWidget {
     return Container(
       width: _WheelHoroscopeSelector.itemExtent,
       height: _WheelHoroscopeSelector.itemExtent,
-      decoration: BoxDecoration(border: Border.all(color: Colors.white), shape: BoxShape.circle),
+      decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).colorScheme.onSurface),
+        shape: BoxShape.circle,
+      ),
       padding: DistanceProvider.smallDistance.padding,
       child: HoroscopeSignIcon(sign: sign),
     );

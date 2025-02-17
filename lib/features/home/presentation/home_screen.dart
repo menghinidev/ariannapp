@@ -19,33 +19,40 @@ class HomeScreen extends ConsumerWidget {
       child: CustomScrollView(
         physics: const ScrollPhysics(),
         slivers: [
-          SliverAppBar.large(
-            title: const Text(
-              'AriannApp',
-            ),
-            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
-            actions: [
-              IconButton.filled(
-                onPressed: () => context.goRelative(MyAstrologyScreenRoute.pagePath),
-                icon: const Icon(Icons.public),
-              ),
-              IconButton.filled(
-                onPressed: () => context.goRelative(TrashCalendarScreenRoute.pagePath),
-                icon: const Icon(Icons.calendar_month_outlined),
-              ),
-              IconButton.filled(
-                onPressed: () => context.goRelative(SettingsScreenRoute.pagePath),
-                icon: const Icon(Icons.settings_outlined),
-              ),
-            ],
-          ),
+          const _AppBar(),
           const SliverToBoxAdapter(child: CalendarDashboardSection()),
           SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
-          const SliverToBoxAdapter(child: MatchkeeperDashboardSection()),
-          SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
           const SliverToBoxAdapter(child: GroceriesDashboardSection()),
+          SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
+          const SliverToBoxAdapter(child: MatchkeeperDashboardSection()),
         ],
       ),
+    );
+  }
+}
+
+class _AppBar extends StatelessWidget {
+  const _AppBar();
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar.large(
+      title: const Text('AriannApp'),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
+      actions: [
+        IconButton.filled(
+          onPressed: () => context.goRelative(MyAstrologyScreenRoute.pagePath),
+          icon: const Icon(Icons.star_border_outlined),
+        ),
+        IconButton.filled(
+          onPressed: () => context.goRelative(TrashCalendarScreenRoute.pagePath),
+          icon: const Icon(Icons.calendar_month_outlined),
+        ),
+        IconButton.filled(
+          onPressed: () => context.goRelative(SettingsScreenRoute.pagePath),
+          icon: const Icon(Icons.settings_outlined),
+        ),
+      ],
     );
   }
 }
