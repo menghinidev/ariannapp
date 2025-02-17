@@ -19,21 +19,21 @@ mixin _$ApplicationError {
   ErrorCode get errorCode => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ErrorCode errorCode) generic,
+    required TResult Function(ErrorCode errorCode, String? message) generic,
     required TResult Function(ErrorCode errorCode) unauthorized,
     required TResult Function(ErrorCode errorCode) operationAborted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ErrorCode errorCode)? generic,
+    TResult? Function(ErrorCode errorCode, String? message)? generic,
     TResult? Function(ErrorCode errorCode)? unauthorized,
     TResult? Function(ErrorCode errorCode)? operationAborted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ErrorCode errorCode)? generic,
+    TResult Function(ErrorCode errorCode, String? message)? generic,
     TResult Function(ErrorCode errorCode)? unauthorized,
     TResult Function(ErrorCode errorCode)? operationAborted,
     required TResult orElse(),
@@ -112,7 +112,7 @@ abstract class _$$GenericImplCopyWith<$Res>
       __$$GenericImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ErrorCode errorCode});
+  $Res call({ErrorCode errorCode, String? message});
 }
 
 /// @nodoc
@@ -129,12 +129,17 @@ class __$$GenericImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? errorCode = null,
+    Object? message = freezed,
   }) {
     return _then(_$GenericImpl(
       errorCode: null == errorCode
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
               as ErrorCode,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -142,15 +147,17 @@ class __$$GenericImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$GenericImpl implements Generic {
-  _$GenericImpl({this.errorCode = ErrorCode.generic});
+  _$GenericImpl({this.errorCode = ErrorCode.generic, this.message});
 
   @override
   @JsonKey()
   final ErrorCode errorCode;
+  @override
+  final String? message;
 
   @override
   String toString() {
-    return 'ApplicationError.generic(errorCode: $errorCode)';
+    return 'ApplicationError.generic(errorCode: $errorCode, message: $message)';
   }
 
   @override
@@ -159,11 +166,12 @@ class _$GenericImpl implements Generic {
         (other.runtimeType == runtimeType &&
             other is _$GenericImpl &&
             (identical(other.errorCode, errorCode) ||
-                other.errorCode == errorCode));
+                other.errorCode == errorCode) &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorCode);
+  int get hashCode => Object.hash(runtimeType, errorCode, message);
 
   /// Create a copy of ApplicationError
   /// with the given fields replaced by the non-null parameter values.
@@ -176,33 +184,33 @@ class _$GenericImpl implements Generic {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ErrorCode errorCode) generic,
+    required TResult Function(ErrorCode errorCode, String? message) generic,
     required TResult Function(ErrorCode errorCode) unauthorized,
     required TResult Function(ErrorCode errorCode) operationAborted,
   }) {
-    return generic(errorCode);
+    return generic(errorCode, message);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ErrorCode errorCode)? generic,
+    TResult? Function(ErrorCode errorCode, String? message)? generic,
     TResult? Function(ErrorCode errorCode)? unauthorized,
     TResult? Function(ErrorCode errorCode)? operationAborted,
   }) {
-    return generic?.call(errorCode);
+    return generic?.call(errorCode, message);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ErrorCode errorCode)? generic,
+    TResult Function(ErrorCode errorCode, String? message)? generic,
     TResult Function(ErrorCode errorCode)? unauthorized,
     TResult Function(ErrorCode errorCode)? operationAborted,
     required TResult orElse(),
   }) {
     if (generic != null) {
-      return generic(errorCode);
+      return generic(errorCode, message);
     }
     return orElse();
   }
@@ -243,10 +251,12 @@ class _$GenericImpl implements Generic {
 }
 
 abstract class Generic implements ApplicationError {
-  factory Generic({final ErrorCode errorCode}) = _$GenericImpl;
+  factory Generic({final ErrorCode errorCode, final String? message}) =
+      _$GenericImpl;
 
   @override
   ErrorCode get errorCode;
+  String? get message;
 
   /// Create a copy of ApplicationError
   /// with the given fields replaced by the non-null parameter values.
@@ -328,7 +338,7 @@ class _$UnauthorizedImpl implements Unauthorized {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ErrorCode errorCode) generic,
+    required TResult Function(ErrorCode errorCode, String? message) generic,
     required TResult Function(ErrorCode errorCode) unauthorized,
     required TResult Function(ErrorCode errorCode) operationAborted,
   }) {
@@ -338,7 +348,7 @@ class _$UnauthorizedImpl implements Unauthorized {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ErrorCode errorCode)? generic,
+    TResult? Function(ErrorCode errorCode, String? message)? generic,
     TResult? Function(ErrorCode errorCode)? unauthorized,
     TResult? Function(ErrorCode errorCode)? operationAborted,
   }) {
@@ -348,7 +358,7 @@ class _$UnauthorizedImpl implements Unauthorized {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ErrorCode errorCode)? generic,
+    TResult Function(ErrorCode errorCode, String? message)? generic,
     TResult Function(ErrorCode errorCode)? unauthorized,
     TResult Function(ErrorCode errorCode)? operationAborted,
     required TResult orElse(),
@@ -481,7 +491,7 @@ class _$OperationAbortedImpl implements OperationAborted {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ErrorCode errorCode) generic,
+    required TResult Function(ErrorCode errorCode, String? message) generic,
     required TResult Function(ErrorCode errorCode) unauthorized,
     required TResult Function(ErrorCode errorCode) operationAborted,
   }) {
@@ -491,7 +501,7 @@ class _$OperationAbortedImpl implements OperationAborted {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ErrorCode errorCode)? generic,
+    TResult? Function(ErrorCode errorCode, String? message)? generic,
     TResult? Function(ErrorCode errorCode)? unauthorized,
     TResult? Function(ErrorCode errorCode)? operationAborted,
   }) {
@@ -501,7 +511,7 @@ class _$OperationAbortedImpl implements OperationAborted {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ErrorCode errorCode)? generic,
+    TResult Function(ErrorCode errorCode, String? message)? generic,
     TResult Function(ErrorCode errorCode)? unauthorized,
     TResult Function(ErrorCode errorCode)? operationAborted,
     required TResult orElse(),

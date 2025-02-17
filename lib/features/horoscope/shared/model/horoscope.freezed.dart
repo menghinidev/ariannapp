@@ -14,21 +14,11 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-SimpleDailyHoroscope _$SimpleDailyHoroscopeFromJson(Map<String, dynamic> json) {
-  return _SimpleDailyHoroscope.fromJson(json);
-}
-
 /// @nodoc
 mixin _$SimpleDailyHoroscope {
-  @JsonKey(name: 'sign_id')
-  int get signId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'sign_name')
-  String get signName => throw _privateConstructorUsedError;
+  HoroscopeSign get sign => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   String get prediction => throw _privateConstructorUsedError;
-
-  /// Serializes this SimpleDailyHoroscope to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of SimpleDailyHoroscope
   /// with the given fields replaced by the non-null parameter values.
@@ -43,11 +33,7 @@ abstract class $SimpleDailyHoroscopeCopyWith<$Res> {
           $Res Function(SimpleDailyHoroscope) then) =
       _$SimpleDailyHoroscopeCopyWithImpl<$Res, SimpleDailyHoroscope>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'sign_id') int signId,
-      @JsonKey(name: 'sign_name') String signName,
-      DateTime date,
-      String prediction});
+  $Res call({HoroscopeSign sign, DateTime date, String prediction});
 }
 
 /// @nodoc
@@ -66,20 +52,15 @@ class _$SimpleDailyHoroscopeCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? signId = null,
-    Object? signName = null,
+    Object? sign = null,
     Object? date = null,
     Object? prediction = null,
   }) {
     return _then(_value.copyWith(
-      signId: null == signId
-          ? _value.signId
-          : signId // ignore: cast_nullable_to_non_nullable
-              as int,
-      signName: null == signName
-          ? _value.signName
-          : signName // ignore: cast_nullable_to_non_nullable
-              as String,
+      sign: null == sign
+          ? _value.sign
+          : sign // ignore: cast_nullable_to_non_nullable
+              as HoroscopeSign,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -100,11 +81,7 @@ abstract class _$$SimpleDailyHoroscopeImplCopyWith<$Res>
       __$$SimpleDailyHoroscopeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'sign_id') int signId,
-      @JsonKey(name: 'sign_name') String signName,
-      DateTime date,
-      String prediction});
+  $Res call({HoroscopeSign sign, DateTime date, String prediction});
 }
 
 /// @nodoc
@@ -120,20 +97,15 @@ class __$$SimpleDailyHoroscopeImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? signId = null,
-    Object? signName = null,
+    Object? sign = null,
     Object? date = null,
     Object? prediction = null,
   }) {
     return _then(_$SimpleDailyHoroscopeImpl(
-      signId: null == signId
-          ? _value.signId
-          : signId // ignore: cast_nullable_to_non_nullable
-              as int,
-      signName: null == signName
-          ? _value.signName
-          : signName // ignore: cast_nullable_to_non_nullable
-              as String,
+      sign: null == sign
+          ? _value.sign
+          : sign // ignore: cast_nullable_to_non_nullable
+              as HoroscopeSign,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -148,23 +120,12 @@ class __$$SimpleDailyHoroscopeImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable(explicitToJson: true)
 class _$SimpleDailyHoroscopeImpl implements _SimpleDailyHoroscope {
   _$SimpleDailyHoroscopeImpl(
-      {@JsonKey(name: 'sign_id') required this.signId,
-      @JsonKey(name: 'sign_name') required this.signName,
-      required this.date,
-      required this.prediction});
-
-  factory _$SimpleDailyHoroscopeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SimpleDailyHoroscopeImplFromJson(json);
+      {required this.sign, required this.date, required this.prediction});
 
   @override
-  @JsonKey(name: 'sign_id')
-  final int signId;
-  @override
-  @JsonKey(name: 'sign_name')
-  final String signName;
+  final HoroscopeSign sign;
   @override
   final DateTime date;
   @override
@@ -172,7 +133,7 @@ class _$SimpleDailyHoroscopeImpl implements _SimpleDailyHoroscope {
 
   @override
   String toString() {
-    return 'SimpleDailyHoroscope(signId: $signId, signName: $signName, date: $date, prediction: $prediction)';
+    return 'SimpleDailyHoroscope(sign: $sign, date: $date, prediction: $prediction)';
   }
 
   @override
@@ -180,18 +141,14 @@ class _$SimpleDailyHoroscopeImpl implements _SimpleDailyHoroscope {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SimpleDailyHoroscopeImpl &&
-            (identical(other.signId, signId) || other.signId == signId) &&
-            (identical(other.signName, signName) ||
-                other.signName == signName) &&
+            (identical(other.sign, sign) || other.sign == sign) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.prediction, prediction) ||
                 other.prediction == prediction));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, signId, signName, date, prediction);
+  int get hashCode => Object.hash(runtimeType, sign, date, prediction);
 
   /// Create a copy of SimpleDailyHoroscope
   /// with the given fields replaced by the non-null parameter values.
@@ -202,31 +159,16 @@ class _$SimpleDailyHoroscopeImpl implements _SimpleDailyHoroscope {
       get copyWith =>
           __$$SimpleDailyHoroscopeImplCopyWithImpl<_$SimpleDailyHoroscopeImpl>(
               this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SimpleDailyHoroscopeImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _SimpleDailyHoroscope implements SimpleDailyHoroscope {
   factory _SimpleDailyHoroscope(
-      {@JsonKey(name: 'sign_id') required final int signId,
-      @JsonKey(name: 'sign_name') required final String signName,
+      {required final HoroscopeSign sign,
       required final DateTime date,
       required final String prediction}) = _$SimpleDailyHoroscopeImpl;
 
-  factory _SimpleDailyHoroscope.fromJson(Map<String, dynamic> json) =
-      _$SimpleDailyHoroscopeImpl.fromJson;
-
   @override
-  @JsonKey(name: 'sign_id')
-  int get signId;
-  @override
-  @JsonKey(name: 'sign_name')
-  String get signName;
+  HoroscopeSign get sign;
   @override
   DateTime get date;
   @override

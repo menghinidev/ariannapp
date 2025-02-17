@@ -4,7 +4,8 @@ import 'package:ariannapp/features/horoscope/daily_horoscope/presentation/bloc/m
 import 'package:ariannapp/features/horoscope/daily_horoscope/presentation/components/horoscope_sign.dart';
 import 'package:ariannapp/features/horoscope/daily_horoscope/presentation/sections/daily_horoscope_section.dart';
 import 'package:ariannapp/features/horoscope/daily_horoscope/usecase/get_horoscope_use_case.dart';
-import 'package:ariannapp/features/horoscope/shared/horoscope/horoscope.dart';
+import 'package:ariannapp/features/horoscope/shared/model/horoscope.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,11 +14,10 @@ class MyAstrologyScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final sign = ref.watch(horoscopeSignSelectorProvider);
-    final horoscope = ref.watch(horoscopeProvider(sign).select((e) => e.valueOrNull));
+    final horoscope = ref.watch(horoscopeProvider.select((e) => e.valueOrNull));
     return BaseAppScreen(
-      title: 'My astro',
-      fab: _WheelHoroscopeSelector(initialSign: sign),
+      title: horoscope?.sign.name.capitalize ?? 'My Astrology',
+      fab: horoscope == null ? null : _WheelHoroscopeSelector(initialSign: horoscope.sign),
       child: Padding(
         padding: DistanceProvider.screenInsets.padding,
         child: LoadingSwitcher(
@@ -26,7 +26,6 @@ class MyAstrologyScreen extends ConsumerWidget {
             slivers: [
               SliverToBoxAdapter(
                 child: DailyHoroscopeSection(
-                  sign: sign,
                   horoscope: data,
                 ),
               ),

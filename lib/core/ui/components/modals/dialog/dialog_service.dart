@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'dialog_service.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class DialogService extends _$DialogService {
   late BuildContext? context;
 

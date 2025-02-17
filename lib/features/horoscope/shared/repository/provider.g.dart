@@ -7,7 +7,7 @@ part of 'provider.dart';
 // **************************************************************************
 
 String _$horoscopeRepositoryHash() =>
-    r'b4e84e64e1a21e95aab6e2be9aae79b2b9f3d5f2';
+    r'882920d3cebb7e327afee5c8aa23394a4e4e3657';
 
 /// See also [horoscopeRepository].
 @ProviderFor(horoscopeRepository)

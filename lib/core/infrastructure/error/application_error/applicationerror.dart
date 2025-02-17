@@ -8,6 +8,7 @@ part 'applicationerror.freezed.dart';
 class ApplicationError with _$ApplicationError {
   factory ApplicationError.generic({
     @Default(ErrorCode.generic) ErrorCode errorCode,
+    String? message,
   }) = Generic;
   factory ApplicationError.unauthorized({
     @Default(ErrorCode.unauthorized) ErrorCode errorCode,
