@@ -14,6 +14,10 @@ extension DateFormatter on DateTime {
 
   String get toMonthYear => DateFormat('MM/yy').format(this);
 
+  String get toNiceMonthYear => DateFormat('MMMM yyyy').format(this);
+
+  String get dayAndWeekDay => DateFormat('d').format(this);
+
   String get toMonthYearExtended => DateFormat('MM/yyyy').format(this);
 
   String get toExtendedDate => DateFormat('dd MMMM yyyy - kk:mm', 'it-IT').format(this);

@@ -3,12 +3,21 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'horoscope.freezed.dart';
 
 @freezed
-class SimpleDailyHoroscope with _$SimpleDailyHoroscope {
-  factory SimpleDailyHoroscope({
+class SimpleHoroscope with _$SimpleHoroscope {
+  factory SimpleHoroscope({
     required HoroscopeSign sign,
     required DateTime date,
     required String prediction,
-  }) = _SimpleDailyHoroscope;
+  }) = _SimpleHoroscope;
+}
+
+@freezed
+class MonthlyHoroscope with _$MonthlyHoroscope {
+  factory MonthlyHoroscope({
+    required SimpleHoroscope data,
+    required List<DateTime> standoutDays,
+    required List<DateTime> challengingDays,
+  }) = _MonthlyHoroscope;
 }
 
 enum HoroscopeSign {

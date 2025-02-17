@@ -26,7 +26,7 @@ class ProkeralaHoroscopeRepository extends IHoroscopeRepository with RepositoryS
   );
 
   @override
-  Future<ApplicationResponse<SimpleDailyHoroscope>> dailyHoroscope({
+  Future<ApplicationResponse<SimpleHoroscope>> dailyHoroscope({
     required HoroscopeSign sign,
     required DateTime date,
   }) async {
@@ -54,7 +54,15 @@ class ProkeralaHoroscopeRepository extends IHoroscopeRepository with RepositoryS
             return ProkeralaDailyHoroscopeDto.fromJson(content);
           },
         )
-        .mapToResponse((payload) => SimpleDailyHoroscope(date: date, prediction: payload!.prediction, sign: sign));
+        .mapToResponse((payload) => SimpleHoroscope(date: date, prediction: payload!.prediction, sign: sign));
+  }
+
+  @override
+  Future<ApplicationResponse<MonthlyHoroscope>> monthlyHoroscope({
+    required HoroscopeSign sign,
+  }) {
+    // TODO: implement monthlyHoroscope
+    throw UnimplementedError();
   }
 }
 

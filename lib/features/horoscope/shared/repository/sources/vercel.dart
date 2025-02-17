@@ -13,7 +13,7 @@ class VercelHoroscopeRepository with RepositorySafeInvoker implements IHoroscope
   static const host = 'https://horoscope-app-api.vercel.app/api/v1';
 
   @override
-  Future<ApplicationResponse<SimpleDailyHoroscope>> dailyHoroscope({
+  Future<ApplicationResponse<SimpleHoroscope>> dailyHoroscope({
     required HoroscopeSign sign,
     required DateTime date,
   }) async {
@@ -35,11 +35,42 @@ class VercelHoroscopeRepository with RepositorySafeInvoker implements IHoroscope
       },
     );
     if (response.isError) return Responses.failure(response.errors);
-    final mapped = SimpleDailyHoroscope(
+    final mapped = SimpleHoroscope(
       sign: sign,
       date: asDate,
       prediction: response.payload!.prediction,
     );
+    return Responses.success(mapped);
+  }
+
+  @override
+  Future<ApplicationResponse<MonthlyHoroscope>> monthlyHoroscope({
+    required HoroscopeSign sign,
+  }) async {
+    final month = DateTime.now().toUtc().copyWith(day: 1);
+    final parameters = {'sign': sign.name};
+    final response = await safeInvoke(
+      request: () => httpClient.get<Map<String, dynamic>>(
+        '$host/get-horoscope/monthly',
+        queryParameters: parameters,
+      ),
+      payloadMapper: (value) => VercelMonthlyHoroscopeDto.fromJson(value.data!['data'] as Map<String, dynamic>),
+      errorMapper: (exception) {
+        final payload = exception.response?.data as Map<String, dynamic>?;
+        return ApplicationError.generic(message: payload?['message'] as String?);
+      },
+    );
+    if (response.isError) return Responses.failure(response.errors);
+    final mapped = MonthlyHoroscope(
+      data: SimpleHoroscope(
+        sign: sign,
+        date: month,
+        prediction: response.payload!.prediction,
+      ),
+      standoutDays: response.payload!.standoutDaysList.map((e) => month.copyWith(day: e)).toList(),
+      challengingDays: response.payload!.challengingDaysList.map((e) => month.copyWith(day: e)).toList(),
+    );
+
     return Responses.success(mapped);
   }
 }

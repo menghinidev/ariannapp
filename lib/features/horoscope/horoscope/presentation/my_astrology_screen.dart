@@ -3,41 +3,61 @@ import 'package:ariannapp/core/ui/layout/layout_provider.dart';
 import 'package:ariannapp/features/horoscope/horoscope/presentation/bloc/my_astrology_state.dart';
 import 'package:ariannapp/features/horoscope/horoscope/presentation/components/horoscope_sign.dart';
 import 'package:ariannapp/features/horoscope/horoscope/presentation/sections/daily_horoscope_section.dart';
-import 'package:ariannapp/features/horoscope/horoscope/usecase/get_horoscope_use_case.dart';
+import 'package:ariannapp/features/horoscope/horoscope/presentation/sections/montly_horoscope_section.dart';
 import 'package:ariannapp/features/horoscope/shared/model/horoscope.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MyAstrologyScreen extends ConsumerWidget {
+class MyAstrologyScreen extends ConsumerStatefulWidget {
   const MyAstrologyScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final horoscope = ref.watch(horoscopeProvider.select((e) => e.valueOrNull));
-    return BaseAppScreen.sliver(
-      fab: horoscope == null ? null : _WheelHoroscopeSelector(initialSign: horoscope.sign),
-      child: LoadingSwitcher(
-        margin: DistanceProvider.screenInsets.padding,
-        value: horoscope,
-        builder: (context, data) => CustomScrollView(
-          slivers: [
-            SliverAppBar.large(
-              title: Text(
-                data.sign.name.capitalize,
-              ),
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
+  ConsumerState<ConsumerStatefulWidget> createState() => _MyAstrologyScreenState();
+}
+
+class _MyAstrologyScreenState extends ConsumerState<MyAstrologyScreen> with TickerProviderStateMixin {
+  late final TabController _tabController;
+
+  static const tabs = ['Giorno', 'Mese'];
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final sign = ref.watch(horoscopeSignSelectorProvider);
+    return BaseAppScreen(
+      title: sign.name.capitalize,
+      fab: _WheelHoroscopeSelector(initialSign: sign),
+      child: Column(
+        children: [
+          TabBar(
+            controller: _tabController,
+            indicatorColor: Theme.of(context).colorScheme.primary,
+            labelColor: Theme.of(context).colorScheme.primary,
+            unselectedLabelColor: Theme.of(context).colorScheme.onSurface,
+            tabs: [...tabs.map((e) => Tab(text: e))],
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: const [
+                DailyHoroscopeSection(),
+                MonthlyHoroscopeSection(),
+              ],
             ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: DistanceProvider.screenInsets.padding,
-                child: DailyHoroscopeSection(
-                  horoscope: data,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
