@@ -1,5 +1,10 @@
 class EnvVariable {
-  static const String horoscopeApi = String.fromEnvironment('HOROSCOPE_API_HOST');
-  static const String horoscopeApiClientId = String.fromEnvironment('HOROSCOPE_API_CLIENT_ID');
-  static const String horoscopeApiClientSecret = String.fromEnvironment('HOROSCOPE_API_CLIENT_SECRET');
+  static const String mode = String.fromEnvironment('MODE', defaultValue: 'lite');
+}
+
+extension EnvVariableExtension on String {
+  bool get isLite => this == 'lite';
+  bool get isPro => this == 'pro';
+  bool get isDev => this == 'dev';
+  bool get isTest => this == 'test';
 }
