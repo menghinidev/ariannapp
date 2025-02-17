@@ -11,18 +11,19 @@ class TrashCalendarScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final calendar = ref.watch(trashCalendarProvider.select((e) => e.valueOrNull));
     return BaseAppScreen.sliver(
-      child: LoadingSwitcher(
-        value: calendar,
-        margin: DistanceProvider.screenInsets.padding,
-        builder: (context, calendar) => CustomScrollView(
-          slivers: [
-            const SliverAppBar.large(
-              title: Text('Calendario Raccolta'),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
-            ),
-            SliverPadding(
-              padding: DistanceProvider.screenInsets.padding,
-              sliver: SliverList.separated(
+      child: CustomScrollView(
+        slivers: [
+          const SliverAppBar.large(
+            title: Text('Calendario Raccolta'),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
+          ),
+          SliverFillRemaining(
+            child: LoadingSwitcher(
+              value: calendar,
+              margin: DistanceProvider.screenInsets.padding,
+              builder: (context, calendar) => ListView.separated(
+                padding: DistanceProvider.screenInsets.padding,
+                physics: const BouncingScrollPhysics(),
                 itemCount: calendar.length,
                 itemBuilder: (context, index) => ListTile(
                   title: Text(calendar[index].description),
@@ -34,8 +35,8 @@ class TrashCalendarScreen extends ConsumerWidget {
                 separatorBuilder: (context, index) => const Divider(height: DistanceProvider.mediumDistance),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
