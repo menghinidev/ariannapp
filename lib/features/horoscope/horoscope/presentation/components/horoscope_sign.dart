@@ -13,9 +13,10 @@ class HoroscopeSignIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(
-      'assets/images/horoscope/${sign.name}_sign.svg',
+      'assets/images/horoscope/${sign.name}-sign.svg',
       width: size,
       height: size,
+      fit: BoxFit.scaleDown,
       placeholderBuilder: (context) => SizedBox(
         width: size,
         height: size,
