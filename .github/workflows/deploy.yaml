@@ -19,4 +19,4 @@ jobs:
         with:
           webRenderer: canvaskit
           baseHref: /ariannapp/
-          customArgs: --dart-define="MODE=lite"
+          customArgs: --dart-define "MODE=lite"
