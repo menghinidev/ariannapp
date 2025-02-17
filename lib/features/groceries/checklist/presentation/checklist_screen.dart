@@ -26,7 +26,7 @@ class GroceriesCheckListScreen extends ConsumerWidget {
 }
 
 class _GroceriesCheckListView extends StatelessWidget {
-  const _GroceriesCheckListView({super.key});
+  const _GroceriesCheckListView();
 
   @override
   Widget build(BuildContext context) {

@@ -1,21 +1,21 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/core/infrastructure/usecase/use_case.dart';
 import 'package:ariannapp/features/groceries/shared/model/shelf_item/shelf_item.dart';
 import 'package:ariannapp/features/groceries/shared/repositories/provider.dart';
 import 'package:ariannapp/features/groceries/shared/repositories/sources/i_groceries_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'get_shelf_use_case.g.dart';
 
 @riverpod
-Future<List<ShelfItem>> getShelf(GetShelfRef ref) async {
+Future<List<ShelfItem>> getShelf(Ref ref) async {
   final usecase = ref.watch(getShelfUseCaseProvider);
   final response = await usecase.call(null);
   return response.toFuture();
 }
 
 @riverpod
-GetShelfUseCase getShelfUseCase(GetShelfUseCaseRef ref) {
+GetShelfUseCase getShelfUseCase(Ref ref) {
   return GetShelfUseCase(repo: ref.watch(groceriesRepositoryProvider));
 }
 

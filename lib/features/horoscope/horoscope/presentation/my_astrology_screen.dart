@@ -66,7 +66,7 @@ class _MyAstrologyScreenState extends ConsumerState<MyAstrologyScreen> with Tick
 }
 
 class _WheelHoroscopeSelector extends ConsumerStatefulWidget {
-  const _WheelHoroscopeSelector({required this.initialSign, super.key});
+  const _WheelHoroscopeSelector({required this.initialSign});
 
   final HoroscopeSign initialSign;
 
