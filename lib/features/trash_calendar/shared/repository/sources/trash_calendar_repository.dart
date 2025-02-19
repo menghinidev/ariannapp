@@ -14,7 +14,7 @@ class ApricaTrashCalendarRepository with RepositorySafeInvoker implements ITrash
 
   @override
   Future<ApplicationResponse<List<TrashCalendarDate>>> getTrashCalendar() {
-    const path = 'https://www.apricaspa.it/api/service/area-services/calendar-items';
+    const path = 'https://api.cors.lol/?url=https://www.apricaspa.it/api/service/area-services/calendar-items';
     return safeInvoke(
       request: () => httpClient.post<Map<String, dynamic>>(path, data: {'geociv': 853576}),
       payloadMapper: (payload) => (payload.data?['data'] as List<dynamic>)

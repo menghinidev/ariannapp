@@ -10,7 +10,7 @@ class VercelHoroscopeRepository with RepositorySafeInvoker implements IHoroscope
   VercelHoroscopeRepository({required this.httpClient});
 
   final dio.Dio httpClient;
-  static const host = 'https://horoscope-app-api.vercel.app/api/v1';
+  static const host = 'https://api.cors.lol/?url=https://horoscope-app-api.vercel.app/api/v1';
 
   @override
   Future<ApplicationResponse<SimpleHoroscope>> dailyHoroscope({
