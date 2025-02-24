@@ -37,7 +37,7 @@ class MonthlyHoroscopeSection extends ConsumerWidget {
                 for (final day in horoscope.standoutDays)
                   Chip(
                     color: WidgetStatePropertyAll(Theme.of(context).colorScheme.primary),
-                    label: Text(day.dayAndWeekDay),
+                    label: Text(day.toDayAndWeekday),
                   ),
               ],
             ),
@@ -51,7 +51,7 @@ class MonthlyHoroscopeSection extends ConsumerWidget {
                 for (final day in horoscope.challengingDays)
                   Chip(
                     color: WidgetStatePropertyAll(Theme.of(context).colorScheme.errorContainer),
-                    label: Text(day.dayAndWeekDay),
+                    label: Text(day.toDayAndWeekday),
                   ),
               ],
             ),

@@ -70,8 +70,8 @@ class _MatchCardHeader extends StatelessWidget {
           RestartMatchIconButton(
             match: match,
             onCompleted: () {
-              final dashboardController = IhneritedDashboard.of(context)?.tabController;
-              if (dashboardController != null) dashboardController.animateTo(0);
+              final dashboardController = IhneritedDashboard.of(context);
+              if (dashboardController != null) dashboardController.switchTab(0);
             },
           ),
         ],
@@ -89,15 +89,16 @@ class _MatchCardScores extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ListView.separated(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      separatorBuilder: (context, index) => DistanceProvider.smallDistance.spacer(),
-      itemCount: match.scores.length,
-      itemBuilder: (context, index) => ScoreCard(
-        score: match.scores[index],
-        match: match,
-      ),
+    return Column(
+      children: [
+        for (final score in match.scores) ...[
+          ScoreCard(
+            score: score,
+            match: match,
+          ),
+          DistanceProvider.smallDistance.spacer(),
+        ],
+      ],
     );
   }
 }

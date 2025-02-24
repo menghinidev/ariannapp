@@ -10,20 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
-  Future<void> login() async {
-    try {
-      await FirebaseAuth.instance.signInAnonymously();
-      log('Signed in with temporary account.');
-    } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case 'operation-not-allowed':
-          log("Anonymous auth hasn't been enabled for this project.");
-        default:
-          log('Unknown error.');
-      }
-    }
-  }
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseAppCheck.instance.activate(
@@ -44,6 +30,16 @@ void main() async {
     // 4. App Attest provider with fallback to Device Check provider (App Attest provider is only available on iOS 14.0+, macOS 14.0+)
     appleProvider: kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
   );
-  await login();
+  try {
+    await FirebaseAuth.instance.signInAnonymously();
+    log('Signed in with temporary account.');
+  } on FirebaseAuthException catch (e) {
+    switch (e.code) {
+      case 'operation-not-allowed':
+        log("Anonymous auth hasn't been enabled for this project.");
+      default:
+        log('Unknown error.');
+    }
+  }
   runApp(const ProviderScope(child: AriannApp()));
 }

@@ -9,15 +9,10 @@ class TrashCalendarScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return const BaseAppScreen.sliver(
-      child: CustomScrollView(
-        slivers: [
-          SliverAppBar.large(
-            title: Text('Calendario Raccolta'),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
-          ),
-          TrashCalendarListView(),
-        ],
-      ),
+      title: 'Calendario Raccolta',
+      children: [
+        TrashCalendarListView(),
+      ],
     );
   }
 }

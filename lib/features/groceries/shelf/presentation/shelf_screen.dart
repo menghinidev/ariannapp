@@ -9,7 +9,7 @@ class ShelfScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return BaseAppScreen(
+    return BaseAppScreen.sliver(
       title: 'Dispensa',
       actions: [
         IconButton.filled(
@@ -20,7 +20,11 @@ class ShelfScreen extends ConsumerWidget {
           icon: const Icon(Icons.add),
         ),
       ],
-      child: const ShelfListView(),
+      children: const [
+        SliverFillRemaining(
+          child: ShelfListView(),
+        ),
+      ],
     );
   }
 }

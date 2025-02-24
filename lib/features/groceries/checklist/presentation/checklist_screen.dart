@@ -12,7 +12,7 @@ class GroceriesCheckListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return BaseAppScreen(
+    return BaseAppScreen.sliver(
       title: 'Lista della spesa',
       actions: [
         IconButton.filled(
@@ -20,24 +20,14 @@ class GroceriesCheckListScreen extends ConsumerWidget {
           icon: const Icon(Icons.local_grocery_store),
         ),
       ],
-      child: const _GroceriesCheckListView(),
-    );
-  }
-}
-
-class _GroceriesCheckListView extends StatelessWidget {
-  const _GroceriesCheckListView();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Padding(
+        SliverPadding(
           padding: DistanceProvider.screenInsets.padding.removeBottom,
-          child: const CategoriesFilterSection(),
+          sliver: const SliverToBoxAdapter(child: CategoriesFilterSection()),
         ),
-        const Expanded(child: CheckListListViewSection()),
+        const SliverFillRemaining(
+          child: CheckListListViewSection(),
+        ),
       ],
     );
   }

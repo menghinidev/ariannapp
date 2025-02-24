@@ -13,45 +13,45 @@ class MatchkeeperDashboardScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _MatchkeeperDashboardScreenState();
 }
 
-class _MatchkeeperDashboardScreenState extends ConsumerState<MatchkeeperDashboardScreen>
-    with SingleTickerProviderStateMixin {
-  late final TabController _tabController;
+class _MatchkeeperDashboardScreenState extends ConsumerState<MatchkeeperDashboardScreen> {
+  static const tabs = ['In corso', 'Conslusi'];
+  late String selectedTab = tabs.first;
 
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(vsync: this, length: 2);
+  void changeTab(int index) {
+    setState(() {
+      selectedTab = tabs[index];
+    });
   }
 
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
+  int get tabIndex => tabs.indexOf(selectedTab);
 
   @override
   Widget build(BuildContext context) {
-    return BaseAppScreen(
-      title: 'Matchkeeper',
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.add),
-          onPressed: () => context.goRelative(MatchkeeperRoutes.newMatch),
-        ),
-      ],
-      bottomAppBarWidget: TabBar(
-        controller: _tabController,
-        tabs: const [Tab(text: 'In corso'), Tab(text: 'Conclusi')],
-      ),
-      child: IhneritedDashboard(
-        tabController: _tabController,
-        child: TabBarView(
-          controller: _tabController,
-          children: const [
-            OngoingMatchesSection(),
-            CompletedMatchesSection(),
+    return IhneritedDashboard(
+      switchTab: changeTab,
+      child: BaseAppScreen.sliver(
+        title: 'Matchkeeper',
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () => context.goRelative(MatchkeeperRoutes.newMatch),
+          ),
+        ],
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: tabIndex,
+          onTap: changeTab,
+          items: [
+            ...tabs.map((e) => BottomNavigationBarItem(label: e, icon: const Icon(Icons.abc))),
           ],
         ),
+        children: [
+          SliverFillRemaining(
+            child: const [
+              OngoingMatchesSection(),
+              CompletedMatchesSection(),
+            ][tabIndex],
+          ),
+        ],
       ),
     );
   }
@@ -60,11 +60,11 @@ class _MatchkeeperDashboardScreenState extends ConsumerState<MatchkeeperDashboar
 class IhneritedDashboard extends InheritedWidget {
   const IhneritedDashboard({
     required super.child,
-    required this.tabController,
+    required this.switchTab,
     super.key,
   });
 
-  final TabController tabController;
+  final void Function(int index) switchTab;
 
   static IhneritedDashboard? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<IhneritedDashboard>();

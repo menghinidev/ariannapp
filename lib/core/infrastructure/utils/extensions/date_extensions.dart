@@ -1,28 +1,97 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+class DateFormatterFactory {
+  DateFormatterFactory._();
+
+  static final DateFormatterFactory _singleton = DateFormatterFactory._();
+  static DateFormatterFactory get instance => _singleton;
+
+  DateFormat get niceDate => DateFormat('dd MMMM yyyy');
+
+  DateFormat get shortDate => DateFormat('dd/MM/yyyy');
+
+  DateFormat get utcDate => DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+
+  DateFormat get dayMonthDate => DateFormat('dd/MM');
+
+  DateFormat get dayMonthAndWeekday => DateFormat('EE, dd/MM');
+
+  DateFormat get day => DateFormat('d');
+
+  DateFormat get dayAndWeekday => DateFormat('EEEE d');
+
+  DateFormat get time => DateFormat('kk:mm');
+
+  DateFormat get monthYear => DateFormat('MM/yy');
+
+  DateFormat get niceMonthYear => DateFormat('MMMM yyyy');
+
+  DateFormat get monthYearExtended => DateFormat('MM/yyyy');
+
+  DateFormat get extendedDate => DateFormat('dd MMMM yyyy - kk:mm');
+
+  DateFormat customFormat(String pattern) => DateFormat(pattern);
+}
+
 extension DateFormatter on DateTime {
-  String get toNiceDate => DateFormat('dd MMMM yyyy').format(this);
+  String get toNiceDate {
+    final instance = DateFormatterFactory.instance;
+    return instance.niceDate.format(this);
+  }
 
-  String get toShortDate => DateFormat('dd/MM/yyyy').format(this);
+  String get toShortDate {
+    final instance = DateFormatterFactory.instance;
+    return instance.shortDate.format(this);
+  }
 
-  String get toUtcDate => DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(this);
+  String get toUtcDate {
+    final instance = DateFormatterFactory.instance;
+    return instance.utcDate.format(this);
+  }
 
-  String get toDayMonthDate => DateFormat('dd/MM').format(this);
+  String get toDayMonthDate {
+    final instance = DateFormatterFactory.instance;
+    return instance.dayMonthDate.format(this);
+  }
 
-  String get toHourDate => DateFormat('kk:mm').format(this);
+  String get toDayMonthAndWeekdayDate {
+    final instance = DateFormatterFactory.instance;
+    return instance.dayMonthAndWeekday.format(this).capitalize;
+  }
 
-  String get toMonthYear => DateFormat('MM/yy').format(this);
+  String get toDayAndWeekday {
+    final instance = DateFormatterFactory.instance;
+    return instance.dayAndWeekday.format(this).capitalize;
+  }
 
-  String get toNiceMonthYear => DateFormat('MMMM yyyy').format(this);
+  String get toTime {
+    final instance = DateFormatterFactory.instance;
+    return instance.time.format(this);
+  }
 
-  String get dayAndWeekDay => DateFormat('d').format(this);
+  String get toMonthYear {
+    final instance = DateFormatterFactory.instance;
+    return instance.monthYear.format(this);
+  }
 
-  String get toMonthYearExtended => DateFormat('MM/yyyy').format(this);
+  String get toNiceMonthYear {
+    final instance = DateFormatterFactory.instance;
+    return instance.niceMonthYear.format(this).capitalize;
+  }
 
-  String get toExtendedDate => DateFormat('dd MMMM yyyy - kk:mm', 'it-IT').format(this);
+  String get toMonthYearExtended {
+    final instance = DateFormatterFactory.instance;
+    return instance.monthYearExtended.format(this);
+  }
 
-  String customFormat(String pattern) => DateFormat(pattern).format(this);
+  String get toExtendedDate {
+    final instance = DateFormatterFactory.instance;
+    return instance.extendedDate.format(this);
+  }
+
+  String customFormat(String pattern) => DateFormatterFactory.instance.customFormat(pattern).format(this);
 
   DateTime copyWith({int? year, int? month, int? day}) {
     return DateTime(

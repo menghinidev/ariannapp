@@ -1,6 +1,7 @@
 import 'package:ariannapp/core/infrastructure/utils/local_storage/local_storage_service.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'theme_builder.g.dart';
@@ -43,8 +44,12 @@ class ThemeBuilder {
 
   final FlexScheme scheme;
 
-  ThemeData get lightTheme => FlexThemeData.light(scheme: scheme);
-  ThemeData get darkTheme => FlexThemeData.dark(scheme: scheme);
+  TextTheme _textTheme(BuildContext context) => GoogleFonts.montserratTextTheme(Theme.of(context).textTheme);
+
+  ThemeData lightTheme(BuildContext context) =>
+      FlexThemeData.light(scheme: scheme).copyWith(textTheme: _textTheme(context));
+  ThemeData darkTheme(BuildContext context) =>
+      FlexThemeData.dark(scheme: scheme).copyWith(textTheme: _textTheme(context));
 }
 
 extension ThemeProvider on BuildContext {

@@ -26,8 +26,8 @@ extension on DateTime {
   String get niceFormat {
     final today = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
     final tomorrow = today.add(const Duration(days: 1));
-    if (this == today) return 'Oggi';
-    if (this == tomorrow) return 'Domani';
-    return toDayMonthDate;
+    if (this == today) return 'Questa mattina';
+    if (this == tomorrow) return 'Domani mattina';
+    return toDayMonthAndWeekdayDate;
   }
 }

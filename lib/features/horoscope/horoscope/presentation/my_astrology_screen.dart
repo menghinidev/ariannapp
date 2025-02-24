@@ -17,50 +17,55 @@ class MyAstrologyScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _MyAstrologyScreenState();
 }
 
-class _MyAstrologyScreenState extends ConsumerState<MyAstrologyScreen> with TickerProviderStateMixin {
-  late final TabController _tabController;
-
+class _MyAstrologyScreenState extends ConsumerState<MyAstrologyScreen> {
   static const tabs = ['Giornaliera', 'Settimanale', 'Mensile'];
+  late String selectedTab = tabs.first;
+
+  void changeTab(int index) {
+    setState(() {
+      selectedTab = tabs[index];
+    });
+  }
+
+  int get tabIndex => tabs.indexOf(selectedTab);
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final sign = ref.watch(horoscopeSignSelectorProvider);
-    return BaseAppScreen(
+    return BaseAppScreen.sliver(
       title: sign.name.capitalize,
       fab: _WheelHoroscopeSelector(initialSign: sign),
-      child: Column(
-        children: [
-          TabBar(
-            controller: _tabController,
-            indicatorColor: Theme.of(context).colorScheme.primary,
-            labelColor: Theme.of(context).colorScheme.primary,
-            unselectedLabelColor: Theme.of(context).colorScheme.onSurface,
-            tabs: [...tabs.map((e) => Tab(text: e))],
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: const [
-                DailyHoroscopeSection(),
-                WeeklyHoroscopeSection(),
-                MonthlyHoroscopeSection(),
-              ],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: tabIndex,
+        onTap: changeTab,
+        items: [
+          ...tabs.map(
+            (e) => BottomNavigationBarItem(
+              label: e,
+              icon: const Icon(Icons.calendar_month_outlined),
             ),
           ),
         ],
       ),
+      children: [
+        SliverFillRemaining(
+          child: [
+            const DailyHoroscopeSection(),
+            const WeeklyHoroscopeSection(),
+            const MonthlyHoroscopeSection(),
+          ][tabIndex],
+        ),
+      ],
     );
   }
 }

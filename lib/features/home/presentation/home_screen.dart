@@ -16,19 +16,32 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return BaseAppScreen.sliver(
-      child: CustomScrollView(
-        physics: const ScrollPhysics(),
-        slivers: [
-          const _AppBar(),
-          if (!EnvVariable.mode.isLite) ...[
-            const SliverToBoxAdapter(child: CalendarDashboardSection()),
-            SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
-          ],
-          const SliverToBoxAdapter(child: GroceriesDashboardSection()),
-          SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
-          const SliverToBoxAdapter(child: MatchkeeperDashboardSection()),
+      title: 'AriannApp',
+      actions: [
+        if (!EnvVariable.mode.isLite) ...[
+          IconButton.filled(
+            onPressed: () => context.goRelative(MyAstrologyScreenRoute.pagePath),
+            icon: const Icon(Icons.star_border_outlined),
+          ),
+          IconButton.filled(
+            onPressed: () => context.goRelative(TrashCalendarScreenRoute.pagePath),
+            icon: const Icon(Icons.calendar_month_outlined),
+          ),
         ],
-      ),
+        IconButton.filled(
+          onPressed: () => context.goRelative(SettingsScreenRoute.pagePath),
+          icon: const Icon(Icons.settings_outlined),
+        ),
+      ],
+      children: [
+        if (!EnvVariable.mode.isLite) ...[
+          const SliverToBoxAdapter(child: CalendarDashboardSection()),
+          SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
+        ],
+        const SliverToBoxAdapter(child: GroceriesDashboardSection()),
+        SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
+        const SliverToBoxAdapter(child: MatchkeeperDashboardSection()),
+      ],
     );
   }
 }

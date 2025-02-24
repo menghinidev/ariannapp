@@ -1,4 +1,4 @@
-import 'package:ariannapp/core/core.dart';
+import 'package:ariannapp/features/groceries/shared/model/grocery_category.dart';
 import 'package:ariannapp/features/groceries/shared/model/shelf_item/shelf_item.dart';
 import 'package:ariannapp/features/groceries/shelf/usecase/move_to_grocery_list/command/movetogrocerylistcommand.dart';
 import 'package:ariannapp/features/groceries/shelf/usecase/move_to_grocery_list/move_grocery_item_use_case.dart';
@@ -17,7 +17,12 @@ class ShelfListItem extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
       title: Text(item.name),
-      subtitle: Text(item.lastUpdate.toDayMonthDate),
+      subtitle: Align(
+        alignment: Alignment.centerLeft,
+        child: RawChip(
+          label: Text(item.category.label),
+        ),
+      ),
       trailing: IconButton(
         icon: const Icon(Icons.add_circle_outline),
         onPressed: () async {

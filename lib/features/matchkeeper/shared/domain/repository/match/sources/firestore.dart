@@ -26,7 +26,7 @@ class FirestoreMatchRepository extends IMatchRepository with RepositorySafeInvok
   @override
   Future<ApplicationResponse<List<ApplicationMatch>>> getMatches({MatchStatus? status}) {
     return safeInvoke<List<ApplicationMatch>, QuerySnapshot<Map<String, dynamic>>>(
-      request: () => instance.collection(matchCollection).get(),
+      request: () => instance.collection(matchCollection).orderBy('lastUpdate', descending: true).get(),
       payloadMapper: (response) {
         final matches = response.docs.map(ApplicationMatch.fromFirestore).toList();
         return status != null ? matches.where((e) => e.status == status).toList() : matches;

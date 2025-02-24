@@ -1,5 +1,4 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/core/infrastructure/utils/extensions/riverpod_extensions.dart';
 import 'package:ariannapp/core/ui/layout/layout_provider.dart';
 import 'package:ariannapp/features/groceries/shelf/presentation/components/search_item_view.dart';
 import 'package:ariannapp/features/groceries/shelf/presentation/components/shelf_list_item.dart';
@@ -12,9 +11,11 @@ class ShelfListView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final shelf = ref.watch(getShelfProvider);
-    return shelf.loadUntil(
-      onLoaded: (data) => EmptyCaseBuilder(
+    final shelf = ref.watch(getShelfProvider.select((e) => e.valueOrNull));
+    return LoadingSwitcher(
+      value: shelf,
+      margin: DistanceProvider.screenInsets.padding.removeBottom,
+      builder: (context, data) => EmptyCaseBuilder(
         isEmpty: data.isEmpty,
         title: 'Nessun elemento',
         builder: (context) => Column(

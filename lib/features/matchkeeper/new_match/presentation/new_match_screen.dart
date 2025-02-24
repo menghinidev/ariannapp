@@ -17,45 +17,47 @@ class NewMatchScreen extends ConsumerWidget {
     final stepper = ref.watch(stepperStateProvider);
     final canProceed = ref.watch(canProceedStepperProvider);
     final canBuild = ref.watch(newMatchControllerProvider.select((e) => e.canBuild));
-    return BaseAppScreen(
+    return BaseAppScreen.sliver(
       title: 'Nuova partita',
       fab: !canBuild ? null : const CreateNewMatchFAB(),
-      child: SizedBox.expand(
-        child: Stepper(
-          currentStep: stepper,
-          stepIconHeight: 36,
-          stepIconWidth: 36,
-          margin: EdgeInsets.zero,
-          stepIconMargin: EdgeInsets.zero,
-          stepIconBuilder: _stepIconBuilder,
-          onStepContinue: !canProceed ? null : () => ref.read(stepperStateProvider.notifier).nextStep(),
-          onStepCancel: stepper == 0 ? null : () => ref.read(stepperStateProvider.notifier).previousStep(),
-          controlsBuilder: _controlsBuilder,
-          steps: [
-            Step(
-              title: const Text('Gioco'),
-              subtitle: const Text('Scegli il gioco che vuoi giocare'),
-              content: const GameSelectionStep(),
-              isActive: stepper == 0,
-              state: stepper > 0 ? StepState.complete : StepState.indexed,
-            ),
-            Step(
-              title: const Text('Impostazioni di gioco'),
-              subtitle: const Text('Scegli quanti punti servono per vincere e altri dettagli'),
-              content: const GameStrategyStep(),
-              isActive: stepper == 1,
-              state: stepper > 1 ? StepState.complete : StepState.indexed,
-            ),
-            Step(
-              title: const Text('Squadre'),
-              subtitle: const Text('Scegli le squadre che parteciperanno al match'),
-              content: const TeamsStep(),
-              isActive: stepper == 2,
-              state: stepper == 2 && canBuild ? StepState.complete : StepState.indexed,
-            ),
-          ],
+      children: [
+        SliverFillRemaining(
+          child: Stepper(
+            currentStep: stepper,
+            stepIconHeight: 36,
+            stepIconWidth: 36,
+            margin: EdgeInsets.zero,
+            stepIconMargin: EdgeInsets.zero,
+            stepIconBuilder: _stepIconBuilder,
+            onStepContinue: !canProceed ? null : () => ref.read(stepperStateProvider.notifier).nextStep(),
+            onStepCancel: stepper == 0 ? null : () => ref.read(stepperStateProvider.notifier).previousStep(),
+            controlsBuilder: _controlsBuilder,
+            steps: [
+              Step(
+                title: const Text('Gioco'),
+                subtitle: const Text('Scegli il gioco che vuoi giocare'),
+                content: const GameSelectionStep(),
+                isActive: stepper == 0,
+                state: stepper > 0 ? StepState.complete : StepState.indexed,
+              ),
+              Step(
+                title: const Text('Impostazioni di gioco'),
+                subtitle: const Text('Scegli quanti punti servono per vincere e altri dettagli'),
+                content: const GameStrategyStep(),
+                isActive: stepper == 1,
+                state: stepper > 1 ? StepState.complete : StepState.indexed,
+              ),
+              Step(
+                title: const Text('Squadre'),
+                subtitle: const Text('Scegli le squadre che parteciperanno al match'),
+                content: const TeamsStep(),
+                isActive: stepper == 2,
+                state: stepper == 2 && canBuild ? StepState.complete : StepState.indexed,
+              ),
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 

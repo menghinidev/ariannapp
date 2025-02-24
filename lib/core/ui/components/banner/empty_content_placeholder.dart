@@ -10,11 +10,26 @@ class EmptyCaseBuilder extends StatelessWidget {
     this.title,
     this.subtitle,
     super.key,
-  }) : assert(
+  })  : isSliver = false,
+        assert(
           title != null || emptyBuilder != null,
           'Title or emptyBuilder must be provided',
         );
 
+  const EmptyCaseBuilder.sliver({
+    required this.isEmpty,
+    required this.builder,
+    this.emptyBuilder,
+    this.title,
+    this.subtitle,
+    super.key,
+  })  : isSliver = true,
+        assert(
+          title != null || emptyBuilder != null,
+          'Title or emptyBuilder must be provided',
+        );
+
+  final bool isSliver;
   final bool isEmpty;
   final Widget Function(BuildContext context)? emptyBuilder;
   final String? title;
@@ -25,10 +40,12 @@ class EmptyCaseBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isEmpty) {
       if (emptyBuilder == null) {
-        return EmptyContentPlaceholder(
+        final body = EmptyContentPlaceholder(
           title: title!,
           subtitle: subtitle,
         );
+        if (isSliver) return SliverToBoxAdapter(child: body);
+        return body;
       }
       return emptyBuilder!.call(context);
     }
