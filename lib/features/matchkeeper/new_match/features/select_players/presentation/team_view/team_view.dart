@@ -1,4 +1,4 @@
-import 'package:ariannapp/core/ui/layout/layout_provider.dart';
+import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/presentation/components/player_list_tile.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/presentation/components/player_text_field.dart';
 import 'package:ariannapp/features/matchkeeper/shared/domain/model/player/player.dart';

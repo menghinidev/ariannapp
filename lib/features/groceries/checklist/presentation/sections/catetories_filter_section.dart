@@ -1,5 +1,4 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/core/ui/layout/layout_provider.dart';
 import 'package:ariannapp/features/groceries/checklist/presentation/bloc/groceries_checklist_bloc.dart';
 import 'package:ariannapp/features/groceries/shared/model/grocery_category.dart';
 import 'package:flutter/material.dart';

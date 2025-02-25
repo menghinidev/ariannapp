@@ -1,5 +1,4 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/core/ui/layout/layout_provider.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/presentation/single_player_view/player_view.dart';
 import 'package:ariannapp/features/matchkeeper/new_match/features/select_players/presentation/team_view/team_view.dart';
 import 'package:flutter/material.dart';

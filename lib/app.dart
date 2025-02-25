@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/core/ui/localization/time_localization_delegate.dart';
 import 'package:ariannapp/navigation/entrypoint.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

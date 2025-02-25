@@ -1,5 +1,4 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/core/ui/layout/layout_provider.dart';
 import 'package:ariannapp/features/groceries/shared/model/grocery_category.dart';
 import 'package:ariannapp/features/groceries/shelf/presentation/components/new_shelf_item/bloc.dart';
 import 'package:ariannapp/features/groceries/shelf/usecase/add_shelf_item/add_shelf_item_use_case.dart';

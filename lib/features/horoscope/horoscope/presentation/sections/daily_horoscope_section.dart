@@ -1,5 +1,4 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/core/ui/layout/layout_provider.dart';
 import 'package:ariannapp/features/horoscope/horoscope/presentation/components/horoscope_header.dart';
 import 'package:ariannapp/features/horoscope/horoscope/usecase/get_horoscope_use_case.dart';
 import 'package:flutter/material.dart';

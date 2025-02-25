@@ -1,5 +1,4 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/core/infrastructure/repository/invoker.dart';
 import 'package:ariannapp/features/trash_calendar/shared/model/trashcalendardate.dart';
 import 'package:dio/dio.dart' as dio;
 

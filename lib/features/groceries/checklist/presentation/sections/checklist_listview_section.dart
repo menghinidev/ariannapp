@@ -1,8 +1,6 @@
 import 'dart:ui';
 
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/core/infrastructure/utils/extensions/riverpod_extensions.dart';
-import 'package:ariannapp/core/ui/layout/layout_provider.dart';
 import 'package:ariannapp/features/groceries/checklist/presentation/bloc/groceries_checklist_bloc.dart';
 import 'package:ariannapp/features/groceries/checklist/presentation/components/checklist_list_item.dart';
 import 'package:flutter/material.dart';

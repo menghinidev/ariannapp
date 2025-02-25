@@ -1,4 +1,4 @@
-import 'package:ariannapp/core/ui/layout/layout_provider.dart';
+import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/groceries/checklist/usecase/get_checklist/get_checklist_use_case.dart';
 import 'package:ariannapp/features/groceries/checklist/usecase/remove_grocery_item/command/removegroceryitemcommand.dart';
 import 'package:ariannapp/features/groceries/checklist/usecase/remove_grocery_item/remove_grocery_item_use_case.dart';

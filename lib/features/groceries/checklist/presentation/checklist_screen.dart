@@ -1,5 +1,4 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/core/ui/layout/layout_provider.dart';
 import 'package:ariannapp/features/groceries/checklist/presentation/sections/catetories_filter_section.dart';
 import 'package:ariannapp/features/groceries/checklist/presentation/sections/checklist_listview_section.dart';
 import 'package:ariannapp/features/groceries/shared/routes/shelf_routes.dart';

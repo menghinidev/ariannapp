@@ -1,5 +1,4 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/core/infrastructure/repository/invoker.dart';
 import 'package:ariannapp/features/horoscope/shared/model/horoscope.dart';
 import 'package:ariannapp/features/horoscope/shared/repository/dto/dailyhoroscopedto.dart';
 import 'package:ariannapp/features/horoscope/shared/repository/sources/horoscope_repository.dart';
