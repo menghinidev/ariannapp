@@ -23,7 +23,7 @@ class FirebaseProxyWrapper with RepositorySafeInvoker {
   }) async {
     final firebaseCacheAttempt = await safeInvoke(request: firebaseProxyRequest, payloadMapper: firebasePayloadMapper);
     if (!firebaseCacheAttempt.isError) return firebaseCacheAttempt;
-    final response = await authanticateRequest(request: request, payloadMapper: payloadMapper);
+    final response = await authenticateRequest(request: request, payloadMapper: payloadMapper);
     if (!response.isError) {
       await safeInvoke(
         request: () => firebaseProxyUpdate(response.payload),
@@ -33,7 +33,7 @@ class FirebaseProxyWrapper with RepositorySafeInvoker {
     return response;
   }
 
-  Future<Response<T, ApplicationError>> authanticateRequest<T, P>({
+  Future<Response<T, ApplicationError>> authenticateRequest<T, P>({
     required Future<P> Function(String token) request,
     required T Function(P payload) payloadMapper,
   }) async {

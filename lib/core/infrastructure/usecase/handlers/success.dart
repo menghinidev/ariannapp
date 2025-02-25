@@ -1,9 +1,9 @@
 import 'package:ariannapp/core/infrastructure/usecase/handlers/handler.dart';
-import 'package:ariannapp/core/ui/layout/layout_provider.dart';
+import 'package:ariannapp/core/ui/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ShowSnackbarSuccessHandler<R, I> extends UseCaseSuccessHandler<R, I> {
+class ShowSnackbarSuccessHandler<R, I> extends UseCaseSuccessHandler<R, I> with SnackbarBuilder {
   ShowSnackbarSuccessHandler({
     required this.message,
     required this.contextProvider,
@@ -17,23 +17,11 @@ class ShowSnackbarSuccessHandler<R, I> extends UseCaseSuccessHandler<R, I> {
     try {
       final context = contextProvider(input);
       final scaffold = ScaffoldMessenger.of(context);
-      final _ = scaffold.showSnackBar(_snackBar);
+      final _ = scaffold.showSnackBar(buildSnackbar(message: message));
       return Future.value();
     } catch (e) {
       return Future.value();
     }
-  }
-
-  SnackBar get _snackBar {
-    return SnackBar(
-      duration: const Duration(seconds: 2),
-      showCloseIcon: true,
-      margin: DistanceProvider.screenInsets.padding,
-      behavior: SnackBarBehavior.floating,
-      dismissDirection: DismissDirection.horizontal,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      content: Text(message),
-    );
   }
 }
 

@@ -1,3 +1,4 @@
+import 'package:ariannapp/core/ui/layout/layout_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -21,6 +22,20 @@ class SnackbarService extends _$SnackbarService {
         content: Text(message),
         backgroundColor: Colors.green,
       ),
+    );
+  }
+}
+
+mixin SnackbarBuilder {
+  SnackBar buildSnackbar({required String message}) {
+    return SnackBar(
+      duration: const Duration(seconds: 2),
+      showCloseIcon: true,
+      margin: DistanceProvider.screenInsets.padding,
+      behavior: SnackBarBehavior.floating,
+      dismissDirection: DismissDirection.horizontal,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      content: Text(message),
     );
   }
 }

@@ -58,7 +58,7 @@ class _GetDailyHoroscopeUseCase extends UseCase<SimpleHoroscope, GetHoroscopeCom
         date: input.date.add(const Duration(hours: 3)),
       ),
     );
-    await response.ifErrorAsync((payload) => applyErrorHandlers(response));
+    await response.ifErrorAsync((payload) => applyErrorHandlers(response, input));
     return response;
   }
 }
@@ -78,7 +78,7 @@ class _GetMonthlyHoroscopeUseCase extends UseCase<MonthlyHoroscope, GetHoroscope
         sign: input.sign,
       ),
     );
-    await response.ifErrorAsync((payload) => applyErrorHandlers(response));
+    await response.ifErrorAsync((payload) => applyErrorHandlers(response, input));
     return response;
   }
 }
@@ -98,7 +98,7 @@ class _GetWeeklyHoroscopeUseCase extends UseCase<SimpleHoroscope, GetHoroscopeCo
         sign: input.sign,
       ),
     );
-    await response.ifErrorAsync((payload) => applyErrorHandlers(response));
+    await response.ifErrorAsync((payload) => applyErrorHandlers(response, input));
     return response;
   }
 }

@@ -17,11 +17,11 @@ class ApplicationLogger {
   );
 
   void logApplicationEvent(Object? event) {
-    _logGenericMessage('NEW VALUE: $event');
+    _logGenericMessage('[NEW-STATE]: $event');
   }
 
   void logApplicationError(String message, {dynamic error, StackTrace? stacktrace}) {
-    _logDartError(message, error: error, stacktrace: stacktrace);
+    _logExceptionError('[ERROR] $message', error: error, stacktrace: stacktrace);
   }
 
   void logApplicationSuccess(String message) {
@@ -32,22 +32,29 @@ class ApplicationLogger {
     logger.log(level, message);
   }
 
-  void _logDartError(String message, {dynamic error, StackTrace? stacktrace}) {
+  void _logExceptionError(String message, {dynamic error, StackTrace? stacktrace}) {
     logger.e(message, error: error, stackTrace: stacktrace);
   }
 
   void logFlutterError(FlutterErrorDetails details) {
-    if (kDebugMode) {
-      print('Error from INSIDE framework');
-      print('----------------------');
-      print('Error :  ${details.exception}');
-      print('StackTrace :  ${details.stack}');
-    }
+    _logDartError(
+      'INSIDE framework',
+      error: details.exception,
+      stacktrace: details.stack,
+    );
   }
 
   void logFrameworkError(Object error, StackTrace? stacktrace) {
+    _logDartError(
+      'OUTSIDE framework',
+      error: error,
+      stacktrace: stacktrace,
+    );
+  }
+
+  void _logDartError(String context, {required Object error, StackTrace? stacktrace}) {
     if (kDebugMode) {
-      print('Error from OUTSIDE framework');
+      print('Error from: $context');
       print('----------------------');
       print('Error :  $error');
       print('StackTrace :  $stacktrace');
