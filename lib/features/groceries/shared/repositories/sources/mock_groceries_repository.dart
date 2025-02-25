@@ -104,8 +104,10 @@ class MockGroceriesRepository extends IGroceriesRepository {
   }
 
   @override
-  Future<EmptyResponse> reorder({required List<GroceriesCheckListItem> items}) {
-    // TODO(someone): implement reorder
-    throw UnimplementedError();
+  Future<EmptyResponse> reorder({required List<GroceriesCheckListItem> items}) async {
+    groceries
+      ..clear()
+      ..addAll(items);
+    return Responses.success<void, ApplicationError>(null);
   }
 }

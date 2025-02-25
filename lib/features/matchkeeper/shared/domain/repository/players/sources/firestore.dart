@@ -10,10 +10,7 @@ class FirestorePlayerRepository extends IPlayersRepository with RepositorySafeIn
 
   @override
   Future<ApplicationResponse<Player>> addPlayer(String name) {
-    final player = Player(
-      id: IDGenerator.generateId,
-      name: name,
-    );
+    final player = Player(id: IDGenerator.generateId, name: name);
     return safeInvoke(
       request: () => instance.collection(playersCollection).add(player.toFirestore()),
       payloadMapper: (response) => player.copyWith(id: response.id),

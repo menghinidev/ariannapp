@@ -1,6 +1,5 @@
 import 'package:ariannapp/core/infrastructure/error/application_error/applicationerror.dart';
 import 'package:ariannapp/core/infrastructure/usecase/validator/use_case_validator.dart';
-import 'package:ariannapp/core/infrastructure/utils/response/empty_response.dart';
 import 'package:ariannapp/core/infrastructure/utils/utils.dart';
 import 'package:ariannapp/core/ui/components/modals/dialog/dialog_service.dart';
 

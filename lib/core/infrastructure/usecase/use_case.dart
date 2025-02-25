@@ -2,7 +2,6 @@ import 'package:ariannapp/core/infrastructure/error/application_error/applicatio
 import 'package:ariannapp/core/infrastructure/usecase/handlers/handler.dart';
 import 'package:ariannapp/core/infrastructure/usecase/requirements/requirement.dart';
 import 'package:ariannapp/core/infrastructure/usecase/validator/use_case_validator.dart';
-import 'package:ariannapp/core/infrastructure/utils/response/empty_response.dart';
 import 'package:ariannapp/core/infrastructure/utils/utils.dart';
 
 abstract class UseCase<R, I> {

@@ -4,25 +4,6 @@ import 'package:ariannapp/features/matchkeeper/shared/domain/repository/players/
 
 class MockPlayersRepository extends IPlayersRepository {
   final players = <Player>[];
-/*   late final players = List.generate(
-    10,
-    (index) => Player(
-      id: index.toString(),
-      name: playerNames[index],
-    ),
-  );
-  late final playerNames = [
-    'Pippo',
-    'Pluto',
-    'Paolo',
-    'Ciccio',
-    'Gino',
-    'Gina',
-    'Giovanni',
-    'Giovanna',
-    'Giovannino',
-    'Giovannina',
-  ]; */
 
   @override
   Future<ApplicationResponse<Player>> addPlayer(String name) async {
@@ -38,7 +19,7 @@ class MockPlayersRepository extends IPlayersRepository {
 
   @override
   Future<ApplicationResponse<Player>> getPlayer(String id) {
-    // TODO(someone): implement getPlayer
-    throw UnimplementedError();
+    final player = players.firstWhere((element) => element.id == id);
+    return Future.value(Responses.success(player));
   }
 }
