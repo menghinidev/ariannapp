@@ -44,12 +44,10 @@ class ThemeBuilder {
 
   final FlexScheme scheme;
 
-  TextTheme _textTheme(BuildContext context) => GoogleFonts.montserratTextTheme(Theme.of(context).textTheme);
+  TextTheme _textTheme(BuildContext context) => GoogleFonts.montserratTextTheme();
 
-  ThemeData lightTheme(BuildContext context) =>
-      FlexThemeData.light(scheme: scheme).copyWith(textTheme: _textTheme(context));
-  ThemeData darkTheme(BuildContext context) =>
-      FlexThemeData.dark(scheme: scheme).copyWith(textTheme: _textTheme(context));
+  ThemeData lightTheme(BuildContext context) => FlexThemeData.light(scheme: scheme, textTheme: _textTheme(context));
+  ThemeData darkTheme(BuildContext context) => FlexThemeData.dark(scheme: scheme, textTheme: _textTheme(context));
 }
 
 extension ThemeProvider on BuildContext {

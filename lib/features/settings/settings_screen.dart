@@ -21,7 +21,7 @@ class SettingsScreen extends ConsumerWidget {
               builder: (context, themeBuilder) => SingleChildScrollView(
                 padding: DistanceProvider.screenInsets.padding,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     DropdownMenu<ThemeMode>(
                       label: const Text('Tema'),
