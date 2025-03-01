@@ -11,8 +11,8 @@ class DailyHoroscopeSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final horoscope = ref.watch(dailyHoroscopeProvider.select((e) => e.valueOrNull));
-    return LoadingSwitcher(
+    final horoscope = ref.watch(dailyHoroscopeProvider);
+    return AsyncLoadingSwitcher(
       value: horoscope,
       margin: DistanceProvider.screenInsets.padding,
       builder: (context, horoscope) => Padding(
