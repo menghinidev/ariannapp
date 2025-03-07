@@ -15,6 +15,10 @@
                 "--dart-define-from-file",
                 "${workspaceFolder}/.env",
             ],
+            "args": [
+                "--web-browser-flag",
+                "--disable-web-security"
+            ]
         },
         {
             "name": "Android (debug)",

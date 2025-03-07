@@ -40,10 +40,10 @@ class _MyAstrologyScreenState extends ConsumerState<MyAstrologyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final sign = ref.watch(horoscopeSignSelectorProvider);
+    final sign = ref.watch(horoscopeSignSelectorProvider.select((value) => value.valueOrNull));
     return BaseAppScreen.sliver(
-      title: sign.name.capitalize,
-      fab: _WheelHoroscopeSelector(initialSign: sign),
+      title: sign == null ? '' : sign.name.capitalize,
+      fab: sign == null ? null : _WheelHoroscopeSelector(initialSign: sign),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: tabIndex,
         onTap: changeTab,
@@ -103,7 +103,7 @@ class __WheelHoroscopeSelectorState extends ConsumerState<_WheelHoroscopeSelecto
       child: ListWheelScrollView(
         controller: _scrollController,
         onSelectedItemChanged: (value) {
-          ref.read(horoscopeSignSelectorProvider.notifier).sign = HoroscopeSign.values[value];
+          ref.read(horoscopeSignSelectorProvider.notifier).setSign(HoroscopeSign.values[value]);
         },
         physics: const FixedExtentScrollPhysics(),
         itemExtent: _WheelHoroscopeSelector.itemExtent,

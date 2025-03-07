@@ -1,6 +1,6 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/horoscope/horoscope/presentation/components/horoscope_header.dart';
-import 'package:ariannapp/features/horoscope/horoscope/usecase/get_horoscope_use_case.dart';
+import 'package:ariannapp/features/horoscope/horoscope/usecase/get_horoscope/get_horoscope_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

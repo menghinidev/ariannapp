@@ -6,7 +6,7 @@ part of 'get_horoscope_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dailyHoroscopeHash() => r'06c2492b924adc963e2406c893b091707ff5cb52';
+String _$dailyHoroscopeHash() => r'2e0d2a71be02047bf4650c43a74824b07371e358';
 
 /// See also [dailyHoroscope].
 @ProviderFor(dailyHoroscope)
@@ -24,7 +24,7 @@ final dailyHoroscopeProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef DailyHoroscopeRef = AutoDisposeFutureProviderRef<SimpleHoroscope>;
-String _$monthlyHoroscopeHash() => r'ef200f011c9dc16c7b6d1f5bf3b09671ff1bcfa8';
+String _$monthlyHoroscopeHash() => r'f97838ec95f59c3bb72e11b35794d5643f3ebf62';
 
 /// See also [monthlyHoroscope].
 @ProviderFor(monthlyHoroscope)
@@ -42,7 +42,7 @@ final monthlyHoroscopeProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef MonthlyHoroscopeRef = AutoDisposeFutureProviderRef<MonthlyHoroscope>;
-String _$weeklyHoroscopeHash() => r'fcc47203d5a2c993cf91d5dcea265699619dba7a';
+String _$weeklyHoroscopeHash() => r'e1430e10d938a541beb1dad2e655315b9791c2a9';
 
 /// See also [weeklyHoroscope].
 @ProviderFor(weeklyHoroscope)

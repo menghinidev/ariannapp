@@ -1,6 +1,6 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/horoscope/horoscope/presentation/bloc/my_astrology_state.dart';
-import 'package:ariannapp/features/horoscope/horoscope/usecase/command/get_horoscope_command.dart';
+import 'package:ariannapp/features/horoscope/horoscope/usecase/get_horoscope/command/get_horoscope_command.dart';
 import 'package:ariannapp/features/horoscope/shared/model/horoscope.dart';
 import 'package:ariannapp/features/horoscope/shared/repository/provider.dart';
 import 'package:ariannapp/features/horoscope/shared/repository/sources/horoscope_repository.dart';
@@ -11,7 +11,7 @@ part 'get_horoscope_use_case.g.dart';
 
 @riverpod
 FutureOr<SimpleHoroscope> dailyHoroscope(Ref ref) async {
-  final sign = ref.watch(horoscopeSignSelectorProvider);
+  final sign = await ref.watch(horoscopeSignSelectorProvider.future);
   final date = ref.watch(horoscopeDateSelectorProvider);
   final repo = await ref.watch(horoscopeRepositoryProvider.future);
   final usecase = _GetDailyHoroscopeUseCase(repo: repo);
@@ -22,7 +22,7 @@ FutureOr<SimpleHoroscope> dailyHoroscope(Ref ref) async {
 
 @riverpod
 FutureOr<MonthlyHoroscope> monthlyHoroscope(Ref ref) async {
-  final sign = ref.watch(horoscopeSignSelectorProvider);
+  final sign = await ref.watch(horoscopeSignSelectorProvider.future);
   final date = ref.watch(horoscopeDateSelectorProvider);
   final repo = await ref.watch(horoscopeRepositoryProvider.future);
   final usecase = _GetMonthlyHoroscopeUseCase(repo: repo);
@@ -33,7 +33,7 @@ FutureOr<MonthlyHoroscope> monthlyHoroscope(Ref ref) async {
 
 @riverpod
 FutureOr<SimpleHoroscope> weeklyHoroscope(Ref ref) async {
-  final sign = ref.watch(horoscopeSignSelectorProvider);
+  final sign = await ref.watch(horoscopeSignSelectorProvider.future);
   final date = ref.watch(horoscopeDateSelectorProvider);
   final repo = await ref.watch(horoscopeRepositoryProvider.future);
   final usecase = _GetWeeklyHoroscopeUseCase(repo: repo);

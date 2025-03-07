@@ -7,12 +7,12 @@ part of 'my_astrology_state.dart';
 // **************************************************************************
 
 String _$horoscopeSignSelectorHash() =>
-    r'8536595489f20bf91b9ed3ae468cf601d9b0df47';
+    r'6eced535ed16b4b3bc2fbe1a1d19cdfbfe68240b';
 
 /// See also [HoroscopeSignSelector].
 @ProviderFor(HoroscopeSignSelector)
-final horoscopeSignSelectorProvider =
-    AutoDisposeNotifierProvider<HoroscopeSignSelector, HoroscopeSign>.internal(
+final horoscopeSignSelectorProvider = AutoDisposeAsyncNotifierProvider<
+    HoroscopeSignSelector, HoroscopeSign>.internal(
   HoroscopeSignSelector.new,
   name: r'horoscopeSignSelectorProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,7 +22,7 @@ final horoscopeSignSelectorProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$HoroscopeSignSelector = AutoDisposeNotifier<HoroscopeSign>;
+typedef _$HoroscopeSignSelector = AutoDisposeAsyncNotifier<HoroscopeSign>;
 String _$horoscopeDateSelectorHash() =>
     r'1803916893bbd054d6e4f1ae023c0c3ea0bb7516';
 

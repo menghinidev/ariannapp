@@ -6,7 +6,7 @@ part of 'router_key.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$navigatorKeyHash() => r'8b4dbfb31d887f8bbb1a13b7214b897e71dac1f7';
+String _$navigatorKeyHash() => r'6e9d7249fe86101ea2092a8617d10993370d5975';
 
 /// See also [navigatorKey].
 @ProviderFor(navigatorKey)

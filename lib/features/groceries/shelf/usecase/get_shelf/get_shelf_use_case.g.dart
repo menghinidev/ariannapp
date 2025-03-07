@@ -6,7 +6,7 @@ part of 'get_shelf_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getShelfHash() => r'1ad0012be48b5fa942d96f3fd60410577d02d7ed';
+String _$getShelfHash() => r'0a5367d16c2528b57c9534517ace1b1d820d107a';
 
 /// See also [getShelf].
 @ProviderFor(getShelf)
@@ -22,7 +22,7 @@ final getShelfProvider = AutoDisposeFutureProvider<List<ShelfItem>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetShelfRef = AutoDisposeFutureProviderRef<List<ShelfItem>>;
-String _$getShelfUseCaseHash() => r'0480c252643e645d1b66cdcef326d8249c03382d';
+String _$getShelfUseCaseHash() => r'd46d47b76f57df1033b0dc0b52b196442b6a50e4';
 
 /// See also [getShelfUseCase].
 @ProviderFor(getShelfUseCase)

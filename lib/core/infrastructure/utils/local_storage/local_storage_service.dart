@@ -17,6 +17,8 @@ abstract class ILocalStorageService {
   Future<void> saveThemeMode(ThemeMode mode);
   Future<void> saveFlexScheme(FlexScheme scheme);
   Future<void> saveAccessToken(String token);
+  Future<void> saveHoroscopeSign(String sign);
+  Future<String?> get horoscopeSign;
   Future<String?> get accessToken;
   Future<ThemeMode?> get themeMode;
   Future<FlexScheme?> get flexScheme;
@@ -30,6 +32,7 @@ class LocalStorageService implements ILocalStorageService {
   static const String themeModeKey = 'theme-mode';
   static const String flexSchemeKey = 'theme-scheme';
   static const String accessTokenKey = 'access-token';
+  static const String horoscopeSignKey = 'horoscope-sign';
 
   @override
   Future<void> saveFlexScheme(FlexScheme scheme) async {
@@ -63,5 +66,13 @@ class LocalStorageService implements ILocalStorageService {
   @override
   Future<void> saveAccessToken(String token) {
     return instance.setString(accessTokenKey, token);
+  }
+
+  @override
+  Future<String?> get horoscopeSign async => instance.getString(horoscopeSignKey);
+
+  @override
+  Future<void> saveHoroscopeSign(String sign) {
+    return instance.setString(horoscopeSignKey, sign);
   }
 }
