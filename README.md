@@ -1,3 +1,5 @@
+[![Codemagic build status](https://api.codemagic.io/apps/67cc1957cc4d3f1c027bca3e/67cc1957cc4d3f1c027bca3d/status_badge.svg)](https://codemagic.io/app/67cc1957cc4d3f1c027bca3e/67cc1957cc4d3f1c027bca3d/latest_build)
+
 [![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
 
 # ariannapp
