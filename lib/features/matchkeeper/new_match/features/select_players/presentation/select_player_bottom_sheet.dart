@@ -38,34 +38,30 @@ class AddPlayerBottomSheet extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final available = ref.watch(_availablePlayerModesProvider);
     final selectedMode = ref.watch(selectedPlayerModeProvider);
-    return BottomSheet(
-      onClosing: () {},
-      builder: (context) => SingleChildScrollView(
-        padding: DistanceProvider.screenInsets.padding.add(MediaQuery.of(context).viewInsets),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'Aggiungi squadra o giocatore',
-              style: context.textTheme.headlineSmall,
-            ),
-            DistanceProvider.mediumDistance.spacer(),
-            SegmentedButton<String>(
-              selected: {selectedMode},
-              onSelectionChanged: ref.read(selectedPlayerModeProvider.notifier).update,
-              segments: [
-                for (final i in available) ButtonSegment(value: i, label: Text(i)),
-              ],
-            ),
-            DistanceProvider.mediumDistance.spacer(),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
-              child: selectedMode == 'Squadra'
-                  ? AddTeamView(onSelected: (players) => context.pop(players))
-                  : AddSinglePlayerView(onSelected: (player) => context.pop([player])),
-            ),
-          ],
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            'Aggiungi squadra o giocatore',
+            style: context.textTheme.headlineSmall,
+          ),
+          DistanceProvider.mediumDistance.spacer(),
+          SegmentedButton<String>(
+            selected: {selectedMode},
+            onSelectionChanged: ref.read(selectedPlayerModeProvider.notifier).update,
+            segments: [
+              for (final i in available) ButtonSegment(value: i, label: Text(i)),
+            ],
+          ),
+          DistanceProvider.mediumDistance.spacer(),
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            child: selectedMode == 'Squadra'
+                ? AddTeamView(onSelected: (players) => context.pop(players))
+                : AddSinglePlayerView(onSelected: (player) => context.pop([player])),
+          ),
+        ],
       ),
     );
   }

@@ -13,11 +13,11 @@ class ShelfScreen extends ConsumerWidget {
       title: 'Dispensa',
       actions: [
         IconButton.filled(
-          onPressed: () => showModalBottomSheet<void>(
-            context: context,
-            builder: (context) => const NewShelfItemBottomSheet(),
-          ),
           icon: const Icon(Icons.add),
+          onPressed: () => ref.read(bottomSheetServiceProvider).showBottomSheet<void>(
+                context,
+                builder: (context) => const NewShelfItemBottomSheet(),
+              ),
         ),
       ],
       children: const [

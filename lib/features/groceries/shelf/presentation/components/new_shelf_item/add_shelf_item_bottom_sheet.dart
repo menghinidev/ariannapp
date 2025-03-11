@@ -13,36 +13,32 @@ class NewShelfItemBottomSheet extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final builder = ref.watch(newShelfItemBuilderProvider);
-    return BottomSheet(
-      onClosing: () {},
-      builder: (context) => SingleChildScrollView(
-        padding: DistanceProvider.screenInsets.padding.add(MediaQuery.of(context).viewInsets),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'Aggiungi elemento',
-              style: context.textTheme.headlineSmall,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            'Aggiungi elemento',
+            style: context.textTheme.headlineSmall,
+          ),
+          DistanceProvider.mediumDistance.spacer(),
+          TextFormField(
+            initialValue: builder.name,
+            autovalidateMode: AutovalidateMode.onUnfocus,
+            onChanged: ref.read(newShelfItemBuilderProvider.notifier).updateName,
+            validator: (value) => value == null || value.isEmpty ? 'Non può essere vuoto' : null,
+          ),
+          DistanceProvider.mediumDistance.spacer(),
+          _CategorySelector(selected: builder.category),
+          DistanceProvider.mediumDistance.spacer(),
+          Align(
+            alignment: Alignment.centerRight,
+            child: ElevatedButton(
+              onPressed: !builder.canBuild ? null : () => _add(context, ref, builder),
+              child: const Text('Aggiungi'),
             ),
-            DistanceProvider.mediumDistance.spacer(),
-            TextFormField(
-              initialValue: builder.name,
-              autovalidateMode: AutovalidateMode.onUnfocus,
-              onChanged: ref.read(newShelfItemBuilderProvider.notifier).updateName,
-              validator: (value) => value == null || value.isEmpty ? 'Non può essere vuoto' : null,
-            ),
-            DistanceProvider.mediumDistance.spacer(),
-            _CategorySelector(selected: builder.category),
-            DistanceProvider.mediumDistance.spacer(),
-            Align(
-              alignment: Alignment.centerRight,
-              child: ElevatedButton(
-                onPressed: !builder.canBuild ? null : () => _add(context, ref, builder),
-                child: const Text('Aggiungi'),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -36,10 +36,10 @@ class TeamsStep extends ConsumerWidget {
   }
 
   void _onAddTeam(BuildContext context, WidgetRef ref) {
-    showModalBottomSheet<List<Player>>(
-      context: context,
-      builder: (context) => const AddPlayerBottomSheet(),
-    ).then((players) {
+    ref
+        .read(bottomSheetServiceProvider)
+        .showBottomSheet<List<Player>>(context, builder: (context) => const AddPlayerBottomSheet())
+        .then((players) {
       if (players != null) {
         ref.read(newMatchControllerProvider.notifier).addTeam(players);
       }

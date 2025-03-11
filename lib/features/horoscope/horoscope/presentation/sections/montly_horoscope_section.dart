@@ -64,7 +64,7 @@ class MonthlyHoroscopeSection extends ConsumerWidget {
   }
 }
 
-class _PredictionSection extends StatelessWidget {
+class _PredictionSection extends ConsumerWidget {
   const _PredictionSection({
     required this.horoscope,
   });
@@ -72,7 +72,7 @@ class _PredictionSection extends StatelessWidget {
   final MonthlyHoroscope horoscope;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -83,14 +83,13 @@ class _PredictionSection extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         TextButton(
-          onPressed: () => showModalBottomSheet<void>(
-            context: context,
-            isScrollControlled: true,
-            constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height * 0.5,
-            ),
-            builder: (context) => _FullHoroscopeBottomSheet(horoscope: horoscope),
-          ),
+          onPressed: () => ref.read(bottomSheetServiceProvider).showBottomSheet<void>(
+                context,
+                constraints: BoxConstraints(
+                  maxHeight: MediaQuery.of(context).size.height * 0.5,
+                ),
+                builder: (context) => _FullHoroscopeBottomSheet(horoscope: horoscope),
+              ),
           child: const Text('Mostra tutto'),
         ),
       ],
@@ -108,7 +107,6 @@ class _FullHoroscopeBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: DistanceProvider.screenInsets.padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
