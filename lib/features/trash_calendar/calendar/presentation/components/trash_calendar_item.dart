@@ -5,19 +5,33 @@ import 'package:flutter/material.dart';
 class TrashCalendarItem extends StatelessWidget {
   const TrashCalendarItem({
     required this.item,
+    required this.isThreeLine,
     super.key,
   });
 
   final TrashCalendarDate item;
+  final bool isThreeLine;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      leading: Image.network(
+        item.iconUrl,
+        height: 40,
+      ),
       title: Text(item.description),
-      dense: false,
       subtitle: Text(item.note),
-      leading: Image.network(item.iconUrl),
-      trailing: Text(item.date.niceFormat),
+      titleTextStyle: context.textTheme.bodyLarge,
+      subtitleTextStyle: context.textTheme.bodySmall,
+      leadingAndTrailingTextStyle: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+      trailing: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 64),
+        child: Text(
+          item.date.niceFormat,
+          textAlign: TextAlign.center,
+          softWrap: true,
+        ),
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/horoscope/horoscope/presentation/components/horoscope_header.dart';
 import 'package:ariannapp/features/horoscope/horoscope/usecase/get_horoscope/get_horoscope_use_case.dart';
+import 'package:ariannapp/features/horoscope/shared/model/horoscope.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -55,56 +56,72 @@ class MonthlyHoroscopeSection extends ConsumerWidget {
               ],
             ),
             DistanceProvider.smallDistance.spacer(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      horoscope.data.prediction,
-                      style: context.textTheme.bodyLarge,
-                      maxLines: 10,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    TextButton(
-                      onPressed: () => showModalBottomSheet<void>(
-                        context: context,
-                        isScrollControlled: true,
-                        constraints: BoxConstraints(
-                          maxHeight: MediaQuery.of(context).size.height * 0.5,
-                        ),
-                        builder: (context) => BottomSheet(
-                          onClosing: () {},
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-                          ),
-                          builder: (context) => SingleChildScrollView(
-                            padding: DistanceProvider.screenInsets.padding,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Previsione',
-                                  style: context.textTheme.titleLarge,
-                                ),
-                                DistanceProvider.smallDistance.spacer(),
-                                Text(
-                                  horoscope.data.prediction,
-                                  style: context.textTheme.bodyLarge,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      child: const Text('Mostra tutto'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            _PredictionSection(horoscope: horoscope),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _PredictionSection extends StatelessWidget {
+  const _PredictionSection({
+    required this.horoscope,
+  });
+
+  final MonthlyHoroscope horoscope;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          horoscope.data.prediction,
+          style: context.textTheme.bodyLarge,
+          maxLines: 10,
+          overflow: TextOverflow.ellipsis,
+        ),
+        TextButton(
+          onPressed: () => showModalBottomSheet<void>(
+            context: context,
+            isScrollControlled: true,
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.5,
+            ),
+            builder: (context) => _FullHoroscopeBottomSheet(horoscope: horoscope),
+          ),
+          child: const Text('Mostra tutto'),
+        ),
+      ],
+    );
+  }
+}
+
+class _FullHoroscopeBottomSheet extends StatelessWidget {
+  const _FullHoroscopeBottomSheet({
+    required this.horoscope,
+  });
+
+  final MonthlyHoroscope horoscope;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: DistanceProvider.screenInsets.padding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Previsione',
+            style: context.textTheme.titleLarge,
+          ),
+          DistanceProvider.smallDistance.spacer(),
+          Text(
+            horoscope.data.prediction,
+            style: context.textTheme.bodyLarge,
+          ),
+        ],
       ),
     );
   }

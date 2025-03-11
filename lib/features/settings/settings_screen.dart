@@ -48,23 +48,21 @@ class SettingsScreen extends ConsumerWidget {
 class _ThemeModeSettingsSection extends ConsumerWidget {
   const _ThemeModeSettingsSection({
     required this.selection,
-    super.key,
   });
 
   final ThemeMode selection;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return DropdownMenu<ThemeMode>(
-      label: const Text('Tema'),
+    return CustomDropdownMenu<ThemeMode>(
+      label: 'Tema',
       initialSelection: selection,
+      values: ThemeMode.values,
+      labelProvider: (value) => value.label,
       onSelected: (value) {
         if (value == null) return;
         ref.read(applicationThemeModeProvider.notifier).changeTheme(value);
       },
-      dropdownMenuEntries: [
-        for (final mode in ThemeMode.values) DropdownMenuEntry(value: mode, label: mode.label),
-      ],
     );
   }
 }
@@ -72,39 +70,33 @@ class _ThemeModeSettingsSection extends ConsumerWidget {
 class _ColorSchemeSettingsSection extends ConsumerWidget {
   const _ColorSchemeSettingsSection({
     required this.themeBuilder,
-    super.key,
   });
 
   final ThemeBuilder themeBuilder;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return DropdownMenu<FlexScheme>(
-      label: const Text('Colori'),
+    return CustomDropdownMenu<FlexScheme>(
+      label: 'Colori',
       initialSelection: themeBuilder.scheme,
       onSelected: (value) => value == null ? null : ref.read(applicationThemeProvider.notifier).changeTheme(value),
-      dropdownMenuEntries: [
-        for (final mode in FlexScheme.values)
-          DropdownMenuEntry(
-            value: mode,
-            label: mode.name,
-            labelWidget: Row(
-              children: [
-                SizedBox.square(
-                  dimension: 24,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: FlexThemeData.light(scheme: mode).primaryColor,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                ),
-                DistanceProvider.mediumDistance.spacer(axis: Axis.horizontal),
-                Text(mode.name),
-              ],
+      values: FlexScheme.values,
+      labelProvider: (value) => value.name,
+      customBuilder: (value) => Row(
+        children: [
+          SizedBox.square(
+            dimension: 24,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: FlexThemeData.light(scheme: value).primaryColor,
+                shape: BoxShape.circle,
+              ),
             ),
           ),
-      ],
+          DistanceProvider.mediumDistance.spacer(axis: Axis.horizontal),
+          Text(value.name),
+        ],
+      ),
     );
   }
 }
@@ -112,27 +104,21 @@ class _ColorSchemeSettingsSection extends ConsumerWidget {
 class _HoroscopeSignSection extends ConsumerWidget {
   const _HoroscopeSignSection({
     required this.sign,
-    super.key,
   });
 
   final HoroscopeSign sign;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return DropdownMenu<HoroscopeSign>(
-      label: const Text('Tema'),
+    return CustomDropdownMenu<HoroscopeSign>(
+      label: 'Segno zodiacale',
       initialSelection: sign,
       onSelected: (value) {
         if (value == null) return;
         ref.read(myHoroscopeSignProvider.notifier).changeMySign(value);
       },
-      dropdownMenuEntries: [
-        for (final sign in HoroscopeSign.values)
-          DropdownMenuEntry(
-            value: sign,
-            label: sign.name.capitalize,
-          ),
-      ],
+      values: HoroscopeSign.values,
+      labelProvider: (value) => value.name.capitalize,
     );
   }
 }

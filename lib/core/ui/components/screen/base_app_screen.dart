@@ -1,9 +1,11 @@
+import 'package:ariannapp/core/ui/components/form/keyboard_focus_wrapper.dart';
 import 'package:flutter/material.dart';
 
 class BaseAppScreen extends StatelessWidget {
   const BaseAppScreen.sliver({
     required this.children,
     required this.title,
+    this.customTitle,
     this.fab,
     this.actions,
     this.bottomNavigationBar,
@@ -12,6 +14,7 @@ class BaseAppScreen extends StatelessWidget {
 
   final List<Widget> children;
   final String title;
+  final Widget? customTitle;
   final Widget? fab;
   final List<Widget>? actions;
   final Widget? bottomNavigationBar;
@@ -19,16 +22,18 @@ class BaseAppScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar.large(
-            title: Text(title),
-            actions: actions,
-            floating: true,
-            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
-          ),
-          ...children,
-        ],
+      body: KeyboardFocusWrapper(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar.large(
+              title: customTitle ?? Text(title),
+              actions: actions,
+              floating: true,
+              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
+            ),
+            ...children,
+          ],
+        ),
       ),
       floatingActionButton: fab,
       bottomNavigationBar: bottomNavigationBar,

@@ -35,7 +35,10 @@ class _CalendarDashboardSection extends ConsumerWidget {
     return BaseDashboardSection(
       values: calendar,
       onOpenAll: () => context.goRelative(TrashCalendarScreenRoute.pagePath),
-      itemBuilder: (context, item) => TrashCalendarItem(item: item),
+      itemBuilder: (context, item) => TrashCalendarItem(
+        item: item,
+        isThreeLine: true,
+      ),
       title: 'Raccolta rifiuti',
       emptyCaseTitle: 'Nessuna raccolta rifiuti',
     );

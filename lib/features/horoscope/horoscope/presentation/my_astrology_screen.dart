@@ -16,16 +16,21 @@ class MyAstrologyScreen extends ConsumerStatefulWidget {
 }
 
 class _MyAstrologyScreenState extends ConsumerState<MyAstrologyScreen> {
-  static const tabs = ['Giornaliera', 'Settimanale', 'Mensile'];
-  late String selectedTab = tabs.first;
+  static const tabs = {
+    'Giornaliera': Icons.today,
+    'Settimanale': Icons.calendar_view_week,
+    'Mensile': Icons.calendar_view_month,
+  };
+  late String selectedTab = tabs.keys.first;
 
   void changeTab(int index) {
     setState(() {
-      selectedTab = tabs[index];
+      final keys = tabs.keys.toList();
+      selectedTab = keys[index];
     });
   }
 
-  int get tabIndex => tabs.indexOf(selectedTab);
+  int get tabIndex => tabs.keys.toList().indexOf(selectedTab);
 
   @override
   void initState() {
@@ -47,10 +52,10 @@ class _MyAstrologyScreenState extends ConsumerState<MyAstrologyScreen> {
         currentIndex: tabIndex,
         onTap: changeTab,
         items: [
-          ...tabs.map(
+          ...tabs.entries.map(
             (e) => BottomNavigationBarItem(
-              label: e,
-              icon: const Icon(Icons.calendar_month_outlined),
+              label: e.key,
+              icon: Icon(e.value),
             ),
           ),
         ],
