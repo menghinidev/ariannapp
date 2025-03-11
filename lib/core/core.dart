@@ -3,6 +3,7 @@ export 'infrastructure/error/application_error/applicationerror.dart';
 export 'infrastructure/error/error_code.dart';
 export 'infrastructure/repository/dio/dio_provider.dart';
 export 'infrastructure/repository/invoker.dart';
+export 'infrastructure/usecase/handlers/error.dart';
 export 'infrastructure/usecase/handlers/handler.dart';
 export 'infrastructure/usecase/handlers/success.dart';
 export 'infrastructure/usecase/use_case.dart';

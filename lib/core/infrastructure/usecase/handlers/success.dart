@@ -17,7 +17,7 @@ class ShowSnackbarSuccessHandler<R, I> extends UseCaseSuccessHandler<R, I> with 
     try {
       final context = contextProvider(input);
       final scaffold = ScaffoldMessenger.of(context);
-      final _ = scaffold.showSnackBar(buildSnackbar(message: message));
+      final _ = scaffold.showSnackBar(buildSuccessSnackbar(context, message: message));
       return Future.value();
     } catch (e) {
       return Future.value();

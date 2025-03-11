@@ -18,6 +18,9 @@ abstract class IGroceriesRepository {
   Future<EmptyResponse> removeGroceryItem({
     required GroceriesCheckListItem item,
   });
+  Future<EmptyResponse> removeShelfItem({
+    required ShelfItem item,
+  });
   Future<EmptyResponse> reorder({
     required List<GroceriesCheckListItem> items,
   });

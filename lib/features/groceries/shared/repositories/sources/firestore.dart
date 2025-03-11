@@ -86,4 +86,12 @@ class FirestoreGroceriesRepository extends IGroceriesRepository with RepositoryS
       payloadMapper: (_) {},
     );
   }
+
+  @override
+  Future<EmptyResponse> removeShelfItem({required ShelfItem item}) {
+    return safeInvoke(
+      request: () => instance.collection(shelfCollection).doc(item.id).delete(),
+      payloadMapper: (_) {},
+    );
+  }
 }

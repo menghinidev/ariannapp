@@ -1,6 +1,8 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/groceries/shelf/presentation/components/search_item_view.dart';
 import 'package:ariannapp/features/groceries/shelf/presentation/components/shelf_list_item.dart';
+import 'package:ariannapp/features/groceries/shelf/usecase/delete_shelf_item/command/deleteshelfitemcommand.dart';
+import 'package:ariannapp/features/groceries/shelf/usecase/delete_shelf_item/delete_shelf_item_use_case.dart';
 import 'package:ariannapp/features/groceries/shelf/usecase/get_shelf/get_shelf_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,7 +31,24 @@ class ShelfListView extends ConsumerWidget {
                 itemCount: data.length,
                 physics: const ScrollPhysics(),
                 padding: DistanceProvider.screenInsets.padding.removeBottom,
-                itemBuilder: (context, index) => ShelfListItem(item: data[index]),
+                itemBuilder: (context, index) => Dismissible(
+                  key: ValueKey(data[index].id),
+                  direction: DismissDirection.endToStart,
+                  background: Container(
+                    color: Colors.red,
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.only(right: 20),
+                    child: const Icon(Icons.delete, color: Colors.white),
+                  ),
+                  onDismissed: (direction) async {
+                    final usecase = ref.read(deleteShelfItemUseCaseProvider);
+                    final command = DeleteShelfItemCommand(shelf: data[index], context: context);
+                    await usecase.call(command);
+                  },
+                  child: ShelfListItem(
+                    item: data[index],
+                  ),
+                ),
               ),
             ),
           ],

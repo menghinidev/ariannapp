@@ -32,6 +32,17 @@
             ],
         },
         {
+            "name": "iOS (debug)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "console": "debugConsole",
+            "toolArgs": [
+                "--dart-define-from-file",
+                "${workspaceFolder}/.env",
+            ],
+        },
+        {
             "name": "Android (release)",
             "request": "launch",
             "type": "dart",

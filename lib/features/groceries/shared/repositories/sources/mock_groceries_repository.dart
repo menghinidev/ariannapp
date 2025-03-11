@@ -110,4 +110,10 @@ class MockGroceriesRepository extends IGroceriesRepository {
       ..addAll(items);
     return Responses.success<void, ApplicationError>(null);
   }
+
+  @override
+  Future<EmptyResponse> removeShelfItem({required ShelfItem item}) {
+    // TODO: implement removeShelfItem
+    throw UnimplementedError();
+  }
 }

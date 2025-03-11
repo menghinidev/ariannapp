@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AddShelfItemCommand {
   String get name => throw _privateConstructorUsedError;
   GroceryCategory get category => throw _privateConstructorUsedError;
+  BuildContext get context => throw _privateConstructorUsedError;
 
   /// Create a copy of AddShelfItemCommand
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +33,7 @@ abstract class $AddShelfItemCommandCopyWith<$Res> {
           AddShelfItemCommand value, $Res Function(AddShelfItemCommand) then) =
       _$AddShelfItemCommandCopyWithImpl<$Res, AddShelfItemCommand>;
   @useResult
-  $Res call({String name, GroceryCategory category});
+  $Res call({String name, GroceryCategory category, BuildContext context});
 }
 
 /// @nodoc
@@ -52,6 +53,7 @@ class _$AddShelfItemCommandCopyWithImpl<$Res, $Val extends AddShelfItemCommand>
   $Res call({
     Object? name = null,
     Object? category = null,
+    Object? context = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -62,6 +64,10 @@ class _$AddShelfItemCommandCopyWithImpl<$Res, $Val extends AddShelfItemCommand>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as GroceryCategory,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ) as $Val);
   }
 }
@@ -74,7 +80,7 @@ abstract class _$$AddShelfItemCommandImplCopyWith<$Res>
       __$$AddShelfItemCommandImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, GroceryCategory category});
+  $Res call({String name, GroceryCategory category, BuildContext context});
 }
 
 /// @nodoc
@@ -92,6 +98,7 @@ class __$$AddShelfItemCommandImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? category = null,
+    Object? context = null,
   }) {
     return _then(_$AddShelfItemCommandImpl(
       name: null == name
@@ -102,6 +109,10 @@ class __$$AddShelfItemCommandImplCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as GroceryCategory,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -109,16 +120,19 @@ class __$$AddShelfItemCommandImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AddShelfItemCommandImpl implements _AddShelfItemCommand {
-  _$AddShelfItemCommandImpl({required this.name, required this.category});
+  _$AddShelfItemCommandImpl(
+      {required this.name, required this.category, required this.context});
 
   @override
   final String name;
   @override
   final GroceryCategory category;
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'AddShelfItemCommand(name: $name, category: $category)';
+    return 'AddShelfItemCommand(name: $name, category: $category, context: $context)';
   }
 
   @override
@@ -128,11 +142,12 @@ class _$AddShelfItemCommandImpl implements _AddShelfItemCommand {
             other is _$AddShelfItemCommandImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.category, category) ||
-                other.category == category));
+                other.category == category) &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, category);
+  int get hashCode => Object.hash(runtimeType, name, category, context);
 
   /// Create a copy of AddShelfItemCommand
   /// with the given fields replaced by the non-null parameter values.
@@ -147,12 +162,15 @@ class _$AddShelfItemCommandImpl implements _AddShelfItemCommand {
 abstract class _AddShelfItemCommand implements AddShelfItemCommand {
   factory _AddShelfItemCommand(
       {required final String name,
-      required final GroceryCategory category}) = _$AddShelfItemCommandImpl;
+      required final GroceryCategory category,
+      required final BuildContext context}) = _$AddShelfItemCommandImpl;
 
   @override
   String get name;
   @override
   GroceryCategory get category;
+  @override
+  BuildContext get context;
 
   /// Create a copy of AddShelfItemCommand
   /// with the given fields replaced by the non-null parameter values.
