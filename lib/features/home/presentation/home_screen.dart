@@ -19,7 +19,7 @@ class HomeScreen extends ConsumerWidget {
       customTitle: Image.asset(
         'assets/images/handwritten-logo.png',
         height: 56,
-        color: context.colorScheme.surface,
+        color: Colors.white,
       ),
       actions: [
         if (!EnvVariable.mode.isLite) ...[

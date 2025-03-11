@@ -34,12 +34,7 @@ class ShelfListView extends ConsumerWidget {
                 itemBuilder: (context, index) => Dismissible(
                   key: ValueKey(data[index].id),
                   direction: DismissDirection.endToStart,
-                  background: Container(
-                    color: Colors.red,
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.only(right: 20),
-                    child: const Icon(Icons.delete, color: Colors.white),
-                  ),
+                  background: const DismissibleDeleteDecoration(),
                   onDismissed: (direction) async {
                     final usecase = ref.read(deleteShelfItemUseCaseProvider);
                     final command = DeleteShelfItemCommand(shelf: data[index], context: context);

@@ -11,6 +11,7 @@ class BaseDashboardSection<T> extends ConsumerWidget {
     super.key,
     this.emptyCaseSubtitle,
     this.onOpenAll,
+    this.showDivider = false,
   });
 
   final List<T>? values;
@@ -19,6 +20,7 @@ class BaseDashboardSection<T> extends ConsumerWidget {
   final String emptyCaseTitle;
   final String? emptyCaseSubtitle;
   final Widget Function(BuildContext, T) itemBuilder;
+  final bool showDivider;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,7 +56,9 @@ class BaseDashboardSection<T> extends ConsumerWidget {
               physics: const ScrollPhysics(),
               shrinkWrap: true,
               padding: DistanceProvider.screenInsets.padding.removeTop,
-              separatorBuilder: (context, index) => DistanceProvider.smallDistance.spacer(),
+              separatorBuilder: (context, index) => showDivider
+                  ? const Divider(height: DistanceProvider.smallDistance)
+                  : DistanceProvider.smallDistance.spacer(),
               itemBuilder: (context, index) => itemBuilder(context, data[index]),
             ),
           ),

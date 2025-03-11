@@ -1,8 +1,11 @@
 import 'package:ariannapp/features/groceries/checklist/presentation/bloc/state/groceries_checklist_state.dart';
 import 'package:ariannapp/features/groceries/checklist/usecase/get_checklist/get_checklist_use_case.dart';
+import 'package:ariannapp/features/groceries/checklist/usecase/remove_grocery_item/command/removegroceryitemcommand.dart';
+import 'package:ariannapp/features/groceries/checklist/usecase/remove_grocery_item/remove_grocery_item_use_case.dart';
 import 'package:ariannapp/features/groceries/checklist/usecase/update_order/update_checklist_order_use_case.dart';
 import 'package:ariannapp/features/groceries/shared/model/check_item/checklist_item.dart';
 import 'package:ariannapp/features/groceries/shared/model/grocery_category.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'groceries_checklist_bloc.g.dart';
@@ -48,5 +51,14 @@ class GroceriesCheckListOrderManager extends _$GroceriesCheckListOrderManager {
       ..insert(newIndex, target);
     state = AsyncData(newValues);
     await ref.read(updateCheckListOrderUseCaseProvider).call(newValues);
+  }
+
+  Future<void> remove(BuildContext context, {required GroceriesCheckListItem item}) async {
+    final loadedState = state.valueOrNull;
+    if (loadedState == null) return;
+    final newValues = [...loadedState]..remove(item);
+    state = AsyncData(newValues);
+    final command = RemoveGroceryItemCommand(item: item, context: context);
+    await ref.read(removeGroceryItemUseCaseProvider).call(command);
   }
 }
