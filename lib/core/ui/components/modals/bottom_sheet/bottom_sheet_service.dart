@@ -20,9 +20,11 @@ class BottomSheetService {
       context: context,
       isScrollControlled: true,
       constraints: constraints,
-      builder: (context) => Padding(
-        padding: DistanceProvider.screenInsets.padding.add(MediaQuery.of(context).viewInsets),
-        child: builder(context),
+      builder: (context) => KeyboardFocusWrapper(
+        child: Padding(
+          padding: DistanceProvider.screenInsets.padding.add(MediaQuery.of(context).viewInsets),
+          child: builder(context),
+        ),
       ),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(16)),

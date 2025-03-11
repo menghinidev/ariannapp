@@ -42,22 +42,14 @@ class _AddPlayerTextFieldState extends ConsumerState<AddPlayerTextField> {
       onLoaded: (data) => Row(
         children: [
           Expanded(
-            child: DropdownMenu<Player>(
-              label: const Text('Seleziona giocatore'),
-              enableFilter: true,
-              expandedInsets: EdgeInsets.zero,
+            child: CustomDropdownMenu<Player>(
+              label: 'Seleziona giocatore',
               controller: _controller,
+              labelProvider: (value) => value.name,
+              values: data,
               requestFocusOnTap: true,
               initialSelection: widget.selectedPlayer,
               onSelected: (value) => value == null ? null : widget.onSelected(value),
-              filterCallback: _filterCallback,
-              dropdownMenuEntries: [
-                for (final player in data)
-                  DropdownMenuEntry(
-                    value: player,
-                    label: player.name,
-                  ),
-              ],
             ),
           ),
           DistanceProvider.smallDistance.spacer(axis: Axis.horizontal),
@@ -74,14 +66,6 @@ class _AddPlayerTextFieldState extends ConsumerState<AddPlayerTextField> {
     final command = AddPlayerCommand(name: _controller.text);
     final player = await ref.read(addPlayerUseCaseProvider).call(command);
     player.ifSuccess((value) => widget.onSelected(value!));
-  }
-
-  List<DropdownMenuEntry<Player>> _filterCallback(
-    List<DropdownMenuEntry<Player>> entries,
-    String query,
-  ) {
-    final filtered = entries.where((e) => e.byNameOrNEW(query)).toList();
-    return filtered.isEmpty ? entries : filtered;
   }
 }
 

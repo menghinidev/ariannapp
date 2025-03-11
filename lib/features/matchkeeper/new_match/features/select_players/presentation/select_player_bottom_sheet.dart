@@ -54,7 +54,7 @@ class AddPlayerBottomSheet extends ConsumerWidget {
               for (final i in available) ButtonSegment(value: i, label: Text(i)),
             ],
           ),
-          DistanceProvider.mediumDistance.spacer(),
+          DistanceProvider.largeDistance.spacer(),
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 500),
             child: selectedMode == 'Squadra'
