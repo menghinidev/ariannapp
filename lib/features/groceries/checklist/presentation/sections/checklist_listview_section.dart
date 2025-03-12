@@ -31,10 +31,11 @@ class CheckListListViewSection extends ConsumerWidget {
             child: child,
           ),
           onReorder: ref.read(groceriesCheckListOrderManagerProvider.notifier).reorder,
-          itemBuilder: (context, index) => Dismissible(
-            key: ValueKey(index),
+          itemBuilder: (context, index) => CustomDismissible(
+            key: ValueKey(data[index].id),
+            value: index,
             background: const DismissibleCompleteDecoration(),
-            onDismissed: (_) => ref.read(groceriesCheckListOrderManagerProvider.notifier).remove(
+            onDismissed: () => ref.read(groceriesCheckListOrderManagerProvider.notifier).remove(
                   context,
                   item: data[index],
                 ),

@@ -33,14 +33,14 @@ class _CalendarDashboardSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return BaseDashboardSection(
+      title: 'Raccolta rifiuti',
+      emptyCaseTitle: 'Nessuna raccolta rifiuti',
       values: calendar,
       onOpenAll: () => context.goRelative(TrashCalendarScreenRoute.pagePath),
       itemBuilder: (context, item) => TrashCalendarItem(
         item: item,
         isThreeLine: true,
       ),
-      title: 'Raccolta rifiuti',
-      emptyCaseTitle: 'Nessuna raccolta rifiuti',
     );
   }
 }

@@ -22,10 +22,10 @@ class GroceriesDashboardSection extends ConsumerWidget {
       values: groceries,
       showDivider: true,
       onOpenAll: () => context.goRelative(GroceriesRoutes.checklist),
-      itemBuilder: (context, data) => Dismissible(
-        key: ValueKey(data),
+      itemBuilder: (context, data) => CustomDismissible(
+        value: data,
         background: const DismissibleCompleteDecoration(),
-        onDismissed: (_) => _removeItem(context, ref, data),
+        onDismissed: () => _removeItem(context, ref, data),
         child: GroceriesCheckListWidget(
           item: data,
           position: groceries?.indexOf(data) ?? 0,

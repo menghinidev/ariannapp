@@ -27,20 +27,21 @@ class ShelfListView extends ConsumerWidget {
               child: ShelfItemSearch(items: data),
             ),
             Expanded(
-              child: ListView.builder(
+              child: ListView.separated(
                 itemCount: data.length,
                 physics: const ScrollPhysics(),
+                separatorBuilder: (context, index) => const Divider(height: DistanceProvider.mediumDistance),
                 padding: DistanceProvider.screenInsets.padding.removeBottom,
-                itemBuilder: (context, index) => Dismissible(
-                  key: ValueKey(data[index].id),
-                  direction: DismissDirection.endToStart,
+                itemBuilder: (context, index) => CustomDismissible(
+                  value: index,
                   background: const DismissibleDeleteDecoration(),
-                  onDismissed: (direction) async {
+                  onDismissed: () async {
                     final usecase = ref.read(deleteShelfItemUseCaseProvider);
                     final command = DeleteShelfItemCommand(shelf: data[index], context: context);
                     await usecase.call(command);
                   },
                   child: ShelfListItem(
+                    position: index,
                     item: data[index],
                   ),
                 ),

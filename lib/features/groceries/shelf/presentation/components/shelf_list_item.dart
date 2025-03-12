@@ -1,3 +1,4 @@
+import 'package:ariannapp/core/ui/theme/theme_builder.dart';
 import 'package:ariannapp/features/groceries/shared/model/grocery_category.dart';
 import 'package:ariannapp/features/groceries/shared/model/shelf_item/shelf_item.dart';
 import 'package:ariannapp/features/groceries/shelf/usecase/move_to_grocery_list/command/movetogrocerylistcommand.dart';
@@ -8,28 +9,29 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ShelfListItem extends ConsumerWidget {
   const ShelfListItem({
     required this.item,
+    required this.position,
     super.key,
   });
 
   final ShelfItem item;
+  final int position;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
-      title: Text(item.name),
-      subtitle: Align(
-        alignment: Alignment.centerLeft,
-        child: RawChip(
-          label: Text(item.category.label),
-        ),
+      leading: CircleAvatar(
+        backgroundColor: context.colorScheme.secondaryContainer,
+        child: Text('${position + 1}'),
       ),
-      trailing: IconButton(
-        icon: const Icon(Icons.add_circle_outline),
+      title: Text(item.name),
+      subtitle: Text(item.category.label),
+      trailing: TextButton(
         onPressed: () async {
           final command = MoveToGroceryListCommand(item: item, context: context);
           final useCase = await ref.read(moveGroceryItemUseCaseProvider.future);
           await useCase.call(command);
         },
+        child: const Text('Aggiungi'),
       ),
     );
   }

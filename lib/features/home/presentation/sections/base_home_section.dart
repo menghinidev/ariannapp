@@ -27,42 +27,51 @@ class BaseDashboardSection<T> extends ConsumerWidget {
     return LoadingSwitcher(
       value: values,
       margin: DistanceProvider.screenInsets.padding,
-      builder: (context, data) => Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: DistanceProvider.screenInsets.padding.removeBottom,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    title,
-                    style: context.textTheme.titleLarge,
+      builder: (context, data) => Card(
+        elevation: 5,
+        color: context.colorScheme.tertiaryContainer.withOpacity(0.5),
+        shadowColor: context.colorScheme.tertiaryContainer.withOpacity(0.2),
+        margin: DistanceProvider.screenInsets.padding,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(DistanceProvider.smallDistance),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: DistanceProvider.screenInsets.padding.removeBottom,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: context.textTheme.titleLarge,
+                    ),
                   ),
-                ),
-                TextButton(
-                  onPressed: onOpenAll,
-                  child: const Text('Visualizza'),
-                ),
-              ],
+                  TextButton(
+                    onPressed: onOpenAll,
+                    child: const Text('Visualizza'),
+                  ),
+                ],
+              ),
             ),
-          ),
-          EmptyCaseBuilder(
-            isEmpty: data.isEmpty,
-            title: emptyCaseTitle,
-            subtitle: emptyCaseSubtitle,
-            builder: (context) => ListView.separated(
-              itemCount: data.length,
-              physics: const ScrollPhysics(),
-              shrinkWrap: true,
-              padding: DistanceProvider.screenInsets.padding.removeTop,
-              separatorBuilder: (context, index) => showDivider
-                  ? const Divider(height: DistanceProvider.smallDistance)
-                  : DistanceProvider.smallDistance.spacer(),
-              itemBuilder: (context, index) => itemBuilder(context, data[index]),
+            EmptyCaseBuilder(
+              isEmpty: data.isEmpty,
+              title: emptyCaseTitle,
+              subtitle: emptyCaseSubtitle,
+              builder: (context) => ListView.separated(
+                itemCount: data.length,
+                physics: const ScrollPhysics(),
+                shrinkWrap: true,
+                padding: DistanceProvider.screenInsets.padding.removeTop,
+                separatorBuilder: (context, index) => showDivider
+                    ? const Divider(height: DistanceProvider.smallDistance)
+                    : DistanceProvider.smallDistance.spacer(),
+                itemBuilder: (context, index) => itemBuilder(context, data[index]),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

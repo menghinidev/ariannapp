@@ -17,6 +17,7 @@ class ShelfItemSearch extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return SearchAnchor(
       suggestionsBuilder: _suggestions,
+      isFullScreen: false,
       builder: (context, controller) => SearchBar(
         controller: controller,
         hintText: 'Cerca un elemento',
@@ -30,6 +31,12 @@ class ShelfItemSearch extends ConsumerWidget {
   FutureOr<Iterable<Widget>> _suggestions(BuildContext context, SearchController controller) {
     final currentValue = controller.text;
     if (currentValue.isEmpty) return [];
-    return [for (final i in items.where((e) => e.name.contains(currentValue))) ShelfListItem(item: i)];
+    return [
+      for (final i in items.where((e) => e.name.contains(currentValue)))
+        ShelfListItem(
+          item: i,
+          position: items.indexOf(i),
+        ),
+    ];
   }
 }

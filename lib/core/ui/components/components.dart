@@ -1,4 +1,4 @@
-export 'banner/dismissible_decoration.dart';
+export 'banner/dismissible_component.dart';
 export 'banner/empty_content_placeholder.dart';
 export 'form/custom_dropdown.dart';
 export 'form/keyboard_focus_wrapper.dart';
