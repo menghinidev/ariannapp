@@ -1,4 +1,5 @@
-import 'package:ariannapp/features/calendar/shared/model/event/calendarevent.dart';
+import 'package:ariannapp/features/calendar/shared/model/builder/calendareventbuilder.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'new_event_controller.g.dart';
@@ -6,14 +7,17 @@ part 'new_event_controller.g.dart';
 @riverpod
 class NewEventController extends _$NewEventController {
   @override
-  CalendarEventBuilder build(DateTime start) => CalendarEventBuilder(start: start);
+  CalendarEventBuilder build(DateTime start) => CalendarEventBuilder(
+        day: start,
+        time: TimeOfDay.now(),
+      );
 
-  void startDate(DateTime start) {
-    state = state.copyWith(start: start);
+  void date(DateTime day) {
+    state = state.copyWith(day: day);
   }
 
-  void endDate(DateTime end) {
-    state = state.copyWith(end: end);
+  void time(TimeOfDay time) {
+    state = state.copyWith(time: time);
   }
 
   void isWholeDay(bool isWholeDay) {
@@ -32,7 +36,7 @@ class NewEventController extends _$NewEventController {
 extension CalendarEventBuilderValidator on CalendarEventBuilder {
   bool get isValid {
     if (title == null || title!.isEmpty) return false;
-    if (isWholeDay) return start != null;
-    return start != null && end != null && start!.isBefore(end!);
+    if (isWholeDay) return day != null;
+    return day != null && time != null;
   }
 }

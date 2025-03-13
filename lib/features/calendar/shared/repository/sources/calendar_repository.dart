@@ -1,4 +1,5 @@
 import 'package:ariannapp/core/core.dart';
+import 'package:ariannapp/features/calendar/shared/model/builder/calendareventbuilder.dart';
 import 'package:ariannapp/features/calendar/shared/model/event/calendarevent.dart';
 
 abstract class ICalendarRepository {

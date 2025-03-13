@@ -2,9 +2,8 @@ import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/calendar/new_event/presentation/bloc/new_event_controller.dart';
 import 'package:ariannapp/features/calendar/new_event/usecase/new_event/command/neweventcommand.dart';
 import 'package:ariannapp/features/calendar/new_event/usecase/new_event/new_event_use_case.dart';
-import 'package:ariannapp/features/calendar/shared/model/event/calendarevent.dart';
+import 'package:ariannapp/features/calendar/shared/model/builder/calendareventbuilder.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,7 +15,6 @@ class NewEventBottomSheet extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(newEventControllerProvider(date));
-
     return KeyboardFocusWrapper(
       child: SingleChildScrollView(
         child: Column(
@@ -93,18 +91,18 @@ class _BoundedDateRangeSection extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _DateTextFormField(
-          label: 'Dal',
+        DateFormFieldSelector(
+          label: 'Il',
           hint: 'dd/mm/yyyy',
-          value: state.start,
-          onChanged: (value) => controllerProvider(ref).startDate(value),
+          value: state.day,
+          onChanged: (value) => controllerProvider(ref).date(value),
         ),
         DistanceProvider.smallDistance.spacer(),
-        _DateTextFormField(
-          label: 'Al',
-          hint: 'dd/mm/yyyy',
-          value: state.end,
-          onChanged: (value) => controllerProvider(ref).endDate(value),
+        TimeFormFieldSelector(
+          label: 'Alle',
+          hint: 'hh:mm',
+          value: state.time,
+          onChanged: (value) => controllerProvider(ref).time(value),
         ),
       ],
     );
@@ -118,31 +116,17 @@ class _WholeDaySection extends ConsumerWidget {
   final NewEventController Function(WidgetRef ref) controllerProvider;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return _DateTextFormField(
+    return DateFormFieldSelector(
       label: 'Il giorno',
       hint: 'dd/mm/yyyy',
-      value: state.start,
-      onChanged: (value) => controllerProvider(ref).startDate(value),
+      value: state.day,
+      onChanged: (value) => controllerProvider(ref).date(value),
     );
   }
 }
 
-class DDMMYYYYFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    final regex = RegExp(regexExpression);
-    if (regex.hasMatch(newValue.text)) {
-      return newValue;
-    }
-    return oldValue;
-  }
-
-  static String regexExpression =
-      r'^(?:(?:31(/|-|.)(?:0?[13578]|1[02]))1|(?:(?:29|30)(/|-|.)(?:0?[13-9]|1[0-2])2))(?:(?:1[6-9]|[2-9]d)?d{2})$|^(?:29(/|-|.)0?23(?:(?:(?:1[6-9]|[2-9]d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1d|2[0-8])(/|-|.)(?:(?:0?[1-9])|(?:1[0-2]))4(?:(?:1[6-9]|[2-9]d)?d{2})$';
-}
-
-class _DateTextFormField extends StatefulWidget {
-  const _DateTextFormField({
+class DateFormFieldSelector extends ConsumerWidget {
+  const DateFormFieldSelector({
     required this.label,
     required this.hint,
     required this.onChanged,
@@ -152,14 +136,84 @@ class _DateTextFormField extends StatefulWidget {
 
   final String label;
   final String hint;
-  final void Function(DateTime date) onChanged;
   final DateTime? value;
+  final void Function(DateTime date) onChanged;
 
   @override
-  State<_DateTextFormField> createState() => _DateTextFormFieldState();
+  Widget build(BuildContext context, WidgetRef ref) {
+    return _CustomFormFieldSelector<DateTime>(
+      label: label,
+      hint: hint,
+      formatter: (date) => date.toNiceDate,
+      value: value,
+      onChanged: onChanged,
+      leading: const Icon(Icons.calendar_month_outlined),
+      picker: (context) => showDatePicker(
+        context: context,
+        initialDate: value,
+        firstDate: DateTime.now().subtract(const Duration(days: 365)),
+        lastDate: DateTime.now().add(const Duration(days: 365)),
+      ),
+    );
+  }
 }
 
-class _DateTextFormFieldState extends State<_DateTextFormField> {
+class TimeFormFieldSelector extends ConsumerWidget {
+  const TimeFormFieldSelector({
+    required this.label,
+    required this.hint,
+    required this.onChanged,
+    this.value,
+    super.key,
+  });
+
+  final String label;
+  final String hint;
+  final TimeOfDay? value;
+  final void Function(TimeOfDay date) onChanged;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return _CustomFormFieldSelector<TimeOfDay>(
+      label: label,
+      hint: hint,
+      formatter: (time) => time.format(context),
+      value: value,
+      leading: const Icon(Icons.access_time_outlined),
+      onChanged: onChanged,
+      picker: (context) => showTimePicker(
+        context: context,
+        initialTime: value ?? TimeOfDay.now(),
+      ),
+    );
+  }
+}
+
+class _CustomFormFieldSelector<T> extends StatefulWidget {
+  const _CustomFormFieldSelector({
+    required this.label,
+    required this.hint,
+    required this.picker,
+    required this.formatter,
+    this.leading,
+    this.onChanged,
+    this.value,
+    super.key,
+  });
+
+  final String label;
+  final String hint;
+  final Widget? leading;
+  final Future<T?> Function(BuildContext context) picker;
+  final void Function(T date)? onChanged;
+  final T? value;
+  final String Function(T date) formatter;
+
+  @override
+  State<_CustomFormFieldSelector<T>> createState() => _CustomFormFieldStateSelector<T>();
+}
+
+class _CustomFormFieldStateSelector<T> extends State<_CustomFormFieldSelector<T>> {
   late final TextEditingController _controller;
 
   @override
@@ -175,13 +229,13 @@ class _DateTextFormFieldState extends State<_DateTextFormField> {
   }
 
   void _init() {
-    _controller = TextEditingController(text: widget.value?.toNiceDate);
+    _controller = TextEditingController(text: widget.value != null ? widget.formatter(widget.value as T) : null);
   }
 
   @override
-  void didUpdateWidget(covariant _DateTextFormField oldWidget) {
+  void didUpdateWidget(covariant _CustomFormFieldSelector<T> oldWidget) {
     if (oldWidget.value != widget.value && widget.value != null) {
-      _controller.text = widget.value!.toNiceDate;
+      _controller.text = widget.formatter(widget.value as T);
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -191,21 +245,16 @@ class _DateTextFormFieldState extends State<_DateTextFormField> {
     return TextFormField(
       controller: _controller,
       decoration: InputDecoration(
-        prefixIcon: const Icon(Icons.calendar_month_outlined),
+        prefixIcon: widget.leading,
         labelText: widget.label,
         hintText: widget.hint,
       ),
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
-        showDatePicker(
-          context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime.now().subtract(const Duration(days: 365)),
-          lastDate: DateTime.now().add(const Duration(days: 365)),
-        ).then((date) {
-          if (date == null) return;
-          widget.onChanged.call(date);
-          _controller.text = date.toNiceDate;
+        widget.picker(context).then((value) {
+          if (value == null) return;
+          widget.onChanged?.call(value);
+          _controller.text = widget.formatter(value);
         });
       },
     );

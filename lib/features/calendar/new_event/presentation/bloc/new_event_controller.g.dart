@@ -7,7 +7,7 @@ part of 'new_event_controller.dart';
 // **************************************************************************
 
 String _$newEventControllerHash() =>
-    r'611b2d35ccd12c3e80788ad4202ad09c1d091e0d';
+    r'93db57b177f1ecb2ecb8437ddb1866c88a3acc61';
 
 /// Copied from Dart SDK
 class _SystemHash {

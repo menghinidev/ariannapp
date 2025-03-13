@@ -24,55 +24,98 @@ class MyCalendarSection extends ConsumerWidget {
       builder: (context, calendar) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TableCalendar<CalendarEvent>(
-            firstDay: DateTime.utc(2010, 10, 16),
-            lastDay: DateTime.utc(2030, 3, 14),
-            focusedDay: selectedDate,
-            calendarStyle: CalendarStyle(
-              selectedDecoration: BoxDecoration(
-                color: context.colorScheme.primary,
-                shape: BoxShape.circle,
-              ),
-              markerDecoration: BoxDecoration(
-                color: context.colorScheme.tertiary,
-                shape: BoxShape.circle,
-              ),
-            ),
-            selectedDayPredicate: selectedDate.isSameDay,
-            onDaySelected: (day, _) => ref.read(selectedDateControllerProvider.notifier).date = day,
-            sixWeekMonthsEnforced: true,
-            calendarFormat: selectedFormat,
-            onFormatChanged: (format) =>
-                ref.read(selectedCalendarFormatControllerProvider.notifier).calendarFormat = format,
-            eventLoader: (day) => calendar.where((event) => event.start.isSameDay(day)).toList(),
+          _CalendarSection(
+            selectedDate: selectedDate,
+            events: calendar,
+            selectedFormat: selectedFormat,
           ),
           DistanceProvider.mediumDistance.spacer(),
-          BaseDashboardSection(
-            title: selectedDate.toNiceDate,
-            values: calendar.where((event) => event.start.isSameDay(selectedDate)).toList(),
-            showDivider: true,
-            headerButtonLabel: 'Aggiungi',
-            headerButtonAction: () => ref.read(bottomSheetServiceProvider).showBottomSheet<void>(
-                  context,
-                  builder: (context) => NewEventBottomSheet(date: selectedDate),
-                ),
-            emptyCaseTitle: 'Non ci sono eventi',
-            emptyCaseSubtitle: "Seleziona un'altra data",
-            itemBuilder: (context, event) => CustomDismissible(
-              value: event,
-              onDismissed: () {
-                final command = DeleteEventCommand(eventId: event.id, context: context);
-                ref.read(deleteEventUseCaseProvider).call(command);
-              },
-              background: const DismissibleCompleteDecoration(),
-              child: ListTile(
-                title: Text(event.title),
-                contentPadding: EdgeInsets.zero,
-                subtitle: Text(event.start.toNiceDate),
-              ),
-            ),
+          _CalendarEventsPerDay(
+            selectedDate: selectedDate,
+            events: calendar.where((event) => event.datetime.isSameDay(selectedDate)).toList(),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _CalendarSection extends ConsumerWidget {
+  const _CalendarSection({
+    required this.selectedDate,
+    required this.selectedFormat,
+    required this.events,
+  });
+
+  final DateTime selectedDate;
+  final CalendarFormat selectedFormat;
+  final List<CalendarEvent> events;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return TableCalendar<CalendarEvent>(
+      firstDay: DateTime.utc(2010, 10, 16),
+      lastDay: DateTime.utc(2030, 3, 14),
+      focusedDay: selectedDate,
+      calendarStyle: _calendarStyle(context),
+      selectedDayPredicate: selectedDate.isSameDay,
+      onDaySelected: (day, _) => ref.read(selectedDateControllerProvider.notifier).date = day,
+      sixWeekMonthsEnforced: true,
+      calendarFormat: selectedFormat,
+      onFormatChanged: (format) => ref.read(selectedCalendarFormatControllerProvider.notifier).calendarFormat = format,
+      eventLoader: (day) => events.where((event) => event.datetime.isSameDay(day)).toList(),
+    );
+  }
+
+  CalendarStyle _calendarStyle(BuildContext context) {
+    final colorScheme = context.colorScheme;
+    const shape = BoxShape.circle;
+    return CalendarStyle(
+      selectedDecoration: BoxDecoration(
+        color: colorScheme.primary,
+        shape: shape,
+      ),
+      markerDecoration: BoxDecoration(
+        color: colorScheme.tertiary,
+        shape: shape,
+      ),
+    );
+  }
+}
+
+class _CalendarEventsPerDay extends ConsumerWidget {
+  const _CalendarEventsPerDay({
+    required this.selectedDate,
+    required this.events,
+  });
+
+  final DateTime selectedDate;
+  final List<CalendarEvent> events;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return BaseDashboardSection(
+      title: selectedDate.toNiceDate,
+      values: events,
+      showDivider: true,
+      headerButtonLabel: 'Aggiungi',
+      headerButtonAction: () => ref.read(bottomSheetServiceProvider).showBottomSheet<void>(
+            context,
+            builder: (context) => NewEventBottomSheet(date: selectedDate),
+          ),
+      emptyCaseTitle: 'Non ci sono eventi',
+      emptyCaseSubtitle: "Seleziona un'altra data",
+      itemBuilder: (context, event) => ListTile(
+        title: Text(event.title),
+        contentPadding: EdgeInsets.zero,
+        trailing: IconButton(
+          onPressed: () {
+            final command = DeleteEventCommand(eventId: event.id, context: context);
+            ref.read(deleteEventUseCaseProvider).call(command);
+          },
+          icon: const Icon(Icons.delete_outline),
+        ),
+        subtitle: Text(event.isWholeDay ? event.datetime.toNiceDate : event.datetime.toExtendedDate),
       ),
     );
   }

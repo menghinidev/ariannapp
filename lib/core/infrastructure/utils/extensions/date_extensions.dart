@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -108,6 +109,15 @@ extension DateFormatter on DateTime {
       minute,
       second,
     );
+  }
+}
+
+extension TimeOfDayFormatter on TimeOfDay {
+  String get toTime {
+    final instance = DateFormatterFactory.instance;
+    final now = DateTime.now();
+    final datetime = DateTime(now.year, now.month, now.day, hour, minute);
+    return instance.time.format(datetime);
   }
 }
 

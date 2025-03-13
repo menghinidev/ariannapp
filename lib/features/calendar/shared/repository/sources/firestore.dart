@@ -1,4 +1,5 @@
 import 'package:ariannapp/core/core.dart';
+import 'package:ariannapp/features/calendar/shared/model/builder/calendareventbuilder.dart';
 import 'package:ariannapp/features/calendar/shared/model/event/calendarevent.dart';
 import 'package:ariannapp/features/calendar/shared/repository/sources/calendar_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,7 +20,7 @@ class FirestoreCalendarRepository with RepositorySafeInvoker implements ICalenda
   @override
   Future<EmptyResponse> createEvent({required CalendarEventBuilder event}) {
     return safeInvoke<void, DocumentReference<Map<String, dynamic>>>(
-      request: () => instance.collection(matchCollection).add(event.toJson()),
+      request: () => instance.collection(matchCollection).add(event.toFirebaseJson()),
       payloadMapper: (ref) {},
     );
   }

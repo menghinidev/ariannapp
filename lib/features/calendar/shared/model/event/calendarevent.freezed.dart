@@ -22,9 +22,8 @@ CalendarEvent _$CalendarEventFromJson(Map<String, dynamic> json) {
 mixin _$CalendarEvent {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  DateTime get start => throw _privateConstructorUsedError;
+  DateTime get datetime => throw _privateConstructorUsedError;
   bool get isWholeDay => throw _privateConstructorUsedError;
-  DateTime? get end => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
 
   /// Serializes this CalendarEvent to a JSON map.
@@ -46,9 +45,8 @@ abstract class $CalendarEventCopyWith<$Res> {
   $Res call(
       {String id,
       String title,
-      DateTime start,
+      DateTime datetime,
       bool isWholeDay,
-      DateTime? end,
       String? description});
 }
 
@@ -69,9 +67,8 @@ class _$CalendarEventCopyWithImpl<$Res, $Val extends CalendarEvent>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? start = null,
+    Object? datetime = null,
     Object? isWholeDay = null,
-    Object? end = freezed,
     Object? description = freezed,
   }) {
     return _then(_value.copyWith(
@@ -83,18 +80,14 @@ class _$CalendarEventCopyWithImpl<$Res, $Val extends CalendarEvent>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      start: null == start
-          ? _value.start
-          : start // ignore: cast_nullable_to_non_nullable
+      datetime: null == datetime
+          ? _value.datetime
+          : datetime // ignore: cast_nullable_to_non_nullable
               as DateTime,
       isWholeDay: null == isWholeDay
           ? _value.isWholeDay
           : isWholeDay // ignore: cast_nullable_to_non_nullable
               as bool,
-      end: freezed == end
-          ? _value.end
-          : end // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -114,9 +107,8 @@ abstract class _$$CalendarEventImplCopyWith<$Res>
   $Res call(
       {String id,
       String title,
-      DateTime start,
+      DateTime datetime,
       bool isWholeDay,
-      DateTime? end,
       String? description});
 }
 
@@ -135,9 +127,8 @@ class __$$CalendarEventImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? start = null,
+    Object? datetime = null,
     Object? isWholeDay = null,
-    Object? end = freezed,
     Object? description = freezed,
   }) {
     return _then(_$CalendarEventImpl(
@@ -149,18 +140,14 @@ class __$$CalendarEventImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      start: null == start
-          ? _value.start
-          : start // ignore: cast_nullable_to_non_nullable
+      datetime: null == datetime
+          ? _value.datetime
+          : datetime // ignore: cast_nullable_to_non_nullable
               as DateTime,
       isWholeDay: null == isWholeDay
           ? _value.isWholeDay
           : isWholeDay // ignore: cast_nullable_to_non_nullable
               as bool,
-      end: freezed == end
-          ? _value.end
-          : end // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -175,9 +162,8 @@ class _$CalendarEventImpl implements _CalendarEvent {
   _$CalendarEventImpl(
       {required this.id,
       required this.title,
-      required this.start,
+      required this.datetime,
       required this.isWholeDay,
-      this.end,
       this.description});
 
   factory _$CalendarEventImpl.fromJson(Map<String, dynamic> json) =>
@@ -188,17 +174,15 @@ class _$CalendarEventImpl implements _CalendarEvent {
   @override
   final String title;
   @override
-  final DateTime start;
+  final DateTime datetime;
   @override
   final bool isWholeDay;
-  @override
-  final DateTime? end;
   @override
   final String? description;
 
   @override
   String toString() {
-    return 'CalendarEvent(id: $id, title: $title, start: $start, isWholeDay: $isWholeDay, end: $end, description: $description)';
+    return 'CalendarEvent(id: $id, title: $title, datetime: $datetime, isWholeDay: $isWholeDay, description: $description)';
   }
 
   @override
@@ -208,10 +192,10 @@ class _$CalendarEventImpl implements _CalendarEvent {
             other is _$CalendarEventImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.start, start) || other.start == start) &&
+            (identical(other.datetime, datetime) ||
+                other.datetime == datetime) &&
             (identical(other.isWholeDay, isWholeDay) ||
                 other.isWholeDay == isWholeDay) &&
-            (identical(other.end, end) || other.end == end) &&
             (identical(other.description, description) ||
                 other.description == description));
   }
@@ -219,7 +203,7 @@ class _$CalendarEventImpl implements _CalendarEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, title, start, isWholeDay, end, description);
+      Object.hash(runtimeType, id, title, datetime, isWholeDay, description);
 
   /// Create a copy of CalendarEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -241,9 +225,8 @@ abstract class _CalendarEvent implements CalendarEvent {
   factory _CalendarEvent(
       {required final String id,
       required final String title,
-      required final DateTime start,
+      required final DateTime datetime,
       required final bool isWholeDay,
-      final DateTime? end,
       final String? description}) = _$CalendarEventImpl;
 
   factory _CalendarEvent.fromJson(Map<String, dynamic> json) =
@@ -254,11 +237,9 @@ abstract class _CalendarEvent implements CalendarEvent {
   @override
   String get title;
   @override
-  DateTime get start;
+  DateTime get datetime;
   @override
   bool get isWholeDay;
-  @override
-  DateTime? get end;
   @override
   String? get description;
 
@@ -268,244 +249,4 @@ abstract class _CalendarEvent implements CalendarEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CalendarEventImplCopyWith<_$CalendarEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-CalendarEventBuilder _$CalendarEventBuilderFromJson(Map<String, dynamic> json) {
-  return _CalendarEventBuilder.fromJson(json);
-}
-
-/// @nodoc
-mixin _$CalendarEventBuilder {
-  String? get title => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  DateTime? get start => throw _privateConstructorUsedError;
-  DateTime? get end => throw _privateConstructorUsedError;
-  bool get isWholeDay => throw _privateConstructorUsedError;
-
-  /// Serializes this CalendarEventBuilder to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CalendarEventBuilder
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $CalendarEventBuilderCopyWith<CalendarEventBuilder> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CalendarEventBuilderCopyWith<$Res> {
-  factory $CalendarEventBuilderCopyWith(CalendarEventBuilder value,
-          $Res Function(CalendarEventBuilder) then) =
-      _$CalendarEventBuilderCopyWithImpl<$Res, CalendarEventBuilder>;
-  @useResult
-  $Res call(
-      {String? title,
-      String? description,
-      DateTime? start,
-      DateTime? end,
-      bool isWholeDay});
-}
-
-/// @nodoc
-class _$CalendarEventBuilderCopyWithImpl<$Res,
-        $Val extends CalendarEventBuilder>
-    implements $CalendarEventBuilderCopyWith<$Res> {
-  _$CalendarEventBuilderCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of CalendarEventBuilder
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? title = freezed,
-    Object? description = freezed,
-    Object? start = freezed,
-    Object? end = freezed,
-    Object? isWholeDay = null,
-  }) {
-    return _then(_value.copyWith(
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      start: freezed == start
-          ? _value.start
-          : start // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      end: freezed == end
-          ? _value.end
-          : end // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      isWholeDay: null == isWholeDay
-          ? _value.isWholeDay
-          : isWholeDay // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$CalendarEventBuilderImplCopyWith<$Res>
-    implements $CalendarEventBuilderCopyWith<$Res> {
-  factory _$$CalendarEventBuilderImplCopyWith(_$CalendarEventBuilderImpl value,
-          $Res Function(_$CalendarEventBuilderImpl) then) =
-      __$$CalendarEventBuilderImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? title,
-      String? description,
-      DateTime? start,
-      DateTime? end,
-      bool isWholeDay});
-}
-
-/// @nodoc
-class __$$CalendarEventBuilderImplCopyWithImpl<$Res>
-    extends _$CalendarEventBuilderCopyWithImpl<$Res, _$CalendarEventBuilderImpl>
-    implements _$$CalendarEventBuilderImplCopyWith<$Res> {
-  __$$CalendarEventBuilderImplCopyWithImpl(_$CalendarEventBuilderImpl _value,
-      $Res Function(_$CalendarEventBuilderImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CalendarEventBuilder
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? title = freezed,
-    Object? description = freezed,
-    Object? start = freezed,
-    Object? end = freezed,
-    Object? isWholeDay = null,
-  }) {
-    return _then(_$CalendarEventBuilderImpl(
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      start: freezed == start
-          ? _value.start
-          : start // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      end: freezed == end
-          ? _value.end
-          : end // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      isWholeDay: null == isWholeDay
-          ? _value.isWholeDay
-          : isWholeDay // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$CalendarEventBuilderImpl implements _CalendarEventBuilder {
-  _$CalendarEventBuilderImpl(
-      {this.title,
-      this.description,
-      this.start,
-      this.end,
-      this.isWholeDay = false});
-
-  factory _$CalendarEventBuilderImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CalendarEventBuilderImplFromJson(json);
-
-  @override
-  final String? title;
-  @override
-  final String? description;
-  @override
-  final DateTime? start;
-  @override
-  final DateTime? end;
-  @override
-  @JsonKey()
-  final bool isWholeDay;
-
-  @override
-  String toString() {
-    return 'CalendarEventBuilder(title: $title, description: $description, start: $start, end: $end, isWholeDay: $isWholeDay)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CalendarEventBuilderImpl &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.start, start) || other.start == start) &&
-            (identical(other.end, end) || other.end == end) &&
-            (identical(other.isWholeDay, isWholeDay) ||
-                other.isWholeDay == isWholeDay));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, title, description, start, end, isWholeDay);
-
-  /// Create a copy of CalendarEventBuilder
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CalendarEventBuilderImplCopyWith<_$CalendarEventBuilderImpl>
-      get copyWith =>
-          __$$CalendarEventBuilderImplCopyWithImpl<_$CalendarEventBuilderImpl>(
-              this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CalendarEventBuilderImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _CalendarEventBuilder implements CalendarEventBuilder {
-  factory _CalendarEventBuilder(
-      {final String? title,
-      final String? description,
-      final DateTime? start,
-      final DateTime? end,
-      final bool isWholeDay}) = _$CalendarEventBuilderImpl;
-
-  factory _CalendarEventBuilder.fromJson(Map<String, dynamic> json) =
-      _$CalendarEventBuilderImpl.fromJson;
-
-  @override
-  String? get title;
-  @override
-  String? get description;
-  @override
-  DateTime? get start;
-  @override
-  DateTime? get end;
-  @override
-  bool get isWholeDay;
-
-  /// Create a copy of CalendarEventBuilder
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CalendarEventBuilderImplCopyWith<_$CalendarEventBuilderImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
