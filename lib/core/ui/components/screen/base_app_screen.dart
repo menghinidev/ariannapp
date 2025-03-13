@@ -28,7 +28,6 @@ class BaseAppScreen extends StatelessWidget {
             SliverAppBar.large(
               title: customTitle ?? Text(title),
               actions: actions,
-              floating: true,
               shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
             ),
             ...children,

@@ -1,6 +1,7 @@
 export 'banner/dismissible_component.dart';
 export 'banner/empty_content_placeholder.dart';
 export 'form/custom_dropdown.dart';
+export 'form/form_field_selector.dart';
 export 'form/keyboard_focus_wrapper.dart';
 export 'loading/loading_switcher.dart';
 export 'modals/modals.dart';
