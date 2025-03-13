@@ -9,10 +9,10 @@ class CalendarEvent with _$CalendarEvent {
   factory CalendarEvent({
     required String id,
     required String title,
-    required String description,
     required DateTime start,
-    required DateTime end,
     required bool isWholeDay,
+    DateTime? end,
+    String? description,
   }) = _CalendarEvent;
 
   factory CalendarEvent.fromJson(Map<String, dynamic> json) => _$CalendarEventFromJson(json);
@@ -29,11 +29,11 @@ class CalendarEvent with _$CalendarEvent {
 @freezed
 class CalendarEventBuilder with _$CalendarEventBuilder {
   factory CalendarEventBuilder({
-    required String title,
-    required String description,
-    required DateTime start,
-    required DateTime end,
-    required bool isWholeDay,
+    String? title,
+    String? description,
+    DateTime? start,
+    DateTime? end,
+    @Default(false) bool isWholeDay,
   }) = _CalendarEventBuilder;
 
   factory CalendarEventBuilder.fromJson(Map<String, dynamic> json) => _$CalendarEventBuilderFromJson(json);

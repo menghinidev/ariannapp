@@ -23,4 +23,12 @@ class FirestoreCalendarRepository with RepositorySafeInvoker implements ICalenda
       payloadMapper: (ref) {},
     );
   }
+
+  @override
+  Future<EmptyResponse> deleteEvent({required String id}) {
+    return safeInvoke<void, void>(
+      request: () => instance.collection(matchCollection).doc(id).delete(),
+      payloadMapper: (_) {},
+    );
+  }
 }

@@ -10,12 +10,14 @@ class BaseDashboardSection<T> extends ConsumerWidget {
     required this.emptyCaseTitle,
     super.key,
     this.emptyCaseSubtitle,
-    this.onOpenAll,
+    this.headerButtonAction,
+    this.headerButtonLabel = 'Visualizza',
     this.showDivider = false,
   });
 
   final List<T>? values;
-  final void Function()? onOpenAll;
+  final void Function()? headerButtonAction;
+  final String headerButtonLabel;
   final String title;
   final String emptyCaseTitle;
   final String? emptyCaseSubtitle;
@@ -48,10 +50,11 @@ class BaseDashboardSection<T> extends ConsumerWidget {
                       style: context.textTheme.titleLarge,
                     ),
                   ),
-                  TextButton(
-                    onPressed: onOpenAll,
-                    child: const Text('Visualizza'),
-                  ),
+                  if (headerButtonAction != null)
+                    TextButton(
+                      onPressed: headerButtonAction,
+                      child: Text(headerButtonLabel),
+                    ),
                 ],
               ),
             ),

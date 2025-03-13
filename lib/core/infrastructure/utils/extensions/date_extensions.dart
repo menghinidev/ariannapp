@@ -2,6 +2,12 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+extension DateTimeFeature on DateTime {
+  bool isSameDay(DateTime other) {
+    return year == other.year && month == other.month && day == other.day;
+  }
+}
+
 class DateFormatterFactory {
   DateFormatterFactory._();
 

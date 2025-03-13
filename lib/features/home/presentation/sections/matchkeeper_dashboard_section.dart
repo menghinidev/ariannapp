@@ -21,7 +21,7 @@ class MatchkeeperDashboardSection extends ConsumerWidget {
       title: 'Partite',
       emptyCaseTitle: 'Non sono presenti partite',
       emptyCaseSubtitle: 'Clicca sul bottone in alto a destra per aggiungere una nuova partita',
-      onOpenAll: () => context.goRelative(MatchkeeperRoutes.dashboard),
+      headerButtonAction: () => context.goRelative(MatchkeeperRoutes.dashboard),
     );
   }
 }

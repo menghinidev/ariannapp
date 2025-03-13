@@ -22,7 +22,7 @@ class BottomSheetService {
       constraints: constraints,
       builder: (context) => KeyboardFocusWrapper(
         child: Padding(
-          padding: DistanceProvider.screenInsets.padding.add(MediaQuery.of(context).viewInsets),
+          padding: DistanceProvider.screenInsets.padding.removeTop.add(MediaQuery.of(context).viewInsets),
           child: builder(context),
         ),
       ),

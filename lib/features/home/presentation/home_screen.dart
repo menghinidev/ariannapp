@@ -1,4 +1,5 @@
 import 'package:ariannapp/core/core.dart';
+import 'package:ariannapp/features/calendar/my_calendar/presentation/my_calendar_section.dart';
 import 'package:ariannapp/features/home/presentation/sections/calendar_dashboard_section.dart';
 import 'package:ariannapp/features/home/presentation/sections/groceries_dashboard_section.dart';
 import 'package:ariannapp/features/home/presentation/sections/matchkeeper_dashboard_section.dart';
@@ -38,6 +39,8 @@ class HomeScreen extends ConsumerWidget {
         ),
       ],
       children: [
+        const SliverToBoxAdapter(child: MyCalendarSection()),
+        SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
         if (!EnvVariable.mode.isLite) ...[
           const SliverToBoxAdapter(child: CalendarDashboardSection()),
           SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),

@@ -21,7 +21,7 @@ class GroceriesDashboardSection extends ConsumerWidget {
       emptyCaseTitle: 'Non sono presenti elementi',
       values: groceries,
       showDivider: true,
-      onOpenAll: () => context.goRelative(GroceriesRoutes.checklist),
+      headerButtonAction: () => context.goRelative(GroceriesRoutes.checklist),
       itemBuilder: (context, data) => CustomDismissible(
         value: data,
         background: const DismissibleCompleteDecoration(),

@@ -9,4 +9,8 @@ abstract class ICalendarRepository {
   Future<EmptyResponse> createEvent({
     required CalendarEventBuilder event,
   });
+
+  Future<EmptyResponse> deleteEvent({
+    required String id,
+  });
 }
