@@ -24,6 +24,8 @@ mixin _$CalendarEvent {
   String get title => throw _privateConstructorUsedError;
   DateTime get datetime => throw _privateConstructorUsedError;
   bool get isWholeDay => throw _privateConstructorUsedError;
+  EventCategory get category => throw _privateConstructorUsedError;
+  List<EventTag> get tags => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
 
   /// Serializes this CalendarEvent to a JSON map.
@@ -47,6 +49,8 @@ abstract class $CalendarEventCopyWith<$Res> {
       String title,
       DateTime datetime,
       bool isWholeDay,
+      EventCategory category,
+      List<EventTag> tags,
       String? description});
 }
 
@@ -69,6 +73,8 @@ class _$CalendarEventCopyWithImpl<$Res, $Val extends CalendarEvent>
     Object? title = null,
     Object? datetime = null,
     Object? isWholeDay = null,
+    Object? category = null,
+    Object? tags = null,
     Object? description = freezed,
   }) {
     return _then(_value.copyWith(
@@ -88,6 +94,14 @@ class _$CalendarEventCopyWithImpl<$Res, $Val extends CalendarEvent>
           ? _value.isWholeDay
           : isWholeDay // ignore: cast_nullable_to_non_nullable
               as bool,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as EventCategory,
+      tags: null == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<EventTag>,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -109,6 +123,8 @@ abstract class _$$CalendarEventImplCopyWith<$Res>
       String title,
       DateTime datetime,
       bool isWholeDay,
+      EventCategory category,
+      List<EventTag> tags,
       String? description});
 }
 
@@ -129,6 +145,8 @@ class __$$CalendarEventImplCopyWithImpl<$Res>
     Object? title = null,
     Object? datetime = null,
     Object? isWholeDay = null,
+    Object? category = null,
+    Object? tags = null,
     Object? description = freezed,
   }) {
     return _then(_$CalendarEventImpl(
@@ -148,6 +166,14 @@ class __$$CalendarEventImplCopyWithImpl<$Res>
           ? _value.isWholeDay
           : isWholeDay // ignore: cast_nullable_to_non_nullable
               as bool,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as EventCategory,
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<EventTag>,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -164,7 +190,10 @@ class _$CalendarEventImpl implements _CalendarEvent {
       required this.title,
       required this.datetime,
       required this.isWholeDay,
-      this.description});
+      this.category = EventCategory.generic,
+      final List<EventTag> tags = const <EventTag>[],
+      this.description})
+      : _tags = tags;
 
   factory _$CalendarEventImpl.fromJson(Map<String, dynamic> json) =>
       _$$CalendarEventImplFromJson(json);
@@ -178,11 +207,23 @@ class _$CalendarEventImpl implements _CalendarEvent {
   @override
   final bool isWholeDay;
   @override
+  @JsonKey()
+  final EventCategory category;
+  final List<EventTag> _tags;
+  @override
+  @JsonKey()
+  List<EventTag> get tags {
+    if (_tags is EqualUnmodifiableListView) return _tags;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tags);
+  }
+
+  @override
   final String? description;
 
   @override
   String toString() {
-    return 'CalendarEvent(id: $id, title: $title, datetime: $datetime, isWholeDay: $isWholeDay, description: $description)';
+    return 'CalendarEvent(id: $id, title: $title, datetime: $datetime, isWholeDay: $isWholeDay, category: $category, tags: $tags, description: $description)';
   }
 
   @override
@@ -196,14 +237,17 @@ class _$CalendarEventImpl implements _CalendarEvent {
                 other.datetime == datetime) &&
             (identical(other.isWholeDay, isWholeDay) ||
                 other.isWholeDay == isWholeDay) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
             (identical(other.description, description) ||
                 other.description == description));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, title, datetime, isWholeDay, description);
+  int get hashCode => Object.hash(runtimeType, id, title, datetime, isWholeDay,
+      category, const DeepCollectionEquality().hash(_tags), description);
 
   /// Create a copy of CalendarEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -227,6 +271,8 @@ abstract class _CalendarEvent implements CalendarEvent {
       required final String title,
       required final DateTime datetime,
       required final bool isWholeDay,
+      final EventCategory category,
+      final List<EventTag> tags,
       final String? description}) = _$CalendarEventImpl;
 
   factory _CalendarEvent.fromJson(Map<String, dynamic> json) =
@@ -240,6 +286,10 @@ abstract class _CalendarEvent implements CalendarEvent {
   DateTime get datetime;
   @override
   bool get isWholeDay;
+  @override
+  EventCategory get category;
+  @override
+  List<EventTag> get tags;
   @override
   String? get description;
 

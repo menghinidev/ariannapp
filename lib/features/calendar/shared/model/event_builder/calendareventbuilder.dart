@@ -1,3 +1,4 @@
+import 'package:ariannapp/features/calendar/shared/model/event/calendarevent.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,6 +12,8 @@ class CalendarEventBuilder with _$CalendarEventBuilder {
     DateTime? day,
     TimeOfDay? time,
     @Default(false) bool isWholeDay,
+    @Default(EventCategory.generic) EventCategory category,
+    @Default(<EventTag>[]) List<EventTag> tags,
   }) = _CalendarEventBuilder;
 }
 
@@ -27,6 +30,8 @@ extension FirebaseMapper on CalendarEventBuilder {
       'title': title,
       'datetime': datetime.toIso8601String(),
       'isWholeDay': isWholeDay,
+      'category': category.name,
+      'tags': tags.map((e) => e.name).toList(),
       if (description != null) 'description': description,
     };
   }

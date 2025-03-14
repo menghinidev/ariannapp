@@ -1,4 +1,4 @@
-import 'package:ariannapp/features/calendar/shared/model/builder/calendareventbuilder.dart';
+import 'package:ariannapp/features/calendar/shared/model/event_builder/calendareventbuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

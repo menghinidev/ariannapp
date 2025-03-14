@@ -1,3 +1,4 @@
+import 'package:ariannapp/features/calendar/shared/routes/my_calendar_events_route.dart';
 import 'package:ariannapp/features/groceries/shared/routes/shelf_routes.dart';
 import 'package:ariannapp/features/home/routes/home_routes.dart';
 import 'package:ariannapp/features/horoscope/routes/my_astrology_routes.dart';
@@ -22,6 +23,7 @@ GoRouter appRouter(Ref ref) {
         MyAstrologyScreenRoute(),
         GroceriesShelfScreenRoute(),
         GroceriesCheckListScreenRoute(),
+        MyCalendarEventsScreenRoute(),
       ]),
     ],
   );

@@ -21,6 +21,8 @@ mixin _$CalendarEventBuilder {
   DateTime? get day => throw _privateConstructorUsedError;
   TimeOfDay? get time => throw _privateConstructorUsedError;
   bool get isWholeDay => throw _privateConstructorUsedError;
+  EventCategory get category => throw _privateConstructorUsedError;
+  List<EventTag> get tags => throw _privateConstructorUsedError;
 
   /// Create a copy of CalendarEventBuilder
   /// with the given fields replaced by the non-null parameter values.
@@ -40,7 +42,9 @@ abstract class $CalendarEventBuilderCopyWith<$Res> {
       String? description,
       DateTime? day,
       TimeOfDay? time,
-      bool isWholeDay});
+      bool isWholeDay,
+      EventCategory category,
+      List<EventTag> tags});
 }
 
 /// @nodoc
@@ -64,6 +68,8 @@ class _$CalendarEventBuilderCopyWithImpl<$Res,
     Object? day = freezed,
     Object? time = freezed,
     Object? isWholeDay = null,
+    Object? category = null,
+    Object? tags = null,
   }) {
     return _then(_value.copyWith(
       title: freezed == title
@@ -86,6 +92,14 @@ class _$CalendarEventBuilderCopyWithImpl<$Res,
           ? _value.isWholeDay
           : isWholeDay // ignore: cast_nullable_to_non_nullable
               as bool,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as EventCategory,
+      tags: null == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<EventTag>,
     ) as $Val);
   }
 }
@@ -103,7 +117,9 @@ abstract class _$$CalendarEventBuilderImplCopyWith<$Res>
       String? description,
       DateTime? day,
       TimeOfDay? time,
-      bool isWholeDay});
+      bool isWholeDay,
+      EventCategory category,
+      List<EventTag> tags});
 }
 
 /// @nodoc
@@ -124,6 +140,8 @@ class __$$CalendarEventBuilderImplCopyWithImpl<$Res>
     Object? day = freezed,
     Object? time = freezed,
     Object? isWholeDay = null,
+    Object? category = null,
+    Object? tags = null,
   }) {
     return _then(_$CalendarEventBuilderImpl(
       title: freezed == title
@@ -146,6 +164,14 @@ class __$$CalendarEventBuilderImplCopyWithImpl<$Res>
           ? _value.isWholeDay
           : isWholeDay // ignore: cast_nullable_to_non_nullable
               as bool,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as EventCategory,
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<EventTag>,
     ));
   }
 }
@@ -158,7 +184,10 @@ class _$CalendarEventBuilderImpl implements _CalendarEventBuilder {
       this.description,
       this.day,
       this.time,
-      this.isWholeDay = false});
+      this.isWholeDay = false,
+      this.category = EventCategory.generic,
+      final List<EventTag> tags = const <EventTag>[]})
+      : _tags = tags;
 
   @override
   final String? title;
@@ -171,10 +200,21 @@ class _$CalendarEventBuilderImpl implements _CalendarEventBuilder {
   @override
   @JsonKey()
   final bool isWholeDay;
+  @override
+  @JsonKey()
+  final EventCategory category;
+  final List<EventTag> _tags;
+  @override
+  @JsonKey()
+  List<EventTag> get tags {
+    if (_tags is EqualUnmodifiableListView) return _tags;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tags);
+  }
 
   @override
   String toString() {
-    return 'CalendarEventBuilder(title: $title, description: $description, day: $day, time: $time, isWholeDay: $isWholeDay)';
+    return 'CalendarEventBuilder(title: $title, description: $description, day: $day, time: $time, isWholeDay: $isWholeDay, category: $category, tags: $tags)';
   }
 
   @override
@@ -188,12 +228,15 @@ class _$CalendarEventBuilderImpl implements _CalendarEventBuilder {
             (identical(other.day, day) || other.day == day) &&
             (identical(other.time, time) || other.time == time) &&
             (identical(other.isWholeDay, isWholeDay) ||
-                other.isWholeDay == isWholeDay));
+                other.isWholeDay == isWholeDay) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            const DeepCollectionEquality().equals(other._tags, _tags));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, title, description, day, time, isWholeDay);
+  int get hashCode => Object.hash(runtimeType, title, description, day, time,
+      isWholeDay, category, const DeepCollectionEquality().hash(_tags));
 
   /// Create a copy of CalendarEventBuilder
   /// with the given fields replaced by the non-null parameter values.
@@ -212,7 +255,9 @@ abstract class _CalendarEventBuilder implements CalendarEventBuilder {
       final String? description,
       final DateTime? day,
       final TimeOfDay? time,
-      final bool isWholeDay}) = _$CalendarEventBuilderImpl;
+      final bool isWholeDay,
+      final EventCategory category,
+      final List<EventTag> tags}) = _$CalendarEventBuilderImpl;
 
   @override
   String? get title;
@@ -224,6 +269,10 @@ abstract class _CalendarEventBuilder implements CalendarEventBuilder {
   TimeOfDay? get time;
   @override
   bool get isWholeDay;
+  @override
+  EventCategory get category;
+  @override
+  List<EventTag> get tags;
 
   /// Create a copy of CalendarEventBuilder
   /// with the given fields replaced by the non-null parameter values.

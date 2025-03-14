@@ -58,6 +58,11 @@ extension DateFormatter on DateTime {
     return instance.utcDate.format(this);
   }
 
+  String get toDay {
+    final instance = DateFormatterFactory.instance;
+    return instance.day.format(this);
+  }
+
   String get toDayMonthDate {
     final instance = DateFormatterFactory.instance;
     return instance.dayMonthDate.format(this);

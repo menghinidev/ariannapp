@@ -2,7 +2,8 @@ import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/calendar/new_event/presentation/bloc/new_event_controller.dart';
 import 'package:ariannapp/features/calendar/new_event/usecase/new_event/command/neweventcommand.dart';
 import 'package:ariannapp/features/calendar/new_event/usecase/new_event/new_event_use_case.dart';
-import 'package:ariannapp/features/calendar/shared/model/builder/calendareventbuilder.dart';
+import 'package:ariannapp/features/calendar/shared/model/event/calendarevent.dart';
+import 'package:ariannapp/features/calendar/shared/model/event_builder/calendareventbuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -26,6 +27,15 @@ class NewEventBottomSheet extends ConsumerWidget {
             TextField(
               decoration: const InputDecoration(labelText: 'Titolo'),
               onChanged: (value) => ref.read(newEventControllerProvider(date).notifier).title(value),
+            ),
+            DistanceProvider.mediumDistance.spacer(),
+            CustomDropdownMenu<EventCategory>(
+              values: EventCategory.values,
+              label: 'Tipologia',
+              labelProvider: (category) => category.formatName,
+              initialSelection: state.category,
+              onSelected: (value) =>
+                  value == null ? null : ref.read(newEventControllerProvider(date).notifier).category(value),
             ),
             DistanceProvider.mediumDistance.spacer(),
             SwitchListTile.adaptive(
@@ -62,9 +72,21 @@ class NewEventBottomSheet extends ConsumerWidget {
               ],
             ),
             DistanceProvider.mediumDistance.spacer(),
-            TextField(
-              decoration: const InputDecoration(labelText: 'Descrizione'),
-              onChanged: (value) => ref.read(newEventControllerProvider(date).notifier).description(value),
+            Text(
+              'Tags',
+              style: context.textTheme.titleLarge,
+            ),
+            DistanceProvider.smallDistance.spacer(),
+            Wrap(
+              spacing: DistanceProvider.smallDistance,
+              children: [
+                for (final tag in EventTag.values)
+                  FilterChip(
+                    label: Text(tag.formatName),
+                    selected: state.tags.contains(tag),
+                    onSelected: (value) => ref.read(newEventControllerProvider(date).notifier).toggleTag(tag),
+                  ),
+              ],
             ),
           ],
         ),

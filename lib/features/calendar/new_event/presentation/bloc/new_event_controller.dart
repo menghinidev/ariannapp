@@ -1,4 +1,5 @@
-import 'package:ariannapp/features/calendar/shared/model/builder/calendareventbuilder.dart';
+import 'package:ariannapp/features/calendar/shared/model/event/calendarevent.dart';
+import 'package:ariannapp/features/calendar/shared/model/event_builder/calendareventbuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -30,6 +31,20 @@ class NewEventController extends _$NewEventController {
 
   void description(String description) {
     state = state.copyWith(description: description);
+  }
+
+  void category(EventCategory category) {
+    state = state.copyWith(category: category);
+  }
+
+  void toggleTag(EventTag tag) {
+    final tags = [...state.tags];
+    if (tags.contains(tag)) {
+      tags.remove(tag);
+    } else {
+      tags.add(tag);
+    }
+    state = state.copyWith(tags: tags);
   }
 }
 
