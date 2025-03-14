@@ -1,5 +1,6 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/calendar/my_calendar/presentation/dashboard/bloc/selected_date_controller.dart';
+import 'package:ariannapp/features/calendar/my_calendar/presentation/events/components/event_list_tile.dart';
 import 'package:ariannapp/features/calendar/my_calendar/usecase/delete_event/command/deleteeventcommand.dart';
 import 'package:ariannapp/features/calendar/my_calendar/usecase/delete_event/delete_event_use_case.dart';
 import 'package:ariannapp/features/calendar/my_calendar/usecase/get_calendar/get_calendar_use_case.dart';
@@ -106,38 +107,15 @@ class _CalendarEventsPerDay extends ConsumerWidget {
           ),
       emptyCaseTitle: 'Non ci sono eventi',
       emptyCaseSubtitle: "Seleziona un'altra data",
-      itemBuilder: (context, event) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListTile(
-            title: Text(event.title),
-            contentPadding: EdgeInsets.zero,
-            trailing: IconButton(
-              onPressed: () {
-                final command = DeleteEventCommand(eventId: event.id, context: context);
-                ref.read(deleteEventUseCaseProvider).call(command);
-              },
-              icon: const Icon(Icons.delete_outline),
-            ),
-            subtitle: Text(event.isWholeDay ? event.datetime.toNiceDate : event.datetime.toExtendedDate),
-          ),
-          if (event.tags.isNotEmpty) ...[
-            Wrap(
-              spacing: DistanceProvider.smallDistance,
-              runSpacing: DistanceProvider.smallDistance,
-              children: [
-                for (final tag in event.tags)
-                  Chip(
-                    label: Text(
-                      tag.formatName,
-                      style: context.textTheme.bodySmall?.copyWith(color: context.colorScheme.onTertiary),
-                    ),
-                    backgroundColor: context.colorScheme.tertiary,
-                  ),
-              ],
-            ),
-          ],
-        ],
+      itemBuilder: (context, event) => CalendarEventListTile(
+        event: event,
+        trailing: IconButton(
+          icon: const Icon(Icons.delete_outline),
+          onPressed: () {
+            final command = DeleteEventCommand(eventId: event.id, context: context);
+            ref.read(deleteEventUseCaseProvider).call(command);
+          },
+        ),
       ),
     );
   }

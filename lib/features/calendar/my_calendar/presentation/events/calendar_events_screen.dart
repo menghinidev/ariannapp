@@ -1,5 +1,6 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/calendar/my_calendar/presentation/events/bloc/my_calendar_controller.dart';
+import 'package:ariannapp/features/calendar/my_calendar/presentation/events/components/event_list_tile.dart';
 import 'package:ariannapp/features/calendar/my_calendar/usecase/delete_event/command/deleteeventcommand.dart';
 import 'package:ariannapp/features/calendar/my_calendar/usecase/delete_event/delete_event_use_case.dart';
 import 'package:ariannapp/features/calendar/my_calendar/usecase/get_calendar/get_calendar_use_case.dart';
@@ -64,13 +65,8 @@ class MyCalendarEventsScreen extends ConsumerWidget {
                               final command = DeleteEventCommand(eventId: data[index].id, context: context);
                               await usecase.call(command);
                             },
-                            child: ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              title: Text(data[index].title),
-                              subtitle: Text(data[index].datetime.toNiceDate),
-                              leading: CircleAvatar(
-                                child: Text(data[index].datetime.toDay),
-                              ),
+                            child: CalendarEventListTile(
+                              event: data[index],
                             ),
                           ),
                         ),
