@@ -10,7 +10,7 @@ part 'get_shelf_use_case.g.dart';
 @riverpod
 Future<List<ShelfItem>> getShelf(Ref ref) async {
   final usecase = ref.watch(getShelfUseCaseProvider);
-  final response = await usecase.call(null);
+  final response = await usecase.execute(null);
   return response.toFuture();
 }
 
@@ -25,9 +25,5 @@ class GetShelfUseCase extends UseCase<List<ShelfItem>, void> {
   final IGroceriesRepository repo;
 
   @override
-  Future<Response<List<ShelfItem>, ApplicationError>> call(void input) async {
-    final check = await checkRequirements();
-    final response = await check.flatMapAsync((_) => repo.getShelf());
-    return response;
-  }
+  Future<Response<List<ShelfItem>, ApplicationError>> call(void input) => repo.getShelf();
 }

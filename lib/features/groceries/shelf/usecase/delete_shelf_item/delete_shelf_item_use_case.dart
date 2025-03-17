@@ -22,9 +22,10 @@ DeleteShelfItemUseCase deleteShelfItemUseCase(Ref ref) {
     provider: getShelfProvider,
   );
   return DeleteShelfItemUseCase(
+    repo: ref.watch(groceriesRepositoryProvider),
+    interceptors: [LoadingUseCaseInterceptor(contextProvider: (input) => input.context)],
     successHandlers: [refresh, showSnackbarSuccess],
     errorHandlers: [showSnackbarError],
-    repo: ref.watch(groceriesRepositoryProvider),
   );
 }
 
@@ -33,16 +34,13 @@ class DeleteShelfItemUseCase extends UseCase<void, DeleteShelfItemCommand> {
     required this.repo,
     super.successHandlers,
     super.errorHandlers,
+    super.interceptors,
   });
 
   final IGroceriesRepository repo;
 
   @override
-  Future<Response<void, ApplicationError>> call(DeleteShelfItemCommand input) async {
-    final check = await checkRequirements();
-    final response = await check.flatMapAsync((_) => repo.removeShelfItem(item: input.shelf));
-    await response.ifSuccessAsync((_) => applySuccessHandlers(response, input));
-    await response.ifErrorAsync((_) => applyErrorHandlers(response, input));
-    return response;
-  }
+  Future<Response<void, ApplicationError>> call(DeleteShelfItemCommand input) => repo.removeShelfItem(
+        item: input.shelf,
+      );
 }

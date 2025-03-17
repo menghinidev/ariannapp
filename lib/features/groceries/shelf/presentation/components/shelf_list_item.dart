@@ -29,7 +29,7 @@ class ShelfListItem extends ConsumerWidget {
         onPressed: () async {
           final command = MoveToGroceryListCommand(item: item, context: context);
           final useCase = await ref.read(moveGroceryItemUseCaseProvider.future);
-          await useCase.call(command);
+          await useCase.execute(command);
         },
         child: const Text('Aggiungi'),
       ),

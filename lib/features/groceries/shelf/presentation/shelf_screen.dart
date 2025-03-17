@@ -21,9 +21,10 @@ class ShelfScreen extends ConsumerWidget {
         ),
       ],
       children: const [
-        SliverFillRemaining(
+        SliverShelfList(),
+        /* SliverFillRemaining(
           child: ShelfListView(),
-        ),
+        ), */
       ],
     );
   }

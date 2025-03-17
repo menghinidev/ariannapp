@@ -7,7 +7,7 @@ part of 'get_checklist_use_case.dart';
 // **************************************************************************
 
 String _$groceriesChecklistHash() =>
-    r'88c52dc73188483bf50cc9d9b5c74e5a12aa3411';
+    r'580f36c3f808668e6a8fc5e54a7579f45ce950d5';
 
 /// See also [groceriesChecklist].
 @ProviderFor(groceriesChecklist)

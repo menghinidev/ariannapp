@@ -7,7 +7,7 @@ part of 'update_checklist_order_use_case.dart';
 // **************************************************************************
 
 String _$updateCheckListOrderUseCaseHash() =>
-    r'77b5923984bad5f7c3accbc7ef650ff56f492365';
+    r'0d33b6c2e5302d2d1b6ef988cc31cd838c123a29';
 
 /// See also [updateCheckListOrderUseCase].
 @ProviderFor(updateCheckListOrderUseCase)

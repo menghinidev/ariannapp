@@ -6,7 +6,7 @@ part of 'get_shelf_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getShelfHash() => r'0a5367d16c2528b57c9534517ace1b1d820d107a';
+String _$getShelfHash() => r'207b2f76f52cc53c39a2824c21305cfec775bb5e';
 
 /// See also [getShelf].
 @ProviderFor(getShelf)

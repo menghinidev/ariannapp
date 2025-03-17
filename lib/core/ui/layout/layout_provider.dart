@@ -20,6 +20,14 @@ extension EdgeInsetsModifier on EdgeInsets {
   EdgeInsets get removeTop => copyWith(top: 0);
 }
 
+extension SliverDecorator on Widget {
+  Widget get sliver {
+    return SliverToBoxAdapter(
+      child: this,
+    );
+  }
+}
+
 class DistanceProvider {
   static const double smallDistance = 6;
   static const double mediumDistance = 14;

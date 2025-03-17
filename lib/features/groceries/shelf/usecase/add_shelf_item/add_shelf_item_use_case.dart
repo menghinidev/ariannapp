@@ -24,6 +24,7 @@ Future<AddShelfItemUseCase> addShelfItemUseCase(Ref ref) async {
   );
   return AddShelfItemUseCase(
     repo: ref.watch(groceriesRepositoryProvider),
+    interceptors: [LoadingUseCaseInterceptor(contextProvider: (input) => input.context)],
     validators: [uniqueValidator],
     errorHandlers: [showSnackBarError],
     successHandlers: [refresh, showSnackBarSuccess],
@@ -36,26 +37,16 @@ class AddShelfItemUseCase extends UseCase<void, AddShelfItemCommand> {
     super.successHandlers,
     super.validators,
     super.errorHandlers,
+    super.interceptors,
   });
 
   final IGroceriesRepository repo;
 
   @override
-  Future<Response<void, ApplicationError>> call(AddShelfItemCommand input) async {
-    final check = await checkRequirements();
-    final validated = await check.flatMapAsync((_) => validateInput(input));
-    validated.ifSuccess((_) => OverlayLoaderManager.instance.showLoader(input.context));
-    final response = await validated.flatMapAsync(
-      (_) => repo.addShelfItem(
+  Future<Response<void, ApplicationError>> call(AddShelfItemCommand input) => repo.addShelfItem(
         name: input.name,
         category: input.category,
-      ),
-    );
-    OverlayLoaderManager.instance.hideLoader();
-    await response.ifSuccessAsync((_) => applySuccessHandlers(response, input));
-    await response.ifErrorAsync((_) => applyErrorHandlers(response, input));
-    return response;
-  }
+      );
 }
 
 class UniqueShelfNameValidator extends UseCaseValidator<AddShelfItemCommand> {

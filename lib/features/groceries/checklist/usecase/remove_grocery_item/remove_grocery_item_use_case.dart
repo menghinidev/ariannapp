@@ -13,8 +13,9 @@ part 'remove_grocery_item_use_case.g.dart';
 RemoveGroceryItemUseCase removeGroceryItemUseCase(Ref ref) {
   return RemoveGroceryItemUseCase(
     repo: ref.watch(groceriesRepositoryProvider),
+    interceptors: [LoadingUseCaseInterceptor(contextProvider: (input) => input.context)],
     successHandlers: [
-      ShowSnackbarSuccessHandler<void, RemoveGroceryItemCommand>(
+      ShowSnackbarSuccessHandler(
         message: 'Rimosso dalla lista della spesa',
         contextProvider: (input) => input.context,
       ),
@@ -34,15 +35,13 @@ class RemoveGroceryItemUseCase extends UseCase<void, RemoveGroceryItemCommand> {
   RemoveGroceryItemUseCase({
     required this.repo,
     super.successHandlers,
+    super.interceptors,
   });
 
   final IGroceriesRepository repo;
 
   @override
-  Future<Response<void, ApplicationError>> call(RemoveGroceryItemCommand input) async {
-    final check = await checkRequirements();
-    final response = await check.flatMapAsync((_) => repo.removeGroceryItem(item: input.item));
-    await response.ifSuccessAsync((_) => applySuccessHandlers(response, input));
-    return response;
-  }
+  Future<Response<void, ApplicationError>> call(RemoveGroceryItemCommand input) => repo.removeGroceryItem(
+        item: input.item,
+      );
 }

@@ -121,8 +121,8 @@ class _MatchCardActions extends ConsumerWidget {
           final newValue = score.copyWith(points: [...points, newPoint]);
           scores.add(newValue);
         }
-        final command = EditScoreCommand(match: match, newScores: scores);
-        await ref.read(editScoreUseCaseProvider).call(command);
+        final command = EditScoreCommand(match: match, newScores: scores, context: context);
+        await ref.read(editScoreUseCaseProvider).execute(command);
       },
     );
   }

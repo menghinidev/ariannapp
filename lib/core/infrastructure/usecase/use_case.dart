@@ -1,8 +1,11 @@
 import 'package:ariannapp/core/infrastructure/error/application_error/applicationerror.dart';
 import 'package:ariannapp/core/infrastructure/usecase/handlers/handler.dart';
+import 'package:ariannapp/core/infrastructure/usecase/interceptors/use_case_interceptor.dart';
 import 'package:ariannapp/core/infrastructure/usecase/requirements/requirement.dart';
 import 'package:ariannapp/core/infrastructure/usecase/validator/use_case_validator.dart';
 import 'package:ariannapp/core/infrastructure/utils/utils.dart';
+import 'package:ariannapp/core/ui/components/loading/overlay_manager.dart';
+import 'package:flutter/material.dart';
 
 abstract class UseCase<R, I> {
   UseCase({
@@ -10,13 +13,40 @@ abstract class UseCase<R, I> {
     this.errorHandlers,
     this.successHandlers,
     this.validators,
+    this.interceptors,
   });
   final List<UseCaseRequirement>? requirements;
   final List<UseCaseValidator<I>>? validators;
   final List<UseCaseErrorHandler<R, I>>? errorHandlers;
   final List<UseCaseSuccessHandler<R, I>>? successHandlers;
+  final List<UseCaseInterceptor<R, I>>? interceptors;
+
+  Future<EmptyResponse> transformInput(I input) async {
+    for (final transformer in interceptors ?? <UseCaseInterceptor<R, I>>[]) {
+      await transformer.processInput(input);
+    }
+    return Responses.success<void, ApplicationError>(null);
+  }
+
+  Future<Response<R, ApplicationError>> transformOutput(Response<R, ApplicationError> response, I input) async {
+    for (final transformer in interceptors ?? <UseCaseInterceptor<R, I>>[]) {
+      await transformer.processOutput(response, input);
+    }
+    return response;
+  }
 
   Future<Response<R, ApplicationError>> call(I input);
+
+  Future<Response<R, ApplicationError>> execute(I input) async {
+    final check = await checkRequirements();
+    final inputValidation = await check.flatMapAsync((_) => validateInput(input));
+    final transformedInput = await inputValidation.flatMapAsync((_) => transformInput(input));
+    final response = await transformedInput.flatMapAsync((_) => call(input));
+    final transformedOutput = await transformOutput(response, input);
+    await applyErrorHandlers(transformedOutput, input);
+    await applySuccessHandlers(transformedOutput, input);
+    return transformedOutput;
+  }
 
   Future<EmptyResponse> checkRequirements() async {
     if (requirements == null) {
@@ -65,5 +95,18 @@ abstract class UseCase<R, I> {
     for (final handler in successHandlers!) {
       await handler.handle(response.payload, input);
     }
+  }
+}
+
+extension ResponseLoadingManager<R, I> on Response<R, I> {
+  Response<R, I> startLoading(BuildContext context) {
+    if (isError) return this;
+    OverlayLoaderManager.instance.showLoader(context);
+    return this;
+  }
+
+  Response<R, I> completeLoading() {
+    OverlayLoaderManager.instance.hideLoader();
+    return this;
   }
 }

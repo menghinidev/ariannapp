@@ -2,6 +2,7 @@ import 'package:ariannapp/features/groceries/checklist/presentation/bloc/state/g
 import 'package:ariannapp/features/groceries/checklist/usecase/get_checklist/get_checklist_use_case.dart';
 import 'package:ariannapp/features/groceries/checklist/usecase/remove_grocery_item/command/removegroceryitemcommand.dart';
 import 'package:ariannapp/features/groceries/checklist/usecase/remove_grocery_item/remove_grocery_item_use_case.dart';
+import 'package:ariannapp/features/groceries/checklist/usecase/update_order/command/updategrocerieslistordercommand.dart';
 import 'package:ariannapp/features/groceries/checklist/usecase/update_order/update_checklist_order_use_case.dart';
 import 'package:ariannapp/features/groceries/shared/model/check_item/checklist_item.dart';
 import 'package:ariannapp/features/groceries/shared/model/grocery_category.dart';
@@ -42,7 +43,7 @@ class GroceriesCheckListOrderManager extends _$GroceriesCheckListOrderManager {
     return groceries.where((e) => categories.contains(e.category)).toList();
   }
 
-  Future<void> reorder(int oldIndex, int newIndex) async {
+  Future<void> reorder(BuildContext context, int oldIndex, int newIndex) async {
     final loadedState = state.valueOrNull;
     if (loadedState == null) return;
     final target = loadedState[oldIndex];
@@ -50,7 +51,8 @@ class GroceriesCheckListOrderManager extends _$GroceriesCheckListOrderManager {
       ..removeAt(oldIndex)
       ..insert(newIndex, target);
     state = AsyncData(newValues);
-    await ref.read(updateCheckListOrderUseCaseProvider).call(newValues);
+    final command = UpdateGroceriesListOrderCommand(items: newValues, context: context);
+    await ref.read(updateCheckListOrderUseCaseProvider).execute(command);
   }
 
   Future<void> remove(BuildContext context, {required GroceriesCheckListItem item}) async {
@@ -59,6 +61,6 @@ class GroceriesCheckListOrderManager extends _$GroceriesCheckListOrderManager {
     final newValues = [...loadedState]..remove(item);
     state = AsyncData(newValues);
     final command = RemoveGroceryItemCommand(item: item, context: context);
-    await ref.read(removeGroceryItemUseCaseProvider).call(command);
+    await ref.read(removeGroceryItemUseCaseProvider).execute(command);
   }
 }

@@ -22,6 +22,7 @@ DeleteCalendarEventUseCase deleteEventUseCase(Ref ref) {
   );
   return DeleteCalendarEventUseCase(
     repo: repo,
+    interceptors: [LoadingUseCaseInterceptor(contextProvider: (input) => input.context)],
     errorHandlers: [showErrorSnackbar],
     successHandlers: [refresh, showSuccessSnackbar],
   );
@@ -32,16 +33,13 @@ class DeleteCalendarEventUseCase extends UseCase<void, DeleteEventCommand> {
     required this.repo,
     super.errorHandlers,
     super.successHandlers,
+    super.interceptors,
   });
 
   final ICalendarRepository repo;
 
   @override
-  Future<Response<void, ApplicationError>> call(DeleteEventCommand input) async {
-    final check = await checkRequirements();
-    final response = await check.flatMapAsync((_) => repo.deleteEvent(id: input.eventId));
-    await response.ifErrorAsync((payload) => applyErrorHandlers(response, input));
-    await response.ifSuccessAsync((_) => applySuccessHandlers(response, input));
-    return response;
-  }
+  Future<Response<void, ApplicationError>> call(DeleteEventCommand input) => repo.deleteEvent(
+        id: input.eventId,
+      );
 }

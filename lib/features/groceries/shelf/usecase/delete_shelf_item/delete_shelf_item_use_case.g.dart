@@ -7,7 +7,7 @@ part of 'delete_shelf_item_use_case.dart';
 // **************************************************************************
 
 String _$deleteShelfItemUseCaseHash() =>
-    r'd29d6d5e627b6b5cb72b491aacd3d529b1182b6e';
+    r'f9cd4e6910d0ea4c1ce4c9b6eda772a180c8713c';
 
 /// See also [deleteShelfItemUseCase].
 @ProviderFor(deleteShelfItemUseCase)

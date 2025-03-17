@@ -12,6 +12,7 @@ part 'edit_score_use_case.g.dart';
 EditScoreUseCase editScoreUseCase(Ref ref) {
   return EditScoreUseCase(
     repo: ref.watch(matchRepositoryProvider),
+    interceptors: [LoadingUseCaseInterceptor(contextProvider: (input) => input.context)],
     successHandlers: [
       InvalidateProviderOnSuccessHandler(ref: ref, provider: matchesProvider),
     ],
@@ -22,20 +23,14 @@ class EditScoreUseCase extends UseCase<void, EditScoreCommand> {
   EditScoreUseCase({
     required this.repo,
     super.successHandlers,
+    super.interceptors,
   });
 
   final IMatchRepository repo;
 
   @override
-  Future<Response<void, ApplicationError>> call(EditScoreCommand input) async {
-    final check = await checkRequirements();
-    final response = await check.flatMapAsync(
-      (_) => repo.updateScore(
+  Future<Response<void, ApplicationError>> call(EditScoreCommand input) => repo.updateScore(
         matchId: input.match.id,
         scores: input.newScores,
-      ),
-    );
-    await response.ifSuccessAsync((_) => applySuccessHandlers(response, input));
-    return response;
-  }
+      );
 }

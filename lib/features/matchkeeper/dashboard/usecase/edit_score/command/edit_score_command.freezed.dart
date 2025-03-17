@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$EditScoreCommand {
   ApplicationMatch get match => throw _privateConstructorUsedError;
   List<Score> get newScores => throw _privateConstructorUsedError;
+  BuildContext get context => throw _privateConstructorUsedError;
 
   /// Create a copy of EditScoreCommand
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +33,8 @@ abstract class $EditScoreCommandCopyWith<$Res> {
           EditScoreCommand value, $Res Function(EditScoreCommand) then) =
       _$EditScoreCommandCopyWithImpl<$Res, EditScoreCommand>;
   @useResult
-  $Res call({ApplicationMatch match, List<Score> newScores});
+  $Res call(
+      {ApplicationMatch match, List<Score> newScores, BuildContext context});
 
   $ApplicationMatchCopyWith<$Res> get match;
 }
@@ -54,6 +56,7 @@ class _$EditScoreCommandCopyWithImpl<$Res, $Val extends EditScoreCommand>
   $Res call({
     Object? match = null,
     Object? newScores = null,
+    Object? context = null,
   }) {
     return _then(_value.copyWith(
       match: null == match
@@ -64,6 +67,10 @@ class _$EditScoreCommandCopyWithImpl<$Res, $Val extends EditScoreCommand>
           ? _value.newScores
           : newScores // ignore: cast_nullable_to_non_nullable
               as List<Score>,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ) as $Val);
   }
 
@@ -86,7 +93,8 @@ abstract class _$$EditScoreCommandImplCopyWith<$Res>
       __$$EditScoreCommandImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ApplicationMatch match, List<Score> newScores});
+  $Res call(
+      {ApplicationMatch match, List<Score> newScores, BuildContext context});
 
   @override
   $ApplicationMatchCopyWith<$Res> get match;
@@ -107,6 +115,7 @@ class __$$EditScoreCommandImplCopyWithImpl<$Res>
   $Res call({
     Object? match = null,
     Object? newScores = null,
+    Object? context = null,
   }) {
     return _then(_$EditScoreCommandImpl(
       match: null == match
@@ -117,6 +126,10 @@ class __$$EditScoreCommandImplCopyWithImpl<$Res>
           ? _value._newScores
           : newScores // ignore: cast_nullable_to_non_nullable
               as List<Score>,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -125,7 +138,9 @@ class __$$EditScoreCommandImplCopyWithImpl<$Res>
 
 class _$EditScoreCommandImpl implements _EditScoreCommand {
   _$EditScoreCommandImpl(
-      {required this.match, required final List<Score> newScores})
+      {required this.match,
+      required final List<Score> newScores,
+      required this.context})
       : _newScores = newScores;
 
   @override
@@ -139,8 +154,11 @@ class _$EditScoreCommandImpl implements _EditScoreCommand {
   }
 
   @override
+  final BuildContext context;
+
+  @override
   String toString() {
-    return 'EditScoreCommand(match: $match, newScores: $newScores)';
+    return 'EditScoreCommand(match: $match, newScores: $newScores, context: $context)';
   }
 
   @override
@@ -150,12 +168,13 @@ class _$EditScoreCommandImpl implements _EditScoreCommand {
             other is _$EditScoreCommandImpl &&
             (identical(other.match, match) || other.match == match) &&
             const DeepCollectionEquality()
-                .equals(other._newScores, _newScores));
+                .equals(other._newScores, _newScores) &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, match, const DeepCollectionEquality().hash(_newScores));
+  int get hashCode => Object.hash(runtimeType, match,
+      const DeepCollectionEquality().hash(_newScores), context);
 
   /// Create a copy of EditScoreCommand
   /// with the given fields replaced by the non-null parameter values.
@@ -170,12 +189,15 @@ class _$EditScoreCommandImpl implements _EditScoreCommand {
 abstract class _EditScoreCommand implements EditScoreCommand {
   factory _EditScoreCommand(
       {required final ApplicationMatch match,
-      required final List<Score> newScores}) = _$EditScoreCommandImpl;
+      required final List<Score> newScores,
+      required final BuildContext context}) = _$EditScoreCommandImpl;
 
   @override
   ApplicationMatch get match;
   @override
   List<Score> get newScores;
+  @override
+  BuildContext get context;
 
   /// Create a copy of EditScoreCommand
   /// with the given fields replaced by the non-null parameter values.

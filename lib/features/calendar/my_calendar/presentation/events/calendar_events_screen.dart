@@ -18,63 +18,67 @@ class MyCalendarEventsScreen extends ConsumerWidget {
     return BaseAppScreen.sliver(
       title: 'Eventi',
       children: [
-        SliverFillRemaining(
-          child: AsyncLoadingSwitcher(
-            value: events,
-            margin: DistanceProvider.screenInsets.padding.removeBottom,
-            builder: (context, data) => EmptyCaseBuilder(
-              isEmpty: data.isEmpty,
-              title: 'Nessun elemento',
-              builder: (context) => Padding(
-                padding: DistanceProvider.screenInsets.padding,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      'Filtra per tag',
-                      style: context.textTheme.titleLarge,
-                    ),
-                    DistanceProvider.smallDistance.spacer(),
-                    Wrap(
-                      spacing: DistanceProvider.smallDistance,
-                      runSpacing: DistanceProvider.smallDistance,
+        BaseSliverLoader(
+          value: events,
+          margin: DistanceProvider.screenInsets.padding.removeBottom,
+          builder: (context, data) => EmptyCaseBuilder.sliver(
+            isEmpty: data.isEmpty,
+            title: 'Nessun elemento',
+            builder: (context) => SliverMainAxisGroup(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: DistanceProvider.screenInsets.padding.removeBottom,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        for (final tag in EventTag.values)
-                          FilterChip(
-                            label: Text(tag.formatName),
-                            selected: tagFilter == tag,
-                            onSelected: (selected) {
-                              ref.read(myCalendarEventTagControllerProvider.notifier).changeTag(selected ? tag : null);
-                            },
-                          ),
+                        Text(
+                          'Filtra per tag',
+                          style: context.textTheme.titleLarge,
+                        ),
+                        DistanceProvider.smallDistance.spacer(),
+                        Wrap(
+                          spacing: DistanceProvider.smallDistance,
+                          runSpacing: DistanceProvider.smallDistance,
+                          children: [
+                            for (final tag in EventTag.values)
+                              FilterChip(
+                                label: Text(tag.formatName),
+                                selected: tagFilter == tag,
+                                onSelected: (selected) {
+                                  ref
+                                      .read(myCalendarEventTagControllerProvider.notifier)
+                                      .changeTag(selected ? tag : null);
+                                },
+                              ),
+                          ],
+                        ),
                       ],
                     ),
-                    DistanceProvider.mediumDistance.spacer(),
-                    Expanded(
-                      child: ListView.separated(
-                        itemCount: data.where((e) => tagFilter == null || e.tags.contains(tagFilter)).length,
-                        physics: const ScrollPhysics(),
-                        separatorBuilder: (context, index) => const Divider(height: DistanceProvider.mediumDistance),
-                        padding: EdgeInsets.zero,
-                        itemBuilder: (context, index) => Material(
-                          child: CustomDismissible(
-                            value: index,
-                            background: const DismissibleDeleteDecoration(),
-                            onDismissed: () async {
-                              final usecase = ref.read(deleteEventUseCaseProvider);
-                              final command = DeleteEventCommand(eventId: data[index].id, context: context);
-                              await usecase.call(command);
-                            },
-                            child: CalendarEventListTile(
-                              event: data[index],
-                            ),
-                          ),
+                  ),
+                ),
+                SliverPadding(
+                  padding: DistanceProvider.screenInsets.padding.removeBottom,
+                  sliver: SliverList.separated(
+                    itemCount: data.where((e) => tagFilter == null || e.tags.contains(tagFilter)).length,
+                    separatorBuilder: (context, index) => const Divider(height: DistanceProvider.mediumDistance),
+                    itemBuilder: (context, index) => Material(
+                      child: CustomDismissible(
+                        value: index,
+                        background: const DismissibleDeleteDecoration(),
+                        onDismissed: () async {
+                          final usecase = ref.read(deleteEventUseCaseProvider);
+                          final command = DeleteEventCommand(eventId: data[index].id, context: context);
+                          await usecase.execute(command);
+                        },
+                        child: CalendarEventListTile(
+                          event: data[index],
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ),

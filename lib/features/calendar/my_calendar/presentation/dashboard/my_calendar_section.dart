@@ -113,7 +113,7 @@ class _CalendarEventsPerDay extends ConsumerWidget {
           icon: const Icon(Icons.delete_outline),
           onPressed: () {
             final command = DeleteEventCommand(eventId: event.id, context: context);
-            ref.read(deleteEventUseCaseProvider).call(command);
+            ref.read(deleteEventUseCaseProvider).execute(command);
           },
         ),
       ),

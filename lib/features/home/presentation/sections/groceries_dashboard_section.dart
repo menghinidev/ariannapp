@@ -36,6 +36,6 @@ class GroceriesDashboardSection extends ConsumerWidget {
 
   void _removeItem(BuildContext context, WidgetRef ref, GroceriesCheckListItem item) {
     final command = RemoveGroceryItemCommand(item: item, context: context);
-    ref.read(removeGroceryItemUseCaseProvider).call(command);
+    ref.read(removeGroceryItemUseCaseProvider).execute(command);
   }
 }

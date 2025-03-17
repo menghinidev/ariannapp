@@ -85,6 +85,28 @@ class LoadingSwitcher<T> extends StatelessWidget {
   }
 }
 
+class BaseSliverLoader<T> extends StatelessWidget {
+  const BaseSliverLoader({
+    required this.value,
+    required this.builder,
+    this.margin,
+    super.key,
+  });
+
+  final AsyncValue<T> value;
+  final EdgeInsets? margin;
+  final Widget Function(BuildContext context, T value) builder;
+
+  @override
+  Widget build(BuildContext context) {
+    return value.when(
+      data: (value) => builder(context, value),
+      error: (_, __) => const SliverToBoxAdapter(child: SizedBox.shrink()),
+      loading: () => const SliverToBoxAdapter(child: SizedBox.shrink()),
+    );
+  }
+}
+
 class _BaseShimmer extends StatelessWidget {
   const _BaseShimmer({this.margin});
 

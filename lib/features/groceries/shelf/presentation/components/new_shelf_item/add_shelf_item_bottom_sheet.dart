@@ -46,7 +46,7 @@ class NewShelfItemBottomSheet extends ConsumerWidget {
   Future<void> _add(BuildContext context, WidgetRef ref, NewShelfItemState state) async {
     final command = AddShelfItemCommand(context: context, name: state.name!, category: state.category!);
     final usecase = await ref.read(addShelfItemUseCaseProvider.future);
-    await usecase.call(command);
+    await usecase.execute(command);
     if (context.mounted) context.pop();
   }
 }

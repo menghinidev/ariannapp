@@ -126,6 +126,6 @@ class _NewEventHeader extends ConsumerWidget {
       context: context,
       event: state,
     );
-    ref.read(newEventUseCaseProvider).call(command);
+    ref.read(newEventUseCaseProvider).execute(command);
   }
 }

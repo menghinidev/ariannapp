@@ -10,7 +10,7 @@ part 'get_checklist_use_case.g.dart';
 @riverpod
 Future<List<GroceriesCheckListItem>> groceriesChecklist(Ref ref) async {
   final usecase = ref.watch(getGroceriesChecklistUseCaseProvider);
-  final response = await usecase.call(null);
+  final response = await usecase.execute(null);
   return response.toFuture();
 }
 
@@ -25,9 +25,5 @@ class GetGroceriesChecklistUseCase extends UseCase<List<GroceriesCheckListItem>,
   final IGroceriesRepository repo;
 
   @override
-  Future<Response<List<GroceriesCheckListItem>, ApplicationError>> call(void input) async {
-    final check = await checkRequirements();
-    final response = await check.flatMapAsync((_) => repo.getGroceriesList());
-    return response;
-  }
+  Future<Response<List<GroceriesCheckListItem>, ApplicationError>> call(void input) => repo.getGroceriesList();
 }

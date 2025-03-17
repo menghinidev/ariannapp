@@ -12,36 +12,42 @@ class CheckListListViewSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final shelf = ref.watch(groceriesCheckListOrderManagerProvider);
-    return shelf.loadUntil(
-      onLoaded: (data) => EmptyCaseBuilder(
+    return BaseSliverLoader(
+      value: shelf,
+      builder: (context, data) => EmptyCaseBuilder.sliver(
         isEmpty: data.isEmpty,
         title: 'Nessun elemento',
         subtitle: 'Aggiungi un nuovo elemento alla lista',
-        builder: (context) => ReorderableListView.builder(
+        builder: (context) => SliverPadding(
           padding: DistanceProvider.screenInsets.padding.removeBottom,
-          itemCount: data.length,
-          physics: const ScrollPhysics(),
-          proxyDecorator: (child, index, animation) => AnimatedBuilder(
-            animation: animation,
-            builder: (context, child) => _builder(
-              context,
-              child,
-              animation: animation,
-            ),
-            child: child,
-          ),
-          onReorder: ref.read(groceriesCheckListOrderManagerProvider.notifier).reorder,
-          itemBuilder: (context, index) => CustomDismissible(
-            key: ValueKey(data[index].id),
-            value: index,
-            background: const DismissibleCompleteDecoration(),
-            onDismissed: () => ref.read(groceriesCheckListOrderManagerProvider.notifier).remove(
+          sliver: SliverReorderableList(
+            itemCount: data.length,
+            onReorder: (old, current) => ref.read(groceriesCheckListOrderManagerProvider.notifier).reorder(
                   context,
-                  item: data[index],
+                  old,
+                  current,
                 ),
-            child: GroceriesCheckListWidget(
-              item: data[index],
-              position: index,
+            itemBuilder: (context, index) => CustomDismissible(
+              key: ValueKey(data[index].id),
+              value: index,
+              background: const DismissibleCompleteDecoration(),
+              onDismissed: () => ref.read(groceriesCheckListOrderManagerProvider.notifier).remove(
+                    context,
+                    item: data[index],
+                  ),
+              child: GroceriesCheckListWidget(
+                item: data[index],
+                position: index,
+              ),
+            ),
+            proxyDecorator: (child, index, animation) => AnimatedBuilder(
+              animation: animation,
+              builder: (context, child) => _builder(
+                context,
+                child,
+                animation: animation,
+              ),
+              child: child,
             ),
           ),
         ),

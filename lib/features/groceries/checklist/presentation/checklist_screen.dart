@@ -24,9 +24,7 @@ class GroceriesCheckListScreen extends ConsumerWidget {
           padding: DistanceProvider.screenInsets.padding.removeBottom,
           sliver: const SliverToBoxAdapter(child: CategoriesFilterSection()),
         ),
-        const SliverFillRemaining(
-          child: CheckListListViewSection(),
-        ),
+        const CheckListListViewSection(),
       ],
     );
   }
