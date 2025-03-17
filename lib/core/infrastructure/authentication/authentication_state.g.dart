@@ -6,6 +6,26 @@ part of 'authentication_state.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$authenticationControllerHash() =>
+    r'7267278d015da88b3b840a1237fc469928c11d51';
+
+/// See also [authenticationController].
+@ProviderFor(authenticationController)
+final authenticationControllerProvider =
+    AutoDisposeProvider<AuthenticationController>.internal(
+  authenticationController,
+  name: r'authenticationControllerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authenticationControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AuthenticationControllerRef
+    = AutoDisposeProviderRef<AuthenticationController>;
 String _$authenticationStateHash() =>
     r'1e6e906782174d1b6b339bae7f87ec9fe06e1df3';
 

@@ -14,30 +14,8 @@ class LoginScreenRoute extends GoRoute {
   static String pagePath = '/login';
 }
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  late final TextEditingController emailController;
-  late final TextEditingController passwordController;
-
-  @override
-  void initState() {
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +31,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Image.asset('assets/logo.png'),
               ),
             ),
-            Positioned.fill(
+            const Positioned.fill(
               child: Align(
-                alignment: const Alignment(0, 0.5),
-                child: _LoginForm(emailController: emailController, passwordController: passwordController),
+                alignment: Alignment(0, 0.5),
+                child: _LoginForm(),
               ),
             ),
           ],
@@ -66,14 +44,41 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-class _LoginForm extends StatelessWidget {
-  const _LoginForm({
-    required this.emailController,
-    required this.passwordController,
-  });
+class _LoginForm extends StatefulWidget {
+  const _LoginForm();
 
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
+  @override
+  State<_LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<_LoginForm> {
+  late final TextEditingController emailController;
+  late final TextEditingController passwordController;
+  String? error;
+
+  @override
+  void initState() {
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    passwordController.addListener(_cleanError);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    passwordController.removeListener(_cleanError);
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  void _cleanError() {
+    if (error != null) {
+      setState(() {
+        error = null;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,14 +105,16 @@ class _LoginForm extends StatelessWidget {
                 controller: passwordController,
                 obscureText: true,
                 autofillHints: const [AutofillHints.password],
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Password',
+                  errorText: error,
                 ),
               ),
               DistanceProvider.mediumDistance.spacer(),
               _LoginButton(
                 emailController: emailController,
                 passwordController: passwordController,
+                setError: (error) => setState(() => this.error = error),
               ),
             ],
           ),
@@ -121,21 +128,26 @@ class _LoginButton extends ConsumerWidget {
   const _LoginButton({
     required this.emailController,
     required this.passwordController,
+    required this.setError,
   });
 
   final TextEditingController emailController;
   final TextEditingController passwordController;
+  final void Function(String error) setError;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
-      onPressed: () => ref.read(loginUseCaseProvider).execute(
+      onPressed: () => ref
+          .read(loginUseCaseProvider)
+          .execute(
             LoginCommand(
               email: emailController.text,
               password: passwordController.text,
               context: context,
             ),
-          ),
+          )
+          .then((value) => value.isError ? setError('Password errata') : null),
       child: const Text('Login'),
     );
   }

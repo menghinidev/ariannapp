@@ -48,67 +48,76 @@ class _HomeDrawer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Material(
       child: Drawer(
+        clipBehavior: Clip.hardEdge,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(12),
             bottom: Radius.circular(12),
           ),
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              DrawerHeader(
-                margin: const EdgeInsets.only(bottom: DistanceProvider.mediumDistance),
-                padding: EdgeInsets.zero,
-                child: SizedBox.expand(
-                  child: DecoratedBox(
-                    decoration: const BoxDecoration(color: Color(0xFFb8add3)),
-                    child: Image.asset(
-                      'assets/logo.png',
-                    ),
+        child: Column(
+          children: [
+            DrawerHeader(
+              padding: EdgeInsets.zero,
+              child: SizedBox.expand(
+                child: DecoratedBox(
+                  decoration: const BoxDecoration(color: Color(0xFFb8add3)),
+                  child: Image.asset(
+                    'assets/logo.png',
                   ),
                 ),
               ),
-              if (!EnvVariable.mode.isLite) ...[
-                ListTile(
-                  title: const Text('Oroscopo'),
-                  style: ListTileStyle.drawer,
-                  leading: const Icon(Icons.stars_outlined),
-                  onTap: () => context.goRelative(MyAstrologyScreenRoute.pagePath),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    if (!EnvVariable.mode.isLite) ...[
+                      ListTile(
+                        title: const Text('Oroscopo'),
+                        style: ListTileStyle.drawer,
+                        leading: const Icon(Icons.stars_outlined),
+                        onTap: () => context.goRelative(MyAstrologyScreenRoute.pagePath),
+                      ),
+                      ListTile(
+                        title: const Text('Raccolta differenziata'),
+                        style: ListTileStyle.drawer,
+                        leading: const Icon(Icons.recycling_outlined),
+                        onTap: () => context.goRelative(TrashCalendarScreenRoute.pagePath),
+                      ),
+                    ],
+                    ListTile(
+                      title: const Text('Eventi Calendario'),
+                      style: ListTileStyle.drawer,
+                      leading: const Icon(Icons.calendar_month_outlined),
+                      onTap: () => context.goRelative(MyCalendarEventsScreenRoute.pagePath),
+                    ),
+                    ListTile(
+                      title: const Text('Contatori'),
+                      style: ListTileStyle.drawer,
+                      leading: const Icon(Icons.numbers_outlined),
+                      onTap: () => context.goRelative(CountablesRoutes.my),
+                    ),
+                    ListTile(
+                      title: const Text('Impostazioni'),
+                      style: ListTileStyle.drawer,
+                      leading: const Icon(Icons.settings_outlined),
+                      onTap: () => context.goRelative(SettingsScreenRoute.pagePath),
+                    ),
+                  ],
                 ),
-                ListTile(
-                  title: const Text('Calendario Cestino'),
-                  style: ListTileStyle.drawer,
-                  leading: const Icon(Icons.recycling_outlined),
-                  onTap: () => context.goRelative(TrashCalendarScreenRoute.pagePath),
-                ),
-              ],
-              ListTile(
-                title: const Text('Eventi Calendario'),
-                style: ListTileStyle.drawer,
-                leading: const Icon(Icons.calendar_month_outlined),
-                onTap: () => context.goRelative(MyCalendarEventsScreenRoute.pagePath),
               ),
-              ListTile(
-                title: const Text('Contatori'),
-                style: ListTileStyle.drawer,
-                leading: const Icon(Icons.numbers_outlined),
-                onTap: () => context.goRelative(CountablesRoutes.my),
-              ),
-              ListTile(
-                title: const Text('Impostazioni'),
-                style: ListTileStyle.drawer,
-                leading: const Icon(Icons.settings_outlined),
-                onTap: () => context.goRelative(SettingsScreenRoute.pagePath),
-              ),
-              ListTile(
-                title: const Text('Esci'),
-                style: ListTileStyle.drawer,
-                leading: const Icon(Icons.exit_to_app_outlined),
-                onTap: () => ref.read(logoutUseCaseProvider).execute(context),
-              ),
-            ],
-          ),
+            ),
+            ListTile(
+              title: const Text('Esci'),
+              style: ListTileStyle.drawer,
+              tileColor: context.colorScheme.errorContainer,
+              iconColor: context.colorScheme.onErrorContainer,
+              textColor: context.colorScheme.onErrorContainer,
+              leading: const Icon(Icons.exit_to_app_outlined),
+              onTap: () => ref.read(logoutUseCaseProvider).execute(context),
+            ),
+          ],
         ),
       ),
     );
