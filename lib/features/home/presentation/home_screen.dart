@@ -6,6 +6,7 @@ import 'package:ariannapp/features/home/presentation/sections/calendar_dashboard
 import 'package:ariannapp/features/home/presentation/sections/groceries_dashboard_section.dart';
 import 'package:ariannapp/features/home/presentation/sections/matchkeeper_dashboard_section.dart';
 import 'package:ariannapp/features/horoscope/routes/my_astrology_routes.dart';
+import 'package:ariannapp/features/profile/routes/profile_routes.dart';
 import 'package:ariannapp/features/settings/routes/settings_route.dart';
 import 'package:ariannapp/features/trash_calendar/routes/trash_calendar_routes.dart';
 import 'package:ariannapp/navigation/entrypoint.dart';
@@ -99,6 +100,12 @@ class _HomeDrawer extends ConsumerWidget {
                       onTap: () => context.goRelative(CountablesRoutes.my),
                     ),
                     ListTile(
+                      title: const Text('Profilo'),
+                      style: ListTileStyle.drawer,
+                      leading: const Icon(Icons.person_outlined),
+                      onTap: () => context.goRelative(ProfileScreenRoute.pagePath),
+                    ),
+                    ListTile(
                       title: const Text('Impostazioni'),
                       style: ListTileStyle.drawer,
                       leading: const Icon(Icons.settings_outlined),
@@ -107,15 +114,6 @@ class _HomeDrawer extends ConsumerWidget {
                   ],
                 ),
               ),
-            ),
-            ListTile(
-              title: const Text('Esci'),
-              style: ListTileStyle.drawer,
-              tileColor: context.colorScheme.errorContainer,
-              iconColor: context.colorScheme.onErrorContainer,
-              textColor: context.colorScheme.onErrorContainer,
-              leading: const Icon(Icons.exit_to_app_outlined),
-              onTap: () => ref.read(logoutUseCaseProvider).execute(context),
             ),
           ],
         ),

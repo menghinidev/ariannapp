@@ -11,6 +11,7 @@ _$CountableDataImpl _$$CountableDataImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       name: json['name'] as String,
       counter: (json['counter'] as num).toInt(),
+      email: json['email'] as String,
       events: (json['events'] as List<dynamic>?)
               ?.map((e) => CountableEvent.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -22,6 +23,7 @@ Map<String, dynamic> _$$CountableDataImplToJson(_$CountableDataImpl instance) =>
       'id': instance.id,
       'name': instance.name,
       'counter': instance.counter,
+      'email': instance.email,
       'events': instance.events.map((e) => e.toJson()).toList(),
     };
 
@@ -41,6 +43,7 @@ Map<String, dynamic> _$$CountableEventImplToJson(
 _$CountableDataBuilderImpl _$$CountableDataBuilderImplFromJson(
         Map<String, dynamic> json) =>
     _$CountableDataBuilderImpl(
+      email: json['email'] as String,
       name: json['name'] as String?,
       counter: (json['counter'] as num?)?.toInt() ?? 0,
       events: (json['events'] as List<dynamic>?)
@@ -52,6 +55,7 @@ _$CountableDataBuilderImpl _$$CountableDataBuilderImplFromJson(
 Map<String, dynamic> _$$CountableDataBuilderImplToJson(
         _$CountableDataBuilderImpl instance) =>
     <String, dynamic>{
+      'email': instance.email,
       'name': instance.name,
       'counter': instance.counter,
       'events': instance.events,

@@ -1,3 +1,4 @@
+import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/counter/shared/model/countable/countabledata.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -7,7 +8,8 @@ part 'create_countable_controller.g.dart';
 class NewCountableController extends _$NewCountableController {
   @override
   CountableDataBuilder build() {
-    return CountableDataBuilder();
+    final email = ref.watch(authenticationStateProvider).valueOrNull?.email;
+    return CountableDataBuilder(email: email ?? '');
   }
 
   void updateName(String name) {

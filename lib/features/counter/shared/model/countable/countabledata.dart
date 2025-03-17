@@ -11,6 +11,7 @@ class CountableData with _$CountableData {
     required String id,
     required String name,
     required int counter,
+    required String email,
     @Default(<CountableEvent>[]) List<CountableEvent> events,
   }) = _CountableData;
 
@@ -45,6 +46,7 @@ class CountableEvent with _$CountableEvent {
 @freezed
 class CountableDataBuilder with _$CountableDataBuilder {
   factory CountableDataBuilder({
+    required String email,
     String? name,
     @Default(0) int counter,
     @Default(<CountableEvent>[]) List<CountableEvent> events,

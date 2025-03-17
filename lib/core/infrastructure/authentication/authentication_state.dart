@@ -24,6 +24,11 @@ class AuthenticationController {
 
   Future<EmptyResponse> signOut() => _handle(() => FirebaseAuth.instance.signOut());
 
+  Future<EmptyResponse> recoverPassword(String email) =>
+      _handle(() => FirebaseAuth.instance.sendPasswordResetEmail(email: email));
+
+  Future<EmptyResponse> verifyEmail() => _handle(() => FirebaseAuth.instance.currentUser!.sendEmailVerification());
+
   Future<EmptyResponse> _handle(Future<void> Function() callback) async {
     try {
       await callback();

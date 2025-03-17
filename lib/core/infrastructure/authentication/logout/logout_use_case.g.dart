@@ -6,7 +6,7 @@ part of 'logout_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$logoutUseCaseHash() => r'c1fcbd1bc0e6c50181fef890b826af1ed54fb078';
+String _$logoutUseCaseHash() => r'7aa48b9a6c38fb98c49d308b3f629f49bdcc83df';
 
 /// See also [logoutUseCase].
 @ProviderFor(logoutUseCase)

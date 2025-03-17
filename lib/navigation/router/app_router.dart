@@ -5,6 +5,7 @@ import 'package:ariannapp/features/home/routes/home_routes.dart';
 import 'package:ariannapp/features/horoscope/routes/my_astrology_routes.dart';
 import 'package:ariannapp/features/login/login_screen.dart';
 import 'package:ariannapp/features/matchkeeper/shared/routes/matchkeeper_routes.dart';
+import 'package:ariannapp/features/profile/routes/profile_routes.dart';
 import 'package:ariannapp/features/settings/routes/settings_route.dart';
 import 'package:ariannapp/features/trash_calendar/routes/trash_calendar_routes.dart';
 import 'package:ariannapp/navigation/key/router_key.dart';
@@ -28,6 +29,7 @@ GoRouter appRouter(Ref ref) {
       LoginScreenRoute(),
       HomeScreenRoute([
         CountableScreenRoute(),
+        ProfileScreenRoute(),
         TrashCalendarScreenRoute(),
         MatchkeeperDashboardRoute(),
         SettingsScreenRoute(),

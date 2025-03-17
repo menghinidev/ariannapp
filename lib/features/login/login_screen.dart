@@ -1,5 +1,6 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/login/login_page_decoration.dart';
+import 'package:ariannapp/features/login/password_recovery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -96,7 +97,7 @@ class _LoginFormState extends State<_LoginForm> {
               TextField(
                 controller: emailController,
                 decoration: const InputDecoration(
-                  labelText: 'Username',
+                  labelText: 'Email',
                 ),
                 autofillHints: const [AutofillHints.email],
               ),
@@ -110,6 +111,7 @@ class _LoginFormState extends State<_LoginForm> {
                   errorText: error,
                 ),
               ),
+              const Align(alignment: Alignment.centerRight, child: StartResetPasswordProcessButton()),
               DistanceProvider.mediumDistance.spacer(),
               _LoginButton(
                 emailController: emailController,

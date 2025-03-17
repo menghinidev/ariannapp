@@ -7,7 +7,7 @@ part of 'create_countable_controller.dart';
 // **************************************************************************
 
 String _$newCountableControllerHash() =>
-    r'74df9762619727671afaff810808a2c0a0a1d75c';
+    r'a19eebdaa1d8cd60729655f80e2a475fb7de9a2c';
 
 /// See also [NewCountableController].
 @ProviderFor(NewCountableController)
