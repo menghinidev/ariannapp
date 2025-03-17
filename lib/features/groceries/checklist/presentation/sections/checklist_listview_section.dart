@@ -35,9 +35,12 @@ class CheckListListViewSection extends ConsumerWidget {
                     context,
                     item: data[index],
                   ),
-              child: GroceriesCheckListWidget(
-                item: data[index],
-                position: index,
+              child: ReorderableDelayedDragStartListener(
+                index: index,
+                child: GroceriesCheckListWidget(
+                  item: data[index],
+                  position: index,
+                ),
               ),
             ),
             proxyDecorator: (child, index, animation) => AnimatedBuilder(
