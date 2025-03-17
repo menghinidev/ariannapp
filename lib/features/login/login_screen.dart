@@ -83,30 +83,34 @@ class _LoginForm extends StatelessWidget {
       shape: DistanceProvider.cardRadius.roundedShape,
       child: Padding(
         padding: DistanceProvider.screenInsets.padding,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                labelText: 'Username',
+        child: AutofillGroup(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Username',
+                ),
+                autofillHints: const [AutofillHints.email],
               ),
-            ),
-            DistanceProvider.mediumDistance.spacer(),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Password',
+              DistanceProvider.mediumDistance.spacer(),
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                autofillHints: const [AutofillHints.password],
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                ),
               ),
-            ),
-            DistanceProvider.mediumDistance.spacer(),
-            _LoginButton(
-              emailController: emailController,
-              passwordController: passwordController,
-            ),
-          ],
+              DistanceProvider.mediumDistance.spacer(),
+              _LoginButton(
+                emailController: emailController,
+                passwordController: passwordController,
+              ),
+            ],
+          ),
         ),
       ),
     );
