@@ -9,6 +9,8 @@ class BaseAppScreen extends StatelessWidget {
     this.fab,
     this.actions,
     this.bottomNavigationBar,
+    this.drawer,
+    this.endDrawer,
     super.key,
   });
 
@@ -18,6 +20,8 @@ class BaseAppScreen extends StatelessWidget {
   final Widget? fab;
   final List<Widget>? actions;
   final Widget? bottomNavigationBar;
+  final Widget? drawer;
+  final Widget? endDrawer;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +38,8 @@ class BaseAppScreen extends StatelessWidget {
           ],
         ),
       ),
+      drawer: drawer,
+      endDrawer: endDrawer,
       floatingActionButton: fab,
       bottomNavigationBar: bottomNavigationBar,
     );

@@ -1,30 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'delete_event_use_case.dart';
+part of 'increment_countable_use_case.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$deleteEventUseCaseHash() =>
-    r'4a45e62b274dee5523dd4d462c32919dea0a3cf0';
+String _$incrementCountableUseCaseHash() =>
+    r'da682255291addc4eb530647fc915f3185e077c5';
 
-/// See also [deleteEventUseCase].
-@ProviderFor(deleteEventUseCase)
-final deleteEventUseCaseProvider =
-    AutoDisposeProvider<DeleteCalendarEventUseCase>.internal(
-  deleteEventUseCase,
-  name: r'deleteEventUseCaseProvider',
+/// See also [incrementCountableUseCase].
+@ProviderFor(incrementCountableUseCase)
+final incrementCountableUseCaseProvider =
+    AutoDisposeProvider<IncrementCountableUseCase>.internal(
+  incrementCountableUseCase,
+  name: r'incrementCountableUseCaseProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$deleteEventUseCaseHash,
+      : _$incrementCountableUseCaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef DeleteEventUseCaseRef
-    = AutoDisposeProviderRef<DeleteCalendarEventUseCase>;
+typedef IncrementCountableUseCaseRef
+    = AutoDisposeProviderRef<IncrementCountableUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

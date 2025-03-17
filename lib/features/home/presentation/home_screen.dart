@@ -1,6 +1,7 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/calendar/my_calendar/presentation/dashboard/my_calendar_section.dart';
 import 'package:ariannapp/features/calendar/shared/routes/my_calendar_events_route.dart';
+import 'package:ariannapp/features/counter/shared/routes/countable_routes.dart';
 import 'package:ariannapp/features/home/presentation/sections/calendar_dashboard_section.dart';
 import 'package:ariannapp/features/home/presentation/sections/groceries_dashboard_section.dart';
 import 'package:ariannapp/features/home/presentation/sections/matchkeeper_dashboard_section.dart';
@@ -18,12 +19,13 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return BaseAppScreen.sliver(
       title: 'AriannApp',
+      endDrawer: const HomeDrawer(),
       customTitle: Image.asset(
         'assets/images/handwritten-logo.png',
         height: 56,
         color: Colors.white,
       ),
-      actions: [
+      /* actions: [
         if (!EnvVariable.mode.isLite) ...[
           IconButton.filled(
             onPressed: () => context.goRelative(MyAstrologyScreenRoute.pagePath),
@@ -39,10 +41,14 @@ class HomeScreen extends ConsumerWidget {
           icon: const Icon(Icons.calendar_month_outlined),
         ),
         IconButton.filled(
+          onPressed: () => context.goRelative(CountablesRoutes.my),
+          icon: const Icon(Icons.numbers_outlined),
+        ),
+        IconButton.filled(
           onPressed: () => context.goRelative(SettingsScreenRoute.pagePath),
           icon: const Icon(Icons.settings_outlined),
         ),
-      ],
+      ], */
       children: [
         const SliverToBoxAdapter(child: MyCalendarSection()),
         SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
@@ -55,6 +61,74 @@ class HomeScreen extends ConsumerWidget {
         const SliverToBoxAdapter(child: MatchkeeperDashboardSection()),
         SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
       ],
+    );
+  }
+}
+
+class HomeDrawer extends ConsumerWidget {
+  const HomeDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Material(
+      child: Drawer(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(12),
+            bottom: Radius.circular(12),
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              DrawerHeader(
+                margin: const EdgeInsets.only(bottom: DistanceProvider.mediumDistance),
+                padding: EdgeInsets.zero,
+                child: SizedBox.expand(
+                  child: DecoratedBox(
+                    decoration: const BoxDecoration(color: Color(0xFFb8add3)),
+                    child: Image.asset(
+                      'assets/logo.png',
+                    ),
+                  ),
+                ),
+              ),
+              if (!EnvVariable.mode.isLite) ...[
+                ListTile(
+                  title: const Text('Oroscopo'),
+                  style: ListTileStyle.drawer,
+                  leading: const Icon(Icons.stars_outlined),
+                  onTap: () => context.goRelative(MyAstrologyScreenRoute.pagePath),
+                ),
+                ListTile(
+                  title: const Text('Calendario Cestino'),
+                  style: ListTileStyle.drawer,
+                  leading: const Icon(Icons.recycling_outlined),
+                  onTap: () => context.goRelative(TrashCalendarScreenRoute.pagePath),
+                ),
+              ],
+              ListTile(
+                title: const Text('Eventi Calendario'),
+                style: ListTileStyle.drawer,
+                leading: const Icon(Icons.calendar_month_outlined),
+                onTap: () => context.goRelative(MyCalendarEventsScreenRoute.pagePath),
+              ),
+              ListTile(
+                title: const Text('Contatori'),
+                style: ListTileStyle.drawer,
+                leading: const Icon(Icons.numbers_outlined),
+                onTap: () => context.goRelative(CountablesRoutes.my),
+              ),
+              ListTile(
+                title: const Text('Impostazioni'),
+                style: ListTileStyle.drawer,
+                leading: const Icon(Icons.settings_outlined),
+                onTap: () => context.goRelative(SettingsScreenRoute.pagePath),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

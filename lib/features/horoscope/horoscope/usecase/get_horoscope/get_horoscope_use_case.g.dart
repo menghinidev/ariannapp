@@ -6,7 +6,7 @@ part of 'get_horoscope_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dailyHoroscopeHash() => r'2e0d2a71be02047bf4650c43a74824b07371e358';
+String _$dailyHoroscopeHash() => r'6adf240660da4cf0f04050c5aba280234440c7e6';
 
 /// See also [dailyHoroscope].
 @ProviderFor(dailyHoroscope)

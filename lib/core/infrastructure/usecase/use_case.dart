@@ -40,12 +40,12 @@ abstract class UseCase<R, I> {
   Future<Response<R, ApplicationError>> execute(I input) async {
     final check = await checkRequirements();
     final inputValidation = await check.flatMapAsync((_) => validateInput(input));
-    final transformedInput = await inputValidation.flatMapAsync((_) => transformInput(input));
-    final response = await transformedInput.flatMapAsync((_) => call(input));
-    final transformedOutput = await transformOutput(response, input);
-    await applyErrorHandlers(transformedOutput, input);
-    await applySuccessHandlers(transformedOutput, input);
-    return transformedOutput;
+    await inputValidation.ifSuccessAsync((_) => transformInput(input));
+    final response = await inputValidation.flatMapAsync((_) => call(input));
+    await transformOutput(response, input);
+    await applyErrorHandlers(response, input);
+    await applySuccessHandlers(response, input);
+    return response;
   }
 
   Future<EmptyResponse> checkRequirements() async {

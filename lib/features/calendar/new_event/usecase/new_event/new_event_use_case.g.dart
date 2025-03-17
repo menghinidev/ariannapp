@@ -6,7 +6,7 @@ part of 'new_event_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$newEventUseCaseHash() => r'18a7b4da447594c4443389630ee16ab1332cce29';
+String _$newEventUseCaseHash() => r'5d247d264fc8cafb8d7485404ef27c7609db8e4b';
 
 /// See also [newEventUseCase].
 @ProviderFor(newEventUseCase)

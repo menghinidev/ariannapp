@@ -6,7 +6,7 @@ part of 'get_calendar_use_case.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$calendarHash() => r'7ecfb3a7928ee21e64251cf77deabec0747660d8';
+String _$calendarHash() => r'cf51bc5728340a0fa0b0909696fde6e7b27560f1';
 
 /// See also [calendar].
 @ProviderFor(calendar)
