@@ -68,9 +68,3 @@ class _AddPlayerTextFieldState extends ConsumerState<AddPlayerTextField> {
     player.ifSuccess((value) => widget.onSelected(value!));
   }
 }
-
-extension on DropdownMenuEntry<Player> {
-  bool byNameOrNEW(String filter) {
-    return label.contains(filter);
-  }
-}

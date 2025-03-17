@@ -9,8 +9,7 @@ class FirestoreCalendarRepository with RepositorySafeInvoker implements ICalenda
   static const String matchCollection = 'calendar';
 
   @override
-  Future<ApplicationResponse<List<CalendarEvent>>> events({required DateTime from}) {
-    // TODO(dev): Implement filtration by date
+  Future<ApplicationResponse<List<CalendarEvent>>> events() {
     return safeInvoke<List<CalendarEvent>, QuerySnapshot<Map<String, dynamic>>>(
       request: () => instance.collection(matchCollection).get(),
       payloadMapper: (snapshot) {

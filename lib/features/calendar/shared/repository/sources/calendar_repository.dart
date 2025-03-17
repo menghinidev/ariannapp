@@ -3,9 +3,7 @@ import 'package:ariannapp/features/calendar/shared/model/event/calendarevent.dar
 import 'package:ariannapp/features/calendar/shared/model/event_builder/calendareventbuilder.dart';
 
 abstract class ICalendarRepository {
-  Future<ApplicationResponse<List<CalendarEvent>>> events({
-    required DateTime from,
-  });
+  Future<ApplicationResponse<List<CalendarEvent>>> events();
 
   Future<EmptyResponse> createEvent({
     required CalendarEventBuilder event,
