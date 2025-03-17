@@ -9,6 +9,10 @@ extension LayoutProvider on double {
   }
 
   EdgeInsets get padding => EdgeInsets.all(this);
+
+  ShapeBorder get roundedShape => RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(this),
+      );
 }
 
 extension EdgeInsetsModifier on EdgeInsets {
@@ -24,4 +28,6 @@ class DistanceProvider {
 
   static const double screenInsets = 16;
   static const double cardInsets = 16;
+
+  static const double cardRadius = 24;
 }

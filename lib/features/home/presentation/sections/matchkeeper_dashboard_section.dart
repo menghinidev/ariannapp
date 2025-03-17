@@ -36,7 +36,7 @@ class _MatchListTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      shape: DistanceProvider.cardRadius.roundedShape,
       child: ListTile(
         contentPadding: DistanceProvider.cardInsets.padding.removeTop.removeBottom,
         title: Text(match.game.name),

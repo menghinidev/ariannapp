@@ -34,9 +34,7 @@ class BaseDashboardSection<T> extends ConsumerWidget {
         color: context.colorScheme.tertiaryContainer.withOpacity(0.5),
         shadowColor: context.colorScheme.tertiaryContainer.withOpacity(0.2),
         margin: DistanceProvider.screenInsets.padding,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(DistanceProvider.smallDistance),
-        ),
+        shape: DistanceProvider.cardRadius.roundedShape,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

@@ -18,11 +18,15 @@ Future<AddShelfItemUseCase> addShelfItemUseCase(Ref ref) async {
   final showSnackBarError = ShowSnackbarErrorHandler<void, AddShelfItemCommand>(
     contextProvider: (command) => command.context,
   );
+  final showSnackBarSuccess = ShowSnackbarSuccessHandler<void, AddShelfItemCommand>(
+    contextProvider: (input) => input.context,
+    message: 'Elemento aggiunto',
+  );
   return AddShelfItemUseCase(
     repo: ref.watch(groceriesRepositoryProvider),
     validators: [uniqueValidator],
     errorHandlers: [showSnackBarError],
-    successHandlers: [refresh],
+    successHandlers: [refresh, showSnackBarSuccess],
   );
 }
 
@@ -40,12 +44,14 @@ class AddShelfItemUseCase extends UseCase<void, AddShelfItemCommand> {
   Future<Response<void, ApplicationError>> call(AddShelfItemCommand input) async {
     final check = await checkRequirements();
     final validated = await check.flatMapAsync((_) => validateInput(input));
+    validated.ifSuccess((_) => OverlayLoaderManager.instance.showLoader(input.context));
     final response = await validated.flatMapAsync(
       (_) => repo.addShelfItem(
         name: input.name,
         category: input.category,
       ),
     );
+    OverlayLoaderManager.instance.hideLoader();
     await response.ifSuccessAsync((_) => applySuccessHandlers(response, input));
     await response.ifErrorAsync((_) => applyErrorHandlers(response, input));
     return response;
