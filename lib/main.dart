@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:ariannapp/app.dart';
 import 'package:ariannapp/firebase_options.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -30,16 +27,5 @@ void main() async {
     // 4. App Attest provider with fallback to Device Check provider (App Attest provider is only available on iOS 14.0+, macOS 14.0+)
     appleProvider: kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
   );
-  try {
-    await FirebaseAuth.instance.signInAnonymously();
-    log('Signed in with temporary account.');
-  } on FirebaseAuthException catch (e) {
-    switch (e.code) {
-      case 'operation-not-allowed':
-        log("Anonymous auth hasn't been enabled for this project.");
-      default:
-        log('Unknown error.');
-    }
-  }
   runApp(const ProviderScope(child: AriannApp()));
 }

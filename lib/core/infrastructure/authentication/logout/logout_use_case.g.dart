@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_router.dart';
+part of 'logout_use_case.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appRouterHash() => r'50f96d244876f0826b73ab7481f6e3ddd4f3856b';
+String _$logoutUseCaseHash() => r'c1fcbd1bc0e6c50181fef890b826af1ed54fb078';
 
-/// See also [appRouter].
-@ProviderFor(appRouter)
-final appRouterProvider = AutoDisposeProvider<GoRouter>.internal(
-  appRouter,
-  name: r'appRouterProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$appRouterHash,
+/// See also [logoutUseCase].
+@ProviderFor(logoutUseCase)
+final logoutUseCaseProvider = AutoDisposeProvider<LogoutUseCase>.internal(
+  logoutUseCase,
+  name: r'logoutUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$logoutUseCaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AppRouterRef = AutoDisposeProviderRef<GoRouter>;
+typedef LogoutUseCaseRef = AutoDisposeProviderRef<LogoutUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

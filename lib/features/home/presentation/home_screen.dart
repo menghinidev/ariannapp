@@ -19,36 +19,12 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return BaseAppScreen.sliver(
       title: 'AriannApp',
-      endDrawer: const HomeDrawer(),
+      endDrawer: const _HomeDrawer(),
       customTitle: Image.asset(
         'assets/images/handwritten-logo.png',
         height: 56,
         color: Colors.white,
       ),
-      /* actions: [
-        if (!EnvVariable.mode.isLite) ...[
-          IconButton.filled(
-            onPressed: () => context.goRelative(MyAstrologyScreenRoute.pagePath),
-            icon: const Icon(Icons.stars_outlined),
-          ),
-          IconButton.filled(
-            onPressed: () => context.goRelative(TrashCalendarScreenRoute.pagePath),
-            icon: const Icon(Icons.recycling_outlined),
-          ),
-        ],
-        IconButton.filled(
-          onPressed: () => context.goRelative(MyCalendarEventsScreenRoute.pagePath),
-          icon: const Icon(Icons.calendar_month_outlined),
-        ),
-        IconButton.filled(
-          onPressed: () => context.goRelative(CountablesRoutes.my),
-          icon: const Icon(Icons.numbers_outlined),
-        ),
-        IconButton.filled(
-          onPressed: () => context.goRelative(SettingsScreenRoute.pagePath),
-          icon: const Icon(Icons.settings_outlined),
-        ),
-      ], */
       children: [
         const SliverToBoxAdapter(child: MyCalendarSection()),
         SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
@@ -65,8 +41,8 @@ class HomeScreen extends ConsumerWidget {
   }
 }
 
-class HomeDrawer extends ConsumerWidget {
-  const HomeDrawer({super.key});
+class _HomeDrawer extends ConsumerWidget {
+  const _HomeDrawer();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -124,6 +100,12 @@ class HomeDrawer extends ConsumerWidget {
                 style: ListTileStyle.drawer,
                 leading: const Icon(Icons.settings_outlined),
                 onTap: () => context.goRelative(SettingsScreenRoute.pagePath),
+              ),
+              ListTile(
+                title: const Text('Esci'),
+                style: ListTileStyle.drawer,
+                leading: const Icon(Icons.exit_to_app_outlined),
+                onTap: () => ref.read(logoutUseCaseProvider).execute(context),
               ),
             ],
           ),
