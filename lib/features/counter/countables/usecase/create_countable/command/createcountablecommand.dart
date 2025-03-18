@@ -6,8 +6,6 @@ part 'createcountablecommand.freezed.dart';
 
 @freezed
 class CreateCountableCommand with _$CreateCountableCommand {
-  factory CreateCountableCommand({
-    required CountableDataBuilder data,
-    required BuildContext context,
-  }) = _CreateCountableCommand;
+  factory CreateCountableCommand({required CountableDataBuilder data, required BuildContext context}) =
+      _CreateCountableCommand;
 }

@@ -18,11 +18,13 @@ class NewCountableDataBottomSheet extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         TextFormField(
-          decoration: const InputDecoration(
-            labelText: 'Nome',
-            hintText: 'Inserisci il nome del contatore',
-          ),
+          decoration: const InputDecoration(labelText: 'Nome', hintText: 'Inserisci il nome del contatore'),
           onChanged: (value) => ref.read(newCountableControllerProvider.notifier).updateName(value),
+        ),
+        SwitchListTile.adaptive(
+          value: state.isPublic,
+          onChanged: (_) => ref.read(newCountableControllerProvider.notifier).toggleIsPublic(),
+          title: const Text('Pubblico'),
         ),
         DistanceProvider.mediumDistance.spacer(),
         ElevatedButton(

@@ -24,11 +24,7 @@ Future<List<CountableData>> getMyCountables(Ref ref) async {
 }
 
 class _GetCountablesUseCase extends UseCase<List<CountableData>, void> {
-  _GetCountablesUseCase({
-    required this.repo,
-    required this.user,
-    super.errorHandlers,
-  });
+  _GetCountablesUseCase({required this.repo, required this.user, super.errorHandlers});
 
   final ICounterRepository repo;
   final User? user;
@@ -36,6 +32,6 @@ class _GetCountablesUseCase extends UseCase<List<CountableData>, void> {
   @override
   Future<Response<List<CountableData>, ApplicationError>> call(void input) async {
     final response = await repo.getCountables();
-    return response.map((e) => e!.where((e) => e.email == user?.email).toList());
+    return response.map((e) => e!.where((e) => e.isPublic || e.email == user?.email).toList());
   }
 }

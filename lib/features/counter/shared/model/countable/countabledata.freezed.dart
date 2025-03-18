@@ -24,6 +24,7 @@ mixin _$CountableData {
   String get name => throw _privateConstructorUsedError;
   int get counter => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  bool get isPublic => throw _privateConstructorUsedError;
   List<CountableEvent> get events => throw _privateConstructorUsedError;
 
   /// Serializes this CountableData to a JSON map.
@@ -47,6 +48,7 @@ abstract class $CountableDataCopyWith<$Res> {
       String name,
       int counter,
       String email,
+      bool isPublic,
       List<CountableEvent> events});
 }
 
@@ -69,6 +71,7 @@ class _$CountableDataCopyWithImpl<$Res, $Val extends CountableData>
     Object? name = null,
     Object? counter = null,
     Object? email = null,
+    Object? isPublic = null,
     Object? events = null,
   }) {
     return _then(_value.copyWith(
@@ -88,6 +91,10 @@ class _$CountableDataCopyWithImpl<$Res, $Val extends CountableData>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      isPublic: null == isPublic
+          ? _value.isPublic
+          : isPublic // ignore: cast_nullable_to_non_nullable
+              as bool,
       events: null == events
           ? _value.events
           : events // ignore: cast_nullable_to_non_nullable
@@ -109,6 +116,7 @@ abstract class _$$CountableDataImplCopyWith<$Res>
       String name,
       int counter,
       String email,
+      bool isPublic,
       List<CountableEvent> events});
 }
 
@@ -129,6 +137,7 @@ class __$$CountableDataImplCopyWithImpl<$Res>
     Object? name = null,
     Object? counter = null,
     Object? email = null,
+    Object? isPublic = null,
     Object? events = null,
   }) {
     return _then(_$CountableDataImpl(
@@ -148,6 +157,10 @@ class __$$CountableDataImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      isPublic: null == isPublic
+          ? _value.isPublic
+          : isPublic // ignore: cast_nullable_to_non_nullable
+              as bool,
       events: null == events
           ? _value._events
           : events // ignore: cast_nullable_to_non_nullable
@@ -165,6 +178,7 @@ class _$CountableDataImpl implements _CountableData {
       required this.name,
       required this.counter,
       required this.email,
+      this.isPublic = false,
       final List<CountableEvent> events = const <CountableEvent>[]})
       : _events = events;
 
@@ -179,6 +193,9 @@ class _$CountableDataImpl implements _CountableData {
   final int counter;
   @override
   final String email;
+  @override
+  @JsonKey()
+  final bool isPublic;
   final List<CountableEvent> _events;
   @override
   @JsonKey()
@@ -190,7 +207,7 @@ class _$CountableDataImpl implements _CountableData {
 
   @override
   String toString() {
-    return 'CountableData(id: $id, name: $name, counter: $counter, email: $email, events: $events)';
+    return 'CountableData(id: $id, name: $name, counter: $counter, email: $email, isPublic: $isPublic, events: $events)';
   }
 
   @override
@@ -202,13 +219,15 @@ class _$CountableDataImpl implements _CountableData {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.counter, counter) || other.counter == counter) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.isPublic, isPublic) ||
+                other.isPublic == isPublic) &&
             const DeepCollectionEquality().equals(other._events, _events));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, counter, email,
-      const DeepCollectionEquality().hash(_events));
+      isPublic, const DeepCollectionEquality().hash(_events));
 
   /// Create a copy of CountableData
   /// with the given fields replaced by the non-null parameter values.
@@ -232,6 +251,7 @@ abstract class _CountableData implements CountableData {
       required final String name,
       required final int counter,
       required final String email,
+      final bool isPublic,
       final List<CountableEvent> events}) = _$CountableDataImpl;
 
   factory _CountableData.fromJson(Map<String, dynamic> json) =
@@ -245,6 +265,8 @@ abstract class _CountableData implements CountableData {
   int get counter;
   @override
   String get email;
+  @override
+  bool get isPublic;
   @override
   List<CountableEvent> get events;
 
@@ -436,6 +458,7 @@ mixin _$CountableDataBuilder {
   String get email => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   int get counter => throw _privateConstructorUsedError;
+  bool get isPublic => throw _privateConstructorUsedError;
   List<CountableEvent> get events => throw _privateConstructorUsedError;
 
   /// Serializes this CountableDataBuilder to a JSON map.
@@ -455,7 +478,11 @@ abstract class $CountableDataBuilderCopyWith<$Res> {
       _$CountableDataBuilderCopyWithImpl<$Res, CountableDataBuilder>;
   @useResult
   $Res call(
-      {String email, String? name, int counter, List<CountableEvent> events});
+      {String email,
+      String? name,
+      int counter,
+      bool isPublic,
+      List<CountableEvent> events});
 }
 
 /// @nodoc
@@ -477,6 +504,7 @@ class _$CountableDataBuilderCopyWithImpl<$Res,
     Object? email = null,
     Object? name = freezed,
     Object? counter = null,
+    Object? isPublic = null,
     Object? events = null,
   }) {
     return _then(_value.copyWith(
@@ -492,6 +520,10 @@ class _$CountableDataBuilderCopyWithImpl<$Res,
           ? _value.counter
           : counter // ignore: cast_nullable_to_non_nullable
               as int,
+      isPublic: null == isPublic
+          ? _value.isPublic
+          : isPublic // ignore: cast_nullable_to_non_nullable
+              as bool,
       events: null == events
           ? _value.events
           : events // ignore: cast_nullable_to_non_nullable
@@ -509,7 +541,11 @@ abstract class _$$CountableDataBuilderImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String email, String? name, int counter, List<CountableEvent> events});
+      {String email,
+      String? name,
+      int counter,
+      bool isPublic,
+      List<CountableEvent> events});
 }
 
 /// @nodoc
@@ -528,6 +564,7 @@ class __$$CountableDataBuilderImplCopyWithImpl<$Res>
     Object? email = null,
     Object? name = freezed,
     Object? counter = null,
+    Object? isPublic = null,
     Object? events = null,
   }) {
     return _then(_$CountableDataBuilderImpl(
@@ -543,6 +580,10 @@ class __$$CountableDataBuilderImplCopyWithImpl<$Res>
           ? _value.counter
           : counter // ignore: cast_nullable_to_non_nullable
               as int,
+      isPublic: null == isPublic
+          ? _value.isPublic
+          : isPublic // ignore: cast_nullable_to_non_nullable
+              as bool,
       events: null == events
           ? _value._events
           : events // ignore: cast_nullable_to_non_nullable
@@ -558,6 +599,7 @@ class _$CountableDataBuilderImpl implements _CountableDataBuilder {
       {required this.email,
       this.name,
       this.counter = 0,
+      this.isPublic = false,
       final List<CountableEvent> events = const <CountableEvent>[]})
       : _events = events;
 
@@ -571,6 +613,9 @@ class _$CountableDataBuilderImpl implements _CountableDataBuilder {
   @override
   @JsonKey()
   final int counter;
+  @override
+  @JsonKey()
+  final bool isPublic;
   final List<CountableEvent> _events;
   @override
   @JsonKey()
@@ -582,7 +627,7 @@ class _$CountableDataBuilderImpl implements _CountableDataBuilder {
 
   @override
   String toString() {
-    return 'CountableDataBuilder(email: $email, name: $name, counter: $counter, events: $events)';
+    return 'CountableDataBuilder(email: $email, name: $name, counter: $counter, isPublic: $isPublic, events: $events)';
   }
 
   @override
@@ -593,12 +638,14 @@ class _$CountableDataBuilderImpl implements _CountableDataBuilder {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.counter, counter) || other.counter == counter) &&
+            (identical(other.isPublic, isPublic) ||
+                other.isPublic == isPublic) &&
             const DeepCollectionEquality().equals(other._events, _events));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, email, name, counter,
+  int get hashCode => Object.hash(runtimeType, email, name, counter, isPublic,
       const DeepCollectionEquality().hash(_events));
 
   /// Create a copy of CountableDataBuilder
@@ -624,6 +671,7 @@ abstract class _CountableDataBuilder implements CountableDataBuilder {
       {required final String email,
       final String? name,
       final int counter,
+      final bool isPublic,
       final List<CountableEvent> events}) = _$CountableDataBuilderImpl;
 
   factory _CountableDataBuilder.fromJson(Map<String, dynamic> json) =
@@ -635,6 +683,8 @@ abstract class _CountableDataBuilder implements CountableDataBuilder {
   String? get name;
   @override
   int get counter;
+  @override
+  bool get isPublic;
   @override
   List<CountableEvent> get events;
 

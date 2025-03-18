@@ -1,3 +1,4 @@
+import 'package:ariannapp/core/core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,6 +13,7 @@ class CountableData with _$CountableData {
     required String name,
     required int counter,
     required String email,
+    @Default(false) bool isPublic,
     @Default(<CountableEvent>[]) List<CountableEvent> events,
   }) = _CountableData;
 
@@ -35,10 +37,7 @@ extension CountableDataMapper on CountableData {
 @freezed
 class CountableEvent with _$CountableEvent {
   @JsonSerializable(explicitToJson: true)
-  factory CountableEvent({
-    required DateTime timestamp,
-    String? description,
-  }) = _CountableEvent;
+  factory CountableEvent({required DateTime timestamp, String? description}) = _CountableEvent;
 
   factory CountableEvent.fromJson(Map<String, dynamic> json) => _$CountableEventFromJson(json);
 }
@@ -49,6 +48,7 @@ class CountableDataBuilder with _$CountableDataBuilder {
     required String email,
     String? name,
     @Default(0) int counter,
+    @Default(false) bool isPublic,
     @Default(<CountableEvent>[]) List<CountableEvent> events,
   }) = _CountableDataBuilder;
 
@@ -57,4 +57,23 @@ class CountableDataBuilder with _$CountableDataBuilder {
 
 extension CountableDataBuilderValidator on CountableDataBuilder {
   bool get isValid => name != null && name!.isNotEmpty;
+}
+
+extension CountableDataStats on CountableData {
+  Map<DateTime, int> get groupedByDate {
+    final mapped = <DateTime, int>{};
+    for (final event in events) {
+      final date = event.timestamp.asDate;
+      if (mapped.containsKey(date)) {
+        mapped[date] = mapped[date]! + 1;
+      } else {
+        mapped[date] = 1;
+      }
+    }
+    return mapped;
+  }
+
+  int subTotal(Map<DateTime, int> map, int index) {
+    return map.entries.toList().sublist(0, index).fold(1, (a, b) => a + b.value);
+  }
 }

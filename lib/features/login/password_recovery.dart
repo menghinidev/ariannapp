@@ -15,16 +15,16 @@ class StartResetPasswordProcessButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return TextButton(
       child: const Text('Password dimenticata?'),
-      onPressed: () => ref.read(bottomSheetServiceProvider).showBottomSheet<void>(
-            context,
-            builder: (_) => const _PasswordResetBottomSheet(),
-          ),
+      onPressed:
+          () => ref
+              .read(bottomSheetServiceProvider)
+              .showBottomSheet<void>(context, builder: (_) => const _PasswordResetBottomSheet()),
     );
   }
 }
 
 class _PasswordResetBottomSheet extends ConsumerWidget {
-  const _PasswordResetBottomSheet({super.key});
+  const _PasswordResetBottomSheet();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,19 +34,18 @@ class _PasswordResetBottomSheet extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'Email',
-            ),
+            decoration: const InputDecoration(labelText: 'Email'),
             autofillHints: const [AutofillHints.email],
             onChanged: (value) => ref.read(_emailProvider.notifier).state = value,
           ),
           DistanceProvider.mediumDistance.spacer(),
           ElevatedButton(
-            onPressed: email == null || email.isEmpty
-                ? null
-                : () => ref
-                    .read(recoverPasswordUseCaseProvider)
-                    .execute(RecoverPasswordCommand(email: ref.read(_emailProvider)!, context: context)),
+            onPressed:
+                email == null || email.isEmpty
+                    ? null
+                    : () => ref
+                        .read(recoverPasswordUseCaseProvider)
+                        .execute(RecoverPasswordCommand(email: ref.read(_emailProvider)!, context: context)),
             child: const Text('Invia email di recupero'),
           ),
         ],

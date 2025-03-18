@@ -15,4 +15,8 @@ class NewCountableController extends _$NewCountableController {
   void updateName(String name) {
     state = state.copyWith(name: name);
   }
+
+  void toggleIsPublic() {
+    state = state.copyWith(isPublic: !state.isPublic);
+  }
 }
