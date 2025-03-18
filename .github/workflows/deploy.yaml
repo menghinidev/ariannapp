@@ -19,6 +19,5 @@ jobs:
           architecture: x64
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
-          webRenderer: canvaskit
           baseHref: /ariannapp/
           customArgs: --dart-define="MODE=lite"
