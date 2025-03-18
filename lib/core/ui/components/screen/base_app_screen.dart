@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class BaseAppScreen extends StatelessWidget {
   const BaseAppScreen.sliver({
-    required this.children,
     required this.title,
+    required this.children,
     this.customTitle,
     this.fab,
     this.actions,

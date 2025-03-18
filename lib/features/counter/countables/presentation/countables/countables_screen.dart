@@ -5,6 +5,8 @@ import 'package:ariannapp/features/counter/countables/usecase/delete_countable/d
 import 'package:ariannapp/features/counter/countables/usecase/get_countables/get_countables_use_case.dart';
 import 'package:ariannapp/features/counter/countables/usecase/increment/command/incrementcountablecommand.dart';
 import 'package:ariannapp/features/counter/countables/usecase/increment/increment_countable_use_case.dart';
+import 'package:ariannapp/features/counter/shared/routes/countable_routes.dart';
+import 'package:ariannapp/navigation/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -44,6 +46,7 @@ class CountableScreen extends ConsumerWidget {
                       .execute(DeleteCountableCommand(id: countable.id, context: context)),
                   child: ListTile(
                     title: Text(countable.name),
+                    onTap: () => context.goRelative(CountablesRoutes.dashboard, extra: countable),
                     subtitle: countable.events.isEmpty ? null : Text(countable.events.last.timestamp.toExtendedDate),
                     leading: CircleAvatar(
                       maxRadius: 24,

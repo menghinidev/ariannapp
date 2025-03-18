@@ -105,16 +105,18 @@ extension DateFormatter on DateTime {
 
   String customFormat(String pattern) => DateFormatterFactory.instance.customFormat(pattern).format(this);
 
-  DateTime copyWith({int? year, int? month, int? day}) {
+  DateTime copyWith({int? year, int? month, int? day, int? hour, int? minute, int? second}) {
     return DateTime(
       year ?? this.year,
       month ?? this.month,
       day ?? this.day,
-      hour,
-      minute,
-      second,
+      hour ?? this.hour,
+      minute ?? this.minute,
+      second ?? this.second,
     );
   }
+
+  DateTime get asDate => DateTime(year, month, day);
 }
 
 extension TimeOfDayFormatter on TimeOfDay {
