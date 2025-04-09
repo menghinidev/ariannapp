@@ -22,31 +22,24 @@ class MyCalendarSection extends ConsumerWidget {
     return AsyncLoadingSwitcher(
       value: calendar,
       margin: DistanceProvider.screenInsets.padding,
-      builder: (context, calendar) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _CalendarSection(
-            selectedDate: selectedDate,
-            events: calendar,
-            selectedFormat: selectedFormat,
+      builder:
+          (context, calendar) => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _CalendarSection(selectedDate: selectedDate, events: calendar, selectedFormat: selectedFormat),
+              DistanceProvider.mediumDistance.spacer(),
+              _CalendarEventsPerDay(
+                selectedDate: selectedDate,
+                events: calendar.where((event) => event.datetime.isSameDay(selectedDate)).toList(),
+              ),
+            ],
           ),
-          DistanceProvider.mediumDistance.spacer(),
-          _CalendarEventsPerDay(
-            selectedDate: selectedDate,
-            events: calendar.where((event) => event.datetime.isSameDay(selectedDate)).toList(),
-          ),
-        ],
-      ),
     );
   }
 }
 
 class _CalendarSection extends ConsumerWidget {
-  const _CalendarSection({
-    required this.selectedDate,
-    required this.selectedFormat,
-    required this.events,
-  });
+  const _CalendarSection({required this.selectedDate, required this.selectedFormat, required this.events});
 
   final DateTime selectedDate;
   final CalendarFormat selectedFormat;
@@ -63,6 +56,7 @@ class _CalendarSection extends ConsumerWidget {
       selectedDayPredicate: selectedDate.isSameDay,
       onDaySelected: (day, _) => ref.read(selectedDateControllerProvider.notifier).date = day,
       sixWeekMonthsEnforced: true,
+      startingDayOfWeek: StartingDayOfWeek.monday,
       calendarFormat: selectedFormat,
       onFormatChanged: (format) => ref.read(selectedCalendarFormatControllerProvider.notifier).calendarFormat = format,
       eventLoader: (day) => events.where((event) => event.datetime.isSameDay(day)).toList(),
@@ -73,23 +67,14 @@ class _CalendarSection extends ConsumerWidget {
     final colorScheme = context.colorScheme;
     const shape = BoxShape.circle;
     return CalendarStyle(
-      selectedDecoration: BoxDecoration(
-        color: colorScheme.primary,
-        shape: shape,
-      ),
-      markerDecoration: BoxDecoration(
-        color: colorScheme.tertiary,
-        shape: shape,
-      ),
+      selectedDecoration: BoxDecoration(color: colorScheme.primary, shape: shape),
+      markerDecoration: BoxDecoration(color: colorScheme.tertiary, shape: shape),
     );
   }
 }
 
 class _CalendarEventsPerDay extends ConsumerWidget {
-  const _CalendarEventsPerDay({
-    required this.selectedDate,
-    required this.events,
-  });
+  const _CalendarEventsPerDay({required this.selectedDate, required this.events});
 
   final DateTime selectedDate;
   final List<CalendarEvent> events;
@@ -101,22 +86,23 @@ class _CalendarEventsPerDay extends ConsumerWidget {
       values: events,
       showDivider: true,
       headerButtonLabel: 'Aggiungi',
-      headerButtonAction: () => ref.read(bottomSheetServiceProvider).showBottomSheet<void>(
-            context,
-            builder: (context) => NewEventBottomSheet(date: selectedDate),
-          ),
+      headerButtonAction:
+          () => ref
+              .read(bottomSheetServiceProvider)
+              .showBottomSheet<void>(context, builder: (context) => NewEventBottomSheet(date: selectedDate)),
       emptyCaseTitle: 'Non ci sono eventi',
       emptyCaseSubtitle: "Seleziona un'altra data",
-      itemBuilder: (context, event) => CalendarEventListTile(
-        event: event,
-        trailing: IconButton(
-          icon: const Icon(Icons.delete_outline),
-          onPressed: () {
-            final command = DeleteEventCommand(eventId: event.id, context: context);
-            ref.read(deleteEventUseCaseProvider).execute(command);
-          },
-        ),
-      ),
+      itemBuilder:
+          (context, event) => CalendarEventListTile(
+            event: event,
+            trailing: IconButton(
+              icon: const Icon(Icons.delete_outline),
+              onPressed: () {
+                final command = DeleteEventCommand(eventId: event.id, context: context);
+                ref.read(deleteEventUseCaseProvider).execute(command);
+              },
+            ),
+          ),
     );
   }
 }
