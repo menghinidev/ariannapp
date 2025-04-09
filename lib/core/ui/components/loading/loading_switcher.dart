@@ -5,12 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shimmer/shimmer.dart';
 
 class AsyncLoadingSwitcher<T> extends StatelessWidget {
-  const AsyncLoadingSwitcher({
-    required this.value,
-    required this.builder,
-    this.margin,
-    super.key,
-  });
+  const AsyncLoadingSwitcher({required this.value, required this.builder, this.margin, super.key});
 
   final AsyncValue<T> value;
   final EdgeInsets? margin;
@@ -22,26 +17,18 @@ class AsyncLoadingSwitcher<T> extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       switchInCurve: Curves.easeInCubic,
       switchOutCurve: Curves.easeOutCubic,
-      layoutBuilder: (currentChild, previousChildren) => Stack(
-        alignment: Alignment.topCenter,
-        children: <Widget>[
-          if (currentChild != null) currentChild,
-          ...previousChildren,
-        ],
-      ),
-      transitionBuilder: (child, animation) => FadeTransition(
-        opacity: animation,
-        child: child,
-      ),
+      layoutBuilder:
+          (currentChild, previousChildren) => Stack(
+            alignment: Alignment.topCenter,
+            children: <Widget>[if (currentChild != null) currentChild, ...previousChildren],
+          ),
+      transitionBuilder: (child, animation) => FadeTransition(opacity: animation, child: child),
       child: value.when(
         data: (value) => builder(context, value),
         error: (error, _) {
           if (error is ApplicationError) {
             final message = error.whenOrNull(generic: (_, message) => message);
-            return EmptyContentPlaceholder(
-              title: 'Qualcosa non va..',
-              subtitle: message,
-            );
+            return EmptyContentPlaceholder(title: 'Qualcosa non va..', subtitle: message);
           }
           return _BaseShimmer(margin: margin);
         },
@@ -52,12 +39,7 @@ class AsyncLoadingSwitcher<T> extends StatelessWidget {
 }
 
 class LoadingSwitcher<T> extends StatelessWidget {
-  const LoadingSwitcher({
-    required this.value,
-    required this.builder,
-    this.margin,
-    super.key,
-  });
+  const LoadingSwitcher({required this.value, required this.builder, this.margin, super.key});
 
   final T? value;
   final EdgeInsets? margin;
@@ -69,29 +51,19 @@ class LoadingSwitcher<T> extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       switchInCurve: Curves.easeInCubic,
       switchOutCurve: Curves.easeOutCubic,
-      layoutBuilder: (currentChild, previousChildren) => Stack(
-        alignment: Alignment.topCenter,
-        children: <Widget>[
-          if (currentChild != null) currentChild,
-          ...previousChildren,
-        ],
-      ),
-      transitionBuilder: (child, animation) => FadeTransition(
-        opacity: animation,
-        child: child,
-      ),
+      layoutBuilder:
+          (currentChild, previousChildren) => Stack(
+            alignment: Alignment.topCenter,
+            children: <Widget>[if (currentChild != null) currentChild, ...previousChildren],
+          ),
+      transitionBuilder: (child, animation) => FadeTransition(opacity: animation, child: child),
       child: value == null ? _BaseShimmer(margin: margin) : builder(context, value as T),
     );
   }
 }
 
 class BaseSliverLoader<T> extends StatelessWidget {
-  const BaseSliverLoader({
-    required this.value,
-    required this.builder,
-    this.margin,
-    super.key,
-  });
+  const BaseSliverLoader({required this.value, required this.builder, this.margin, super.key});
 
   final AsyncValue<T> value;
   final EdgeInsets? margin;
@@ -101,8 +73,8 @@ class BaseSliverLoader<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return value.when(
       data: (value) => builder(context, value),
-      error: (_, __) => const SliverToBoxAdapter(child: SizedBox.shrink()),
-      loading: () => const SliverToBoxAdapter(child: SizedBox.shrink()),
+      error: (_, __) => const SliverToBoxAdapter(child: Center(child: CircularProgressIndicator.adaptive())),
+      loading: () => const SliverToBoxAdapter(child: Center(child: CircularProgressIndicator.adaptive())),
     );
   }
 }

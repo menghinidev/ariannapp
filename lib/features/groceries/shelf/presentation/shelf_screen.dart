@@ -14,18 +14,13 @@ class ShelfScreen extends ConsumerWidget {
       actions: [
         IconButton.filled(
           icon: const Icon(Icons.add),
-          onPressed: () => ref.read(bottomSheetServiceProvider).showBottomSheet<void>(
-                context,
-                builder: (context) => const NewShelfItemBottomSheet(),
-              ),
+          onPressed:
+              () => ref
+                  .read(bottomSheetServiceProvider)
+                  .showBottomSheet<void>(context, builder: (context) => const NewShelfItemBottomSheet()),
         ),
       ],
-      children: const [
-        SliverShelfList(),
-        /* SliverFillRemaining(
-          child: ShelfListView(),
-        ), */
-      ],
+      children: const [SliverShelfList()],
     );
   }
 }

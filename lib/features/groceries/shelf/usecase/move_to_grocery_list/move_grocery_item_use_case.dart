@@ -16,9 +16,7 @@ Future<MoveGroceryItemUseCase> moveGroceryItemUseCase(Ref ref) async {
   return MoveGroceryItemUseCase(
     groceries: groceries,
     repo: ref.watch(groceriesRepositoryProvider),
-    interceptors: [
-      LoadingUseCaseInterceptor(contextProvider: (input) => input.context),
-    ],
+    interceptors: [LoadingUseCaseInterceptor(contextProvider: (input) => input.context)],
     successHandlers: [
       ShowSnackbarSuccessHandler<void, MoveToGroceryListCommand>(
         message: 'Aggiunto alla lista della spesa',
@@ -50,8 +48,8 @@ class MoveGroceryItemUseCase extends UseCase<void, MoveToGroceryListCommand> {
 
   @override
   Future<Response<void, ApplicationError>> call(MoveToGroceryListCommand input) => repo.addGroceryItem(
-        name: input.item.name,
-        category: input.item.category,
-        index: groceries.length,
-      );
+    name: input.item.name,
+    category: input.item.category,
+    index: groceries.isEmpty ? 0 : groceries.last.index + 1,
+  );
 }

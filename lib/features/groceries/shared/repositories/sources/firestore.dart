@@ -12,11 +12,7 @@ class FirestoreGroceriesRepository extends IGroceriesRepository with RepositoryS
   static const String groceriesCollection = 'groceries';
 
   @override
-  Future<EmptyResponse> addGroceryItem({
-    required String name,
-    required GroceryCategory category,
-    required int index,
-  }) {
+  Future<EmptyResponse> addGroceryItem({required String name, required GroceryCategory category, required int index}) {
     final item = GroceriesCheckListItem(
       id: IDGenerator.generateId,
       name: name,
@@ -31,16 +27,8 @@ class FirestoreGroceriesRepository extends IGroceriesRepository with RepositoryS
   }
 
   @override
-  Future<EmptyResponse> addShelfItem({
-    required String name,
-    required GroceryCategory category,
-  }) {
-    final item = ShelfItem(
-      id: IDGenerator.generateId,
-      name: name,
-      category: category,
-      lastUpdate: DateTime.now(),
-    );
+  Future<EmptyResponse> addShelfItem({required String name, required GroceryCategory category}) {
+    final item = ShelfItem(id: IDGenerator.generateId, name: name, category: category, lastUpdate: DateTime.now());
     return safeInvoke(
       request: () => instance.collection(shelfCollection).add(item.toFirestore()),
       payloadMapper: (_) {},
@@ -58,7 +46,7 @@ class FirestoreGroceriesRepository extends IGroceriesRepository with RepositoryS
   @override
   Future<ApplicationResponse<List<ShelfItem>>> getShelf() {
     return safeInvoke<List<ShelfItem>, QuerySnapshot<Map<String, dynamic>>>(
-      request: () => instance.collection(shelfCollection).get(),
+      request: () => instance.collection(shelfCollection).orderBy('lastUpdate', descending: true).get(),
       payloadMapper: (response) => response.docs.map(ShelfItem.fromFirestore).toList(),
     );
   }
@@ -72,26 +60,18 @@ class FirestoreGroceriesRepository extends IGroceriesRepository with RepositoryS
   }
 
   @override
-  Future<EmptyResponse> reorder({
-    required List<GroceriesCheckListItem> items,
-  }) {
+  Future<EmptyResponse> reorder({required List<GroceriesCheckListItem> items}) {
     final batch = instance.batch();
     for (var i = 0; i < items.length; i++) {
       final item = items[i];
       final ref = instance.collection(groceriesCollection).doc(item.id);
       batch.update(ref, {'index': i});
     }
-    return safeInvoke(
-      request: batch.commit,
-      payloadMapper: (_) {},
-    );
+    return safeInvoke(request: batch.commit, payloadMapper: (_) {});
   }
 
   @override
   Future<EmptyResponse> removeShelfItem({required ShelfItem item}) {
-    return safeInvoke(
-      request: () => instance.collection(shelfCollection).doc(item.id).delete(),
-      payloadMapper: (_) {},
-    );
+    return safeInvoke(request: () => instance.collection(shelfCollection).doc(item.id).delete(), payloadMapper: (_) {});
   }
 }
