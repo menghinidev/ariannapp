@@ -1,6 +1,4 @@
 import 'package:ariannapp/core/core.dart';
-import 'package:ariannapp/features/calendar/my_calendar/presentation/dashboard/my_calendar_section.dart';
-import 'package:ariannapp/features/calendar/shared/routes/my_calendar_events_route.dart';
 import 'package:ariannapp/features/counter/shared/routes/countable_routes.dart';
 import 'package:ariannapp/features/home/presentation/sections/calendar_dashboard_section.dart';
 import 'package:ariannapp/features/home/presentation/sections/groceries_dashboard_section.dart';
@@ -21,14 +19,8 @@ class HomeScreen extends ConsumerWidget {
     return BaseAppScreen.sliver(
       title: 'AriannApp',
       endDrawer: const _HomeDrawer(),
-      customTitle: Image.asset(
-        'assets/images/handwritten-logo.png',
-        height: 56,
-        color: Colors.white,
-      ),
+      customTitle: Image.asset('assets/images/handwritten-logo.png', height: 56, color: Colors.white),
       children: [
-        const SliverToBoxAdapter(child: MyCalendarSection()),
-        SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
         if (!EnvVariable.mode.isLite) ...[
           const SliverToBoxAdapter(child: CalendarDashboardSection()),
           SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
@@ -51,10 +43,7 @@ class _HomeDrawer extends ConsumerWidget {
       child: Drawer(
         clipBehavior: Clip.hardEdge,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(12),
-            bottom: Radius.circular(12),
-          ),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(12), bottom: Radius.circular(12)),
         ),
         child: Column(
           children: [
@@ -63,9 +52,7 @@ class _HomeDrawer extends ConsumerWidget {
               child: SizedBox.expand(
                 child: DecoratedBox(
                   decoration: const BoxDecoration(color: Color(0xFFb8add3)),
-                  child: Image.asset(
-                    'assets/logo.png',
-                  ),
+                  child: Image.asset('assets/logo.png'),
                 ),
               ),
             ),
@@ -87,12 +74,6 @@ class _HomeDrawer extends ConsumerWidget {
                         onTap: () => context.goRelative(TrashCalendarScreenRoute.pagePath),
                       ),
                     ],
-                    ListTile(
-                      title: const Text('Eventi Calendario'),
-                      style: ListTileStyle.drawer,
-                      leading: const Icon(Icons.calendar_month_outlined),
-                      onTap: () => context.goRelative(MyCalendarEventsScreenRoute.pagePath),
-                    ),
                     ListTile(
                       title: const Text('Contatori'),
                       style: ListTileStyle.drawer,
