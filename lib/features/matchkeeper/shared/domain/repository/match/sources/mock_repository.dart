@@ -9,9 +9,7 @@ class MockMatchRepository extends IMatchRepository {
   final List<ApplicationMatch> _matches = <ApplicationMatch>[];
 
   @override
-  Future<ApplicationResponse<ApplicationMatch>> addMatch({
-    required MatchBuilder builder,
-  }) async {
+  Future<ApplicationResponse<ApplicationMatch>> addMatch({required MatchBuilder builder}) async {
     final game = builder.game!;
     final gameStrategy = game.strategy;
     final match = ApplicationMatch(
@@ -40,18 +38,10 @@ class MockMatchRepository extends IMatchRepository {
   }
 
   @override
-  Future<EmptyResponse> updateScore({
-    required String matchId,
-    required List<Score> scores,
-  }) async {
+  Future<EmptyResponse> updateScore({required String matchId, required List<Score> scores}) async {
     final match = _matches.firstWhere((match) => match.id == matchId);
     final matchIndex = _matches.indexOf(match);
-    final newMatch = match
-        .copyWith(
-          scores: scores,
-          lastUpdate: DateTime.now(),
-        )
-        .computeNewScore();
+    final newMatch = match.copyWith(scores: scores, lastUpdate: DateTime.now()).processRound();
     _matches
       ..remove(match)
       ..insert(matchIndex, newMatch);
@@ -59,9 +49,7 @@ class MockMatchRepository extends IMatchRepository {
   }
 
   @override
-  Future<ApplicationResponse<ApplicationMatch>> restartMatch({
-    required ApplicationMatch match,
-  }) async {
+  Future<ApplicationResponse<ApplicationMatch>> restartMatch({required ApplicationMatch match}) async {
     final teams = match.scores.map((e) => e.team).toList();
     final newScores = teams.newScores.toList();
     _matches.add(
@@ -84,11 +72,6 @@ extension on List<Team> {
 
 extension on Team {
   Score get newScore {
-    return Score(
-      id: IDGenerator.generateId,
-      lifeRemaining: 1,
-      team: this,
-      points: <int>[0],
-    );
+    return Score(id: IDGenerator.generateId, lifeRemaining: 1, team: this, points: <int>[0]);
   }
 }

@@ -11,9 +11,7 @@ class FirestoreMatchRepository extends IMatchRepository with RepositorySafeInvok
   static const String matchCollection = 'match';
 
   @override
-  Future<ApplicationResponse<ApplicationMatch>> addMatch({
-    required MatchBuilder builder,
-  }) {
+  Future<ApplicationResponse<ApplicationMatch>> addMatch({required MatchBuilder builder}) {
     final match = buildNewMatch(builder);
     return safeInvoke<ApplicationMatch, NullableDocRef>(
       request: () => instance.collection(matchCollection).add(match.toFirestore()),
@@ -33,9 +31,7 @@ class FirestoreMatchRepository extends IMatchRepository with RepositorySafeInvok
   }
 
   @override
-  Future<ApplicationResponse<ApplicationMatch>> restartMatch({
-    required ApplicationMatch match,
-  }) async {
+  Future<ApplicationResponse<ApplicationMatch>> restartMatch({required ApplicationMatch match}) async {
     final newMatch = buildRestartedMatch(match);
     return safeInvoke<ApplicationMatch, NullableDocRef>(
       request: () => instance.collection(matchCollection).add(newMatch.toFirestore()),
@@ -44,22 +40,13 @@ class FirestoreMatchRepository extends IMatchRepository with RepositorySafeInvok
   }
 
   @override
-  Future<EmptyResponse> updateScore({
-    required String matchId,
-    required List<Score> scores,
-  }) async {
+  Future<EmptyResponse> updateScore({required String matchId, required List<Score> scores}) async {
     final document = instance.collection(matchCollection).doc(matchId);
-    final matchResponse = await safeInvoke(
-      request: document.get,
-      payloadMapper: ApplicationMatch.fromFirestoreDoc,
-    );
+    final matchResponse = await safeInvoke(request: document.get, payloadMapper: ApplicationMatch.fromFirestoreDoc);
     final match = matchResponse.payload;
     if (matchResponse.isError || match == null) return Responses.failure([ApplicationError.generic()]);
-    final newMatch = match.copyWith(scores: scores).computeNewScore();
-    return safeInvoke(
-      request: () => document.update(newMatch.toFirestore()),
-      payloadMapper: (_) {},
-    );
+    final newMatch = match.copyWith(scores: scores).processRound();
+    return safeInvoke(request: () => document.update(newMatch.toFirestore()), payloadMapper: (_) {});
   }
 }
 

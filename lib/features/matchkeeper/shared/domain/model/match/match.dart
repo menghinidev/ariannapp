@@ -40,38 +40,48 @@ enum MatchStatus { completed, ongoing }
 extension MatchStatusFeature on ApplicationMatch {
   bool get _isOver {
     if (status == MatchStatus.completed) return true;
-    final standings = scores.map(game.strategy.totalPoints).toList()
-      ..sort((a, b) => b.compareTo(a))
-      ..toList();
-    final firstPlacePoints = standings.first;
     final strategy = game.strategy;
+
+    final standings = strategy.sortedScores(scores).map(totalPoints).toList();
+    final lastPlacedScore = standings.last;
+
     if (strategy.goingDownTo) {
-      return firstPlacePoints <= strategy.threshold;
+      return lastPlacedScore < strategy.threshold;
     } else {
-      return firstPlacePoints >= strategy.threshold;
+      return lastPlacedScore > strategy.threshold;
     }
   }
 
-  ApplicationMatch computeNewScore() {
+  ApplicationMatch processRound() {
     if (_isOver) {
-      final standings = game.strategy.sortedScores(scores);
-      final exceedingScore = standings.last;
-      final lowestScore = standings.first;
-      var newExceedingScore = exceedingScore.copyWith(lifeRemaining: exceedingScore.lifeRemaining - 1);
-      if (newExceedingScore.lifeRemaining == 0) {
+      if (!game.strategy.doubleLife) return copyWith(status: MatchStatus.completed);
+
+      final sortedScores = game.strategy.sortedScores(scores);
+      if (sortedScores.length < 2) return copyWith(status: MatchStatus.completed);
+
+      final lastPlaced = sortedScores.last;
+
+      if (lastPlaced.lifeRemaining <= 1) {
         return copyWith(status: MatchStatus.completed);
       }
-      newExceedingScore = newExceedingScore.copyWith(
-        points: [...lowestScore.points]
-          ..removeLast()
-          ..add(lowestScore.points.last + 1),
-      );
-      final newScores = [...scores]
-        ..remove(exceedingScore)
-        ..add(newExceedingScore);
+
+      final secondLastPlaced = sortedScores[sortedScores.length - 2];
+
+      final newLastPlacedScore = _processNewScoreLife(lastPlaced, secondLastPlaced);
+      final newScores =
+          [...scores]
+            ..remove(lastPlaced)
+            ..add(newLastPlacedScore);
       return copyWith(scores: newScores).sortedScores;
     }
     return sortedScores;
+  }
+
+  Score _processNewScoreLife(Score lastPlaced, Score secondLastPlaced) {
+    final lastPlaceNewPoints = [...secondLastPlaced.points];
+    final latestPoint = lastPlaceNewPoints.removeLast() + 1;
+    lastPlaceNewPoints.add(latestPoint);
+    return lastPlaced.copyWith(points: lastPlaceNewPoints, lifeRemaining: lastPlaced.lifeRemaining - 1);
   }
 
   ApplicationMatch get sortedScores {
@@ -85,10 +95,12 @@ extension MatchStatusFeature on ApplicationMatch {
   }
 
   String get formattedScore {
-    return scores.map((e) {
-      if (e.points.isEmpty) return '0';
-      return e.points.reduce((a, b) => a + b).toString();
-    }).join(' - ');
+    return scores
+        .map((e) {
+          if (e.points.isEmpty) return '0';
+          return e.points.reduce((a, b) => a + b).toString();
+        })
+        .join(' - ');
   }
 
   int totalPoints(Score score) {
@@ -100,8 +112,9 @@ extension MatchStatusFeature on ApplicationMatch {
 
 extension on WinningStrategy {
   List<Score> sortedScores(List<Score> scores) {
+    final loseAtZero = !winAtThreshold;
     final winGoingUp = goingUpTo && winAtThreshold;
-    final loseGoingDown = goingDownTo && !winAtThreshold;
+    final loseGoingDown = goingDownTo && loseAtZero;
 
     if (loseGoingDown || winGoingUp) {
       final sorted = [...scores]..sort((a, b) => totalPoints(b).compareTo(totalPoints(a)));

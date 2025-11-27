@@ -1,6 +1,5 @@
 import 'package:ariannapp/core/core.dart';
 import 'package:ariannapp/features/counter/shared/routes/countable_routes.dart';
-import 'package:ariannapp/features/home/presentation/sections/calendar_dashboard_section.dart';
 import 'package:ariannapp/features/home/presentation/sections/groceries_dashboard_section.dart';
 import 'package:ariannapp/features/home/presentation/sections/matchkeeper_dashboard_section.dart';
 import 'package:ariannapp/features/horoscope/routes/my_astrology_routes.dart';
@@ -21,10 +20,6 @@ class HomeScreen extends ConsumerWidget {
       endDrawer: const _HomeDrawer(),
       customTitle: Image.asset('assets/images/handwritten-logo.png', height: 56, color: Colors.white),
       children: [
-        if (!EnvVariable.mode.isLite) ...[
-          const SliverToBoxAdapter(child: CalendarDashboardSection()),
-          SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
-        ],
         const SliverToBoxAdapter(child: GroceriesDashboardSection()),
         SliverToBoxAdapter(child: DistanceProvider.mediumDistance.spacer()),
         const SliverToBoxAdapter(child: MatchkeeperDashboardSection()),
